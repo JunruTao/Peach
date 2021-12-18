@@ -1,0 +1,14 @@
+#######################
+# [ PEACH GitIgnore ]
+
+
+#######################
+# [ EXCLUDED FOLDERS ]:
+
+# GIT:
+/.git/**
+
+# ICON DESIGN:
+/,designs/icon_designs/**
+**.ai
+
