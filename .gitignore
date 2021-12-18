@@ -8,6 +8,7 @@
 # ICON DESIGN:
 /,designs/icon_designs/**
 **.ai
+**/.original
 
 # DESKTOP FILES:
 **.ini
