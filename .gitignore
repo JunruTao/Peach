@@ -1,8 +1,5 @@
-#######################
 # [ PEACH GitIgnore ]
 
-
-#######################
 # [ EXCLUDED FOLDERS ]:
 
 # GIT:
@@ -14,3 +11,13 @@
 
 # DESKTOP FILES:
 **.ini
+
+# BUILDS
+**/build
+
+# [ PYTHON ]
+*.pyc
+*.pyo
+
+
+# [ CMAKE ]
