@@ -22,3 +22,9 @@
 
 
 # [ CMAKE ]
+
+# [ VSCode ]
+**/.vscode
+
+# [ PyCharm ]
+**/.idea
