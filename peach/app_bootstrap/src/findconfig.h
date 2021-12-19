@@ -6,7 +6,7 @@
 #include <iostream>
 #include <algorithm>
 
-#define STARTUP_ENV_FILEPATH "config/startup.penv"
+#define STARTUP_ENV_FILEPATH "config/startup.pconfig"
 #define STARTUP_INIT_SHELLPATH "config/shell/startup_dcc_init.sh"
 
 static const std::string win_cdisk = "C:";
@@ -95,8 +95,8 @@ inline std::string RunConfig(Type type=Type::HOUDINI, std::string dcc_args="")
 
     if(startup_env_file.is_open())
     {
-        PrintConfigMsg("Found - \"config/startup.penv\"");
-        PrintParserMsg("Parsing startup.penv...");
+        PrintConfigMsg("Found - \"config/startup.pconfig\"");
+        PrintParserMsg("Parsing startup.pconfig...");
         
         while(std::getline(startup_env_file, line, '\n'))
         {
