@@ -8,8 +8,12 @@ set(SOURCE_HOU src/main_hou.cpp src/main.cpp)
 set(SOURCE_BLN src/main_bln.cpp src/main.cpp)
 include_directories(src)
 
-add_executable(pHoudini_init ${SOURCE_HOU})
-add_executable(pBlender_init ${SOURCE_BLN})
+
+set(WIN_APP_ICON_RESOURCE_HOU "${CMAKE_CURRENT_SOURCE_DIR}/resource/win_appicon_hou.rc")
+set(WIN_APP_ICON_RESOURCE_BLN "${CMAKE_CURRENT_SOURCE_DIR}/resource/win_appicon_bln.rc")
+
+add_executable(pHoudini_init ${SOURCE_HOU} ${WIN_APP_ICON_RESOURCE_HOU})
+add_executable(pBlender_init ${SOURCE_BLN} ${WIN_APP_ICON_RESOURCE_BLN})
 
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
@@ -23,6 +27,7 @@ endif()
 
 install(TARGETS pHoudini_init DESTINATION ${PEACH_INSTALL_DIR})
 install(TARGETS pBlender_init DESTINATION ${PEACH_INSTALL_DIR})
+
 
 install(DIRECTORY 
         ${CMAKE_SOURCE_DIR}/config

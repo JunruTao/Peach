@@ -1,6 +1,6 @@
 #!/bin/sh
 
-Init_Script_Houdini=""
+Init_Script_Houdini="config/scripts/houdini_init.py"
 Init_Script_Blender="config/scripts/blender_init.py"
 
 # [ DEFAULT ARGUMENT FIELD ]
@@ -45,7 +45,7 @@ then
     dcc_arguments="-con --debug-python --python \"$Init_Script_Blender\""
 elif [ $dcc_type == 'houdini' ];
 then 
-    dcc_arguments=""
+    dcc_arguments="-background \"$Init_Script_Houdini\""
 fi
 
 # [ Combine the dcc executable and input arguments ]
