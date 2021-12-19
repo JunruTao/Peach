@@ -1,0 +1,9 @@
+# [ PEACH 2022 ] By Junru Tao
+# [ Notes ]: Please don't add empty space between <token>,"=" and <value>. 
+
+# [ DCC app Directories ]
+houdini_executable="C:\Program Files\Side Effects Software\Houdini 19.0.455\bin\houdini.exe"
+blender_executable="C:\Program Files\Blender Foundation\Blender 3.0\blender-launcher.exe"
+
+# [ Init App Configuration ]
+debug=TRUE

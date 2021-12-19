@@ -50,7 +50,7 @@ int main(int argc, char** argv){
     std::string dccpath = RunConfig(dcc);
 
     // Run Dcc Shell scripts
-    if(dccpath != "missing")
+    if(!dccpath.empty())
     {   
         PrintMsg("OPEN...");
         // Shell Script
