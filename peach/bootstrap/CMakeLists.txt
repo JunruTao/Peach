@@ -1,21 +1,19 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-
 project(PEACH_Bootstraps)
 
-set(DEV_DIR "E:/dev")
 set(SOURCE_HOU src/main_hou.cpp src/main.cpp)
 set(SOURCE_BLN src/main_bln.cpp src/main.cpp)
+
 include_directories(src)
 
-
-set(WIN_APP_ICON_RESOURCE_HOU "${CMAKE_CURRENT_SOURCE_DIR}/resource/win_appicon_hou.rc")
-set(WIN_APP_ICON_RESOURCE_BLN "${CMAKE_CURRENT_SOURCE_DIR}/resource/win_appicon_bln.rc")
+set(WIN_APP_ICON_RESOURCE_HOU 
+    "${CMAKE_CURRENT_SOURCE_DIR}/resource/win_appicon_hou.rc")
+set(WIN_APP_ICON_RESOURCE_BLN 
+    "${CMAKE_CURRENT_SOURCE_DIR}/resource/win_appicon_bln.rc")
 
 add_executable(pHoudini_init ${SOURCE_HOU} ${WIN_APP_ICON_RESOURCE_HOU})
 add_executable(pBlender_init ${SOURCE_BLN} ${WIN_APP_ICON_RESOURCE_BLN})
-
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
     # [ MODE ] Release Version
@@ -24,13 +22,11 @@ else()
     # [ MODE ] Debug/Test Version
     add_definitions(-DDEBUG)
     set(PEACH_INSTALL_DIR ${DEV_DIR}/peach_dev_projects/Peach)
-    message("somehere here")
 endif()
 
 install(TARGETS pHoudini_init DESTINATION ${PEACH_INSTALL_DIR})
 install(TARGETS pBlender_init DESTINATION ${PEACH_INSTALL_DIR})
 
-
 install(DIRECTORY 
-        ${CMAKE_SOURCE_DIR}/config
+        ${CMAKE_CURRENT_SOURCE_DIR}/config
         DESTINATION ${PEACH_INSTALL_DIR})

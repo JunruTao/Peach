@@ -15,7 +15,6 @@ void appendFlaggedArg(std::string& line, const std::string flag, const std::stri
     line += " " + flag + "=" + arg;
 }
 
-
 int main(int argc, char** argv){
     // argument processing
     if(argc > 1){
@@ -27,6 +26,11 @@ int main(int argc, char** argv){
 
     #ifdef _WIN32
         PrintMsg("System: Running on Win32 system");
+    #endif
+
+    //#define FOO 1
+    #ifdef FOO
+        std::cout << FOO << std::endl;
     #endif
     
     // Init:
