@@ -22,11 +22,12 @@ static inline void PrintParserMsg(const std::string& msg)
     std::cout << "[ Peach Config::Parser ] " << msg << std::endl;
 }
 
-static inline void ReplaceBackslash(std::string& line)
+static inline void ReplaceBackslash(std::string& line) /*something here*/
 {
     // this function only for converting linux scripts to shell
     std::replace(line.begin(), line.end(), '\\', '/');
 }
+
 
 static inline void ReplaceForeslash(std::string& line)
 {

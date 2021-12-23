@@ -2,7 +2,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-project(appBoostTrap)
+project(PEACH_Bootstraps)
+
 set(DEV_DIR "E:/dev")
 set(SOURCE_HOU src/main_hou.cpp src/main.cpp)
 set(SOURCE_BLN src/main_bln.cpp src/main.cpp)
@@ -17,13 +18,14 @@ add_executable(pBlender_init ${SOURCE_BLN} ${WIN_APP_ICON_RESOURCE_BLN})
 
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
+    # [ MODE ] Release Version
     set(PEACH_INSTALL_DIR ${DEV_DIR}/Peach)
 else()
-    set(PEACH_INSTALL_DIR ${DEV_DIR}/peach_dev_projects/Peach)
-    # setting the debug flag by force as long as it is not release mode
+    # [ MODE ] Debug/Test Version
     add_definitions(-DDEBUG)
+    set(PEACH_INSTALL_DIR ${DEV_DIR}/peach_dev_projects/Peach)
+    message("somehere here")
 endif()
-
 
 install(TARGETS pHoudini_init DESTINATION ${PEACH_INSTALL_DIR})
 install(TARGETS pBlender_init DESTINATION ${PEACH_INSTALL_DIR})
