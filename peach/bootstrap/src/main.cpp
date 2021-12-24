@@ -3,6 +3,10 @@
 static std::string dccTypeArg;
 namespace Peach{
     bool __DEBUG = false;
+    std::string PEACH_VER;
+    std::string PBTP_PACKAGE_VER;
+    std::string PBTP_HOU_VERSION;
+    std::string PBTP_BLN_VERSION;
 }
 
 void appendArg(std::string& line, const std::string arg)
@@ -15,7 +19,40 @@ void appendFlaggedArg(std::string& line, const std::string flag, const std::stri
     line += " " + flag + "=" + arg;
 }
 
+
+void configurations()
+{
+    #ifdef _WIN32
+        PrintMsg("System: Running on Win32 system");
+    #endif
+    
+    #ifdef PEACH_BOOTSTRAP_APP_VERSION
+        Peach::PBTP_PACKAGE_VER = std::string(TOSTRING(PEACH_BOOTSTRAP_APP_VERSION));
+        Peach::PBTP_PACKAGE_VER.erase(0,1);
+        Peach::PBTP_PACKAGE_VER.pop_back();
+        Peach::PBTP_BLN_VERSION = Peach::PBTP_PACKAGE_VER;
+        Peach::PBTP_HOU_VERSION = Peach::PBTP_PACKAGE_VER;
+        
+    #endif
+
+    #ifdef PEACH_BOOTSTRAP_BLN_VERSION
+        Peach::PBTP_BLN_VERSION += "." + std::string(TOSTRING(PEACH_BOOTSTRAP_BLN_VERSION));
+    #endif
+
+    #ifdef PEACH_BOOTSTRAP_HOU_VERSION
+        Peach::PBTP_HOU_VERSION += "." + std::string(TOSTRING(PEACH_BOOTSTRAP_HOU_VERSION));
+    #endif
+
+    #ifdef PEACH_VERSION
+        Peach::PEACH_VER = std::string(TOSTRING(PEACH_VERSION));
+        Peach::PEACH_VER.erase(0,1);
+        Peach::PEACH_VER.pop_back();
+    #endif
+}
+
 int main(int argc, char** argv){
+    
+    configurations();
     // argument processing
     if(argc > 1){
         for(size_t i = 1; i < argc; ++i){
@@ -23,15 +60,6 @@ int main(int argc, char** argv){
             if( !ArgHandling(arg, dcc) ) { return 1; }
         }
     }
-
-    #ifdef _WIN32
-        PrintMsg("System: Running on Win32 system");
-    #endif
-
-    //#define FOO 1
-    #ifdef FOO
-        std::cout << FOO << std::endl;
-    #endif
     
     // Init:
     PrintPackageMsg();

@@ -5,16 +5,23 @@
 #include <iostream>
 #include <string>
 
-#define PBTP_PACKAGE_VER "v1.0.0"
-#define PBTP_HOU_VERSION "1.0.0"
-#define PBTP_BLN_VERSION "1.0.0"
 
-static const char* HDAPP = "[ Peach Boostrap ] ";
-static const char* HDHOU = "[ Peach Boostrap : Houdini ]";
-static const char* HDBLD = "[ Peach Boostrap : Blender ]";
+/* [ Preprocessor ToString Function ]*/
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+
+
+
+static constexpr std::string_view HDAPP = "[ Peach Boostrap ] ";
+static constexpr std::string_view HDHOU = "[ Peach Boostrap : Houdini ]";
+static constexpr std::string_view HDBLD = "[ Peach Boostrap : Blender ]";
  
 namespace Peach{
     extern bool __DEBUG;
+    extern std::string PEACH_VER;
+    extern std::string PBTP_PACKAGE_VER;
+    extern std::string PBTP_HOU_VERSION;
+    extern std::string PBTP_BLN_VERSION;
 }
 
 inline void PrintPackageMsg()
@@ -24,17 +31,18 @@ inline void PrintPackageMsg()
 
 inline void PrintPackageVer()
 {
-    std::cout << "[ Peach Boostrap ] Version: " << PBTP_PACKAGE_VER << std::endl;
+    std::cout << "[ Peach ] Version: " << Peach::PEACH_VER << std::endl;
+    std::cout << "[ Peach Boostrap ] Version: " << Peach::PBTP_PACKAGE_VER << std::endl;
 }
 
 inline void PrintHouVer()
 {
-    std::cout << HDHOU << " Version: " << PBTP_HOU_VERSION << std::endl;
+    std::cout << HDHOU << " Version: " << Peach::PBTP_HOU_VERSION << std::endl;
 }
 
 inline void PrintBlnVer()
 {
-    std::cout << HDBLD << " Version: " << PBTP_BLN_VERSION << std::endl;
+    std::cout << HDBLD << " Version: " << Peach::PBTP_BLN_VERSION << std::endl;
 }
 
 inline void PrintMsg(const char* msg)

@@ -15,10 +15,12 @@
 
 # BUILDS
 **/build
+**/.build
 
 # [ PYTHON ]
 *.pyc
 *.pyo
+**/__pycache__
 
 
 # [ CMAKE ]

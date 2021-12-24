@@ -1,32 +1,50 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 project(PEACH_Bootstraps)
 
+# [ BOOTSTRAP ] Versions
+set(PEACH_BOOTSTRAP_APP_VERSION_MAJOR "0")
+set(PEACH_BOOTSTRAP_APP_VERSION_MINOR "1")
+set(PEACH_BOOTSTRAP_APP_BLENDER_VERSION "1")
+set(PEACH_BOOTSTRAP_APP_HOUDINI_VERSION "1")
+
+# [ PASSING TO PREPROCESSOR ]
+add_definitions(
+    -DPEACH_BOOTSTRAP_APP_VERSION="-${PEACH_BUILD} v${PEACH_BOOTSTRAP_APP_VERSION_MAJOR}.${PEACH_BOOTSTRAP_APP_VERSION_MINOR}"
+    )
+add_definitions(-DPEACH_BOOTSTRAP_BLN_VERSION=${PEACH_BOOTSTRAP_APP_BLENDER_VERSION})
+add_definitions(-DPEACH_BOOTSTRAP_HOU_VERSION=${PEACH_BOOTSTRAP_APP_HOUDINI_VERSION})
+
+# [ SOURCE & INCLUDES ]
 set(SOURCE_HOU src/main_hou.cpp src/main.cpp)
 set(SOURCE_BLN src/main_bln.cpp src/main.cpp)
-
 include_directories(src)
 
-set(WIN_APP_ICON_RESOURCE_HOU 
-    "${CMAKE_CURRENT_SOURCE_DIR}/resource/win_appicon_hou.rc")
-set(WIN_APP_ICON_RESOURCE_BLN 
-    "${CMAKE_CURRENT_SOURCE_DIR}/resource/win_appicon_bln.rc")
+# [ BUILD EXECUTABLES CXX ]
+IF (WIN32)
+    # [ Windows ] Link Icon Files
+    set(WIN_APP_ICON_RESOURCE_HOU 
+        "${PEACH_ICONS_ICO_DIR}/icon_peach_houdini.rc")
+    set(WIN_APP_ICON_RESOURCE_BLN 
+        "${PEACH_ICONS_ICO_DIR}/icon_peach_blender.rc")
+    add_executable(pHoudini_init ${SOURCE_HOU} ${WIN_APP_ICON_RESOURCE_HOU})
+    add_executable(pBlender_init ${SOURCE_BLN} ${WIN_APP_ICON_RESOURCE_BLN})
+ELSE()
+    # iconless build
+    add_executable(pHoudini_init ${SOURCE_HOU})
+    add_executable(pBlender_init ${SOURCE_BLN})
+ENDIF()
 
-add_executable(pHoudini_init ${SOURCE_HOU} ${WIN_APP_ICON_RESOURCE_HOU})
-add_executable(pBlender_init ${SOURCE_BLN} ${WIN_APP_ICON_RESOURCE_BLN})
 
-if (CMAKE_BUILD_TYPE MATCHES Release)
-    # [ MODE ] Release Version
-    set(PEACH_INSTALL_DIR ${DEV_DIR}/Peach)
-else()
-    # [ MODE ] Debug/Test Version
-    add_definitions(-DDEBUG)
-    set(PEACH_INSTALL_DIR ${DEV_DIR}/peach_dev_projects/Peach)
-endif()
+# [ INSTALLATION ]
 
+# /.executables
 install(TARGETS pHoudini_init DESTINATION ${PEACH_INSTALL_DIR})
 install(TARGETS pBlender_init DESTINATION ${PEACH_INSTALL_DIR})
 
+# /.files and directories
 install(DIRECTORY 
         ${CMAKE_CURRENT_SOURCE_DIR}/config
         DESTINATION ${PEACH_INSTALL_DIR})

@@ -1,14 +1,18 @@
 #ifndef __FINDCONFIG_H__
 #define __FINECONFIG_H__
+
+/* [ Header Includes ]*/
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <iostream>
 #include <algorithm>
 
+/* [ Start-up File Locations ] */
 #define STARTUP_ENV_FILEPATH "config/startup.pconfig"
 #define STARTUP_INIT_SHELLPATH "config/shell/startup_dcc_init.sh"
 
+/* [ windows OS helper Data ] */
 static const std::string win_cdisk = "C:";
 static const std::string shl_cdist = "/c";
 
@@ -22,7 +26,7 @@ static inline void PrintParserMsg(const std::string& msg)
     std::cout << "[ Peach Config::Parser ] " << msg << std::endl;
 }
 
-static inline void ReplaceBackslash(std::string& line) /*something here*/
+static inline void ReplaceBackslash(std::string& line)
 {
     // this function only for converting linux scripts to shell
     std::replace(line.begin(), line.end(), '\\', '/');
