@@ -9,6 +9,7 @@ Note: In order to keep a clear mind of this project, the task list will be the m
 
 - :purple_square: **Peach Idea Roadmap**
     - [x] a rough sketch of what it could be <sup>(diagram)</sup>
+    - [ ] a rough sketch of the Peach API <sup>(cpp/python)</sup>
 
 - :purple_square: **Developement workflow**
     - [x] basic work flow diagram <sup>(diagram)</sup>
@@ -27,9 +28,9 @@ Note: In order to keep a clear mind of this project, the task list will be the m
 - :orange_square: **Peach Install Target File Structure**
     - [x] bootstrap and config/config files
 - :red_square: **Peach Dev CMake**
-    - [x] Build target
-    - [x] Main CMake
-    - [x] Subdir CMake and build mechanism
+    - [x] Build target test
+        - [x] Main CMake test
+        - [x] Subdir CMake and build mechanism test
         - [ ] :warning: __`TODO:`__ disable other project from building. therefore only build selected one. (should be given an option to pass to cmake or build tools)
     - [ ] Test Passing Version information to Precompiler (1/2)
         - [x] bootstrapper [ done ]
@@ -61,7 +62,11 @@ Note: In order to keep a clear mind of this project, the task list will be the m
 
 - :green_square: **Peach Houdini**
 
+-----------------------------------------
+### :pen: [ API Design ]
+> specific section for Houdini
 
+- :red_circle: **Peach Python**
 
 -----------------------------------------
 ### :pen: [ *Misc. ]
