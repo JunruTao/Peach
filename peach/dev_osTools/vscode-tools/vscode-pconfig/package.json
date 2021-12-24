@@ -1,0 +1,21 @@
+{
+    "name": "pconfig",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "*"
+    },
+    "publisher": "jtao",
+    "contributes": {
+        "languages": [{
+            "id": "pconfig",
+            "aliases": ["pConfig", "pconfig"],
+            "extensions": [".pconfig", ".pcfg"]
+        }],
+        "grammars": [{
+            "language": "pconfig",
+            "scopeName": "source.pconfig",
+            "path": "./syntaxes/pconfig.json"
+        }],
+        "semanticHighlighting": true
+    }
+}
