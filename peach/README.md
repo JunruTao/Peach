@@ -1,7 +1,16 @@
 # ![icon](icons/25w/icon_peach_x25.png) Peach Dev Tasks
 
 **Author: Junru Tao** <br>
-Note: In order to keep a clear mind of this project, the task list will be the main section of documenting ToDos of this project. All higher level documentation should be created in the `peach_dev`'s main README. 
+> Note: In order to keep a clear mind of this project, the task list will be the main section of documenting ToDos of this project. All higher level documentation should be created in the `peach_dev`'s main README. 
+
+
+
+
+<br>
+<br>
+<br>
+<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<br>
 
 ## :pencil: TASK LIST
 ### :pen: [ Design ]
@@ -16,11 +25,18 @@ Note: In order to keep a clear mind of this project, the task list will be the m
     
     <br> :warning: __`TODO:`__
     - [ ] **document the boostrapping mechanism in doc and diagrams.**
-    - [ ] **HDA Dev workflow**
-        - [ ] **design a way develop hdas in dev stage**
-        - [ ] **design the hda shipment**
 
------------------------------------------
+
+
+
+
+<br>
+<br>
+<br>
+<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<br>
+
+----------------------------------------------------------------------------------
 ### :pen: [ Project Management ]
 > anything related to folder structure, development package management, cmake and building.
 
@@ -38,7 +54,17 @@ Note: In order to keep a clear mind of this project, the task list will be the m
 
     - [ ] :warning: __`TODO:`__ Move current bootstrap's config install folder to master dir. After moving bootstrap's config folder, change cmake list
 
------------------------------------------
+
+
+
+
+<br>
+<br>
+<br>
+<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<br>
+
+----------------------------------------------------------------------------------
 ### :pen: [ App: Dcc Bootstrapping ]
 > specific section for the bootstrap apps.
 
@@ -49,26 +75,69 @@ Note: In order to keep a clear mind of this project, the task list will be the m
     - [x] --- run Houdini init script setup <sup>(py)</sup>
     - [x] --- run Blender init script setup <sup>(py)</sup>
 
------------------------------------------
+
+
+
+
+<br>
+<br>
+<br>
+<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<br>
+
+----------------------------------------------------------------------------------
 ### :pen: [ Dcc Blender ]
 > specific section for blender
 
 - :green_square: **Peach Blender**
 
 
------------------------------------------
+
+
+
+<br>
+<br>
+<br>
+<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<br>
+
+----------------------------------------------------------------------------------
 ### :pen: [ Dcc Houdini ]
 > specific section for Houdini
 
-- :green_square: **Peach Houdini**
+- :green_square: **Houdini Digital Asset**
+    - [ ] --- `HDA` Dev workflow
+        - [ ] --- design a way develop `HDA`s in dev stage
+        - [ ] --- design the `HDA` shipment
 
------------------------------------------
+
+
+
+
+
+<br>
+<br>
+<br>
+<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<br>
+
+----------------------------------------------------------------------------------
 ### :pen: [ API Design ]
 > specific section for Houdini
 
 - :red_circle: **Peach Python**
 
------------------------------------------
+
+
+
+
+<br>
+<br>
+<br>
+<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<br>
+
+----------------------------------------------------------------------------------
 ### :pen: [ *Misc. ]
 > anything else. however including the icons, image resource and documentations.
 
