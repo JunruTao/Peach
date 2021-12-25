@@ -8,5 +8,5 @@ function pause(){
 }
 
 # run scripts
-python ./scripts/genico.py
+python genico.py
 pause

@@ -14,8 +14,8 @@ file_dir = os.path.join(logs_dir, filename)
 admin = "Junru Tao"
 
 str_init = """# :hammer: ChangeLog
-> __Date: {0}__ </br>
-> __Author: {1}__ </br>
+> __Date: {0}__<br>
+> __Author: {1}__<br>
 ---
 \n""".format(date_str, admin)
 
