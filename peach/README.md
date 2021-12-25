@@ -6,8 +6,12 @@
 
 <br><br> 
 
-|Use :warning: __`TODO:`__ to  add more noticable checkbox sections . . .|
+| - Markers Atlas |
 |:---|
+|Use :warning: __`TODO:`__ to  add more noticable checkbox sections . . .|
+|Use: <sup>__`[DONE]`__</sup> to express recently done TODOs . . . |
+
+
 
 
 
@@ -27,9 +31,7 @@
 
 - :purple_square: **Developement workflow**
     - [x] --- basic work flow diagram <sup>(diagram)</sup>
-    
-    <br> :warning: __`TODO:`__
-    - [ ] **document the boostrapping mechanism in doc and diagrams.**
+    - [x] --- document the boostrapping mechanism in doc and diagrams
 
 
 
@@ -56,8 +58,7 @@
     - [ ] Test Passing Version information to Precompiler (1/2)
         - [x] --- bootstrapper [ done ]
         - [ ] --- passing to python/a configuration file?/or folder name?    
-
-    - [ ] :warning: __`TODO:`__ Move current bootstrap's config install folder to master dir. After moving bootstrap's config folder, change cmake list
+    - [x] <sup>__`[DONE]`__</sup>  Move current bootstrap's config install folder to master dir. After moving bootstrap's config folder, change cmake list
 
 
 
@@ -155,5 +156,5 @@
 - :yellow_square: **Documentation Tools**
     - [x] --- date-time based changeLogs auto generator. create new changeLog files according to the date, and append new changes to that date's changeLog with timestamps. <sup>(py, shell)</sup>
     - [x] --- automatically open `code` after the shell execution. open up the change log file that needed to be editied.
-    - [x] --- Auto append sub change-logs to a _main_ change-log, as `Markdown/html hyperlinks`.
+    - [x] --- <sup>__`[DONE]`__</sup> Auto append sub change-logs to a _main_ change-log, as `Markdown/html hyperlinks`.
     (maybe override the same file each time)
