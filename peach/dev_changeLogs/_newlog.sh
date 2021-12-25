@@ -7,5 +7,8 @@ function pause(){
     echo ""
 }
 
-python ./scripts/changelog_gen.py
+result=`python ./scripts/changelog_gen.py`
+echo $result
 pause
+
+code "$result"

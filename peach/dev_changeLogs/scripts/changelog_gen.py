@@ -17,12 +17,13 @@ str_init = """# :hammer: ChangeLog
 > __Date: {0}__ </br>
 > __Author: {1}__ </br>
 ---
-\n"""
+\n""".format(date_str, admin)
 
 append = """### :electric_plug: ( New Log )
 > Time: {2} | Author: {1}\n\n
 ---\n\n
 """.format(date_str, admin, time_str)
+
 
 # Running: Either Append
 if os.path.exists(file_dir):
@@ -32,3 +33,6 @@ if os.path.exists(file_dir):
 else:
     with open(file_dir, "w") as file:
         file.write(str_init + append)
+        
+print(file_dir)  
+exit(0)
