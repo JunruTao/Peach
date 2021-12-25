@@ -1,29 +1,30 @@
 #!/bin/sh
 
+# [ INIT SCRIPTS LOCATIONS ]
 Init_Script_Houdini="config/scripts/houdini_init.py"
 Init_Script_Blender="config/scripts/blender_init.py"
 
 # [ DEFAULT ARGUMENT FIELD ]
-
-DEBUG=0
+mode_debug=0
 dcc_file_path=""
 dcc_type=""
 dcc_arguments=""
 
-# [ DEBUG ] functions here:
+# [ DEBUG ] define functions here:
 function pause(){
     read -s -n 1 -p "[debug] Press any key to continue . . ."
     echo ""
 }
 
+# >>>[ PROCESS ARGUMENTS ]
 for arg in "$@"
 do
     case $arg in
         -d|--debug)
         # [-d Flag: if Debug mode ]
             echo "[ Startup - Debug ]: True"
-            DEBUG=1
-            echo "[ Startup - Debug Value ]: $DEBUG"
+            mode_debug=1
+            echo "[ Startup - Debug Value ]: $mode_debug"
         ;;
 
         -e=*|--executable=*)
@@ -40,6 +41,8 @@ do
     esac
 done
 
+
+# [ DEFINE INIT ARGUMENTS HERE ]
 if [ $dcc_type == 'blender' ];
 then
     dcc_arguments="-con --debug-python --python \"$Init_Script_Blender\""
@@ -52,16 +55,24 @@ fi
 startup_shell_cmd="$dcc_file_path $dcc_arguments"
 echo "[ Startip - DCC Run dcc_file_path] $startup_shell_cmd"
 
-
-if [ $DEBUG == 1 ];then
+# ////////////////////////////
+if [ $mode_debug == 1 ];then
+    # Give user some time to read the logs.
     pause
 fi
 
+
+# >>>
 # [ RUN SCRIPT]
 eval "$startup_shell_cmd"
 
-if [ $DEBUG == 1 ];then
+# [Note]: In the dev stage, Houdini will NOT start from vscode's powershell or cmds,
+# as the working dir is limited to the vscode file scope. the solution is run the 
+# bootstrap app from the folder(windows, .exe) or call the bootstrap from other shells.
+
+# ////////////////////////////
+if [ $mode_debug == 1 ];then
+    # Give user some time to read the logs.
     pause
 fi
-
 

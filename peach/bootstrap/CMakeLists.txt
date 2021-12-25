@@ -43,8 +43,3 @@ ENDIF()
 # /.executables
 install(TARGETS pHoudini_init DESTINATION ${PEACH_INSTALL_DIR})
 install(TARGETS pBlender_init DESTINATION ${PEACH_INSTALL_DIR})
-
-# /.files and directories
-install(DIRECTORY 
-        ${CMAKE_CURRENT_SOURCE_DIR}/config
-        DESTINATION ${PEACH_INSTALL_DIR})

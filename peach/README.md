@@ -4,12 +4,17 @@
 > Note: In order to keep a clear mind of this project, the task list will be the main section of documenting ToDos of this project. All higher level documentation should be created in the `peach_dev`'s main README. 
 
 
+<br><br> 
+
+|Use :warning: __`TODO:`__ to  add more noticable checkbox sections . . .|
+|:---|
 
 
+
 <br>
 <br>
 <br>
-<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<p align=middle> <sup><sup><i>Peach</i></sup></sup></p>
 <br>
 
 ## :pencil: TASK LIST
@@ -33,7 +38,7 @@
 <br>
 <br>
 <br>
-<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<p align=middle> <sup><sup><i>Peach</i></sup></sup></p>
 <br>
 
 ----------------------------------------------------------------------------------
@@ -61,7 +66,7 @@
 <br>
 <br>
 <br>
-<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<p align=middle> <sup><sup><i>Peach</i></sup></sup></p>
 <br>
 
 ----------------------------------------------------------------------------------
@@ -82,7 +87,7 @@
 <br>
 <br>
 <br>
-<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<p align=middle> <sup><sup><i>Peach</i></sup></sup></p>
 <br>
 
 ----------------------------------------------------------------------------------
@@ -98,7 +103,7 @@
 <br>
 <br>
 <br>
-<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<p align=middle> <sup><sup><i>Peach</i></sup></sup></p>
 <br>
 
 ----------------------------------------------------------------------------------
@@ -118,7 +123,7 @@
 <br>
 <br>
 <br>
-<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<p align=middle> <sup><sup><i>Peach</i></sup></sup></p>
 <br>
 
 ----------------------------------------------------------------------------------
@@ -134,7 +139,7 @@
 <br>
 <br>
 <br>
-<p align=middle> <img src="icons/25w/icon_peach_x25.png" width="17"></img> <sup><sup><i>Peach</i></sup></sup></p>
+<p align=middle> <sup><sup><i>Peach</i></sup></sup></p>
 <br>
 
 ----------------------------------------------------------------------------------
@@ -150,7 +155,5 @@
 - :yellow_square: **Documentation Tools**
     - [x] --- date-time based changeLogs auto generator. create new changeLog files according to the date, and append new changes to that date's changeLog with timestamps. <sup>(py, shell)</sup>
     - [x] --- automatically open `code` after the shell execution. open up the change log file that needed to be editied.
-    
-    <br> :warning: __`TODO:`__
-    - [ ] **Auto append sub change-logs to a _main_ change-log, as `Markdown/html hyperlinks`.
-    (maybe override the same file each time)**
+    - [x] --- Auto append sub change-logs to a _main_ change-log, as `Markdown/html hyperlinks`.
+    (maybe override the same file each time)

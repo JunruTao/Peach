@@ -37,3 +37,10 @@ add_definitions(
 
 # [ SUBDIRECTORIES ]
 add_subdirectory(bootstrap)
+
+
+# [ INSTALL ]
+# /.files and directories
+install(DIRECTORY 
+        ${PEACH_DIR}/config
+        DESTINATION ${PEACH_INSTALL_DIR})
