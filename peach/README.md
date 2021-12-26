@@ -111,10 +111,16 @@
 ### :pen: [ Dcc Houdini ]
 > specific section for Houdini
 
-- :green_square: **Houdini Digital Asset**
-    - [ ] --- `HDA` Dev workflow
-        - [ ] --- design a way develop `HDA`s in dev stage
-        - [ ] --- design the `HDA` shipment
+:green_square: **Houdini Init--Bootstrapping**
+- [ ] --- __`Houdini Package`__ Loading
+    > This is something highly important. Use houdini package(.json) files should be able to configure houdini the way I wanted. Loading everything, configure path, plug-ins, otls, and extra.
+    - [ ] --- :warning: __`TODO:`__ Experiment with Houdini package. See how it can be utilised to load HDA and create workflows based on Dev, Project, User, and Shot etc.
+
+
+:green_square: **Houdini Digital Asset**
+- [ ] --- `HDA` Dev workflow
+    - [ ] --- design a way develop `HDA`s in dev stage
+    - [ ] --- design the `HDA` shipment
 
 
 
