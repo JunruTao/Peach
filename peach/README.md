@@ -114,7 +114,8 @@
 :green_square: **Houdini Init--Bootstrapping**
 - [ ] --- __`Houdini Package`__ Loading
     > This is something highly important. Use houdini package(.json) files should be able to configure houdini the way I wanted. Loading everything, configure path, plug-ins, otls, and extra.
-    - [ ] --- :warning: __`TODO:`__ Experiment with Houdini package. See how it can be utilised to load HDA and create workflows based on Dev, Project, User, and Shot etc.
+    - [x] --- Experiment with Houdini package. See how it can be utilised to load HDA and create workflows based on Dev, Project, User, and Shot etc.
+    - [ ] --- intergrate into dev pipeline.
 
 
 :green_square: **Houdini Digital Asset**
