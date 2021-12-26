@@ -1,19 +1,20 @@
 # [ PEACH GitIgnore ]
 
-# [ EXCLUDED FOLDERS ]:
+# [ *CUSTOM ]
+_igr_*
 
-# GIT:
-/.git/**
+# [ GIT ]:
+**/.git
 
-# ICON DESIGN:
+# [ ICON DESIGN ]
 **/icon_designs
 **.ai
 **/.original
 
-# DESKTOP FILES:
+# [ DESKTOP FILES ]
 **.ini
 
-# BUILDS
+# [ BUILDS ]
 **/build
 **/.build
 
@@ -24,9 +25,40 @@
 
 
 # [ CMAKE ]
+**/cmake-build-debug
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/install_manifest.txt
+**/CMakeFiles/
+**/CTestTestfile.cmake
+**/Makefile
+**/*.cbp
+**/CMakeScripts
+**/compile_commands.json
 
 # [ VSCode ]
 **/.vscode
 
 # [ PyCharm ]
 **/.idea
+
+# [ Executables ]
+*.exe
+*.out
+*.app
+
+# [ Compiled Object files ]
+**/.DS_Store
+*.slo
+*.lo
+*.o
+*.obj
+
+# [ Precompiled Headers ]
+*.gch
+*.pch
+
+# [ Compiled Dynamic libraries ]
+*.so
+*.dylib
+*.dll
