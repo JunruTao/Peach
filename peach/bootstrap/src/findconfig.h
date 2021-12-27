@@ -86,7 +86,7 @@ static inline void StripWhiteSpace(std::string& line)
     }
 }
 
-inline std::string RunConfig(Type type=Type::HOUDINI, std::string dcc_args="")
+inline std::string RunConfig(Type type, std::string dcc_args="")
 {
     std::string startup_env_path(STARTUP_ENV_FILEPATH);
     #ifdef _WIN32
@@ -119,8 +119,8 @@ inline std::string RunConfig(Type type=Type::HOUDINI, std::string dcc_args="")
                     if(token=="debug")
                     {
                         PrintParserMsg("Found token : debug");
-                        Peach::__DEBUG = line == "TRUE";
-                        PrintConfigMsg("Debug Mode : " + std::to_string(Peach::__DEBUG));
+                        Peach::PEACH_BOOTSTRAP_DEBUG_MODE = line == "TRUE";
+                        PrintConfigMsg("Debug Mode : " + std::to_string(Peach::PEACH_BOOTSTRAP_DEBUG_MODE));
                     }
                     if(token=="houdini_executable" && type==Type::HOUDINI )
                     {

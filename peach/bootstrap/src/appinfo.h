@@ -1,9 +1,14 @@
 #ifndef __APPINFO_H__
 #define __APPINFO_H__
-
-#include "basetypes.h"
 #include <iostream>
 #include <string>
+
+// Define a enum for type switching
+enum class Type{
+    HOUDINI,
+    BLENDER,
+    MAYA
+};
 
 
 /* [ Preprocessor ToString Function ]*/
@@ -11,13 +16,14 @@
 #define TOSTRING(x) STRINGIFY(x)
 
 
-
+/* [ Console Print Headers ]*/
 static constexpr std::string_view HDAPP = "[ Peach Boostrap ] ";
 static constexpr std::string_view HDHOU = "[ Peach Boostrap : Houdini ]";
 static constexpr std::string_view HDBLD = "[ Peach Boostrap : Blender ]";
  
+ /* Peach Namespaced Headers */
 namespace Peach{
-    extern bool __DEBUG;
+    extern bool PEACH_BOOTSTRAP_DEBUG_MODE;
     extern std::string PEACH_VER;
     extern std::string PBTP_PACKAGE_VER;
     extern std::string PBTP_HOU_VERSION;
@@ -61,13 +67,20 @@ inline void PrintBlnMsg(const char* msg)
 }
 
 
-
+/* [ HELP: Printing Content ] */
 #define HELP_MSG "Print Help... \n\n \
 [ Allowed Flags ]:\n \
 -v | --version ..... Display current Bootstrap version\n \
 -h | --help    ..... Display help message\n \
 -d | --debug   ..... Set Debug Mode as True\n"
 
+
+/* [ Argument Handling Function ]
+In this functions, The argument(single input) will be processed
+through this function. */
+///@param arg: (std::string &) argument that put in
+///@param app: (enum Type) which dcc context
+/////////////////////////////////////////////////////////////////
 inline bool ArgHandling(std::string &arg, Type app=Type::HOUDINI)
 {
     if( arg == "--version" || arg == "-v")
@@ -99,13 +112,15 @@ inline bool ArgHandling(std::string &arg, Type app=Type::HOUDINI)
     }
     else if(arg == "--debug" || arg == "-d")
     {
-        Peach::__DEBUG = true;
+        Peach::PEACH_BOOTSTRAP_DEBUG_MODE = true;
         PrintMsg("Debug=True");
         return true;
     }
     else
     {
-        std::string msg = "Cannot Recognise the flag " + arg + ", please use --help or -h";
+        std::string msg = "Cannot Recognise the flag "
+                            + arg 
+                            + ", please use --help or -h";
         PrintMsg(msg.c_str());
         return false;
     }

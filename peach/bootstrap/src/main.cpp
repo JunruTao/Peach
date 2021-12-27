@@ -1,12 +1,12 @@
 #include "main.h"
 
-static std::string dccTypeArg;
+// Definition field
 namespace Peach{
-    bool __DEBUG = false;
-    std::string PEACH_VER;
-    std::string PBTP_PACKAGE_VER;
-    std::string PBTP_HOU_VERSION;
-    std::string PBTP_BLN_VERSION;
+    bool PEACH_BOOTSTRAP_DEBUG_MODE = false;
+    std::string PEACH_VER = "v0.0.0";
+    std::string PBTP_PACKAGE_VER = "v0.0";
+    std::string PBTP_HOU_VERSION = "v0.0";
+    std::string PBTP_BLN_VERSION = "v0.0";
 }
 
 void appendArg(std::string& line, const std::string arg)
@@ -60,7 +60,10 @@ int main(int argc, char** argv){
             if( !ArgHandling(arg, dcc) ) { return 1; }
         }
     }
-    
+
+    // DCC Type
+    static std::string dccType;
+
     // Init:
     PrintPackageMsg();
     switch (dcc)
@@ -68,12 +71,12 @@ int main(int argc, char** argv){
     case Type::HOUDINI:
         PrintHouVer(); // Houdini
         system("ECHO \"Running Houdini\"");
-        dccTypeArg= "houdini";
+        dccType= "houdini";
         break;
     case Type::BLENDER:
         PrintBlnVer(); // Blender
         system("ECHO \"Running Blender\"");
-        dccTypeArg= "blender";
+        dccType= "blender";
     default:
         break;
     }
@@ -95,10 +98,12 @@ int main(int argc, char** argv){
         std::string shell_cmd; 
         appendArg(shell_cmd, startup_shell);
         appendFlaggedArg(shell_cmd, "-e", dccpath);
-        appendFlaggedArg(shell_cmd, "-t", dccTypeArg);
-        if(Peach::__DEBUG){
+        appendFlaggedArg(shell_cmd, "-t", dccType);
+
+        if(Peach::PEACH_BOOTSTRAP_DEBUG_MODE){
             appendArg(shell_cmd, "-d");
         }
+
         return system(shell_cmd.c_str());
     }
     return 0;

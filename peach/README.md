@@ -80,6 +80,8 @@
     - [x] --- create `.pconfig` file format
     - [x] --- run Houdini init script setup <sup>(py)</sup>
     - [x] --- run Blender init script setup <sup>(py)</sup>
+    <br><br>
+    - [ ] --- :warning: __`TODO:`__ Create `PowerShell` version for the `startup_dcc_init.sh`. Therefore the linux user and windows user should have the capabilities to bootstrap the apps without installing any new dependent softwares such as git-bash.
 
 
 
