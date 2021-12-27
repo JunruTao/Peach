@@ -11,7 +11,7 @@
 /* [ Start-up File Locations ] */
 #define STARTUP_ENV_FILEPATH "config/startup.pconfig"
 #define STARTUP_INIT_SHELLPATH "config/bootstrap/startup_dcc_init.sh"
-#define STARTUP_INIT_PWSHLPATH "powershell config/bootstrap/startup_dcc_init.ps1"
+#define STARTUP_INIT_PWSHLPATH "start powershell config/bootstrap/startup_dcc_init.ps1"
 
 #define IS ==
 #define AND &&
@@ -70,7 +70,9 @@ static inline void FormatWindowsString(std::string& line)
     ReplaceBackslash(line);
 }
 
-static inline void ReplaceEmptySpaceInPathString(std::string& line)
+static inline void ReplaceEmptySpaceInPathString(
+    std::string& line, 
+    const std::string& div="\\")
 {
     if(line.find(" ") != std::string::npos)
     {
@@ -79,7 +81,7 @@ static inline void ReplaceEmptySpaceInPathString(std::string& line)
         std::string result = "";
         while(std::getline(iss, item, ' '))
         {
-            result +=  item + "\\ ";
+            result +=  item + div + " ";
         }
         line = std::move(result);
         line.pop_back();
@@ -94,11 +96,20 @@ static inline void PathParsing(std::string& line)
     //for shell on windows only
     if(Peach::init_script_type == "sh")
     {
+        //shell
         #ifdef _WIN32
             FormatWindowsString(line);
         #endif
-        ReplaceEmptySpaceInPathString(line);
+        
+        ReplaceEmptySpaceInPathString(line, "\\");
+    }else
+    {
+        //power shell
+        line.erase(0, 1);
+        line.pop_back();
+        line = "'" + line + "'";
     }
+    
 }
 
 static inline void StripWhiteSpace(std::string& line)
