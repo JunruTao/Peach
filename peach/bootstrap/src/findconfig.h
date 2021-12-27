@@ -11,7 +11,7 @@
 /* [ Start-up File Locations ] */
 #define STARTUP_ENV_FILEPATH "config/startup.pconfig"
 #define STARTUP_INIT_SHELLPATH "config/bootstrap/startup_dcc_init.sh"
-#define STARTUP_INIT_PWSHLPATH "start powershell config/bootstrap/startup_dcc_init.ps1"
+#define STARTUP_INIT_PWSHLPATH "powershell config/bootstrap/startup_dcc_init.ps1"
 
 #define IS ==
 #define AND &&

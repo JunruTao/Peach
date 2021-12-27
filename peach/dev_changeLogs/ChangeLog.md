@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2021.12.27__<br>
-> __Time stamp: 14:10:35__<br>
+> __Time stamp: 14:39:07__<br>
 > __Author: Junru Tao__
 ---
 

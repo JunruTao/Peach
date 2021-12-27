@@ -36,20 +36,25 @@ for ( $i = 0; $i -lt $args.count; $i++ )
     }
 } 
 
+
+if($mode_debug)
+{
+    Pause
+}
+
 # [ DEFINE INIT ARGUMENTS HERE ]
 if ( $dcc_type -eq 'blender' )
 {
     $dcc_arguments=@('-con', '--debug-python', '--python',"`"$Init_Script_Blender`"")
+    # [ Combine the dcc executable and input arguments ]
+    $startup_shell_cmd = $dcc_arguments -join ' '
+    write-host "[ Startip - DCC Run dcc_file_path] $startup_shell_cmd"
+    Start-Process -NoNewWindow -FilePath $dcc_file_path -ArgumentList $dcc_arguments
 }
 elseif ( $dcc_type -eq 'houdini' )
 {
     $dcc_arguments=@("-background", "`"$Init_Script_Houdini`"")
+    $startup_shell_cmd = $dcc_arguments -join ' '
+    write-host "[ Startip - DCC Run dcc_file_path] $startup_shell_cmd"
+    Start-Process -Wait -NoNewWindow -FilePath $dcc_file_path -ArgumentList $dcc_arguments
 }
-
-# [ Combine the dcc executable and input arguments ]
-$startup_shell_cmd = $dcc_arguments -join ' '
-write-host "[ Startip - DCC Run dcc_file_path] $startup_shell_cmd"
-
-Pause
-
-& $dcc_file_path $dcc_arguments
