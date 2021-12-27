@@ -7,6 +7,7 @@ namespace Peach{
     std::string PBTP_PACKAGE_VER = "v0.0";
     std::string PBTP_HOU_VERSION = "v0.0";
     std::string PBTP_BLN_VERSION = "v0.0";
+    std::string init_script_command = "";
 }
 
 void appendArg(std::string& line, const std::string arg)
@@ -88,20 +89,16 @@ int main(int argc, char** argv){
     if(!dccpath.empty())
     {   
         PrintMsg("OPEN...");
-        // Shell Script
-        std::string startup_shell(STARTUP_INIT_SHELLPATH);
-        #ifdef _WIN32
-            ReplaceForeslash(startup_shell);
-        #endif
 
         // Compile the shell command to pass to .sh script
         std::string shell_cmd; 
-        appendArg(shell_cmd, startup_shell);
+        appendArg(shell_cmd, Peach::init_script_command);
         appendFlaggedArg(shell_cmd, "-e", dccpath);
         appendFlaggedArg(shell_cmd, "-t", dccType);
 
         if(Peach::PEACH_BOOTSTRAP_DEBUG_MODE){
             appendArg(shell_cmd, "-d");
+            PrintMsg(shell_cmd.c_str());
         }
 
         return system(shell_cmd.c_str());

@@ -2,8 +2,17 @@
 # [ Notes ]: Please don't add empty space between <token>,"=" and <value>. 
 
 # [ DCC app Directories ]
+# Users: 
+# / ! \ Please Change all the directories pointed to your own DCCs
 houdini_executable="C:\Program Files\Side Effects Software\Houdini 19.0.455\bin\houdini.exe"
 blender_executable="C:\Program Files\Blender Foundation\Blender 3.0\blender-launcher.exe"
 
 # [ Init App Configuration ]
 debug=TRUE
+
+# [ Startup Script Mode ]
+# Modes: (Leave it auto if you don't have git-bash or bash on Windows)
+# --- "auto" ........ (depends on system, linux/max: shell, windows: PowerShell)
+# --- "sh" .......... (forced using shell) 
+# --- "ps" .......... (forced using powershell)
+startup_script_mode="auto"

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "[Peach Start-Up] Running Bash Script"
+
 # [ INIT SCRIPTS LOCATIONS ]
 Init_Script_Houdini="config/scripts/houdini_init.py"
 Init_Script_Blender="config/scripts/blender_init.py"

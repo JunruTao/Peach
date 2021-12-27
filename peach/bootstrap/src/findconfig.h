@@ -10,22 +10,45 @@
 
 /* [ Start-up File Locations ] */
 #define STARTUP_ENV_FILEPATH "config/startup.pconfig"
-#define STARTUP_INIT_SHELLPATH "config/shell/startup_dcc_init.sh"
+#define STARTUP_INIT_SHELLPATH "config/bootstrap/startup_dcc_init.sh"
+#define STARTUP_INIT_PWSHLPATH "powershell config/bootstrap/startup_dcc_init.ps1"
+
+#define IS ==
+#define AND &&
+#define OR ||
 
 /* [ windows OS helper Data ] */
 static const std::string win_cdisk = "C:";
 static const std::string shl_cdist = "/c";
 
+/* [ Peach Globals ]*/
+namespace Peach
+{
+    extern std::string init_script_command;
+}
+
+
+/* [Printing Functions ]
+//////////////////////////////////////////////////////////*/
+
+// [ Print Config ]
 static inline void PrintConfigMsg(const std::string& msg)
 {
     std::cout << "[ Peach Config ] " << msg << std::endl;
 }
 
+// [ Print Parsing Message(Debug Mode Only) ]
 static inline void PrintParserMsg(const std::string& msg)
 {
-    std::cout << "[ Peach Config::Parser ] " << msg << std::endl;
+    if(Peach::PEACH_BOOTSTRAP_DEBUG_MODE)
+        std::cout << "[ Peach Config::Parser ] " << msg << std::endl;
 }
 
+
+/* [Parsing Functions] 
+//////////////////////////////////////////////////////////*/
+
+//
 static inline void ReplaceBackslash(std::string& line)
 {
     // this function only for converting linux scripts to shell
@@ -47,17 +70,7 @@ static inline void FormatWindowsString(std::string& line)
 }
 
 
-static inline void PassArguments(std::string& line, const std::string& arg)
-{
-    if(!arg.empty())
-    {
-        line.pop_back();
-        line += " " + arg;
-        line += "\"";
-    }
-}
-
-static inline void ReplaceEmptySpace(std::string& line)
+static inline void ReplaceEmptySpaceInPathString(std::string& line)
 {
     if(line.find(" ") != std::string::npos)
     {
@@ -76,6 +89,14 @@ static inline void ReplaceEmptySpace(std::string& line)
     }
 }
 
+static inline void PathParsing(std::string& line)
+{
+    #ifdef _WIN32
+        FormatWindowsString(line);
+    #endif
+    ReplaceEmptySpaceInPathString(line);
+}
+
 static inline void StripWhiteSpace(std::string& line)
 {
     if(!line.empty()){
@@ -86,7 +107,7 @@ static inline void StripWhiteSpace(std::string& line)
     }
 }
 
-inline std::string RunConfig(Type type, std::string dcc_args="")
+inline std::string RunConfig(Type type)
 {
     std::string startup_env_path(STARTUP_ENV_FILEPATH);
     #ifdef _WIN32
@@ -105,50 +126,82 @@ inline std::string RunConfig(Type type, std::string dcc_args="")
         
         while(std::getline(startup_env_file, line, '\n'))
         {
+            // { Empty Line }
             if(line.empty())
                 PrintParserMsg("(\\n) SKIP EMPTY LINE");
+            // { Line Comments }
             if(line.starts_with("#"))
                 PrintParserMsg("(#) SKIP COMMENT");
+            // { Try Parsing Tokens }
             else{
+                // { Split Token and Value }
                 std::string delimiter = "=";
                 size_t pos = line.find(delimiter);
+
                 if(pos != std::string::npos)
                 {
                     std::string token = line.substr(0, pos);
                     line.erase(0, pos + delimiter.length());
+
                     if(token=="debug")
                     {
                         PrintParserMsg("Found token : debug");
-                        Peach::PEACH_BOOTSTRAP_DEBUG_MODE = line == "TRUE";
+                        Peach::PEACH_BOOTSTRAP_DEBUG_MODE = 
+                                            (line IS "TRUE") OR 
+                                            (line IS "True") OR
+                                            (line IS "true");
+                        // Notes: Anything else will be treated as False
                         PrintConfigMsg("Debug Mode : " + std::to_string(Peach::PEACH_BOOTSTRAP_DEBUG_MODE));
                     }
-                    if(token=="houdini_executable" && type==Type::HOUDINI )
+                    else if(token IS "houdini_executable" and type IS Type::HOUDINI )
                     {
-                        PrintParserMsg("Found token : houdini_executable");
-                        #ifdef _WIN32
-                            FormatWindowsString(line);
-                        #endif
-                        ReplaceEmptySpace(line);
-                        PassArguments(line, dcc_args);
-
+                        PrintParserMsg("Found token :" + token);
+                        PathParsing(line);
                         PrintConfigMsg("Houdini: " + line);
-                        line_out = line;
+                        line_out = line; // Set return value
                     }
-                    if(token=="blender_executable" && type==Type::BLENDER)
+                    else if(token IS "blender_executable" and type IS Type::BLENDER)
                     {
-                        PrintParserMsg("Found token : blender_executable");
-                        #ifdef _WIN32
-                            FormatWindowsString(line);
-                        #endif
-                        ReplaceEmptySpace(line);
-                        PassArguments(line, dcc_args);
-
+                        PrintParserMsg("Found token :" + token);
+                        PathParsing(line);
                         PrintConfigMsg("Blender: " + line);
-                        line_out = line;
-
+                        line_out = line; // Set return value
+                    }
+                    else if(token IS "startup_script_mode")
+                    {
+                        PrintParserMsg("Found token :" + token);
+                        // By default, init script is shell
+                        Peach::init_script_command = std::string(STARTUP_INIT_SHELLPATH);
+                        if(line IS "\"sh\""){ /*do nothing*/ }
+                        if(line IS "\"ps\"") 
+                        {
+                            // forced using powershell
+                            Peach::init_script_command = std::string(STARTUP_INIT_PWSHLPATH);
+                        }
+                        else
+                        {
+                            //Any other value will be treated as "auto"
+                            #ifdef _WIN32
+                                Peach::init_script_command = std::string(STARTUP_INIT_PWSHLPATH);
+                            #endif
+                        }
+                        // detect which script to use.
+                        #ifdef _WIN32
+                            ReplaceForeslash(Peach::init_script_command);
+                        #endif
+                    }
+                    else
+                    {
+                        // Runtime not finding any corret token or value
+                        PrintParserMsg("Unknown PConfig Script");
                     }/*end of <if in token parsing>*/
 
                 }/*end of <if found token sentence>*/
+                else
+                {   
+                    // Runtime not finding any corret gramma
+                    PrintParserMsg("Unknown PConfig Script");
+                }/*end of <not found token sentence>*/
             
             }/*end of <else>*/
 
