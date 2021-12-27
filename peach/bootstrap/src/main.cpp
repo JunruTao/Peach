@@ -2,11 +2,14 @@
 
 // Definition field
 namespace Peach{
+    
     bool PEACH_BOOTSTRAP_DEBUG_MODE = false;
+
     std::string PEACH_VER = "v0.0.0";
     std::string PBTP_PACKAGE_VER = "v0.0";
     std::string PBTP_HOU_VERSION = "v0.0";
     std::string PBTP_BLN_VERSION = "v0.0";
+
     std::string init_script_command = "";
     std::string init_script_type = "";
 }
