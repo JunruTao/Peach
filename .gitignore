@@ -11,6 +11,7 @@ _igr_*
 **/icon_designs
 **.ai
 **/.original
+*.lnk
 
 # [ DESKTOP FILES ]
 **.ini
