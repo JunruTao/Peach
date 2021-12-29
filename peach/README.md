@@ -27,7 +27,7 @@
 
 - :purple_square: **Peach Idea Roadmap**
     - [x] --- a rough sketch of what it could be <sup>(diagram)</sup>
-    - [ ] --- a rough sketch of the Peach API <sup>(cpp/python)</sup>
+    - [ ] --- :warning: __`TODO:`__ a rough sketch of the Peach API <sup>(cpp/python)</sup>
 
 - :purple_square: **Developement workflow**
     - [x] --- basic work flow diagram <sup>(diagram)</sup>
@@ -119,12 +119,15 @@
     - [ ] --- intergrate into dev pipeline.
 
 
-:green_square: **Houdini Digital Asset**
-- [ ] --- `HDA` Dev workflow
-    - [ ] --- design a way develop `HDA`s in dev stage
-    - [ ] --- design the `HDA` shipment
+:green_square: **Houdini Package Develop**
+- [x] --- <s>`HDA` Dev workflow design graph
+    - [x] --- design a way develop `HDA`s in dev stage
+    - [x] --- design the `HDA` shipment</s>
+    
+    > now The hda loading should be included in the package loading section.
 
-
+- [ ] --- Test out Package Development Workflow
+    > This is important transit from the design chart to actual product.
 
 
 
