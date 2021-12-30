@@ -4,7 +4,7 @@
     "load_package_once": true,
     "enable" : "houdini_version >= '19.0' and houdini_version < '19.1'",
     "env" : [
-        {"PEACH_VERSION" : "0.0.3"},
+        {"PEACH_VERSION" : "0.0.4"},
         {"PEACH_CREATOR" : "Junru Tao"},
         {"PEACH_BUILD" : "Debug"}
     ]

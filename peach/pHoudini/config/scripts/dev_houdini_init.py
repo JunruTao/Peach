@@ -17,7 +17,7 @@ finally:
     printMsg("Module <hou> import successfully")
 
 # [ Loading Peach Env ]
-peach_env_filepath = "./dev/peach_env.json"
+peach_env_filepath = "./dev/PeachEnv.json"
 printMsg("Loading Peach Env Package")
 
 try:
@@ -26,3 +26,5 @@ except FileNotFoundError:
     printMsg("package: %s can not be found" % peach_env_filepath)
 finally:
     printMsg("package Found: %s" % peach_env_filepath)
+    
+# Setting the global path.

@@ -5,7 +5,7 @@ echo "[Peach Start-Up] Dev Houdini Init"
 Init_Script_Houdini="config/scripts/dev_houdini_init.py"
 
 # [ DEFAULT ARGUMENT FIELD ]
-mode_debug=1
+mode_debug=0
 dcc_file_path="/c/Program\ Files/Side\ Effects\ Software/Houdini\ 19.0.455/bin/houdini.exe"
 
 # [ DEBUG ] define functions here:
