@@ -8,5 +8,5 @@
         {"PEACH_CREATOR" : "Junru Tao"},
         {"PEACH_BUILD" : "Debug"}
     ],
-    "path" : "$PEACH_HOU"
+    "path" : "$PEACH_HOU/PeachEnv"
 }

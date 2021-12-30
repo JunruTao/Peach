@@ -8,9 +8,8 @@ set(BUILD_INSTALL TRUE)
 
 # [ PATH SETTING ]
 set(PHOUDINI_DIR ${PEACH_DIR}/pHoudini)
-set(DEV_ENV_FILE_INSTALL_DIR ${PEACH_DIR}/pHoudini/dev)
-set(DEBUG_ENV_FILE_INSTALL_DIR ${PEACH_DEBUG_INSTALL_DIR}/pHoudini)
-set(FINAL_ENV_FILE_INSTALL_DIR ${PEACH_FINAL_INSTALL_DIR}/pHoudini)
+set(PHOUDINI_DEV_DIR ${PEACH_DIR}/pHoudini/dev)
+set(ENV_FILE_INSTALL_DIR ${PEACH_INSTALL_DIR}/pHoudini)
 
 # [ SETTINGS ]
 set(PACKAGE_VERSION "0.1.0")
@@ -29,19 +28,23 @@ set(PEACH_ENV_DATA
         {\"PEACH_CREATOR\" : \"${AUTHOR}\"},
         {\"PEACH_BUILD\" : \"${PEACH_BUILD}\"}
     ],
-    \"path\" : \"$PEACH_HOU\"
+    \"path\" : \"$PEACH_HOU/PeachEnv\"
 }")
 
 # [ CREATE ENV PACKAGE FILES ]
 if(${BUILD_DEV})
-    file(WRITE ${DEV_ENV_FILE_INSTALL_DIR}/PeachEnv.json ${PEACH_ENV_DATA})
+    file(WRITE ${PHOUDINI_DEV_DIR}/PeachEnv.json ${PEACH_ENV_DATA})
+
+    # /.Copy the `houdini_util file into this dev section as util`
+    install(FILES ${PEACH_DIR}/config/scripts/houdini_util.py
+            DESTINATION ${PHOUDINI_DIR}/config/scripts/util_x/)
+    file(WRITE ${PHOUDINI_DIR}/config/scripts/util_x/__init__.py "#!/usr/bin/python")      
 endif()
 
 # [ CREATE INSTALL PACKAGE FILES ]
 if(${BUILD_INSTALL})
-    if (${PEACH_BUILD} MATCHES Release)
-        file(WRITE ${FINAL_ENV_FILE_INSTALL_DIR}/PeachEnv.json ${PEACH_ENV_DATA})
-    else()
-        file(WRITE ${DEBUG_ENV_FILE_INSTALL_DIR}/PeachEnv.json ${PEACH_ENV_DATA})
-    endif()
+    file(WRITE ${ENV_FILE_INSTALL_DIR}/PeachEnv.json ${PEACH_ENV_DATA})
+    install(DIRECTORY 
+        ${PHOUDINI_DEV_DIR}/PeachEnv
+        DESTINATION ${ENV_FILE_INSTALL_DIR})
 endif()

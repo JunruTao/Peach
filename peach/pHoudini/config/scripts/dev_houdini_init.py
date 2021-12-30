@@ -1,42 +1,12 @@
 import os
+import util_x.houdini_util as hu
+import hou
 
-def printMsg(msg):
-    print("[ PEACH-DEV HOUDINI ]: {}".format(msg) )
-
-# [ Loading Hou Module ]
-printMsg("Running pHoudini-DEV...")
-printMsg("Try importing hou...")
+hu.mode = "dev"
 
 # [ Getting the Peach Install Dir ]
-peach_dir = os.path.realpath("..")
-printMsg("Peach Dir: %s" % peach_dir)
-pHoudini_dir = os.path.join(peach_dir, "pHoudini/dev")
-printMsg("pHoudini Dir: %s" % pHoudini_dir)
-
-try:
-    import hou
-except ImportError:
-    raise "Can not Import <hou> module"
-finally:
-    printMsg("Module <hou> import successfully")
-
-# [ Loading Peach Env ]
-peach_env_filepath = os.path.join(pHoudini_dir, "PeachEnv.json")
-printMsg("Loading Peach Env Package")
-
-# [ Setting $PEACH in Houdini ]
-hou.putenv("PEACH", peach_dir)
-# [ Setting $PEACH in Houdini ]
-hou.putenv("PEACH_HOU", pHoudini_dir)
-
-try:
-    hou.ui.loadPackage(peach_env_filepath)
-except FileNotFoundError:
-    printMsg("package: %s can not be found" % peach_env_filepath)
-finally:
-    printMsg("package Found: %s" % peach_env_filepath)
-    
-# Setting the global path.
-wd = str(os.path.realpath("./sandbox"))
-hou.putenv("HIP", wd)
-hou.putenv("JOB", wd)
+hu.peach_dir = os.path.realpath("..")
+hu.phoudini_dir = os.path.join(hu.peach_dir, "pHoudini/dev")
+hu.working_dir = str(os.path.realpath("./sandbox"))
+hu.setDirAndPrint()
+hu.loadPeachEnvPackage()
