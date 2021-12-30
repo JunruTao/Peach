@@ -28,7 +28,8 @@ set(PEACH_ENV_DATA
         {\"PEACH_VERSION\" : \"${PEACH_VERSION}\"},
         {\"PEACH_CREATOR\" : \"${AUTHOR}\"},
         {\"PEACH_BUILD\" : \"${PEACH_BUILD}\"}
-    ]
+    ],
+    \"path\" : \"$PEACH_HOU\"
 }")
 
 # [ CREATE ENV PACKAGE FILES ]

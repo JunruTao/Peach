@@ -8,7 +8,7 @@ houdini_executable="C:\Program Files\Side Effects Software\Houdini 19.0.455\bin\
 blender_executable="C:\Program Files\Blender Foundation\Blender 3.0\blender-launcher.exe"
 
 # [ Init App Configuration ]
-debug=TRUE
+debug=FALSE
 
 # [ Startup Script Mode ]
 # Modes: (Leave it auto if you don't have git-bash or bash on Windows)
