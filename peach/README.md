@@ -169,3 +169,19 @@
     - [x] --- automatically open `code` after the shell execution. open up the change log file that needed to be editied.
     - [x] --- <sup>__`[DONE]`__</sup> Auto append sub change-logs to a _main_ change-log, as `Markdown/html hyperlinks`.
     (maybe override the same file each time)
+
+
+<br>
+<br>
+<br>
+<p align=middle> <sup><sup><i>Peach</i></sup></sup></p>
+<br>
+
+----------------------------------------------------------------------------------
+### :pen: [ *Tips. ]
+
+#### :white_circle: Running `.sh` script on windows
+* 1/ You need git-bash for windows.
+* 2/ Instead of running it with git-bash.exe(which opens up Git's its own custom commandline window), choose the default app as "`sh.exe`"
+    > location: `C:\Program Files\Git\bin\sh.exe` 
+
