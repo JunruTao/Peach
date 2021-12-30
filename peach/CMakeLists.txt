@@ -5,9 +5,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 project(Peach)
 
 # [ GLOBAL ] Versions
+set(AUTHOR "Junru Tao")
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "0")
-set(PEACH_VERSION_PATCH "1")
+set(PEACH_VERSION_PATCH "3")
+set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
+
 
 # [ SOURCE PATH ] Settings
 set(DEV_DIR "E:/dev")
@@ -18,6 +21,7 @@ set(PEACH_ICONS_ICO_DIR "${PEACH_DIR}/icons/ICO")
 # [ TARGET PATH ] Settings
 set(PEACH_DEBUG_INSTALL_DIR "${DEV_DIR}/peach_dev_projects/Peach")
 set(PEACH_FINAL_INSTALL_DIR "${DEV_DIR}/Peach")
+
 if (CMAKE_BUILD_TYPE MATCHES Release)
     # /MODE = Release Version
     set(PEACH_INSTALL_DIR ${PEACH_FINAL_INSTALL_DIR})
@@ -29,15 +33,16 @@ else()
     set(PEACH_BUILD "Debug")
 endif()
 
+
 # [ PASSING TO PREPROCESSOR ]
 add_definitions(
-    -DPEACH_VERSION="-${PEACH_BUILD} v${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}"
+    -DPEACH_VERSION="-${PEACH_BUILD} v${PEACH_VERSION}"
     )
 
 
 # [ SUBDIRECTORIES ]
 add_subdirectory(bootstrap)
-
+add_subdirectory(pHoudini/config)
 
 # [ INSTALL ]
 # /.files and directories
