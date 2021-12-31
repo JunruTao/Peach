@@ -1,46 +1,48 @@
-# ![icon](icons/25w/icon_peach_x25.png) Peach Dev Tasks
+#  Peach Dev Tasks
+**_Junru Tao 2022_**  
 
-**Author: Junru Tao** <br>
-> Note: In order to keep a clear mind of this project, the task list will be the main section of documenting ToDos of this project. All higher level documentation should be created in the `peach_dev`'s main README. 
 
+<div align=left><font size="+5">“</font></div>
+
+> Note: In order to keep a clear mind of this project, the task list will be the main section of documenting ToDos of this project. All higher level documentation should be created in the _peach_dev_'s main README. 
+
+<div align=right><font size="+5">”</font></div>
 <br><br>
 
-## :pencil: TASK LIST
-### :pen: [ Design ]
-> anything that need an abstract way of thinking :brain:. need to think outside the box, by drawing diagrams, brainstorming and connecting all those dots. 
+## TASK LIST
+### :link: [ Design and Project]
+####
 * [DESIGN and PROJECT tasks](.././.designs/README.md)
-
-### :pen: [ Project Management ]
-> anything related to folder structure, development package management, cmake and building.
-
+    > Anything that need an abstract way of thinking. need to think outside the box, by drawing diagrams, brainstorming and connecting all those dots. 
+####
 * [DESIGN and PROJECT tasks](.././.designs/README.md)
-
-### :pen: [ App: Dcc Bootstrapping ]
-> specific section for the bootstrap apps.
-* [Peach Dcc Bootstrap App](./bootstrap/README.md)
+    > Anything related to folder structure, development package management, cmake and building.
 
 
-### :pen: [ Dcc Blender ]
-> specific section for blender
-* [pBlender Tasks and Notes](./pBlender/README.md)
-
-### :pen: [ Dcc Houdini ]
-> specific section for Houdini
-
-* [pHoudini Tasks and Notes](./pHoudini/README.md)
-
-
-### :pen: [ API Design ]
-> specific section for Libs and API development
-
+### :link: [ API Design ]
 - [Library Development and API Designs](./lib/README.md)
+    > Apecific section for Libs and API development
 
 
-### :pen: [ *Misc. ]
-> anything else. however including the icons, image resource and documentations.
+### :link: [ App: Dcc Bootstrapping ]
+* [Peach Dcc Bootstrap App](./bootstrap/README.md)
+    > Specific section for the bootstrap apps.
 
+### :link: [ pBlender ]
+* [pBlender Tasks and Notes](./pBlender/README.md)
+    > Specific section for blender
+
+### :link: [ pHoudini ]
+* [pHoudini Tasks and Notes](./pHoudini/README.md)
+    > specific section for Houdini
+
+### :link: [ *Misc. ]
+####
 * [Peach's Icons Designs](./icons/README.md)
+    > anything else including the icons, image resource.
+####
 * [Change Logs and Documentation tools](./dev_changeLogs/README.md)
+    > anything related documentation and its automation.
 
 
 
