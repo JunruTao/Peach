@@ -113,10 +113,10 @@
 > specific section for Houdini
 
 :green_square: **Houdini Init--Bootstrapping**
-- [ ] --- __`Houdini Package`__ Loading
+- [x] --- __`Houdini Package`__ Loading
     > This is something highly important. Use houdini package(.json) files should be able to configure houdini the way I wanted. Loading everything, configure path, plug-ins, otls, and extra.
     - [x] --- Experiment with Houdini package. See how it can be utilised to load HDA and create workflows based on Dev, Project, User, and Shot etc.
-    - [ ] --- intergrate into dev pipeline.
+    - [x] --- intergrate into dev pipeline.
 
 
 :green_square: **Houdini Package Develop**
@@ -126,7 +126,7 @@
     
     > now The hda loading should be included in the package loading section.
 
-- [ ] --- Test out Package Development Workflow
+- [x] --- Test out Package Development Workflow
     > This is important transit from the design chart to actual product.
 
 
@@ -170,6 +170,7 @@
     - [x] --- <sup>__`[DONE]`__</sup> Auto append sub change-logs to a _main_ change-log, as `Markdown/html hyperlinks`.
     (maybe override the same file each time)
 
+    - [ ] :warning: __`TODO:`__ split change log into months, and format main change log into sub sections.
 
 <br>
 <br>
@@ -177,11 +178,4 @@
 <p align=middle> <sup><sup><i>Peach</i></sup></sup></p>
 <br>
 
-----------------------------------------------------------------------------------
-### :pen: [ *Tips. ]
-
-#### :white_circle: Running `.sh` script on windows
-* 1/ You need git-bash for windows.
-* 2/ Instead of running it with git-bash.exe(which opens up Git's its own custom commandline window), choose the default app as "`sh.exe`"
-    > location: `C:\Program Files\Git\bin\sh.exe` 
 

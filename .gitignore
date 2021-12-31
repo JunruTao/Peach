@@ -3,6 +3,7 @@
 # [ *CUSTOM ]
 _igr_*
 **/sandbox
+**/util_x
 
 # [ GIT ]:
 **/.git

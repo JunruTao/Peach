@@ -1,10 +1,10 @@
 {
     "author" : "Junru Tao",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "load_package_once": true,
     "enable" : "houdini_version >= '19.0' and houdini_version < '19.1'",
     "env" : [
-        {"PEACH_VERSION" : "0.0.4"},
+        {"PEACH_VERSION" : "0.0.5"},
         {"PEACH_CREATOR" : "Junru Tao"},
         {"PEACH_BUILD" : "Debug"}
     ],
