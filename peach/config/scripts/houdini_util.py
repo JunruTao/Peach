@@ -2,15 +2,22 @@ import os
 
 # GLOBAL VARIABLES
 mode = "normal"
+
+# $dirs
 peach_dir = ""
 phoudini_dir = ""
+working_dir = ""
+
 peach_env_filename = "PeachEnv.json"
 
-working_dir = ""
 henv_PEACH = "PEACH"
 henv_PEACH_HOU = "PEACH_HOU"
 henv_GLOBS = ["HIP", "JOB", "HSITE"]
 
+
+def format_dir(dir):
+    return dir.replace("\\","/")
+        
 # FUNCTIONS
 def printMsg(msg):
     if mode != "dev":
@@ -38,29 +45,34 @@ if(tryImportHou()):
 
 
 def setDirAndPrint():
+    global peach_dir
+    global phoudini_dir
+    global working_dir
     
-    # //somespace
-    printMsg("...")
+    peach_dir = format_dir(peach_dir)
+    phoudini_dir = format_dir(phoudini_dir)
+    working_dir = format_dir(working_dir)
+
     # [ Setting $PEACH in Houdini ]
     hou.putenv(henv_PEACH, peach_dir)
     printMsg("Peach Dir: %s" % peach_dir)
-    printMsg("---set as '$%s'\n" % henv_PEACH)
+    printMsg("---set as '$%s'" % henv_PEACH)
     
     # [ Setting $PEACH in Houdini ]
     hou.putenv(henv_PEACH_HOU, phoudini_dir)
     printMsg("pHoudini Dir: %s" % phoudini_dir)
-    printMsg("---set as '$%s'\n" % henv_PEACH_HOU)
+    printMsg("---set as '$%s'" % henv_PEACH_HOU)
     
     # [ Getting Workfing Directroy ]
     printMsg("Current Working Directory: %s" % working_dir)
     for env in henv_GLOBS:
         hou.putenv(env, working_dir)
         printMsg("---set '$%s' to this Working Directory" % env)
-    printMsg("...")
     
 def loadPeachEnvPackage():
     # [ Loading Peach Env ]
-    _peach_env_filepath = os.path.join(phoudini_dir, peach_env_filename)
+    _peach_env_filepath = format_dir(os.path.join(phoudini_dir, peach_env_filename))
+    
     printMsg("Loading Peach Env Package")
     try:
         hou.ui.loadPackage(_peach_env_filepath)
