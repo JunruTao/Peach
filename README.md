@@ -1,11 +1,20 @@
-# ![icon](peach/icons/25w/icon_peach_x25.png) Peach
+# Peach
 
-* __Sites and Contacts__:
-    * instagram: [@digital.peach.v001](https://www.instagram.com/digital.peach.v001/)
-    * store: https://digital-peach.company.site
-    * email: junrutao.uk@gmail.com
+### :peach: About
 
-- __Peach__
-    * [>>> Task Lists and Entries](./peach/README.md#Peach-Dev-Tasks)
-    * [>>> Change Log](./peach/dev_changeLogs/ChangeLog.md)
-    * [>>> Documentation](./docs/README.md)
+About Peach. #TODO
+
+### :peach: Contact:
+- __Instagram__
+    > :camera: [@digital.peach.v001](https://www.instagram.com/digital.peach.v001/)
+- __Website__
+    > :peach: [digital-peach.company.site](https://digital-peach.company.site)
+- __E-Mail__
+    > :e-mail: junrutao.uk@gmail.com
+
+
+### :peach: Peach Documentations
+
+- [__Task Lists and Entries__](./peach/README.md#Peach-Dev-Tasks)
+- [__Change Log__](./peach/dev_changeLogs/ChangeLog.md)
+- [__Documentation__](./docs/README.md)
