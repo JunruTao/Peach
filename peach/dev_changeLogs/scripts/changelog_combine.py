@@ -3,7 +3,7 @@ from posixpath import splitext
 
 
 #  this will be appended to represent the length of the change log.
-length_rep_symbol = ":cd:"
+length_rep_symbol = ":bread:"
 month_start_symbol = ":hammer:"
 # getting file length
 max_repsize = 3000
@@ -35,7 +35,7 @@ str_data = """# :hammer: ChangeLogs
 
 
 str_data += "\n<div align=right>\n\n\
-( _Note:_ \"%s\" _represent %d lines_ )\n\n</div> \n\n" % (length_rep_symbol, block_size)
+( _Note:_ \"%s\" _represent %d bytes_ )\n\n</div> \n\n" % (length_rep_symbol, block_size)
 
 changlog_file = os.path.join(logs_dir, "ChangeLog.md")
 log_files = []

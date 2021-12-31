@@ -1,34 +1,34 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2021.12.31__<br>
-> __Time stamp: 05:11:37__<br>
+> __Time stamp: 05:16:14__<br>
 > __Author: Junru Tao__
 ---
 
 <div align=right>
 
-( _Note:_ ":cd:" _represent 128 lines_ )
+( _Note:_ ":bread:" _represent 128 bytes_ )
 
 </div> 
 
 ## :hammer: Change Logs: _Dec, 2021_
 
 
- :bookmark_tabs: _001_. [Change_Log - Date:2021/12/23](./2021_12/2021_12_23_cl.md) : :cd::cd:
+ :bookmark_tabs: _001_. [Change_Log - Date:2021/12/23](./2021_12/2021_12_23_cl.md) : :bread::bread:
 
- :bookmark_tabs: _002_. [Change_Log - Date:2021/12/24](./2021_12/2021_12_24_cl.md) : :cd::cd::cd::cd:
+ :bookmark_tabs: _002_. [Change_Log - Date:2021/12/24](./2021_12/2021_12_24_cl.md) : :bread::bread::bread::bread:
 
- :bookmark_tabs: _003_. [Change_Log - Date:2021/12/25](./2021_12/2021_12_25_cl.md) : :cd::cd::cd::cd::cd::cd::cd::cd::cd::cd::cd:
+ :bookmark_tabs: _003_. [Change_Log - Date:2021/12/25](./2021_12/2021_12_25_cl.md) : :bread::bread::bread::bread::bread::bread::bread::bread::bread::bread::bread:
 
- :bookmark_tabs: _004_. [Change_Log - Date:2021/12/26](./2021_12/2021_12_26_cl.md) : :cd::cd::cd::cd::cd::cd:
+ :bookmark_tabs: _004_. [Change_Log - Date:2021/12/26](./2021_12/2021_12_26_cl.md) : :bread::bread::bread::bread::bread::bread:
 
- :bookmark_tabs: _005_. [Change_Log - Date:2021/12/27](./2021_12/2021_12_27_cl.md) : :cd::cd::cd::cd::cd::cd:
+ :bookmark_tabs: _005_. [Change_Log - Date:2021/12/27](./2021_12/2021_12_27_cl.md) : :bread::bread::bread::bread::bread::bread:
 
- :bookmark_tabs: _006_. [Change_Log - Date:2021/12/29](./2021_12/2021_12_29_cl.md) : :cd::cd:
+ :bookmark_tabs: _006_. [Change_Log - Date:2021/12/29](./2021_12/2021_12_29_cl.md) : :bread::bread:
 
- :bookmark_tabs: _007_. [Change_Log - Date:2021/12/30](./2021_12/2021_12_30_cl.md) : :cd::cd::cd::cd::cd::cd::cd::cd::cd::cd::cd:
+ :bookmark_tabs: _007_. [Change_Log - Date:2021/12/30](./2021_12/2021_12_30_cl.md) : :bread::bread::bread::bread::bread::bread::bread::bread::bread::bread::bread:
 
- :bookmark_tabs: _008_. [Change_Log - Date:2021/12/31](./2021_12/2021_12_31_cl.md) : :cd::cd::cd::cd::cd::cd:
+ :bookmark_tabs: _008_. [Change_Log - Date:2021/12/31](./2021_12/2021_12_31_cl.md) : :bread::bread::bread::bread::bread::bread:
 
 
 
