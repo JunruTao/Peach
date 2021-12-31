@@ -15,37 +15,33 @@
 
 * [DESIGN and PROJECT tasks](.././.designs/README.md)
 
-----------------------------------------------------------------------------------
 ### :pen: [ App: Dcc Bootstrapping ]
 > specific section for the bootstrap apps.
 * [Peach Dcc Bootstrap App](./bootstrap/README.md)
 
 
-----------------------------------------------------------------------------------
 ### :pen: [ Dcc Blender ]
 > specific section for blender
 * [pBlender Tasks and Notes](./pBlender/README.md)
 
-----------------------------------------------------------------------------------
 ### :pen: [ Dcc Houdini ]
 > specific section for Houdini
 
 * [pHoudini Tasks and Notes](./pHoudini/README.md)
 
-----------------------------------------------------------------------------------
+
 ### :pen: [ API Design ]
 > specific section for Libs and API development
 
 - [Library Development and API Designs](./lib/README.md)
 
-----------------------------------------------------------------------------------
+
 ### :pen: [ *Misc. ]
 > anything else. however including the icons, image resource and documentations.
 
 * [Peach's Icons Designs](./icons/README.md)
 * [Change Logs and Documentation tools](./dev_changeLogs/README.md)
 
-----------------------------------------------------------------------------------
 
 
 <br><br>
