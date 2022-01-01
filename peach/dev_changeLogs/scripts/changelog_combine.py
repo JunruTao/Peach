@@ -38,7 +38,6 @@ str_data += "\n<div align=right>\n\n\
 ( _Note:_ \"%s\" _represent %d bytes_ )\n\n</div> \n\n" % (length_rep_symbol, block_size)
 
 changlog_file = os.path.join(logs_dir, "ChangeLog.md")
-log_files = []
 subfolders = [f.path for f in os.scandir(logs_dir) if f.is_dir()]
 month_list = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -49,6 +48,7 @@ for d in subfolders:
     if not dirname.startswith('2'):
         continue
     
+    log_files = []
     for infile in glob.glob(os.path.join(d, "*.md")):
         if os.path.split(infile)[-1].startswith('2'):
             log_files.append(infile)
@@ -72,6 +72,8 @@ for d in subfolders:
             str_data += length_rep_symbol
             
         str_data += "\n"
+        
+    str_data += "\n<br><br>\n\n"
 
 
 # [ END Wrap Ending and Dump File ]
