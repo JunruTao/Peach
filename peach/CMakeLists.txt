@@ -1,10 +1,16 @@
+# ------------------------------------------------------------------------------- #
+#                          THIS IS THE MAIN CMAKE FILE
+#
+#       /${PEACH_DIR}
+#             + ---> CMakeLists
+# ------------------------------------------------------------------------------- #
+
+# [ CMAKE CONFIGURATION ]
 CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# ------------------------------------------------------------------------------- #
-#                          THIS IS THE MAIN CMAKE FILE                            # 
-# ------------------------------------------------------------------------------- #
+# [ MAIN ]
 project(Peach)
 
 # [ GLOBAL ] Versions
@@ -43,9 +49,15 @@ add_definitions(
     )
 
 
-# [ SUBDIRECTORIES ]
+# ------------------------------------------------------------------------------- #
+# [ SUBDIRECTORIES ]------------------------------------------------------------- #
+
 add_subdirectory(bootstrap)
-add_subdirectory(pHoudini/config)
+add_subdirectory(lib)
+add_subdirectory(pHoudini)
+
+# ------------------------------------------------------------------------------- #
+
 
 # [ INSTALL ]
 # /.files and directories

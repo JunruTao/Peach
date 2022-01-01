@@ -3,29 +3,34 @@ import os
 # GLOBAL VARIABLES
 mode = "normal"
 
-# $dirs
+# $dirs:
 peach_dir = ""
 phoudini_dir = ""
 working_dir = ""
 
+# the peach env file:
 peach_env_filename = "PeachEnv.json"
 
+# houdini environment varibles setting:
 henv_PEACH = "PEACH"
 henv_PEACH_HOU = "PEACH_HOU"
 henv_GLOBS = ["HIP", "JOB", "HSITE"]
 
 
+# Convert dir to Houdini Format
 def format_dir(dir):
     return dir.replace("\\","/")
-        
-# FUNCTIONS
+
+
+# Print Function
 def printMsg(msg):
     if mode != "dev":
         print("[ PEACH HOUDINI ]: {}".format(msg) )
     else:
         print("[ PEACH-DEV HOUDINI ]: {}".format(msg) )
         
-        
+
+# Loading Houdini.  
 def tryImportHou():
     # [ Loading Hou Module ]
     printMsg("Running pHoudini...")
@@ -39,7 +44,7 @@ def tryImportHou():
         printMsg("Module <hou> import successfully")
     return True
 
-
+# Loading Hou Module
 if(tryImportHou()):
     import hou
 
@@ -68,7 +73,8 @@ def setDirAndPrint():
     for env in henv_GLOBS:
         hou.putenv(env, working_dir)
         printMsg("---set '$%s' to this Working Directory" % env)
-    
+
+
 def loadPeachEnvPackage():
     # [ Loading Peach Env ]
     _peach_env_filepath = format_dir(os.path.join(phoudini_dir, peach_env_filename))
@@ -80,3 +86,10 @@ def loadPeachEnvPackage():
         printMsg("package: %s can not be found" % _peach_env_filepath)
     finally:
         printMsg("package Found: %s" % _peach_env_filepath)
+
+ 
+def loadPeachPackages():
+    # TODO loading other packages.
+    # should read package from pconfig
+    printMsg("Loading Peach Packages...")
+    pass

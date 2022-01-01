@@ -4,6 +4,7 @@
 _igr_*
 **/sandbox
 **/util_x
+**/nocopy
 
 # [ GIT ]:
 **/.git

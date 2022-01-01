@@ -1,7 +1,15 @@
+# ------------------------------------------------------------------------------- #
+#       /${PEACH_DIR}
+#             +-----/bootstrap
+#                       + ---> CMakeLists
+# ------------------------------------------------------------------------------- #
+
+# [ CMAKE CONFIGURATIONS ]
 CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# [ PROJECT ]
 project(PEACH_Bootstraps)
 
 # [ BOOTSTRAP ] Versions
