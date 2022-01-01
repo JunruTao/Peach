@@ -20,3 +20,9 @@
 
 - [x] --- Test out Package Development Workflow
     > This is important transit from the design chart to actual product.
+
+- [ ] --- Split json files to separate files, using CMake configure_files to do it.
+
+
+:green_square: **Houdini General Tool Develop**
+ - [ ] --- Houdini, create custom panel. Asset Browser (same goes with blender)
