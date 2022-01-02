@@ -32,9 +32,11 @@ list(APPEND PACKAGES
 set(PACKAGE_LIST_STR "PeachPy\n")
 
 
-# [ SETTINGS ]
+# [ SETTINGS ] - pHoudini Packages
 set(PACKAGE_VERSION "0.1.4")
 set(ULTRA_URBAN_VERSION "0.2.1")
+
+
 # [ HOU SOURCES ]
 # /.source Template:
 set(HOU_ENV_SOURCE_JSON ${PHOUDINI_TEMPLATES_DIR}/__in__PeachEnv.json )
