@@ -13,12 +13,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # [ MAIN ]
 project(Peach)
 
+
 # [ GLOBAL ] Versions
 set(AUTHOR "Junru Tao")
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "0")
-set(PEACH_VERSION_PATCH "5")
+set(PEACH_VERSION_PATCH "6")
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
+
+# [ DCC SETTINGS ]
+set(HOU_MIN_VER "19.0")
+set(HOU_MAX_VER "19.1")
 
 
 # [ SOURCE PATH ] Settings
@@ -42,6 +47,10 @@ else()
     set(PEACH_BUILD "Debug")
 endif()
 
+# [ BUILD MESSAGES ]
+message(NOTICE "Building Peach")
+message(NOTICE "Version: Peach -v${PEACH_VERSION}")
+message(NOTICE "Build: Peach -${PEACH_BUILD}")
 
 # [ PASSING TO PREPROCESSOR ]
 add_definitions(
@@ -64,3 +73,9 @@ add_subdirectory(pHoudini)
 install(DIRECTORY 
         ${PEACH_DIR}/config
         DESTINATION ${PEACH_INSTALL_DIR})
+
+# /.icons
+install(DIRECTORY 
+        ${PEACH_DIR}/icons/SVG # install vector icons
+        ${PEACH_DIR}/icons/25w # install small icons
+        DESTINATION ${PEACH_INSTALL_DIR}/icons)

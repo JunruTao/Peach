@@ -5,4 +5,65 @@
 # ------------------------------------------------------------------------------- #
 # This should build the libs copy all the files..
 
-message(STATUS "Gen Lib-files")
+# [ HOUDINI LIBS ]--------------------------------------------------------------- #
+# [ BUILD SETTINGS ]
+set(BUILD_DEV_HOU TRUE)
+set(BUILD_INSTALL_HOU TRUE)
+
+
+# [ PATH SETTING >>>IN ]
+set(PHOUDINI_DIR ${PEACH_DIR}/pHoudini)
+set(PHOUDINI_DEV_DIR ${PEACH_DIR}/pHoudini/dev)
+set(PHOUDINI_TEMPLATES_DIR ${PHOUDINI_DIR}/config/templates)
+set(LIB_DIR ${PEACH_DIR}/lib/peach)
+
+# [ PATH SETTINGS <<<OUT ]
+set(HOUDEV_PACKAGES_DIR ${PEACH_DIR}/pHoudini/dev/packages)
+set(HOUDEV_PEACHPY_DIR ${PEACH_DIR}/pHoudini/dev/packages/PeachPy/python3.7libs)
+set(INSTALL_PACKAGES_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages)
+set(INSTALL_PEACHPY_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages/PeachPy/python3.7libs)
+
+# [ HOU SETTINGS ]
+set(PACKAGE_VERSION "0.1.2")
+
+# [ HOU SOURCES ]
+# /.source Template:
+set(HOU_PY_SOURCE_JSON ${PHOUDINI_TEMPLATES_DIR}/__in__PeachPy.json )
+# /.source Python Libs:
+set(HOU_PY_LIBRARIES 
+    ${LIB_DIR}/pHoudini
+    ${LIB_DIR}/pUtil
+)
+
+# [ HOU: CREATE DEV PACKAGE FILES ]
+if(${BUILD_DEV_HOU})
+    # /.configure package file
+    configure_file(
+        ${HOU_PY_SOURCE_JSON} 
+        ${HOUDEV_PACKAGES_DIR}/PeachPy.json)
+    # /.copy
+    install(
+        DIRECTORY ${HOU_PY_LIBRARIES}
+        DESTINATION ${HOUDEV_PEACHPY_DIR}/peach)
+    file(WRITE ${HOUDEV_PEACHPY_DIR}/peach/__init__.py "#!/usr/bin/python")
+endif()
+
+
+# [ HOU: CREATE INSTALL PACKAGE FILES ]
+if(${BUILD_INSTALL_HOU})
+    # /.install: configure package file
+    configure_file(
+        ${HOU_PY_SOURCE_JSON}
+        ${INSTALL_PACKAGES_DIR}/PeachPy.json)
+    # /.install: copy
+    install(
+        DIRECTORY  ${HOU_PY_LIBRARIES}
+        DESTINATION ${INSTALL_PEACHPY_DIR}/peach)
+    file(WRITE ${INSTALL_PEACHPY_DIR}/peach/__init__.py "#!/usr/bin/python")
+endif()
+
+
+# [ BLENDER LIBS ]--------------------------------------------------------------- #
+# [ BUILD SETTINGS ]
+set(BUILD_DEV_BLD TRUE)
+set(BUILD_INSTALL_BLD TRUE)

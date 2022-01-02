@@ -10,6 +10,8 @@ working_dir = ""
 
 # the peach env file:
 peach_env_filename = "PeachEnv.json"
+peach_packages = []
+
 
 # houdini environment varibles setting:
 henv_PEACH = "PEACH"
@@ -85,11 +87,21 @@ def loadPeachEnvPackage():
     except FileNotFoundError:
         printMsg("package: %s can not be found" % _peach_env_filepath)
     finally:
-        printMsg("package Found: %s" % _peach_env_filepath)
+        printMsg("---package Found: %s" % _peach_env_filepath)
 
  
 def loadPeachPackages():
     # TODO loading other packages.
     # should read package from pconfig
     printMsg("Loading Peach Packages...")
-    pass
+    package_dir = format_dir(os.path.join(phoudini_dir, "packages"))
+    
+    for pkg in peach_packages:
+        pkg_dir = format_dir(os.path.join(package_dir, "%s.json" % pkg))
+        printMsg("Loading <%s> Package" % pkg)
+        try:
+            hou.ui.loadPackage(pkg_dir)
+        except FileNotFoundError:
+            printMsg("package: <%s> can not be found" % pkg)
+        finally:
+            printMsg("---package <%s> Found: %s" % (pkg, pkg_dir))
