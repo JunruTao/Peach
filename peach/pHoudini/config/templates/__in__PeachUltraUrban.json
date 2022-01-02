@@ -6,7 +6,7 @@
     "env": [
         {"PEACH_VERSION_UU": "${ULTRA_URBAN_VERSION}"}
     ],
-    "path" : "$PEACH_HOU/packages/PeachUltraUrban"
+    "path" : "$PEACH_HOU/packages/${PKG}"
 }
 
 /* <comment>

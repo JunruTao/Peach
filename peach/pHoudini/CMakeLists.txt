@@ -24,6 +24,7 @@ set(INSTALL_PACKAGES_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages)
 # [ PACKAGE LIST ]
 list(APPEND PACKAGES
         # PeachPy (from lib)
+        PeachAsset
         PeachModel 
         PeachUltraUrban
     )

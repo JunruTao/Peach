@@ -16,10 +16,12 @@ project(Peach)
 
 # [ GLOBAL ] Versions
 set(AUTHOR "Junru Tao")
+set(EMAIL "junrutao.uk@gmail.com")
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "0")
 set(PEACH_VERSION_PATCH "6")
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
+
 
 # [ DCC SETTINGS ]
 set(HOU_MIN_VER "19.0")
@@ -32,9 +34,18 @@ set(PEACH_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(PEACH_ICONS_DIR "${PEACH_DIR}/icons")
 set(PEACH_ICONS_ICO_DIR "${PEACH_DIR}/icons/ICO")
 
+
+# [ INSTALLATION OPTIONS ]
+option(INSTALL_ICON "If Install Icons" OFF)
+option(INSTALL_CONFIG "If Install Config Files" OFF)
+option(BUILD_BOOTSTRAP "If Build Boostrap App" OFF)
+
+
 # [ TARGET PATH ] Settings
 set(PEACH_DEBUG_INSTALL_DIR "${DEV_DIR}/peach_dev_projects/Peach")
 set(PEACH_FINAL_INSTALL_DIR "${DEV_DIR}/Peach_v${PEACH_VERSION}")
+
+
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
     # /MODE = Release Version
@@ -61,7 +72,9 @@ add_definitions(
 # ------------------------------------------------------------------------------- #
 # [ SUBDIRECTORIES ]------------------------------------------------------------- #
 
-add_subdirectory(bootstrap)
+if(BUILD_BOOTSTRAP)
+    add_subdirectory(bootstrap)
+endif()
 add_subdirectory(lib)
 add_subdirectory(pHoudini)
 
@@ -70,12 +83,16 @@ add_subdirectory(pHoudini)
 
 # [ INSTALL ]
 # /.files and directories
+if(INSTALL_CONFIG)
 install(DIRECTORY 
         ${PEACH_DIR}/config
         DESTINATION ${PEACH_INSTALL_DIR})
+endif()
 
 # /.icons
+if(INSTALL_ICON)
 install(DIRECTORY 
         ${PEACH_DIR}/icons/SVG # install vector icons
         ${PEACH_DIR}/icons/25w # install small icons
         DESTINATION ${PEACH_INSTALL_DIR}/icons)
+endif()

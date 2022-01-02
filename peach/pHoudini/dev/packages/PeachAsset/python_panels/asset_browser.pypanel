@@ -5,9 +5,9 @@ Change from the visable code.
 -->
 <pythonPanelDocument>
     <interface 
-        name="peach_main" 
-        label="Peach Main" 
-        icon="$PEACH_ICONS/icon_peach.svg" 
+        name="asset_browser" 
+        label="Peach Asset Browser" 
+        icon="$PEACH_ICONS/icon_peach_dev.svg" 
         showNetworkNavigationBar="true" 
         help_url="">
         <script>
@@ -21,16 +21,16 @@ Change from the visable code.
 # - Edit externally while Houdini is running.
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 from hutil.Qt import QtWidgets
-from peach.pHoudini import test
+from peach.pUtil import test
 
 def onCreateInterface():
-    test.Foo()
-    widget = QtWidgets.QLabel('Hello World!')
+    test.Foo2()
+    widget = QtWidgets.QLabel('Asset Browser!')
     return widget]]>
         </script>
         <includeInPaneTabMenu 
-            menu_position="501" 
-            create_separator="true"/>
+            menu_position="502" 
+            create_separator="false"/>
     <help><![CDATA[]]></help>
     </interface>
 </pythonPanelDocument>

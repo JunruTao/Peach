@@ -26,6 +26,8 @@ set(INSTALL_PEACHPY_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages/PeachPy/python3.7
 # [ HOU SETTINGS ]
 set(PACKAGE_VERSION "0.1.2")
 
+set(README_STR "# PyPeach ${PACKAGE_VERSION}")
+
 # [ HOU SOURCES ]
 # /.source Template:
 set(HOU_PY_SOURCE_JSON ${PHOUDINI_TEMPLATES_DIR}/__in__PeachPy.json )
@@ -46,6 +48,7 @@ if(${BUILD_DEV_HOU})
         DIRECTORY ${HOU_PY_LIBRARIES}
         DESTINATION ${HOUDEV_PEACHPY_DIR}/peach)
     file(WRITE ${HOUDEV_PEACHPY_DIR}/peach/__init__.py "#!/usr/bin/python")
+    file(WRITE ${PEACH_DIR}/pHoudini/dev/packages/PeachPy/README.md ${README_STR})
 endif()
 
 
@@ -60,8 +63,10 @@ if(${BUILD_INSTALL_HOU})
         DIRECTORY  ${HOU_PY_LIBRARIES}
         DESTINATION ${INSTALL_PEACHPY_DIR}/peach)
     file(WRITE ${INSTALL_PEACHPY_DIR}/peach/__init__.py "#!/usr/bin/python")
+    file(WRITE ${PEACH_INSTALL_DIR}/pHoudini/packages/PeachPy/README.md ${README_STR})
 endif()
 
+add_subdirectory(peach/houdini_panels)
 
 # [ BLENDER LIBS ]--------------------------------------------------------------- #
 # [ BUILD SETTINGS ]
