@@ -23,8 +23,10 @@
     - [x] Build target test
         - [x] --- Main CMake test
         - [x] --- Subdir CMake and build mechanism test
-        - [ ] --- :warning: __`TODO:`__ disable other project from building. therefore only build selected one. (should be given an option to pass to cmake or build tools)
-    - [ ] Test Passing Version information to Precompiler (1/2)
+        - [x] --- disable other project from building. <s>therefore only build selected one. (should be given an option to pass to cmake or build tools)</s>
+            > Currently using a few set variables to control it.(see main cmakelist)
+    - [x] Test Passing Version information to Precompiler (1/2)
         - [x] --- bootstrapper [ done ]
-        - [ ] --- passing to python/a configuration file?/or folder name?    
-    - [x] <sup>__`[DONE]`__</sup>  Move current bootstrap's config install folder to master dir. After moving bootstrap's config folder, change cmake list
+        - [x] --- passing to python/a configuration file?/or folder name? [ done ]
+            > Solution: use `congifure_file` in cmake to replate strings.
+    - [x] Move current bootstrap's config install folder to master dir. After moving bootstrap's config folder, change cmake list
