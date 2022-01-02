@@ -3,5 +3,5 @@ from peach.pUtil import test
 
 def onCreateInterface():
     test.Foo2()
-    widget = QtWidgets.QLabel('Asset Browser!')
+    widget = QtWidgets.QLabel('Asset Browser New')
     return widget

@@ -6,10 +6,6 @@
 # This should build the libs copy all the files..
 
 # [ HOUDINI LIBS ]--------------------------------------------------------------- #
-# [ BUILD SETTINGS ]
-set(BUILD_DEV_HOU TRUE)
-set(BUILD_INSTALL_HOU TRUE)
-
 
 # [ PATH SETTING >>>IN ]
 set(PHOUDINI_DIR ${PEACH_DIR}/pHoudini)
@@ -24,7 +20,7 @@ set(INSTALL_PACKAGES_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages)
 set(INSTALL_PEACHPY_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages/PeachPy/python3.7libs)
 
 # [ HOU SETTINGS ] - lib
-set(PACKAGE_VERSION "0.1.2")
+set(PACKAGE_VERSION "0.1.3")
 
 set(README_STR "# PyPeach ${PACKAGE_VERSION}")
 
@@ -38,7 +34,7 @@ set(HOU_PY_LIBRARIES
 )
 
 # [ HOU: CREATE DEV PACKAGE FILES ]
-if(${BUILD_DEV_HOU})
+if(BUILD_DEV_HOU)
     # /.configure package file
     configure_file(
         ${HOU_PY_SOURCE_JSON} 
@@ -53,7 +49,7 @@ endif()
 
 
 # [ HOU: CREATE INSTALL PACKAGE FILES ]
-if(${BUILD_INSTALL_HOU})
+if(BUILD_INSTALL_HOU)
     # /.install: configure package file
     configure_file(
         ${HOU_PY_SOURCE_JSON}
@@ -69,6 +65,3 @@ endif()
 add_subdirectory(peach/houdini_panels)
 
 # [ BLENDER LIBS ]--------------------------------------------------------------- #
-# [ BUILD SETTINGS ]
-set(BUILD_DEV_BLD TRUE)
-set(BUILD_INSTALL_BLD TRUE)

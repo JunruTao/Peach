@@ -7,10 +7,6 @@
 # The main/env peach Houdini package will be generated
 # from this file
 
-# [ BUILD SETTINGS ]
-set(BUILD_DEV_HOU TRUE)
-set(BUILD_INSTALL_HOU TRUE)
-
 # [ PHOU-PATH SETTING >>>IN ]
 set(PHOUDINI_DIR ${PEACH_DIR}/pHoudini)
 set(PHOUDINI_DEV_DIR ${PEACH_DIR}/pHoudini/dev)
@@ -42,7 +38,7 @@ set(ULTRA_URBAN_VERSION "0.2.1")
 set(HOU_ENV_SOURCE_JSON ${PHOUDINI_TEMPLATES_DIR}/__in__PeachEnv.json )
 
 # [ CREATE ENV PACKAGE FILES ]
-if(${BUILD_DEV_HOU})
+if(BUILD_DEV_HOU)
     # /.CREATING FILES FROM TEMPLATES
     configure_file(
         ${HOU_ENV_SOURCE_JSON}
@@ -56,7 +52,7 @@ endif()
 
 
 # [ CREATE INSTALL PACKAGE FILES ]
-if(${BUILD_INSTALL_HOU})
+if(BUILD_INSTALL_HOU)
     # /.Install: CREATING FILES FROM TEMPLATES
     configure_file(
         ${HOU_ENV_SOURCE_JSON}

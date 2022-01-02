@@ -19,7 +19,7 @@ set(AUTHOR "Junru Tao")
 set(EMAIL "junrutao.uk@gmail.com")
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "0")
-set(PEACH_VERSION_PATCH "6")
+set(PEACH_VERSION_PATCH "7")
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
 
 
@@ -36,15 +36,20 @@ set(PEACH_ICONS_ICO_DIR "${PEACH_DIR}/icons/ICO")
 
 
 # [ INSTALLATION OPTIONS ]
-option(INSTALL_ICON "If Install Icons" OFF)
-option(INSTALL_CONFIG "If Install Config Files" OFF)
-option(BUILD_BOOTSTRAP "If Build Boostrap App" OFF)
-
+# /. Install Settings
+set(INSTALL_ICON OFF)
+set(INSTALL_CONFIG OFF)
+set(BUILD_BOOTSTRAP OFF)
+# /. Houdini Dev Builds
+set(BUILD_DEV_HOU ON)
+set(BUILD_INSTALL_HOU ON)
+# /. Blender Dev Builds
+set(BUILD_DEV_BLD ON)
+set(BUILD_INSTALL_BLD ON)
 
 # [ TARGET PATH ] Settings
 set(PEACH_DEBUG_INSTALL_DIR "${DEV_DIR}/peach_dev_projects/Peach")
 set(PEACH_FINAL_INSTALL_DIR "${DEV_DIR}/Peach_v${PEACH_VERSION}")
-
 
 
 if (CMAKE_BUILD_TYPE MATCHES Release)
@@ -59,9 +64,9 @@ else()
 endif()
 
 # [ BUILD MESSAGES ]
-message(NOTICE "Building Peach")
-message(NOTICE "Version: Peach -v${PEACH_VERSION}")
-message(NOTICE "Build: Peach -${PEACH_BUILD}")
+message(STATUS "Building Peach...")
+message(STATUS "Version: Peach -v${PEACH_VERSION}")
+message(STATUS "Build: Peach -${PEACH_BUILD}")
 
 # [ PASSING TO PREPROCESSOR ]
 add_definitions(
@@ -84,15 +89,15 @@ add_subdirectory(pHoudini)
 # [ INSTALL ]
 # /.files and directories
 if(INSTALL_CONFIG)
-install(DIRECTORY 
-        ${PEACH_DIR}/config
-        DESTINATION ${PEACH_INSTALL_DIR})
+    install(DIRECTORY 
+            ${PEACH_DIR}/config
+            DESTINATION ${PEACH_INSTALL_DIR})
 endif()
 
 # /.icons
 if(INSTALL_ICON)
-install(DIRECTORY 
-        ${PEACH_DIR}/icons/SVG # install vector icons
-        ${PEACH_DIR}/icons/25w # install small icons
-        DESTINATION ${PEACH_INSTALL_DIR}/icons)
+    install(DIRECTORY 
+            ${PEACH_DIR}/icons/SVG # install vector icons
+            ${PEACH_DIR}/icons/25w # install small icons
+            DESTINATION ${PEACH_INSTALL_DIR}/icons)
 endif()

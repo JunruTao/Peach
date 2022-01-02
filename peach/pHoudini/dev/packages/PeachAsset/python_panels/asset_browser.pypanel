@@ -13,7 +13,7 @@ Change from the visable code.
         <script>
             <![CDATA[# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # Company: Digital Peach Co.
-# Peach Build: -Debug -v0.0.6
+# Peach Build: -Debug -v0.0.7
 # Author: Junru Tao
 # Contact: junrutao.uk@gmail.com
 # Notes: 
@@ -25,7 +25,7 @@ from peach.pUtil import test
 
 def onCreateInterface():
     test.Foo2()
-    widget = QtWidgets.QLabel('Asset Browser!')
+    widget = QtWidgets.QLabel('Asset Browser New')
     return widget]]>
         </script>
         <includeInPaneTabMenu 

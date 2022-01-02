@@ -25,13 +25,13 @@ set(PANEL_ICON "icon_peach")
 set(PANEL_MENU_POS "501")
 set(PANEL_MENU_SPR "true")
 
-if(${BUILD_DEV_HOU})
+if(BUILD_DEV_HOU)
 configure_file(
     ${PYPANEL_TEMPLATE}
     ${PEACH_DIR}/pHoudini/dev/PeachEnv/python_panels/${PANEL_NAME}.pypanel)
 endif()
 
-if(${BUILD_INSTALL_HOU})
+if(BUILD_INSTALL_HOU)
 configure_file(
     ${PYPANEL_TEMPLATE}
     ${PEACH_INSTALL_DIR}/pHoudini/PeachEnv/python_panels/${PANEL_NAME}.pypanel)
@@ -44,13 +44,13 @@ set(PANEL_ICON "icon_peach_dev")
 set(PANEL_MENU_POS "502")
 set(PANEL_MENU_SPR "false")
 
-if(${BUILD_DEV_HOU})
+if(BUILD_DEV_HOU)
 configure_file(
     ${PYPANEL_TEMPLATE}
     ${PEACH_DIR}/pHoudini/dev/packages/PeachAsset/python_panels/${PANEL_NAME}.pypanel)
 endif()
 
-if(${BUILD_INSTALL_HOU})
+if(BUILD_INSTALL_HOU)
 configure_file(
     ${PYPANEL_TEMPLATE}
     ${PEACH_INSTALL_DIR}/pHoudini/packages/PeachAsset/python_panels/${PANEL_NAME}.pypanel)
