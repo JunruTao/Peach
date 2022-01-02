@@ -93,15 +93,32 @@ def loadPeachEnvPackage():
 def loadPeachPackages():
     # TODO loading other packages.
     # should read package from pconfig
-    printMsg("Loading Peach Packages...")
+    
     package_dir = format_dir(os.path.join(phoudini_dir, "packages"))
     
+    if not len(peach_packages):
+        # find package list:
+        printMsg("Finding package_list.txt...")
+        pkg_list = format_dir(os.path.join(phoudini_dir, "package_list.txt"))
+        if not os.path.exists(pkg_list):
+            raise FileNotFoundError("package_list.txt is not found under /pHoudini")
+        printMsg("Found package_list.txt")
+        with open(pkg_list, 'r') as f:
+            for line in f:
+                if len(line):
+                    line = line.replace('\n','')
+                    printMsg("---Package to load: { %s }" % line)
+                    peach_packages.append(line)
+        f.close()
+    
+    printMsg("Loading Peach Packages...")
     for pkg in peach_packages:
         pkg_dir = format_dir(os.path.join(package_dir, "%s.json" % pkg))
-        printMsg("Loading <%s> Package" % pkg)
+        printMsg("---Loading <%s> Package" % pkg)
         try:
             hou.ui.loadPackage(pkg_dir)
         except FileNotFoundError:
-            printMsg("package: <%s> can not be found" % pkg)
+            printMsg("---package: <%s> can not be found" % pkg)
         finally:
-            printMsg("---package <%s> Found: %s" % (pkg, pkg_dir))
+            printMsg("---+ ---package <%s> Found" % pkg)
+            printMsg("---+ ---path: %s" % pkg_dir)

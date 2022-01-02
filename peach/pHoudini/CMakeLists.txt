@@ -14,14 +14,26 @@ set(BUILD_INSTALL_HOU TRUE)
 # [ PHOU-PATH SETTING >>>IN ]
 set(PHOUDINI_DIR ${PEACH_DIR}/pHoudini)
 set(PHOUDINI_DEV_DIR ${PEACH_DIR}/pHoudini/dev)
+set(HOUDEV_PACKAGES_DIR ${PEACH_DIR}/pHoudini/dev/packages)
 set(PHOUDINI_TEMPLATES_DIR ${PHOUDINI_DIR}/config/templates)
 
 # [ PATH SETTING <<<OUT ]
-set(ENV_FILE_INSTALL_DIR ${PEACH_INSTALL_DIR}/pHoudini)
+set(INSTALL_PHOUDINI_DIR ${PEACH_INSTALL_DIR}/pHoudini)
+set(INSTALL_PACKAGES_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages)
+
+# [ PACKAGE LIST ]
+list(APPEND PACKAGES
+        # PeachPy (from lib)
+        PeachModel 
+        PeachUltraUrban
+    )
+
+set(PACKAGE_LIST_STR "PeachPy\n")
+
 
 # [ SETTINGS ]
-set(PACKAGE_VERSION "0.1.3")
-
+set(PACKAGE_VERSION "0.1.4")
+set(ULTRA_URBAN_VERSION "0.2.1")
 # [ HOU SOURCES ]
 # /.source Template:
 set(HOU_ENV_SOURCE_JSON ${PHOUDINI_TEMPLATES_DIR}/__in__PeachEnv.json )
@@ -39,15 +51,33 @@ if(${BUILD_DEV_HOU})
     file(WRITE ${PHOUDINI_DIR}/config/scripts/nocopy/__init__.py "#!/usr/bin/python")      
 endif()
 
+
 # [ CREATE INSTALL PACKAGE FILES ]
 if(${BUILD_INSTALL_HOU})
     # /.Install: CREATING FILES FROM TEMPLATES
     configure_file(
         ${HOU_ENV_SOURCE_JSON}
-        ${ENV_FILE_INSTALL_DIR}/PeachEnv.json
+        ${INSTALL_PHOUDINI_DIR}/PeachEnv.json
     )
     # /.Install: PeachEnv Package Folder 
     install(DIRECTORY 
         ${PHOUDINI_DEV_DIR}/PeachEnv
-        DESTINATION ${ENV_FILE_INSTALL_DIR})
+        DESTINATION ${INSTALL_PHOUDINI_DIR})
+    
+    # /.Install: Cofigure Each package
+    foreach(PKG IN LISTS PACKAGES)
+        # /.. Copy packages into dir.
+        install(DIRECTORY 
+            "${HOUDEV_PACKAGES_DIR}/${PKG}"
+            DESTINATION ${INSTALL_PACKAGES_DIR})
+        
+        # /.. Create package json files
+        configure_file(
+            "${PHOUDINI_TEMPLATES_DIR}/__in__${PKG}.json"
+            "${INSTALL_PACKAGES_DIR}/${PKG}.json")
+        # /.. Create package_list.txt string
+        set(PACKAGE_LIST_STR "${PACKAGE_LIST_STR}${PKG}\n")
+    endforeach()
+
+    file(WRITE ${INSTALL_PHOUDINI_DIR}/package_list.txt ${PACKAGE_LIST_STR})
 endif()

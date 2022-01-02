@@ -5,6 +5,7 @@
     "enable" : "houdini_version >= '${HOU_MIN_VER}' and houdini_version < '${HOU_MAX_VER}'",
     "env" : [
         {"PEACH_VERSION" : "${PEACH_VERSION}"},
+        {"PEACH_VERSION_PKG": "${PACKAGE_VERSION}"},
         {"PEACH_CREATOR" : "${AUTHOR}"},
         {"PEACH_BUILD" : "${PEACH_BUILD}"}
     ],
