@@ -9,7 +9,7 @@
     <memberTool name="peach_info"/>
   </toolshelf>
 
-  <tool name="peach_info" label="About" icon="$PEACH/icons/SVG/icon_peach_dev_vec.svg">
+  <tool name="peach_info" label="About" icon="$PEACH_ICONS/icon_peach_dev.svg">
     <script scriptType="python"><![CDATA[import hou
 
 
