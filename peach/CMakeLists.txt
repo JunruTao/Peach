@@ -29,7 +29,9 @@ set(HOU_MAX_VER "19.1")
 
 
 # [ SOURCE PATH ] Settings
-set(DEV_DIR "E:/dev")
+get_filename_component(DEV_DIR ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
+get_filename_component(DEV_DIR ${DEV_DIR} DIRECTORY)
+
 set(PEACH_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(PEACH_ICONS_DIR "${PEACH_DIR}/icons")
 set(PEACH_ICONS_ICO_DIR "${PEACH_DIR}/icons/ICO")
