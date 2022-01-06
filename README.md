@@ -7,7 +7,7 @@ About Peach. #TODO
 
 ### Contact:
 - __Instagram__
-    > :camera: [@digital.peach.v001](https://www.instagram.com/digital.peach.v001/)
+    > :camera: [@digital.peach.studio](https://www.instagram.com/digital.peach.studio/)
 - __Website__
     > :peach: [digital-peach.company.site](https://digital-peach.company.site)
 - __E-Mail__
