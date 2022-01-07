@@ -12,7 +12,7 @@ block_size = 256
 def get_file_profile(fname):
     """This Function to get the length of the text file"""
     size = os.path.getsize(fname)
-    return min(int(size / block_size), max_repsize) 
+    return max(min(int(size / block_size), max_repsize), 1)
 
 # Date and times:
 now = datetime.datetime.now()

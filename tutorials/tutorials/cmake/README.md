@@ -1,3 +1,4 @@
 # CMake Tips
 
-1. [Get Parent Directory Path](./get_parent_dir.md)
+- [Get Parent Directory Path](./get_parent_dir.md)
+- [Foreach Loop](./foreach_loop_cmake.md) 

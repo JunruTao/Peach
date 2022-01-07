@@ -1,9 +1,8 @@
 # ------------------------------------------------
 # Houdini Panel CMake Configuration
+# [ asset_browser ]
 
-set(PANEL_NAME "peach_main")
-file(READ ${CMAKE_CURRENT_LIST_DIR}/pypanel_${PANEL_NAME}.py PANEL_SCRIPT)
-set(PANEL_LABEL "Peach Main")
-set(PANEL_ICON "icon_peach")
-set(PANEL_MENU_POS "501")
-set(PANEL_MENU_SPR "true")
+set(TARGET_PKG "PeachAsset" PARENT_SCOPE)
+set(PANEL_LABEL "Peach Asset Browser" PARENT_SCOPE)
+set(PANEL_ICON "icon_peach_dev" PARENT_SCOPE)
+set(PANEL_MENU_SPR "false" PARENT_SCOPE)
