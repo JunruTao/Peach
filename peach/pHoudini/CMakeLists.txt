@@ -66,9 +66,10 @@ if(BUILD_INSTALL_HOU)
     # /.Install: Cofigure Each package
     foreach(PKG IN LISTS PACKAGES)
         # /.. Copy packages into dir.
-        install(DIRECTORY 
-            "${HOUDEV_PACKAGES_DIR}/${PKG}"
-            DESTINATION ${INSTALL_PACKAGES_DIR})
+        install(DIRECTORY "${HOUDEV_PACKAGES_DIR}/${PKG}"
+                DESTINATION ${INSTALL_PACKAGES_DIR}
+                PATTERN "wip" EXCLUDE 
+        )
         
         # /.. Create package json files
         configure_file(
