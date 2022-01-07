@@ -5,11 +5,14 @@
 #                              + ---> CMakeLists
 # ------------------------------------------------------------------------------- #
 
+# [ PATH >>> SOURCE ] Settings
 set(PANEL_TEMPLATES_DIR ${CMAKE_CURRENT_LIST_DIR}/templates)
+
 # [ CONFIGURE THE COMMENTS FIRST ]
 set(CONFIGURED_COMMENT_FILE ${PANEL_TEMPLATES_DIR}/temp/python_panel_comment.temp)
 set(PYPANEL_TEMPLATE ${PANEL_TEMPLATES_DIR}/python_panel_template.xml)
-# [ DUMP COMMENT INTO A TEMP FILE ]
+
+# [ DUMP COMMENT INTO A .TEMP FILE ]
 configure_file(
     ${PANEL_TEMPLATES_DIR}/python_panel_comment.py
     ${CONFIGURED_COMMENT_FILE})
