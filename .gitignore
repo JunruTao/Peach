@@ -9,6 +9,7 @@ _igr_*
 **/1000w
 **/backup
 **/wip
+**/venv
 
 # [ GIT ]:
 **/.git
@@ -47,8 +48,7 @@ _igr_*
 # [ VSCode ]
 **/.vscode
 **/.VSCodeCounter
-# [ PyCharm ]
-**/.idea
+
 
 # [ Executables ]
 *.exe

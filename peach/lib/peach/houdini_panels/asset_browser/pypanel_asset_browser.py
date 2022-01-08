@@ -1,7 +1,6 @@
-from hutil.Qt import QtWidgets
-from peach.pUtil import test
+from PySide2 import QtWidgets
+
 
 def onCreateInterface():
-    test.Foo2()
     widget = QtWidgets.QLabel('Asset Browser New')
     return widget
