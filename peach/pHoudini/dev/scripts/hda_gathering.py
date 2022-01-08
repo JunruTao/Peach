@@ -2,7 +2,7 @@
 import os, shutil
 
 
-package_dir = os.path.realpath(".././packages")
+package_dir = os.path.realpath("./dev/packages")  # executed in sh script
 packages = [f.path for f in os.scandir(package_dir) if f.is_dir()]
 empty_dir = True
 divider = "----------------------------------"
