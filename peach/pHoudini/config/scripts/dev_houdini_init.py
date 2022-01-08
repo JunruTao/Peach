@@ -1,4 +1,4 @@
-import os
+import os, shutil
 import nocopy.houdini_util as hu
 import hou
 
@@ -17,3 +17,59 @@ hu.working_dir = str(os.path.realpath("./dev/packages"))
 hu.setDirAndPrint()
 hu.loadPeachEnvPackage()
 hu.loadPeachPackages()
+
+# [ Section: Loading Latest dev hdas ]
+package_dir = hou.getenv("PEACH_PACKAGES_PATH")
+packages = [f.path for f in os.scandir(package_dir) if f.is_dir()]
+divider = "----------------------------------"
+
+
+class HDA(object):
+    def __init__(self, hda_filename="", path="") -> None:
+        super().__init__()
+        self.long_name = hda_filename
+        self.name = ""
+        self.v_major = 0
+        self.v_minor = 0
+        self.path = path
+        self.name, self.v_major, self.v_minor, ext = hda_filename.split(".")
+        self.version = int(self.v_major) * 1000 + int(self.v_minor)
+        
+    def printInfo(self):
+        hu.printMsg("---[HDA::path]: " + self.path)
+        hu.printMsg("---> name: %s" % self.name)
+        hu.printMsg("---> VERSION_INT: %d" % self.version)
+        hu.printMsg(divider)
+
+
+def get_latest_hdas(hda_dir):
+    hdas = dict()
+    for f in os.scandir(hda_dir):
+        if f.is_file() and f.name.endswith("hdalc"):
+            hda_path = f.path
+            hda_name = f.name
+            hda = HDA(hda_name, hda_path)
+            hda.printInfo()
+            if hdas.get(hda.name):
+                if hdas[hda.name].version < hda.version:
+                    hdas[hda.name] = hda
+            else:
+                hdas[hda.name] = hda
+    return hdas
+            
+
+hu.printMsg(divider)
+hu.printMsg("scanning...")
+for path in packages:
+    hda_wip_dir = os.path.join(path, "wip\\hda")
+    if os.path.exists(hda_wip_dir):
+        hu.printMsg(divider)
+        hu.printMsg("[HDA Wip path]: %s" % hda_wip_dir)
+        # [2] Getting latest hdas
+        hdas = get_latest_hdas(hda_wip_dir)
+        hu.printMsg("[All Latest HDAs]: ")
+        
+        for _, a in hdas.items():
+            hu.printMsg(">>>> Load HDA: %s, %d" % (a.name, a.version))
+            # [3] load:
+            hou.hda.installFile(hu.format_dir(a.path))

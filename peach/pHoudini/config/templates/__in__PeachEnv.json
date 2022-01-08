@@ -8,6 +8,7 @@
         {"PEACH_VERSION_PKG": "${PACKAGE_VERSION}"},
         {"PEACH_CREATOR" : "${AUTHOR}"},
         {"PEACH_BUILD" : "${PEACH_BUILD}"},
+        {"PEACH_PACKAGES_PATH" : "$PEACH_HOU/packages"},
         {"PEACH_ICONS" : "$PEACH/icons/SVG"}
     ],
     "path" : "$PEACH_HOU/PeachEnv"

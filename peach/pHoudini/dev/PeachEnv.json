@@ -8,6 +8,7 @@
         {"PEACH_VERSION_PKG": "0.1.4"},
         {"PEACH_CREATOR" : "Junru Tao"},
         {"PEACH_BUILD" : "Debug"},
+        {"PEACH_PACKAGES_PATH" : "$PEACH_HOU/packages"},
         {"PEACH_ICONS" : "$PEACH/icons/SVG"}
     ],
     "path" : "$PEACH_HOU/PeachEnv"

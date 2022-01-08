@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.08__<br>
-> __Time stamp: 17:02:51__<br>
+> __Time stamp: 17:28:34__<br>
 > __Author: Junru Tao__
 ---
 
@@ -43,7 +43,7 @@
 
  :bookmark_tabs: _004_. [Change_Log - Date:2022/01/07](./2022_01/2022_01_07_cl.md) : :bread::bread:
 
- :bookmark_tabs: _005_. [Change_Log - Date:2022/01/08](./2022_01/2022_01_08_cl.md) : :bread::bread:
+ :bookmark_tabs: _005_. [Change_Log - Date:2022/01/08](./2022_01/2022_01_08_cl.md) : :bread::bread::bread:
 
 <br><br>
 
