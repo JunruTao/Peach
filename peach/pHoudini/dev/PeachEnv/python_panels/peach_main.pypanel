@@ -20,13 +20,13 @@ Change from the visable code.
 # - This is python panel for Peach. Please do not
 # - Edit externally while Houdini is running.
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-from hutil.Qt import QtWidgets
-from peach.pHoudini import test
+from PySide2 import QtWidgets
+
 
 def onCreateInterface():
-    test.Foo()
     widget = QtWidgets.QLabel('Hello World!')
-    return widget]]>
+    return widget
+]]>
         </script>
         <includeInPaneTabMenu 
             menu_position="501" 

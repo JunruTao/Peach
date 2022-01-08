@@ -103,3 +103,9 @@ if(INSTALL_ICON)
             ${PEACH_DIR}/icons/25w # install small icons
             DESTINATION ${PEACH_INSTALL_DIR}/icons)
 endif()
+
+# /.license
+install(FILES 
+        ${PEACH_DIR}/LICENSE.txt 
+        DESTINATION 
+        ${PEACH_INSTALL_DIR})

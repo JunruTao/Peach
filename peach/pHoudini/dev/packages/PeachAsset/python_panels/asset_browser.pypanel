@@ -20,13 +20,13 @@ Change from the visable code.
 # - This is python panel for Peach. Please do not
 # - Edit externally while Houdini is running.
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-from hutil.Qt import QtWidgets
-from peach.pUtil import test
+from PySide2 import QtWidgets
+
 
 def onCreateInterface():
-    test.Foo2()
     widget = QtWidgets.QLabel('Asset Browser New')
-    return widget]]>
+    return widget
+]]>
         </script>
         <includeInPaneTabMenu 
             menu_position="502" 

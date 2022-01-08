@@ -81,3 +81,10 @@ if(BUILD_INSTALL_HOU)
 
     file(WRITE ${INSTALL_PHOUDINI_DIR}/package_list.txt ${PACKAGE_LIST_STR})
 endif()
+
+
+# /.license
+install(FILES 
+        ${PEACH_DIR}/LICENSE.txt 
+        DESTINATION 
+        ${INSTALL_PHOUDINI_DIR})
