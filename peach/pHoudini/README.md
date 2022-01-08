@@ -44,4 +44,5 @@
     > - `PRC_<name>_<opt.function>` nodes the calculate procedurally, no need for extra parameter inputs.
     > - ... <sup>(append here)</sup>
 
-- [ ] Firgure out HDA dev in packages, and distribution.
+- [x] Firgure out HDA dev in packages, and distribution.
+- [ ] `Dev tool package`. set things like renamer, set project, save dev file, hda saving, etc.
