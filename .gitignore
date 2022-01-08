@@ -7,6 +7,8 @@ _igr_*
 **/nocopy
 **/500w
 **/1000w
+**/backup
+
 # [ GIT ]:
 **/.git
 
@@ -43,7 +45,7 @@ _igr_*
 
 # [ VSCode ]
 **/.vscode
-
+**/.VSCodeCounter
 # [ PyCharm ]
 **/.idea
 
