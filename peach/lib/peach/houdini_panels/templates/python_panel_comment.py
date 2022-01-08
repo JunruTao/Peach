@@ -1,9 +1,18 @@
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# Company: Digital Peach Co.
-# Peach Build: -${PEACH_BUILD} -v${PEACH_VERSION}
-# Author: ${AUTHOR}
-# Contact: ${EMAIL}
-# Notes: 
-# - This is python panel for Peach. Please do not
-# - Edit externally while Houdini is running.
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# ---------------------------------------------------------------------
+# Copyright (c) 2022 Digital Peach Studio - Junru Tao
+# This code is licensed under MIT license (see LICENSE.txt for details)
+#                             *   *   *   *
+# - ${COMPANY}
+# - Peach Build: -${PEACH_BUILD} -v${PEACH_VERSION}
+# - Authors: ${AUTHOR}
+# - Contact: ${EMAIL}
+# - Website: ${WEBSITE}
+# - Instagram: ${INSTAGRAM}
+#
+# [ File Description] - 2022.01.08 (Y.M.D)
+#                             *   *   *   *
+#   This is python panel for Peach. Please do not edit externally
+#   while Houdini is running.
+# ---------------------------------------------------------------------

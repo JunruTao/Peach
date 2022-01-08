@@ -14,12 +14,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 project(Peach)
 
 
-# [ GLOBAL ] Versions
+# [ GLOBAL ] Info
 set(AUTHOR "Junru Tao")
-set(EMAIL "junrutao.uk@gmail.com")
+set(COMPANY "Digital Peach Studio")
+set(EMAIL "<junrutao.uk@gmail.com | junrutao@qq.com>")
+set(WEBSITE "digital-peach.company.site")
+set(INSTAGRAM "@digital.peach.studio")
+
+# [ GLOBAL ] Versions
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "0")
-set(PEACH_VERSION_PATCH "9")
+set(PEACH_VERSION_PATCH "10")
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
 
 

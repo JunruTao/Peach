@@ -1,3 +1,15 @@
+# ---------------------------------------------------------------------
+# Copyright (c) 2022 Digital Peach Studio - Junru Tao
+# This code is licensed under MIT license (see LICENSE.txt for details)
+#                             *   *   *   *
+# - Digital Peach Studio
+# - Authors: Junru Tao
+# - Contact: <junrtao.uk@gmail.com | junrutao@qq.com>
+# - Website: digital-peach.company.site
+# - Instagram: @digital.peach.studio
+#
+# ---------------------------------------------------------------------
+
 write-host "[Peach Start-Up] Running PowerShell Script"
 
 # [ INIT SCRIPTS LOCATIONS ]

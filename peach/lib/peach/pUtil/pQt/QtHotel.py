@@ -1,7 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# This is an import wrapper for importing Qt/PyQt/PySide2 libraries
-# If PySide2 is not available, simply change the `from` section.
+# ---------------------------------------------------------------------
+# Copyright (c) 2022 Digital Peach Studio - Junru Tao
+# This code is licensed under MIT license (see LICENSE.txt for details)
+#                             *   *   *   *
+# - Digital Peach Studio
+# - Authors: Junru Tao
+# - Contact: <junrtao.uk@gmail.com | junrutao@qq.com>
+# - Website: digital-peach.company.site
+# - Instagram: @digital.peach.studio
+#
+# [ File Description] - 2022.01.08 (Y.M.D)
+#                             *   *   *   *
+#   This is an import wrapper for importing Qt/PyQt/PySide2 libraries
+#   If PySide2 is not available, simply change the `from` section.
+#
+# ---------------------------------------------------------------------
 
 from PySide2 import (QtWidgets,
                      QtGui,

@@ -17,6 +17,7 @@
 #define AND &&
 #define OR ||
 
+#define PRINT_PARSING_MSG  false 
 /* [ Peach Globals ]*/
 namespace Peach
 {
@@ -37,7 +38,8 @@ static inline void PrintConfigMsg(const std::string& msg)
 // [ Print Parsing Message(Debug Mode Only) ]
 static inline void PrintParserMsg(const std::string& msg)
 {
-    std::cout << "[ Peach Config::Parser ] " << msg << std::endl;
+    if(PRINT_PARSING_MSG)
+        std::cout << "[ Peach Config::Parser ] " << msg << std::endl;
 }
 
 
