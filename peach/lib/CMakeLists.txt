@@ -42,7 +42,10 @@ if(BUILD_DEV_HOU)
     # /.copy
     install(
         DIRECTORY ${HOU_PY_LIBRARIES}
-        DESTINATION ${HOUDEV_PEACHPY_DIR}/peach)
+        DESTINATION ${HOUDEV_PEACHPY_DIR}/peach
+        PATTERN
+        "__pycache__" EXCLUDE
+        )
     file(WRITE ${HOUDEV_PEACHPY_DIR}/peach/__init__.py "#!/usr/bin/python")
     file(WRITE ${PEACH_DIR}/pHoudini/dev/packages/PeachPy/README.md ${README_STR})
 endif()
