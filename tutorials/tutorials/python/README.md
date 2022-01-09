@@ -5,3 +5,4 @@
     > - Get all sub-directories
     > - Remove File, Directory and rm -rf in Python
     > - File copy
+- [Pycharm Tools](./pycharm_tools.md)
