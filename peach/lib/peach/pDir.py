@@ -20,8 +20,9 @@
 #
 # ---------------------------------------------------------------------
 import os
-from . import pImp
-from . import pLog
+import pImp
+import pLog
+
 pImp.reload(pLog)
 
 
@@ -68,6 +69,24 @@ def getPeachDir():
     return pathSlashCvt(p_path)
 
 
-# [ PEACH ICONS DIR ]
+# [ PEACH SUB DIRS ]
+def getPeachConfigsDir():
+    """[ Peach ] Get `$PEACH/config` folder realpath """
+    return join(getPeachDir(), "config")
+
+
+def getPeachHouDir():
+    """[ Peach ] Get `$PEACH/pHoudini` folder realpath """
+    return join(getPeachDir(), "pHoudini")
+
+
+def getPeachBlnDir():
+    """[ Peach ] Get `$PEACH/pBlender` folder realpath """
+    return join(getPeachDir(), "pBlender")
+
+
+# [ PEACH IMG RESOURCE PATHS ]
 def getPeachIconsDir():
+    """[ Peach ] Get `$PEACH/icons` folder realpath """
     return join(getPeachDir(), "icons")
+

@@ -30,8 +30,11 @@ set(HOU_PY_SOURCE_JSON ${PHOUDINI_TEMPLATES_DIR}/__in__PeachPy.json )
 # /.source Python Libs:
 set(HOU_PY_LIBRARIES 
     ${LIB_DIR}/pHoudini
-    ${LIB_DIR}/pUtil
+    ${LIB_DIR}/pQt
 )
+# /.source Python files in lib$peach
+file(GLOB PEACH_DIR_FILES CONFIGURE_DEPENDS ${LIB_DIR}/*.py)
+
 
 # [ HOU: CREATE DEV PACKAGE FILES ]
 if(BUILD_DEV_HOU)
@@ -45,8 +48,12 @@ if(BUILD_DEV_HOU)
         DESTINATION ${HOUDEV_PEACHPY_DIR}/peach
         PATTERN
         "__pycache__" EXCLUDE
-        )
-    file(WRITE ${HOUDEV_PEACHPY_DIR}/peach/__init__.py "#!/usr/bin/python")
+    )
+    # /.copy peach/*.py
+    install(
+        FILES ${PEACH_DIR_FILES}
+        DESTINATION ${HOUDEV_PEACHPY_DIR}/peach
+    )
     file(WRITE ${PEACH_DIR}/pHoudini/dev/packages/PeachPy/README.md ${README_STR})
 endif()
 
@@ -61,7 +68,11 @@ if(BUILD_INSTALL_HOU)
     install(
         DIRECTORY  ${HOU_PY_LIBRARIES}
         DESTINATION ${INSTALL_PEACHPY_DIR}/peach)
-    file(WRITE ${INSTALL_PEACHPY_DIR}/peach/__init__.py "#!/usr/bin/python")
+    # /.install.copy peach/*.py
+    install(
+        FILES ${PEACH_DIR_FILES}
+        DESTINATION ${INSTALL_PEACHPY_DIR}/peach
+    )
     file(WRITE ${PEACH_INSTALL_DIR}/pHoudini/packages/PeachPy/README.md ${README_STR})
 endif()
 
