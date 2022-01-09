@@ -9,11 +9,11 @@
 # - Contact: <junrtao.uk@gmail.com | junrutao@qq.com>
 # - Website: digital-peach.company.site
 # - Instagram: @digital.peach.studio
-#
+# ---------------------------------------------------------------------
 # [ File Description] - 2022.01.08 (Y.M.D)
 #                             *   *   *   *
 #   This File contains all the necessary functions that related to lib
-#   loading and other configurations.
+#   importing and other configurations.
 #
 # ---------------------------------------------------------------------
 

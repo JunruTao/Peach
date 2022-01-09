@@ -10,8 +10,8 @@
 # - Contact: ${EMAIL}
 # - Website: ${WEBSITE}
 # - Instagram: ${INSTAGRAM}
-#
-# [ File Description] - 2022.01.08 (Y.M.D)
+# ---------------------------------------------------------------------
+# [ File Description] - ${STR_DATE_YMD} (Y.M.D)
 #                             *   *   *   *
 #   This is python panel for Peach. Please do not edit externally
 #   while Houdini is running.
