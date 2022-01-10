@@ -36,8 +36,8 @@ def configure_icon_path():
 class Icon(object):
     # [ Constructor ]
     def __init__(self, name="", types=None):
-        self.name = name
-        self.data = dict()
+        self._name = name
+        self._data = dict()
 
         # /.make sure there's valid path
         configure_icon_path()
@@ -61,14 +61,17 @@ class Icon(object):
                     p = pDir.join(
                         _PEACH_ICON_DIR,
                         folder,
-                        "icon_%s%s.%s" % (self.name, suffix, ext))
+                        "icon_%s%s.%s" % (self._name, suffix, ext))
                     if pDir.exists(p):
-                        self.data[str(t)] = p
+                        self._data[str(t)] = p
                     else:
                         pLog.warning("File Missing: %s" % p, cls=self, fn="Constructor")
 
     def getPath(self, size=""):
-        return self.data[size] if size in self.data else None
+        return self._data[size] if size in self._data else None
+
+    def getName(self):
+        return self._name
 
 
 class IconTank(object):

@@ -6,4 +6,6 @@
 
 :red_circle: **Peach Python**
 - [x] --- Create first Houdini python package and install it.
-- [ ] --- `Icon Manager` get the file path for icons. icon objects.
+- [x] --- <s>`Icon Manager`</s>`Icon Tank` get the file path for icons, icon objects. IconTank init and search.
+from the $icon path, and create `Icon` objects. 
+- [x] --- `Icon` class, able to use it without create an IconTank.
