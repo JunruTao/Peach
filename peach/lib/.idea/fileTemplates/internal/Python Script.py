@@ -19,5 +19,6 @@
 # [ File Description ] - ${YEAR}.${MONTH}.${DAY} (Y.M.D) - ${TIME}
 #                            *   *   *   *
 #
+#   This script contains
 #
 # ---------------------------------------------------------------------

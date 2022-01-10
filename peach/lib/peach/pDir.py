@@ -52,6 +52,50 @@ def exists(path):
     return os.path.exists(path)
 
 
+def ls(path="", n=False):
+    """[ List Directory ] path and files
+    :param path: (str) directory
+    :param n: (bool) if return name
+    :return: (str)dir_name/dir_fullpath, None if not exist
+    """
+    if not exists(path):
+        return None
+    if n:
+        return [f.name for f in os.scandir(path)]
+    return [f.path for f in os.scandir(path)]
+
+
+def listdir(path="", n=False):
+    """[ List Directory ] directories only
+    :param path: (str) directory
+    :param n: (bool) if return name
+    :return: (str)dir_name/dir_fullpath, None if not exist
+    """
+    if not exists(path):
+        return None
+    if n:
+        return [f.name for f in os.scandir(path) if f.is_dir()]
+    return [f.path for f in os.scandir(path) if f.is_dir()]
+
+
+def listfiles(path="", n=False):
+    """[ List Directory ] files only
+    :param path: (str) directory
+    :param n: (bool) if return name
+    :return: (str)dir_name/dir_fullpath, None if not exist
+    """
+    if not exists(path):
+        return None
+    if n:
+        return [f.name for f in os.scandir(path) if f.is_file()]
+    return [f.path for f in os.scandir(path) if f.is_file()]
+
+
+def remove_ext(file_name=''):
+    """[ Path ] remove extension """
+    return (os.path.splitext(file_name))[0]
+
+
 # [ PEACH DIR FUNCTION ]
 def getPeachDir():
     """
@@ -64,7 +108,7 @@ def getPeachDir():
         p_path = os.path.dirname(p_path)
         if last_dir == p_path:
             # [ error ] this means it's down to root, and missing config folder.
-            pLog.error("Cannot Locate Peach Dir, illegal Usage", subject=getPeachDir.__name__)
+            pLog.error("Cannot Locate Peach Dir, illegal Usage", sbj="pDir", fn=getPeachDir)
             return None
     return pathSlashCvt(p_path)
 
@@ -89,4 +133,3 @@ def getPeachBlnDir():
 def getPeachIconsDir():
     """[ Peach ] Get `$PEACH/icons` folder realpath """
     return join(getPeachDir(), "icons")
-

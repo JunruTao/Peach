@@ -26,13 +26,13 @@ python_version = sys.version_info[0]
 
 # [ LOADING RELOADING MODULES ]
 if sys.version_info[0] >= 3.4:
-    from importlib import reload
+    import importlib as il
 else:
-    from imp import reload
+    import imp as il
 
 
 # [ RELOAD FUNCTION ]
-def reload_modules(*args):
+def reload(*args):
     """
     Function wrap around the module reload. This function
     allows users to reload multiple modules.
@@ -41,4 +41,4 @@ def reload_modules(*args):
     """
     if len(args):
         for module in args:
-            reload(module)
+            il.reload(module)

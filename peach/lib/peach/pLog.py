@@ -15,6 +15,7 @@
 #                            *   *   *   *
 #
 #   Peach Debug Manager. Handling debug message printing.
+#   TODO: docstrings
 #
 # ---------------------------------------------------------------------
 _enable_debug = True
@@ -26,35 +27,52 @@ def _print(**kwargs):
     msg = kwargs["msg"]
     state = kwargs["state"]
     subject = kwargs["subject"]
-    # [ Log format string ]
-    log = "[ pLog{sb}{st} ]: {tx}"
-    if len(subject):
-        subject = "::" + subject
+    cls = kwargs["cls"]
+    fn = kwargs["fn"]
+
+    # /.Log format string
+    log = "[ {cl}{fn}{st} ]: {tx}"
+
+    if not isinstance(fn, str):
+        # fn can be a custom name or a function
+        fn = fn.__name__ if fn else ""
+
+    if cls:
+        # if class detected
+        cls = cls.__class__.__name__
+    else:
+        # otherwise, look up subject.
+        if subject:
+            cls = subject
+        else:
+            cls = "pLog"
+    # /.appending scope separators
+    if len(fn):
+        fn = "::" + fn
     if len(state):
         state = "::" + state
-    print(log.format(sb=subject, st=state, tx=msg))
+    print(log.format(cl=cls,
+                     fn=fn,
+                     st=state,
+                     tx=msg))
 
 
-def message(*args, subject="", fn=None):
-    subject = fn.__name__ if fn else subject
+def message(*args, sbj="", fn=None, cls=None, state=""):
     for arg in args:
-        _print(msg=arg, subject=subject, state="")
+        _print(msg=arg, subject=sbj, fn=fn, cls=cls, state=state)
 
 
-def debug(*args, subject="", fn=None, force=False):
-    subject = fn.__name__ if fn else subject
-    if force or _enable_debug:
+def debug(*args, sbj="", fn=None, cls=None, f=False):
+    if f or _enable_debug:
         for arg in args:
-            _print(msg=arg, subject=subject, state="debugMsg")
+            _print(msg=arg, subject=sbj, fn=fn, cls=cls, state="debugMsg")
 
 
-def warning(*args, subject="", fn=None):
-    subject = fn.__name__ if fn else subject
+def warning(*args, sbj="", fn=None, cls=None):
     for arg in args:
-        _print(msg=arg, subject=subject, state="Warning")
+        _print(msg=arg, subject=sbj, fn=fn, cls=cls, state="Warning")
 
 
-def error(msg, subject="", fn=None):
-    subject = fn.__name__ if fn else subject
-    _print(msg=msg, subject=subject, state="Error")
+def error(msg, sbj="", fn=None, cls=None):
+    _print(msg=msg, subject=sbj, fn=fn, cls=cls, state="Error")
     raise RuntimeError(msg)
