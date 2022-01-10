@@ -24,39 +24,48 @@ import pImp
 import pLog
 
 pImp.reload(pLog)
+_PEACH_DIR = None
 
 
 # [ PATH FORMAT ]
-def pathSlashCvt(path=""):
-    """For windows-Houdini, Convert '\\' to '/'.
+def pathSlashConvert(path=""):
+    """
+    For windows-Houdini, Convert '\\' to '/'.
+    @param path: (str) path to convert
+    @return: (str) converted path string
     """
     return path.replace("\\", "/")
+
+
+def remove_ext(file_name=''):
+    """[ Path ] remove extension """
+    return (os.path.splitext(file_name))[0]
+
+
+def exists(path):
+    """
+    Check if the path exists
+    @param path: (str) path
+    @return: (bool) if exists
+    """
+    return os.path.exists(path)
 
 
 # [ PATH FUNCTIONS ] - os.path impl
 def join(*args):
     """
     Join directories
-    :param args: *(str) path components
-    :return: (str) joined path
+    @param args: *(str) path components
+    @return: (str) joined path
     """
-    return pathSlashCvt(os.path.join(*args))
-
-
-def exists(path):
-    """
-    Check if the path exists
-    :param path: (str) path
-    :return: (bool) if exists
-    """
-    return os.path.exists(path)
+    return pathSlashConvert(os.path.join(*args))
 
 
 def ls(path="", n=False):
     """[ List Directory ] path and files
-    :param path: (str) directory
-    :param n: (bool) if return name
-    :return: (str)dir_name/dir_fullpath, None if not exist
+    @param path: (str) directory
+    @param n: (bool) if return name
+    @return: (list)dir_name/dir_fullpath, None if not exist
     """
     if not exists(path):
         return None
@@ -67,9 +76,9 @@ def ls(path="", n=False):
 
 def listdir(path="", n=False):
     """[ List Directory ] directories only
-    :param path: (str) directory
-    :param n: (bool) if return name
-    :return: (str)dir_name/dir_fullpath, None if not exist
+    @param path: (str) directory
+    @param n: (bool) if return name
+    @return: (list)dir_name/dir_fullpath, None if not exist
     """
     if not exists(path):
         return None
@@ -80,9 +89,9 @@ def listdir(path="", n=False):
 
 def listfiles(path="", n=False):
     """[ List Directory ] files only
-    :param path: (str) directory
-    :param n: (bool) if return name
-    :return: (str)dir_name/dir_fullpath, None if not exist
+    @param path: (str) directory
+    @param n: (bool) if return name
+    @return: (list)dir_name/dir_fullpath, None if not exist
     """
     if not exists(path):
         return None
@@ -91,17 +100,17 @@ def listfiles(path="", n=False):
     return [f.path for f in os.scandir(path) if f.is_file()]
 
 
-def remove_ext(file_name=''):
-    """[ Path ] remove extension """
-    return (os.path.splitext(file_name))[0]
-
-
 # [ PEACH DIR FUNCTION ]
 def getPeachDir():
     """
     [ Peach ] Getting the installation path of the Peach
-    :return: (str) fores-lashed path
+    @return: (str) fores-lashed path
     """
+    global _PEACH_DIR
+    if _PEACH_DIR and exists(_PEACH_DIR):
+        # calculate once only in runtime
+        return _PEACH_DIR
+
     p_path = os.path.dirname(__file__)
     while not (exists(join(p_path, "config")) and exists(join(p_path, "icons"))):
         last_dir = p_path
@@ -110,7 +119,8 @@ def getPeachDir():
             # [ error ] this means it's down to root, and missing config folder.
             pLog.error("Cannot Locate Peach Dir, illegal Usage", sbj="pDir", fn=getPeachDir)
             return None
-    return pathSlashCvt(p_path)
+    _PEACH_DIR = pathSlashConvert(p_path)
+    return _PEACH_DIR
 
 
 # [ PEACH SUB DIRS ]
