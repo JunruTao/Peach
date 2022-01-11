@@ -16,7 +16,6 @@
 #
 #   This script contains key functions and class for handling icon and
 #   image resources.
-#   TODO: docstrings
 #
 # ---------------------------------------------------------------------
 from peach import (pImp, pDir, pLog)
@@ -28,6 +27,9 @@ _PEACH_ICON_DIR = ""
 
 # [ global-functions ] Public
 def configure_icon_path():
+    """
+    Configure path only once, the value will be stored.
+    """
     global _PEACH_ICON_DIR
     if _PEACH_ICON_DIR == "":
         _PEACH_ICON_DIR = pDir.getPeachIconsDir()
@@ -36,6 +38,11 @@ def configure_icon_path():
 class Icon(object):
     # [ Constructor ]
     def __init__(self, name="", types=None):
+        """
+        [ Icon ] Constructor
+        @param name: (str) icon name
+        @param types: (list[str]) i.g. "x25", "SVG" etc.
+        """
         self._name = name
         self._data = dict()
 
@@ -68,10 +75,21 @@ class Icon(object):
                         # _____PRINT_WARNINGS_____
                         pLog.warning("File Missing: %s" % p, cls=self, fn="Constructor")
 
-    def getPath(self, size=""):
+    def getPath(self, size="SVG"):
+        """
+        [ Icon ] getter
+        Get Icon File Path, size default will be getting "SVG"
+        @param size: (str) i.g. "x25", "SVG" etc.
+        @return: (str/None) filepath of the icon
+        """
         return self._data[size] if size in self._data else None
 
     def getName(self):
+        """
+        [ Icon ] getter
+        Getting the name of this icon object.
+        @return: (str) name
+        """
         return self._name
 
 
@@ -82,11 +100,17 @@ class IconTank(object):
 
     # [ Constructor ]
     def __init__(self):
+        """[ IconTank ] Constructor"""
         # /.construct icon database once only
         if not len(self._icon_types):
             self._construct_library()
 
     def _construct_library(self):
+        """
+        [ IconTank ] Private
+        Construct/Log in all the found icons. by scanning the directory.
+        This function will be only running once. unless refresh is called.
+        """
         # /.find ./icons folder
         configure_icon_path()
         folders = pDir.listdir(_PEACH_ICON_DIR, n=True)
@@ -119,33 +143,46 @@ class IconTank(object):
                          fn="Constructor")
 
     def refresh(self):
+        """
+        [ IconTank ] Public
+        Clear Icon Database and rescan directory.
+        @return:
+        """
         self._icon_types.clear()
         self._data.clear()
         self._construct_library()
 
-    def printTypes(self):
-        # _____PRINT_DEBUG_MESSAGE_____
-        pLog.debug(*self.getTypes(), fn="Types", cls=self)
-
-    def printNames(self):
-        # _____PRINT_DEBUG_MESSAGE_____
-        pLog.debug(*self.getNames(), fn="Types", cls=self)
-
     def getTypes(self) -> list:
+        """
+        [ IconTank ] getter
+        @return: (list) icon types
+        """
         return self._icon_types
 
     def getNames(self) -> list:
+        """
+        [ IconTank ] getter
+        @return: (list) icon names
+        """
         names = []
         for key, ico in self._data.items():
             names.append(key)
         return names
 
     def get(self, name=""):
+        """
+        [ IconTank ] getter
+        @param name: (str) name of icon to look up
+        @return: (Icon) object
+        """
         return self._data[name] if name in self._data else None
 
+    def printTypes(self):
+        """[ IconTank ] Debug Function"""
+        # _____PRINT_DEBUG_MESSAGE_____
+        pLog.debug(*self.getTypes(), fn="Types", cls=self)
 
-im = IconTank()
-
-pt = im.get("peach")
-r = pt.getPath("SVG")
-print(r)
+    def printNames(self):
+        """[ IconTank ] Debug Function"""
+        # _____PRINT_DEBUG_MESSAGE_____
+        pLog.debug(*self.getNames(), fn="Names", cls=self)

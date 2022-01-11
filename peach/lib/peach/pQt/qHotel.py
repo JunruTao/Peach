@@ -10,7 +10,7 @@
 # - Website: digital-peach.company.site
 # - Instagram: @digital.peach.studio
 # ---------------------------------------------------------------------
-# [ File Name ] QtHotel.py@python
+# [ File Name ] qHotel.py@python
 # [ File Description ] - 2022.01.09 (Y.M.D) - 13:17
 #                            *   *   *   *
 #
