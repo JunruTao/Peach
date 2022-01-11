@@ -17,7 +17,9 @@ class IcoInitTest(unittest.TestCase):
     def test_icon_test(self):
         n = im.getNames()[0]
         icon = im.get(n)
-        self.assertEqual(True, bool(icon.getPath()))  # add assertion here
+        path = icon.getPath("x50")
+        print(path)
+        self.assertEqual(True, bool(path))  # add assertion here
 
 
 if __name__ == '__main__':

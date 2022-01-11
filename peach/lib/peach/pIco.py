@@ -58,13 +58,14 @@ class Icon(object):
             if isinstance(types, list):
                 # /..Map in keys -> { size/type : filepath }
                 for t in types:
-                    folder = "%sw" % t
-                    suffix = "_x%s" % t
-                    ext = "png"
                     if t == "SVG":
                         suffix = ""
                         ext = "svg"
                         folder = t
+                    else:
+                        folder = "%sw" % t[1:]
+                        suffix = "_%s" % t
+                        ext = "png"
                     p = pDir.join(
                         _PEACH_ICON_DIR,
                         folder,
@@ -126,6 +127,7 @@ class IconTank(object):
                 f = str(f)
                 if f.endswith("w"):
                     f = f[:-1]
+                    f = "x" + f
                 self._icon_types.append(f)
 
             # /..list all the objects in the first icon directory
