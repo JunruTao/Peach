@@ -20,6 +20,24 @@
 _enable_debug = True
 
 
+def enable_debug_msg():
+    """
+    After calling this function,
+    debug messages will be printed to console
+    """
+    global _enable_debug
+    _enable_debug = True
+
+
+def disable_debug_msg():
+    """
+    After calling this function,
+    debug messages will NOT be printed to console
+    """
+    global _enable_debug
+    _enable_debug = False
+
+
 def _print(**kwargs):
     """[ Internal Fn ] printing log
     This is an internal function that print formatted logs following the
