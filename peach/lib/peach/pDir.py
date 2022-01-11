@@ -103,12 +103,18 @@ def listfiles(path="", n=False):
 # [ PEACH DIR FUNCTION ]
 def getPeachDir():
     """
-    [ Peach ] Getting the installation path of the Peach
+    [ Peach ] Getting the installation path of the Peach.
+    @note:
+         This function will only search once in runtime when it
+         is called, it's recursive search from the python module
+         until it finds the root `${PEACH}` folder. After that,
+         it will store the value in `_PEACH_DIR` file scope global
+         variable.
     @return: (str) fores-lashed path
     """
     global _PEACH_DIR
     if _PEACH_DIR and exists(_PEACH_DIR):
-        # calculate once only in runtime
+        # /.calculate once only in runtime
         return _PEACH_DIR
 
     p_path = os.path.dirname(__file__)
@@ -116,8 +122,9 @@ def getPeachDir():
         last_dir = p_path
         p_path = os.path.dirname(p_path)
         if last_dir == p_path:
+            # _____PRINT_ERROR_MESSAGE_____
             # [ error ] this means it's down to root, and missing config folder.
-            pLog.error("Cannot Locate Peach Dir, illegal Usage", sbj="pDir", fn=getPeachDir)
+            pLog.error("Cannot Locate Peach Dir, illegal Usage", cls="pDir", fn=getPeachDir)
             return None
     _PEACH_DIR = pathSlashConvert(p_path)
     return _PEACH_DIR

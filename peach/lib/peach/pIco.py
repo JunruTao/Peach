@@ -65,6 +65,7 @@ class Icon(object):
                     if pDir.exists(p):
                         self._data[str(t)] = p
                     else:
+                        # _____PRINT_WARNINGS_____
                         pLog.warning("File Missing: %s" % p, cls=self, fn="Constructor")
 
     def getPath(self, size=""):
@@ -112,7 +113,7 @@ class IconTank(object):
                 # /...create icon objects
                 self._data[name] = Icon(name, self._icon_types)
         else:
-            # /.Throw soft errors
+            # _____PRINT_WARNINGS_____
             pLog.warning("No Icon-sub-folders found under: %s" % _PEACH_ICON_DIR,
                          cls=self,
                          fn="Constructor")
@@ -123,9 +124,11 @@ class IconTank(object):
         self._construct_library()
 
     def printTypes(self):
+        # _____PRINT_DEBUG_MESSAGE_____
         pLog.debug(*self.getTypes(), fn="Types", cls=self)
 
     def printNames(self):
+        # _____PRINT_DEBUG_MESSAGE_____
         pLog.debug(*self.getNames(), fn="Types", cls=self)
 
     def getTypes(self) -> list:

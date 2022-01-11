@@ -20,25 +20,29 @@
 # ---------------------------------------------------------------------
 import sys
 
+# [ ALLOW RELOAD TOGGLE ]
+ALLOW_MODULE_RUNTIME_RELOAD = True
 
-# [ PYTHON VERSION ]
-python_version = sys.version_info[0]
+if ALLOW_MODULE_RUNTIME_RELOAD:
+    # [ PYTHON VERSION ]
+    python_version = sys.version_info[0]
 
-# [ LOADING RELOADING MODULES ]
-if sys.version_info[0] >= 3.4:
-    import importlib as il
-else:
-    import imp as il
+    # [ LOADING RELOADING MODULES ]
+    if sys.version_info[0] >= 3.4:
+        import importlib as il
+    else:
+        import imp as il
 
 
 # [ RELOAD FUNCTION ]
-def reload(*args):
+def reload(*args, force=False):
     """
     Function wrap around the module reload. This function
     allows users to reload multiple modules.
 
     param args: modules to reload
     """
-    if len(args):
-        for module in args:
-            il.reload(module)
+    if ALLOW_MODULE_RUNTIME_RELOAD or force:
+        if len(args):
+            for module in args:
+                il.reload(module)
