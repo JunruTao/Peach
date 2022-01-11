@@ -18,22 +18,26 @@ Change from the visible code.
 # This code is licensed under MIT license (see LICENSE.txt for details)
 #                             *   *   *   *
 # - Digital Peach Studio
-# - Peach Build: -Debug -v0.0.10
+# - Peach Build: -Debug -v0.0.11
 # - Authors: Junru Tao
 # - Contact: <junrutao.uk@gmail.com | junrutao@qq.com>
 # - Website: digital-peach.company.site
 # - Instagram: @digital.peach.studio
 # ---------------------------------------------------------------------
-# [ File Description] - 2022.01.09 (Y.M.D)
+# [ File Description] - 2022.01.11 (Y.M.D)
 #                             *   *   *   *
 #   This is python panel for Peach. Please do not edit externally
 #   while Houdini is running.
 # ---------------------------------------------------------------------
-from PySide2 import QtWidgets
+from peach.pQt.qHotel import QtWidgets
+from peach import pImp
+from peach.pQt import pq_ico
+from peach.pHoudini.panels import ppp_peach_main
+pImp.reload(pq_ico, ppp_peach_main)
 
 
 def onCreateInterface():
-    widget = QtWidgets.QLabel('Hello World!')
+    widget = ppp_peach_main.PeachMain()
     return widget
 ]]>
         </script>

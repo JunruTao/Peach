@@ -20,8 +20,8 @@
 #
 # ---------------------------------------------------------------------
 import os
-import pImp
-import pLog
+from peach import pImp
+from peach import pLog
 
 pImp.reload(pLog)
 _PEACH_DIR = None

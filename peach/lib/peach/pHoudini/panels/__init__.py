@@ -10,30 +10,10 @@
 # - Website: digital-peach.company.site
 # - Instagram: @digital.peach.studio
 # ---------------------------------------------------------------------
-# [ File Name ] pq_ico.py@python
-# [ File Description ] - 2022.01.11 (Y.M.D) - 19:51
+# [ File Name ] __init__.py@python
+# [ File Description ] - 2022.01.11 (Y.M.D) - 22:12
 #                            *   *   *   *
 #
-#   This script contains Qt Functions, picture resource, icon management.
+#   This script contains
 #
 # ---------------------------------------------------------------------
-from peach.pQt.qHotel import QtGui
-from peach import pImp
-from peach import pIco
-pImp.reload(pIco)
-
-
-# [ GLOBAL OBJECT ]
-_ico_tank = pIco.IconTank()
-
-
-# [ PUBLIC FUNCTIONS ]
-def getPixmap(name="", size="x25"):
-    """
-    [ Public Getter Function ]from name get QPixmap UI object
-    @param name: (str) Icon name
-    @param size: (str) Icon size/type
-    @return: (QtGui.QPixmap)
-    """
-    path = _ico_tank.get(name).getPath(size)
-    return QtGui.QPixmap(path) if path else None
