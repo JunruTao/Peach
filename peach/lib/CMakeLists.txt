@@ -77,5 +77,5 @@ if(BUILD_INSTALL_HOU)
 endif()
 
 add_subdirectory(peach/houdini_panels)
-
+add_subdirectory(peach/houdini_toolbars)
 # [ BLENDER LIBS ]--------------------------------------------------------------- #

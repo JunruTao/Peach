@@ -1,0 +1,11 @@
+
+  <tool name="${TOOL_NAME}" 
+        label="${TOOL_LABEL}"
+        icon="$PEACH_ICONS/icon_${TOOL_ICON}.svg">
+    <script scriptType="python">
+    <![CDATA[${COMMENT_HEADER}${TOOL_SCRIPT}]]>
+    </script>
+    <keywordList>
+      <keyword>${TOOL_KEYWORDS}</keyword>
+    </keywordList>
+  </tool>

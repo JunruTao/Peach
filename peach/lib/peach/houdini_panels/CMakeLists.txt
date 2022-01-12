@@ -1,7 +1,8 @@
 # ------------------------------------------------------------------------------- #
 #       /${PEACH_DIR}
 #             +-----/lib
-#                    +-----/houdini_panels
+#                   +-----/peach
+#                       +-----/houdini_panels
 #                              + ---> CMakeLists
 # ------------------------------------------------------------------------------- #
 
@@ -22,17 +23,18 @@ list(APPEND PANEL_NAMES
 
 set(COUNTER 500)
 
+message(STATUS "[houdini_panel]: Building PyPanels...")
 # [ FOREACH PANELS ]
 foreach(PANEL_NAME IN LISTS PANEL_NAMES)
-    message(STATUS "${PANEL_NAME}")
+    message(STATUS ". [houdini_panel]: Building Python Panel < ${PANEL_NAME} >")
     # Read configuration for those variables locally in panel dir
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/${PANEL_NAME})
     math(EXPR COUNTER "${COUNTER}+1")
     set(PANEL_MENU_POS "${COUNTER}")
     file(READ ${CMAKE_CURRENT_LIST_DIR}/${PANEL_NAME}/pypanel_${PANEL_NAME}.py PANEL_SCRIPT)
 
-    if(${PANEL_NAME} MATCHES "peach_main")
-        set(PANEL_BUILD_PATH ${PEACH_DIR}/pHoudini/dev/${TARGET_PKG}/python_panels/${PANEL_NAME}.pypanel)
+    if(${TARGET_PKG} MATCHES "PeachEnv")
+        set(PANEL_BUILD_PATH ${PEACH_DIR}/pHoudini/dev/PeachEnv/python_panels/${PANEL_NAME}.pypanel)
     else()
         set(PANEL_BUILD_PATH ${PEACH_DIR}/pHoudini/dev/packages/${TARGET_PKG}/python_panels/${PANEL_NAME}.pypanel)
     endif()

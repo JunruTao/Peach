@@ -73,9 +73,9 @@ else()
 endif()
 
 # [ BUILD MESSAGES ]
-message(STATUS "Building Peach...")
-message(STATUS "Version: Peach -v${PEACH_VERSION}")
-message(STATUS "Build: Peach -${PEACH_BUILD}")
+message(STATUS "[Peach]Building Peach...")
+message(STATUS ". [Peach::Version]: Peach -v${PEACH_VERSION}")
+message(STATUS ". [Peach::Build]: Peach -${PEACH_BUILD}")
 
 # [ PASSING TO PREPROCESSOR ]
 add_definitions(
