@@ -17,13 +17,16 @@
 #   This script contains peach main's pypanel widget class
 #
 # ---------------------------------------------------------------------
-from peach.pQt.qHotel import QtWidgets
+from peach.pQt.qHotel import QtWidgets, QtCore
 from peach.pQt import pq_ico
 
+im = pq_ico.IconManager()
+im.stash("peach", "peach_dev")
 
-class PeachMain(QtWidgets.QWidget):
+
+class PeachMainUI(QtWidgets.QWidget):
     def __init__(self, parent=None):
-        super(PeachMain, self).__init__(parent)
+        super(PeachMainUI, self).__init__(parent)
 
         # widget layout functions:
         self.create_widgets()
@@ -35,15 +38,21 @@ class PeachMain(QtWidgets.QWidget):
     def create_widgets(self):
         self.lbl_hello_world = QtWidgets.QLabel("Hello World")
         self.bnt_test = QtWidgets.QPushButton("Peach Button")
+        self.bnt_test2 = QtWidgets.QPushButton("Peach Button2")
 
     def create_layouts(self):
         layout_master = QtWidgets.QVBoxLayout()
         layout_master.addWidget(self.lbl_hello_world)
         layout_master.addWidget(self.bnt_test)
+        layout_master.addWidget(self.bnt_test2)
         self.setLayout(layout_master)
 
     def create_style(self):
-        self.bnt_test.setIcon(pq_ico.getPixmap("peach_dev", "x50"))
+        self.bnt_test.setIcon(im.get("peach_dev"))
+        self.bnt_test.setMinimumHeight(50)
+        self.bnt_test2.setIcon(im.get("peach"))
+        self.bnt_test2.setIconSize(QtCore.QSize(30, 30))
+        self.bnt_test2.setMinimumHeight(50)
 
     def create_connections(self):
         pass

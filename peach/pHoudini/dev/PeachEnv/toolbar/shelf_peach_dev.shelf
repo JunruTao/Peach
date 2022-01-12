@@ -35,8 +35,9 @@
 # ---------------------------------------------------------------------
 from peach import pLog
 
-pLog.debug("DBUEG")
-pLog.message("Hello World", fn="test", cls="PDevRenamer")]]>
+pLog.debug("DEBUG")
+pLog.message("Hello World", fn="test", cls="PDevRenamer")
+]]>
     </script>
     <keywordList>
       <keyword>Peach</keyword>

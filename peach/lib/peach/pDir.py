@@ -42,6 +42,16 @@ def remove_ext(file_name=''):
     return (os.path.splitext(file_name))[0]
 
 
+def fileName(filepath=''):
+    """[ Path ] Extract Base Name from Path"""
+    return os.path.basename(filepath)
+
+
+def fileNameBare(filepath=''):
+    """[ Path ] Extract Base Name from Path"""
+    return remove_ext(fileName(filepath))
+
+
 def exists(path):
     """
     Check if the path exists
