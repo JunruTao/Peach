@@ -22,7 +22,7 @@ import hou
 # [ @warning: Internal Init Script ]
 hu.mode = "dev"
 # packages to load
-hu.peach_packages = ["PeachPy", ]
+hu.peach_packages = []
 
 # [ Getting the Peach Install Dir ]
 hu.peach_dir = os.path.realpath("..")
@@ -52,7 +52,7 @@ class HDA(object):
         self.version = int(self.v_major) * 1000 + int(self.v_minor)
         
     def printInfo(self):
-        hu.printMsg("---[HDA::path]: " + self.path)
+        # hu.printMsg("---[HDA::path]: " + self.path)
         hu.printMsg("---> name: %s" % self.name)
         hu.printMsg("---> VERSION_INT: %d" % self.version)
         hu.printMsg(divider)

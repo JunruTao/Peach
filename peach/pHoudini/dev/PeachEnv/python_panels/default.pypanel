@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pythonPanelDocument>
+  <!-- This file contains definitions of Python interfaces and the
+ interfaces menu.  It should not be hand-edited when it is being
+ used by the application.  Note, that two definitions of the
+ same interface or of the interfaces menu are not allowed
+ in a single file. -->
+  <interfacesMenu type="panetab">
+    <interfaceItem name="ConstraintBrowser"/>
+    <interfaceItem name="labs::diff"/>
+    <interfaceItem name="pdgdatalayerpanel"/>
+    <interfaceItem name="pdgpathmap"/>
+    <interfaceItem name="pdgservicemenu"/>
+    <interfaceItem name="PackageBrowser"/>
+    <interfaceItem name="taskgraphtable"/>
+    <interfaceItem name="ViewerHandleBrowser"/>
+    <interfaceItem name="ViewerStateBrowser"/>
+    <interfaceItem name="contexteditor"/>
+    <interfaceItem name="sesi_auto_rigs"/>
+    <interfaceItem name="sesi_pose_space_deform"/>
+    <interfaceItem name="rig_tree"/>
+    <interfaceItem name="sesi_character_picker"/>
+    <interfaceItem name="sesi_pose_library"/>
+    <interfaceItem name="SceneGraphDetails"/>
+    <interfaceItem name="SceneGraphLayersPanel"/>
+    <interfaceItem name="sesi_light_linker"/>
+    <interfaceItem name="sesi_light_mixer"/>
+    <interfaceItem name="log_viewer"/>
+    <interfaceItem name="layout_asset_gallery"/>
+    <separatorItem/>
+    <interfaceItem name="peach_main"/>
+    <interfaceItem name="asset_browser"/>
+  </interfacesMenu>
+</pythonPanelDocument>

@@ -2,8 +2,13 @@
 
 powershell "./dev_osTools/clean.ps1"
 
-cd ./.build
+# gather HDA:
+echo "[CMD] Gather All WIP hda, select latest and install in {dev package}/otls folders"
+echo "execute python script..."
+python './pHoudini/dev/scripts/hda_gathering.py'
 
+# Build:
+cd ./.build
 # cmake debug
 cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug ..
 # make install

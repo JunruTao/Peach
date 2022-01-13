@@ -20,7 +20,7 @@ set(INSTALL_PACKAGES_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages)
 set(INSTALL_PEACHPY_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages/PeachPy/python3.7libs)
 
 # [ HOU SETTINGS ] - lib
-set(PACKAGE_VERSION "0.1.3")
+set(PACKAGE_VERSION "0.1.8")
 
 set(README_STR "# PyPeach ${PACKAGE_VERSION}")
 

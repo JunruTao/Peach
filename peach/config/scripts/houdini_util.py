@@ -108,26 +108,37 @@ def loadPeachEnvPackage():
         printMsg("---package Found: %s" % _peach_env_filepath)
 
  
-def loadPeachPackages():
-    # TODO loading other packages.
-    # should read package from pconfig
-    
+def loadPeachPackages():    
     package_dir = format_dir(os.path.join(phoudini_dir, "packages"))
     
     if not len(peach_packages):
         # find package list:
         printMsg("Finding package_list.txt...")
         pkg_list = format_dir(os.path.join(phoudini_dir, "package_list.txt"))
+        
         if not os.path.exists(pkg_list):
-            raise FileNotFoundError("package_list.txt is not found under /pHoudini")
-        printMsg("Found package_list.txt")
-        with open(pkg_list, 'r') as f:
-            for line in f:
-                if len(line):
-                    line = line.replace('\n','')
-                    printMsg("---Package to load: { %s }" % line)
-                    peach_packages.append(line)
-        f.close()
+            # Here should find packages by searching directory:
+            dirs = [f.path for f in os.scandir(package_dir) if f.is_dir()]
+            if len(dirs):
+                for d in dirs:
+                    package_name = os.path.basename(d)
+                    if os.path.exists(os.path.join(package_dir, "%s.json" % package_name)):
+                        printMsg("Found Package: \"%s.json\" file" % package_name)
+                        printMsg("Appending Package: %s" % package_name)
+                        peach_packages.append(package_name)
+                    else:
+                        printMsg("Warning: illegal directory in package path [ %s ]" % package_name)
+            else:
+                printMsg("Warning: No Peach Package is Found")
+        else:
+            printMsg("Found package_list.txt")
+            with open(pkg_list, 'r') as f:
+                for line in f:
+                    if len(line):
+                        line = line.replace('\n','')
+                        printMsg("---Package to load: { %s }" % line)
+                        peach_packages.append(line)
+            f.close()
     
     printMsg("Loading Peach Packages...")
     for pkg in peach_packages:

@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import os, shutil
 
-
-package_dir = os.path.realpath("./dev/packages")  # executed in sh script
+base_path = os.path.dirname(os.path.dirname(__file__))
+package_dir = os.path.join(base_path, "packages")  # executed in sh script
 packages = [f.path for f in os.scandir(package_dir) if f.is_dir()]
 empty_dir = True
 divider = "----------------------------------"
@@ -20,11 +20,11 @@ class HDA(object):
         
     def printInfo(self):
         print("---[HDA::path]: ", self.path)
-        print("---> name: {0}\n---> major_version: {1}\n---> minor_version: {2}".format(
-                self.name,
-                self.v_major,
-                self.v_minor
-            ))
+        # print("---> name: {0}\n---> major_version: {1}\n---> minor_version: {2}".format(
+        #         self.name,
+        #         self.v_major,
+        #         self.v_minor
+        #     ))
         print("---> VERSION_INT: %d" % self.version)
         print(divider)
 
@@ -55,7 +55,7 @@ for path in packages:
         print("[HDA Wip path]: %s" % hda_wip_dir)
         
         # [1] Emty Otls, update with new empty dir
-        otl_dir = os.path.join(path, "otls")
+        otl_dir = os.path.join(path, "pdev_otls")
         if empty_dir:
             print("---[OS::Dir] Empty Filepath, create New `otls` dir")
             if os.path.exists(otl_dir):

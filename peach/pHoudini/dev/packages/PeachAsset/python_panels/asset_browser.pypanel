@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Build: [ 2022.01.12 ] Peach
- [pHoudini - 0.0.11]
+<!--Build: [ 2022.01.13 ] Peach
+ [pHoudini - 0.0.12]
  This file contains definitions of houdini python panels.
  [ Houdini Notes ]:
  It should not be hand-edited when it is being used by the application.
@@ -22,22 +22,25 @@
 # This code is licensed under MIT license (see LICENSE.txt for details)
 #                             *   *   *   *
 # - Digital Peach Studio
-# - Peach Build: -Debug -v0.0.11
+# - Peach Build: -Debug -v0.0.12
 # - Authors: Junru Tao
 # - Contact: <junrutao.uk@gmail.com | junrutao@qq.com>
 # - Website: digital-peach.company.site
 # - Instagram: @digital.peach.studio
 # ---------------------------------------------------------------------
-# [ File Description] - 2022.01.12 (Y.M.D)
+# [ File Description] - 2022.01.13 (Y.M.D)
 #                             *   *   *   *
 #   This is python panel for Peach. Please do not edit externally
 #   while Houdini is running.
 # ---------------------------------------------------------------------
-from PySide2 import QtWidgets
+from peach import pImp
+from peach.pQt import pq_ico
+from peach.pHoudini.panels import peach_main
+pImp.reload(pq_ico, peach_main)
 
 
 def onCreateInterface():
-    widget = QtWidgets.QLabel('Asset Browser New')
+    widget = peach_main.PeachMainUI()
     return widget
 ]]>
         </script>

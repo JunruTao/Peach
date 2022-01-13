@@ -1,9 +1,12 @@
 {
     "author" : "Junru Tao",
-    "version": "0.1.8",
+    "version": "0.1.5",
     "load_package_once": true,
     "enable" : "houdini_version >= '19.0' and houdini_version < '19.1'",
-    "path" : "$PEACH_HOU/packages/PeachPy"
+    "env": [
+        {"PEACH_VERSION_UU": "0.2.1"}
+    ],
+    "path" : "$PEACH_HOU/packages/PeachUltraUrban"
 }
 
 /* <comment>

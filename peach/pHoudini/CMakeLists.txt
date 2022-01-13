@@ -29,7 +29,7 @@ set(PACKAGE_LIST_STR "PeachPy\n")
 
 
 # [ SETTINGS ] - pHoudini Packages
-set(PACKAGE_VERSION "0.1.4")
+set(PACKAGE_VERSION "0.1.5")
 set(ULTRA_URBAN_VERSION "0.2.1")
 
 
@@ -47,7 +47,14 @@ if(BUILD_DEV_HOU)
     # /.Copy the `houdini_util file into this dev section as util`
     install(FILES ${PEACH_DIR}/config/scripts/houdini_util.py
             DESTINATION ${PHOUDINI_DIR}/config/scripts/nocopy/)
-    file(WRITE ${PHOUDINI_DIR}/config/scripts/nocopy/__init__.py "#!/usr/bin/python")      
+    file(WRITE ${PHOUDINI_DIR}/config/scripts/nocopy/__init__.py "#!/usr/bin/python")
+
+    # /. Added[ 2022-01-13 20:43 ] allow dev to load packages as well.
+    foreach(PKG IN LISTS PACKAGES)
+        configure_file(
+                "${PHOUDINI_TEMPLATES_DIR}/__in__${PKG}.json"
+                "${HOUDEV_PACKAGES_DIR}/${PKG}.json")
+    endforeach()
 endif()
 
 
@@ -64,12 +71,22 @@ if(BUILD_INSTALL_HOU)
         DESTINATION ${INSTALL_PHOUDINI_DIR})
     
     # /.Install: Cofigure Each package
+    message(STATUS "[Install::Packages]...")
     foreach(PKG IN LISTS PACKAGES)
+        message(STATUS ". [Install::Package]: ${PKG}")
         # /.. Copy packages into dir.
         install(DIRECTORY "${HOUDEV_PACKAGES_DIR}/${PKG}"
                 DESTINATION ${INSTALL_PACKAGES_DIR}
                 PATTERN "wip" EXCLUDE 
+                PATTERN "pdev_otls" EXCLUDE 
         )
+
+        # /.. Install Hdas from pdev_otls -> otls
+        file(GLOB PKG_HDAS "${HOUDEV_PACKAGES_DIR}/${PKG}/pdev_otls/*")
+        foreach(IN_HDA IN LISTS PKG_HDAS)
+            message(STATUS ". . [Install::HDA]: ${IN_HDA}")
+            install(FILES ${IN_HDA} DESTINATION "${INSTALL_PACKAGES_DIR}/${PKG}/otls")
+        endforeach()
         
         # /.. Create package json files
         configure_file(
