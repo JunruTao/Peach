@@ -11,3 +11,10 @@ from the $icon path, and create `Icon` objects.
 - [x] --- `Icon` class, able to use it without create an IconTank.
 - [x] --- Houdini toolbar generator.
 - [x] --- pq_ico.IconManager class.
+
+### pHoudini.node
+Todo:
+- [ ] --- node creation
+- [ ] --- node delete
+- [ ] --- node color stuff
+- [ ] --- node placement
