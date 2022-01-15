@@ -19,19 +19,32 @@
 #
 # ---------------------------------------------------------------------
 import hou
-from peach import pImp
-from peach.pQt.qHotel import QtWidgets, QtCore
-from peach.pHoudini import node, wm
-pImp.reload(node, wm)
+from peach import pImp, pGlob
+from peach.pQt.qHotel import QtWidgets, QtCore, QtGui
+from peach.pQt import img
+from peach.pHoudini import hNode, wm
+pImp.reload(hNode, wm, pGlob, img)
 
 
-class Col(object):
-    IN = (1.0, 1.0, 1.0)
-    REF = (0.560, 0.780, 0.745)
-    OUT = (1, 0.572, 0.019)
-    CTR = (0.945, 0.164, 0.152)
-    DRV = (0.031, 0.478, 0.749)
-    PRC = (0.478, 0.478, 0.478)
+style_label = """
+QLabel{ 
+    background-color: rgb(22, 59, 85);
+    color: rgb(239, 243, 246);
+    border-color: rgb(18,55,80);
+    border-radius: 10;
+    border-width: 2;
+    border-style: solid;
+}
+"""
+
+colors = {
+    "__IN__": (1.0, 1.0, 1.0),
+    "REF_": (0.560, 0.780, 0.745),
+    "OUT_": (1, 0.572, 0.019),
+    "CTR_": (0.945, 0.164, 0.152),
+    "DRV_": (0.031, 0.478, 0.749),
+    "PRC_": (0.478, 0.478, 0.478)
+}
 
 
 class RenamerUI(QtWidgets.QWidget):
@@ -43,10 +56,11 @@ class RenamerUI(QtWidgets.QWidget):
 
         # /.Set UI init Position
         p = wm.getMainWindowCenter()
-        self.setGeometry(p.x(), p.y(), 250, 110)
+        self.setGeometry(p.x(), p.y(), 500, 260)
         # /.Set Window Title
-        self.setWindowTitle('Renamer')
-
+        self.setWindowTitle('Renamer - PeachPy v%s' % pGlob.PEACH_PY_VERSION)
+        icon = QtGui.QIcon(img.getPixmap("peach_dev"))
+        self.setWindowIcon(icon)
         # /. Build UI Functions
         self.create_widgets()
         self.create_layouts()
@@ -59,42 +73,74 @@ class RenamerUI(QtWidgets.QWidget):
 
     def create_widgets(self):
         """[ RenamerUI ] UI Define Widgets """
-        self.lbl_test = QtWidgets.QLabel("hello world new")
-        self.button = QtWidgets.QPushButton('Change Font', self)
-        pass
+        self.lbl_node_name = QtWidgets.QLabel("No Node Selected")
+
+        self.txt_in = QtWidgets.QLineEdit("subject")
+        self.bnt_IN = QtWidgets.QPushButton("__IN__")
+        self.bnt_REF = QtWidgets.QPushButton("REF_")
+        self.bnt_OUT = QtWidgets.QPushButton("OUT_")
+        self.bnt_CTR = QtWidgets.QPushButton("CTR_")
+        self.bnt_DRV = QtWidgets.QPushButton("DRV_")
+        self.bnt_PRC = QtWidgets.QPushButton("PRC_")
 
     def create_layouts(self):
         """[ RenamerUI ] UI Construct Layout """
         layout_main = QtWidgets.QVBoxLayout()
-        layout_main.addWidget(self.lbl_test)
-        layout_main.addWidget(self.button)
+        layout_main.addWidget(self.lbl_node_name)
+        layout_main.addWidget(self.txt_in)
+        wgt_layout_buttons = QtWidgets.QWidget()
+        layout_buttons = QtWidgets.QGridLayout()
+        layout_buttons.addWidget(self.bnt_IN, 0, 0)
+        layout_buttons.addWidget(self.bnt_REF, 1, 0)
+        layout_buttons.addWidget(self.bnt_OUT, 2, 0)
+        layout_buttons.addWidget(self.bnt_CTR, 0, 1)
+        layout_buttons.addWidget(self.bnt_DRV, 1, 1)
+        layout_buttons.addWidget(self.bnt_PRC, 2, 1)
+        wgt_layout_buttons.setLayout(layout_buttons)
+        layout_main.addWidget(wgt_layout_buttons)
+        layout_main.addStretch()
         self.setLayout(layout_main)
 
     def create_style(self):
         """[ RenamerUI ] UI Configure Styles """
+        self.lbl_node_name.setStyleSheet(style_label)
+        self.setStyleSheet("QWidget{background-color: rgb(5, 5, 5);}")
         pass
 
     def create_connections(self):
-        self.button.clicked.connect(self._rename_sel)
+        # self.button.clicked.connect(self._rename_sel)
         """[ RenamerUI ] UI Connections """
-        pass
+
+        self.bnt_IN.clicked.connect(lambda: self._rename(self.bnt_IN.text()))
+        self.bnt_REF.clicked.connect(lambda: self._rename(self.bnt_REF.text()))
+        self.bnt_OUT.clicked.connect(lambda: self._rename(self.bnt_OUT.text()))
+        self.bnt_CTR.clicked.connect(lambda: self._rename(self.bnt_CTR.text()))
+        self.bnt_DRV.clicked.connect(lambda: self._rename(self.bnt_DRV.text()))
+        self.bnt_PRC.clicked.connect(lambda: self._rename(self.bnt_PRC.text()))
 
     def populate_menu(self):
         """[ RenamerUI ] UI Populate Menus """
         pass
 
-    def _rename_sel(self):
-        selNode = node.listSelected()
-        if selNode:
-            print(node.getColor(selNode[0]).rgb())
-
     def selectionCallback(self, selection):
         if selection:
             if isinstance(selection[0], hou.Node):
                 self.selected = selection
+                self.lbl_node_name.setText(self.selected[0].name() + "->" + self.selected[0].type().name())
+        else:
+            self.lbl_node_name.setText("No Node Selected")
 
     def closeEvent(self, event):
         hou.ui.removeAllSelectionCallbacks()
+
+    def _rename(self, prefix=""):
+        if self.selected:
+            hNode.rename(self.selected[0], prefix + self.txt_in.text() + "_" + self.selected[0].type().name().split("::")[0])
+            hNode.changeColor(self.selected[0], hou.Color(colors[prefix]))
+            if prefix in ("__IN__", "OUT_", "REF_"):
+                self.selected[0].setUserData('nodeshape', "null")
+            else:
+                self.selected[0].clearUserDataDict()
 
 
 # [ GLOBAL HWND ]

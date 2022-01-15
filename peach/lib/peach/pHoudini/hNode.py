@@ -10,7 +10,7 @@
 # - Website: digital-peach.company.site
 # - Instagram: @digital.peach.studio
 # ---------------------------------------------------------------------
-# [ File Name ] node.py@python
+# [ File Name ] hNode.py@python
 # [ File Description ] - 2022.01.13 (Y.M.D) - 22:18
 #                            *   *   *   *
 #
