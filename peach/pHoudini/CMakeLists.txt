@@ -6,6 +6,10 @@
 # This is pHouidni Configuration CMake File
 # The main/env peach Houdini package will be generated
 # from this file
+# [ SETTINGS ] - pHoudini Packages
+set(PACKAGE_VERSION "0.1.5")
+set(ULTRA_URBAN_VERSION "0.2.1")
+
 
 # [ PHOU-PATH SETTING >>>IN ]
 set(PHOUDINI_DIR ${PEACH_DIR}/pHoudini)
@@ -26,11 +30,6 @@ list(APPEND PACKAGES
     )
 
 set(PACKAGE_LIST_STR "PeachPy\n")
-
-
-# [ SETTINGS ] - pHoudini Packages
-set(PACKAGE_VERSION "0.1.5")
-set(ULTRA_URBAN_VERSION "0.2.1")
 
 
 # [ HOU SOURCES ]

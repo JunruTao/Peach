@@ -23,8 +23,6 @@ from peach.pQt.qHotel import QtWidgets, QtCore
 from peach.pHoudini import node, wm
 pImp.reload(node, wm)
 
-RenamerUI_instance = None
-
 
 class RenamerUI(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -71,7 +69,10 @@ class RenamerUI(QtWidgets.QWidget):
     def _rename_sel(self):
         selNode = node.listSelected()
         if selNode:
-            node.rename(selNode[0], "something")
+            print(node.getColor(selNode[0]).rgb())
+
+
+RenamerUI_instance = None
 
 
 def show():

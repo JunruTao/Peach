@@ -4,6 +4,11 @@
 #       /${PEACH_DIR}
 #             + ---> CMakeLists
 # ------------------------------------------------------------------------------- #
+# [ QUICK BUILD OPTIONS ]
+# /. build the dev version only
+set(BUILD_DEV_NOT_INSTALL TRUE)  # >>>> CONTROL
+# /. build lib only
+set(BUILD_DEVLIB_ONLY TRUE)      # >>>> CONTROL
 
 # [ CMAKE CONFIGURATION ]
 CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
@@ -23,8 +28,8 @@ set(INSTAGRAM "@digital.peach.studio")
 
 # [ GLOBAL ] Versions
 set(PEACH_VERSION_MAJOR "0")
-set(PEACH_VERSION_MINOR "0")
-set(PEACH_VERSION_PATCH "12")
+set(PEACH_VERSION_MINOR "1")
+set(PEACH_VERSION_PATCH "1")
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
 
 # [ DCC SETTINGS ]
@@ -55,6 +60,30 @@ set(BUILD_INSTALL_HOU ON)
 # /. Blender Dev Builds
 set(BUILD_DEV_BLD ON)
 set(BUILD_INSTALL_BLD ON)
+
+# /. Do Not Install in install dir
+if (BUILD_DEV_NOT_INSTALL)
+    set(INSTALL_ICON OFF)
+    set(INSTALL_CONFIG OFF)
+    set(BUILD_BOOTSTRAP OFF)
+    set(BUILD_INSTALL_HOU OFF)
+    set(BUILD_INSTALL_BLD OFF)
+endif()
+
+# Only Build devlib
+if (BUILD_BUILD_DEVLIB_ONLY)
+    # /. Install Settings
+    set(INSTALL_ICON OFF)
+    set(INSTALL_CONFIG OFF)
+    set(BUILD_BOOTSTRAP OFF)
+    # /. Houdini Dev Builds
+    set(BUILD_DEV_HOU ON)
+    set(BUILD_INSTALL_HOU OFF)
+    # /. Blender Dev Builds
+    set(BUILD_DEV_BLD ON)
+    set(BUILD_INSTALL_BLD OFF)
+endif()
+
 
 # [ TARGET PATH ] Settings
 set(PEACH_DEBUG_INSTALL_DIR "${DEV_DIR}/peach_dev_projects/Peach")
@@ -89,6 +118,7 @@ add_definitions(
 if(BUILD_BOOTSTRAP)
     add_subdirectory(bootstrap)
 endif()
+
 add_subdirectory(lib)
 add_subdirectory(pHoudini)
 
@@ -111,8 +141,11 @@ if(INSTALL_ICON)
             DESTINATION ${PEACH_INSTALL_DIR}/icons)
 endif()
 
-# /.license
-install(FILES 
-        ${PEACH_DIR}/LICENSE.txt 
-        DESTINATION 
-        ${PEACH_INSTALL_DIR})
+
+if(NOT BUILD_DEV_NOT_INSTALL)
+    # /.license
+    install(FILES 
+            ${PEACH_DIR}/LICENSE.txt 
+            DESTINATION 
+            ${PEACH_INSTALL_DIR})
+endif()

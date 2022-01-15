@@ -4,6 +4,8 @@
 #                    + ---> CMakeLists
 # ------------------------------------------------------------------------------- #
 # This should build the libs copy all the files..
+# [ HOU SETTINGS ] - lib
+set(PACKAGE_VERSION "0.1.12")
 
 # [ HOUDINI LIBS ]--------------------------------------------------------------- #
 
@@ -18,9 +20,6 @@ set(HOUDEV_PACKAGES_DIR ${PEACH_DIR}/pHoudini/dev/packages)
 set(HOUDEV_PEACHPY_DIR ${PEACH_DIR}/pHoudini/dev/packages/PeachPy/python3.7libs)
 set(INSTALL_PACKAGES_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages)
 set(INSTALL_PEACHPY_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages/PeachPy/python3.7libs)
-
-# [ HOU SETTINGS ] - lib
-set(PACKAGE_VERSION "0.1.8")
 
 set(README_STR "# PyPeach ${PACKAGE_VERSION}")
 

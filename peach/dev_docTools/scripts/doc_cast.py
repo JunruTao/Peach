@@ -1,3 +1,4 @@
+from audioop import add
 import os
 from re import sub
 from unicodedata import name
@@ -14,6 +15,7 @@ is_class = 0
 function_name = ""
 args = ""
 comment_area = ""
+add_quote = False
 
 class Parm(object):
     def __init__(self, name, type, comment):
@@ -77,6 +79,8 @@ with open("./file_in.py", "r") as f:
             subject = get_value(line)
         if line.startswith("#class"):
             is_class = int(get_value(line))
+        if line.startswith("#add_quote"):
+            add_quote = int(get_value(line))
         
         if line.startswith("def"):
             func_started=True
@@ -150,6 +154,8 @@ class_template = """
     </table>
     <!-- . . . . . . . . . . . . . . . . . . . . . . . .  -->"""
 
+if not add_quote:
+    comment_area = ""
 
 parm_str = ""
 if len(parm_list):
