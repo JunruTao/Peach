@@ -45,5 +45,5 @@
     > - ... <sup>(append here)</sup>
 
 - [x] Firgure out HDA dev in packages, and distribution.
-- [ ] `Dev tool package`. set things like renamer, set project, save dev file, hda saving, etc.
+- [x] `Dev tool package`. set things like renamer, set project, save dev file, hda saving, etc.
     - :warning:`Note:` <sub> Houdini Pane list: they are seperate files. They should be saved as a `default.pypanel` in the package. In current case, the custom default.pypanel is saved under `PeachEnv` package.</sub>
