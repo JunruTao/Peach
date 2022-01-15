@@ -23,16 +23,6 @@ import sys
 # [ ALLOW RELOAD TOGGLE ]
 ALLOW_MODULE_RUNTIME_RELOAD = True
 
-if ALLOW_MODULE_RUNTIME_RELOAD:
-    # [ PYTHON VERSION ]
-    python_version = sys.version_info[0]
-
-    # [ LOADING RELOADING MODULES ]
-    if sys.version_info[0] >= 3.4:
-        import importlib as il
-    else:
-        import imp as il
-
 
 # [ RELOAD FUNCTION ]
 def reload(*args, force=False):
@@ -42,7 +32,17 @@ def reload(*args, force=False):
 
     param args: modules to reload
     """
-    if ALLOW_MODULE_RUNTIME_RELOAD or force:
-        if len(args):
-            for module in args:
-                il.reload(module)
+    if ALLOW_MODULE_RUNTIME_RELOAD:
+        # [ PYTHON VERSION ]
+        python_version = sys.version_info[0]
+
+        # [ LOADING RELOADING MODULES ]
+        if sys.version_info[0] >= 3.4:
+            import importlib as il
+        else:
+            import imp as il
+
+        if ALLOW_MODULE_RUNTIME_RELOAD or force:
+            if len(args):
+                for module in args:
+                    il.reload(module)

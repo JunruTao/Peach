@@ -1,7 +1,7 @@
 from peach import pImp
-from peach.pQt import pq_ico
+from peach.pQt import img
 from peach.pHoudini.panels import peach_main
-pImp.reload(pq_ico, peach_main)
+pImp.reload(img, peach_main)
 
 
 def onCreateInterface():

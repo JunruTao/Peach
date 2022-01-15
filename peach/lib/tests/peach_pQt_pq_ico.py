@@ -1,5 +1,5 @@
 import unittest
-from peach.pQt import pq_ico
+from peach.pQt import img
 from peach import pDir
 
 

@@ -1,10 +1,12 @@
 import os, datetime, glob
-from posixpath import splitext
 
 
 #  this will be appended to represent the length of the change log.
 length_rep_symbol = ":bread:"
 month_start_symbol = ":hammer:"
+list_indent = """   > - """
+sub_topic_id = "### :electric_plug:"
+sub_time_id = "> Time:"
 # getting file length
 max_repsize = 2072
 block_size = 256
@@ -13,6 +15,23 @@ def get_file_profile(fname):
     """This Function to get the length of the text file"""
     size = os.path.getsize(fname)
     return max(min(int(size / block_size), max_repsize), 1)
+
+
+def get_topics(fname):
+    str_ = ""
+    with open(fname, "r") as f:
+        hit = False
+        logged = ""
+        for line in f:
+            if line.startswith(sub_topic_id):
+                hit = True
+                logged = (line.replace(sub_topic_id, "")).rstrip()
+            if line.startswith(sub_time_id):
+                line = "[%s ] " % (line.replace(sub_time_id, "")).split('|')[0].rstrip()
+                str_ += list_indent + line 
+                str_ += "<sup><b>%s</b></sup>\n" % logged
+    f.close()
+    return str_
 
 # Date and times:
 now = datetime.datetime.now()
@@ -64,14 +83,16 @@ for d in subfolders:
         len = get_file_profile(f)
         title =  os.path.basename(os.path.splitext(f)[0])
         title = str(title).replace("_", "/")
-        title = "Change_Log - Date:" + title[:-3]
+        title = "Change_Log - Date: %s" % title[:-3]
         file = "./%s/%s" % (dirname, os.path.basename(f))
-        str_data += "\n :bookmark_tabs: _{2:03d}_. [{0}]({1}) : ".format(title, file, counter)
+        str_data += "\n- :bookmark_tabs: _{2:03d}_. [{0}]({1}) : ".format(title, file, counter)
         
         for i in range(len):
             str_data += length_rep_symbol
             
         str_data += "\n"
+        # todo: add subtopics:
+        str_data += get_topics(f)
         
     str_data += "\n<br><br>\n\n"
 

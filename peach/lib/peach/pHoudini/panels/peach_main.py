@@ -18,9 +18,9 @@
 #
 # ---------------------------------------------------------------------
 from peach.pQt.qHotel import QtWidgets, QtCore
-from peach.pQt import pq_ico
+from peach.pQt import img
 
-im = pq_ico.IconManager()
+im = img.IconManager()
 im.stash("peach", "peach_dev")
 
 

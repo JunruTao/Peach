@@ -3,11 +3,7 @@
 # Make and Install
 
 # gather HDA:
-echo "[CMD] Gather All WIP hda, select latest and install in {dev package}/otls folders"
-echo "execute python script..."
-python './pHoudini/dev/scripts/hda_gathering.py'
-
-
+# [ disabled ] this script does not collect HDAs
 # Build:
 
 cd ./.build

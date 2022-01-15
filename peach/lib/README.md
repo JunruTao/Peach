@@ -11,6 +11,7 @@ from the $icon path, and create `Icon` objects.
 - [x] --- `Icon` class, able to use it without create an IconTank.
 - [x] --- Houdini toolbar generator.
 - [x] --- pq_ico.IconManager class.
+- [x] --- dev tool rename mockup
 
 ### pHoudini.node
 Todo:

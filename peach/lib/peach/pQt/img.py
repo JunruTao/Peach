@@ -10,7 +10,7 @@
 # - Website: digital-peach.company.site
 # - Instagram: @digital.peach.studio
 # ---------------------------------------------------------------------
-# [ File Name ] pq_ico.py@python
+# [ File Name ] img.py@python
 # [ File Description ] - 2022.01.11 (Y.M.D) - 19:51
 #                            *   *   *   *
 #
