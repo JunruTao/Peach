@@ -34,6 +34,7 @@ class Parm(object):
 parm_list = []
 return_type = ""
 return_comment = ""
+class_def = False
 
 # read file:
 with open("./file_in.py", "r") as f:
@@ -82,11 +83,21 @@ with open("./file_in.py", "r") as f:
             line = line.replace("def ", "")
             function_name, args= line.split("(")
             args = args.replace("):", "")
+            
+        if line.startswith("class"):
+            func_started=True
+            class_def = True
+            line = line.replace("class ", "")
+            function_name, args= line.split("(")
+            args = args.replace("):", "")
                 
     f.close()
 
 if is_class:
-    if return_type:
+    if "__init__" in function_name:
+        tags = "`constructor`"
+        function_name = "__init__"
+    elif return_type:
         tags = "`getter`"
     else:
         tags = "`member`"
@@ -94,19 +105,6 @@ if len(parm_list):
     tags += " `args`"
 if return_type and not is_class:
     tags += " `return`"
-
-print("tags:", tags)
-print("parent:", parent)
-print("subject:", subject)
-print("is_class:", is_class)
-print("function_name:", function_name)
-print("args:", args)
-print("")
-print(comment_area)
-for p in parm_list:
-    p.print()
-    
-print(return_type, return_comment)
 
 
 parm_template="""
@@ -141,24 +139,47 @@ template = """
     <!-- . . . . . . . . . . . . . . . . . . . . . . . .  -->
 """
 
+class_template = """
+<!--///////////////////Class-Table/////////////////////-->
+<sub>Inherit &rarr; `{inher}` </sub> <!-- `TAGS` -->
+    <table>
+    <tr><td> <!-- [ CLASS ] -->
+    <big><sup>{parent}.</sup> {module}.<code> {cls} </code><sup>class</sup><br></h4>
+    </td></big> 
+    <!-- ( /END OF CLASS ) -->
+    </table>
+    <!-- . . . . . . . . . . . . . . . . . . . . . . . .  -->"""
+
+
 parm_str = ""
-if parm_list:
+if len(parm_list):
     for p in parm_list:
         parm_str += p.get_format()
     parm_str = parm_template.format(parms=parm_str)
-    
+
 return_str = ""
 if return_type:
     return_str=return_template.format(type=return_type, comment=return_comment.rstrip())
     
-out_str = template.format(tags=tags,
-                          parent=parent,
-                          module=subject,
-                          function=function_name,
-                          ag=args,
-                          main_comment=comment_area,
-                          parm=parm_str,
-                          rtr=return_str)
+out_str = ""
+if class_def:
+    out_str = class_template.format(inher=args,
+                                    parent=parent,
+                                    module=subject,
+                                    cls=function_name)
+else:
+    if len(args):
+        args = "<sup>({})</sup>".format(args)    
+    else:
+        function_name += "()"
+    out_str = template.format(tags=tags,
+                            parent=parent,
+                            module=subject,
+                            function=function_name,
+                            ag=args,
+                            main_comment=comment_area,
+                            parm=parm_str,
+                            rtr=return_str)
     
 import pyperclip
 pyperclip.copy(out_str)
