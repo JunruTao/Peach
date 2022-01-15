@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.15__<br>
-> __Time stamp: 06:55:04__<br>
+> __Time stamp: 08:26:03__<br>
 > __Author: Junru Tao__
 ---
 
@@ -107,9 +107,10 @@
 - :bookmark_tabs: _010_. [Change_Log - Date: 2022/01/14](./2022_01/2022_01_14_cl.md) : :bread:
    > - [ 00:00:07 ] <sup><b> Added pHoudini.node module</b></sup>
 
-- :bookmark_tabs: _011_. [Change_Log - Date: 2022/01/15](./2022_01/2022_01_15_cl.md) : :bread::bread:
+- :bookmark_tabs: _011_. [Change_Log - Date: 2022/01/15](./2022_01/2022_01_15_cl.md) : :bread::bread::bread:
    > - [ 06:22:30 ] <sup><b> Update Hou, Qt Modules</b></sup>
    > - [ 06:53:39 ] <sup><b> Adding Sub topics to combined changelog.</b></sup>
+   > - [ 08:19:43 ] <sup><b> Auto Function-Doc generator bot [done]</b></sup>
 
 <br><br>
 
