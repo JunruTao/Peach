@@ -33,7 +33,8 @@ set(HOU_PY_LIBRARIES
 )
 # /.source Python files in lib$peach
 file(GLOB PEACH_DIR_FILES CONFIGURE_DEPENDS ${LIB_DIR}/*.py)
-
+# /. remove this file and configure if later.
+list(REMOVE_ITEM PEACH_DIR_FILES ${LIB_DIR}/pGlob.py)
 
 # [ HOU: CREATE DEV PACKAGE FILES ]
 if(BUILD_DEV_HOU)
@@ -41,6 +42,12 @@ if(BUILD_DEV_HOU)
     configure_file(
         ${HOU_PY_SOURCE_JSON} 
         ${HOUDEV_PACKAGES_DIR}/PeachPy.json)
+    
+    # /.configure pGlob.py file
+    configure_file(
+        ${LIB_DIR}/pGlob.py
+        ${HOUDEV_PEACHPY_DIR}/peach/pGlob.py)
+    
     # /.copy
     install(
         DIRECTORY ${HOU_PY_LIBRARIES}

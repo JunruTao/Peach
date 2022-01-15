@@ -38,12 +38,14 @@ class RenamerUI(QtWidgets.QWidget):
     def __init__(self, parent=None):
         """[ RenamerUI ] UI Class Constructor """
         QtWidgets.QWidget.__init__(self, parent, QtCore.Qt.WindowStaysOnTopHint)
+        # [ CONTAINERS ]
+        self.selected = []
 
         # /.Set UI init Position
         p = wm.getMainWindowCenter()
         self.setGeometry(p.x(), p.y(), 250, 110)
         # /.Set Window Title
-        self.setWindowTitle('Font Demo')
+        self.setWindowTitle('Renamer')
 
         # /. Build UI Functions
         self.create_widgets()
@@ -59,8 +61,6 @@ class RenamerUI(QtWidgets.QWidget):
         """[ RenamerUI ] UI Define Widgets """
         self.lbl_test = QtWidgets.QLabel("hello world new")
         self.button = QtWidgets.QPushButton('Change Font', self)
-        self.button.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.button.move(20, 20)
         pass
 
     def create_layouts(self):
@@ -88,11 +88,10 @@ class RenamerUI(QtWidgets.QWidget):
         if selNode:
             print(node.getColor(selNode[0]).rgb())
 
-    @staticmethod
-    def selectionCallback(selection):
+    def selectionCallback(self, selection):
         if selection:
             if isinstance(selection[0], hou.Node):
-                print("Yes, Sop is Node")
+                self.selected = selection
 
     def closeEvent(self, event):
         hou.ui.removeAllSelectionCallbacks()
