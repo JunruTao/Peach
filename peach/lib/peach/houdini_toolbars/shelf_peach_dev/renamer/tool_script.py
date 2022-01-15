@@ -1,4 +1,7 @@
 from peach import pLog
+from peach.pHoudini.tools.dev_tools import renamer
 
-pLog.debug("DEBUG")
-pLog.message("Hello World", fn="test", cls="PDevRenamer")
+
+rn = renamer.RenamerUI()
+pLog.message("Show Renamer", fn="Show", cls=rn)
+rn.show()
