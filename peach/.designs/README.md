@@ -30,3 +30,8 @@
         - [x] --- passing to python/a configuration file?/or folder name? [ done ]
             > Solution: use `congifure_file` in cmake to replate strings.
     - [x] Move current bootstrap's config install folder to master dir. After moving bootstrap's config folder, change cmake list
+
+- :red_square: **Peach Project Structure**
+  - [x] --- project structure design <sub>@<sup>Added[ 2022-01-16 18:18 ]</sup></sub><br>
+  
+  ![Project Structure](./img/2021.01.16_Project_Structure.svg)
