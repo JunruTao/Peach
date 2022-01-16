@@ -12,10 +12,10 @@
 ## TASK LIST
 ### :link: [ Design and Project]
 ####
-* [DESIGN and PROJECT tasks](.././.designs/README.md)
+* [DESIGN and PROJECT tasks](./.designs/README.md)
     > Anything that need an abstract way of thinking. need to think outside the box, by drawing diagrams, brainstorming and connecting all those dots. 
 ####
-* [DESIGN and PROJECT tasks](.././.designs/README.md)
+* [DESIGN and PROJECT tasks](./.designs/README.md)
     > Anything related to folder structure, development package management, cmake and building.
 
 
