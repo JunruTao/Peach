@@ -135,8 +135,8 @@ class RenamerUI(QtWidgets.QWidget):
 
     def _rename(self, prefix=""):
         if self.selected:
-            hNode.rename(self.selected[0], prefix + self.txt_in.text() + "_" + self.selected[0].type().name().split("::")[0])
-            hNode.changeColor(self.selected[0], hou.Color(colors[prefix]))
+            self.selected[0].setName(prefix + self.txt_in.text() + "_" + self.selected[0].type().name().split("::")[0])
+            self.selected[0].setColor(hou.Color(colors[prefix]))
             if prefix in ("__IN__", "OUT_", "REF_"):
                 self.selected[0].setUserData('nodeshape', "null")
             else:

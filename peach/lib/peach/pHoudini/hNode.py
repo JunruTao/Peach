@@ -60,61 +60,27 @@ def listSelected(item=False, connection=False, bundle=False):
     return hou.selectedNodes()
 
 
-def rename(node=None, name="", sel=False):
+def getTypeStr(node=None):
     """
-    [ Node ] Rename Houdini Node
+    [ Node ] Get Name of the node.Type
     @param node: (hou.Node) houdini node
-    @param name: (str)target name to rename to
-    @param sel: (bool) if query selected
+    @return: (str) node type name
     """
-    if sel:
-        node = hou.selectedNodes()[0]
-    if not node:
-        return
-    node.setName(name, unique_name=True)
+    if isinstance(node, hou.Node):
+        # for nodes that has HDA versions, should remove "::"
+        return str(node.type().name()).split("::")[0]
+    else:
+        return ""
 
 
-def getName(node=None):
+def getCatStr(node=None):
     """
-    [ Node ] Get Node Name
+    [ Node ] Get Category Name of the Node
     @param node: (hou.Node) houdini node
-    @return: (str) node name
+    @return: (str) node category name
     """
-    return node.name()
-
-
-def getColor(node=None):
-    """
-    [ Node ] Get Node Color
-    @param node: (hou.Node) houdini node
-    @return: (hou.Color) node color
-    """
-    return node.color()
-
-
-def getColorRGB(node=None):
-    """[ Node : getColor ] RGB """
-    return getColor(node).rbg()
-
-
-def getColorHSV(node=None):
-    """[ Node : getColor ] HSV """
-    return getColor(node).hsv()
-
-
-def getColorHSL(node=None):
-    """[ Node : getColor ] HSL """
-    return getColor(node).hsl()
-
-
-def changeColor(node, *args):
-    """
-    [ Node Set Color ]
-    @param node: (hou.Node) houdini node
-    @param args: (hou.Color or float)
-    """
-    if len(args):
-        if isinstance(args[0], float) or isinstance(args[0], int):
-            node.setColor(pUtil.fRGB(*args))
-        elif isinstance(args[0], hou.Color):
-            node.setColor(args[0])
+    if isinstance(node, hou.Node):
+        # for nodes that has HDA versions, should remove "::"
+        return node.type().category().name()
+    else:
+        return ""
