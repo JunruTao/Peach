@@ -7,6 +7,7 @@ echo "[CMD] Gather All WIP hda, select latest and install in {dev package}/otls 
 echo "execute python script..."
 python './pHoudini/dev/scripts/hda_gathering.py'
 
+python ./dev_osTools/cmake_configlive/cmake_config_build_all.py
 # Build:
 cd ./.build
 # cmake debug

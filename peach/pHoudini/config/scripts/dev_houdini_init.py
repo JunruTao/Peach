@@ -52,10 +52,8 @@ class HDA(object):
         self.version = int(self.v_major) * 1000 + int(self.v_minor)
         
     def printInfo(self):
-        # hu.printMsg("---[HDA::path]: " + self.path)
-        hu.printMsg("---> name: %s" % self.name)
-        hu.printMsg("---> VERSION_INT: %d" % self.version)
-        hu.printMsg(divider)
+        hu.printMsg(". . [Found]: %s" % self.name)
+        hu.printMsg(". . [VERSION_INT]: %d" % self.version)
 
 
 def get_latest_hdas(hda_dir):
