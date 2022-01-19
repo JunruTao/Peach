@@ -32,7 +32,7 @@ def reload(*args, force=False):
 
     param args: modules to reload
     """
-    if ALLOW_MODULE_RUNTIME_RELOAD:
+    if ALLOW_MODULE_RUNTIME_RELOAD or force:
         # [ PYTHON VERSION ]
         python_version = sys.version_info[0]
 
@@ -42,7 +42,6 @@ def reload(*args, force=False):
         else:
             import imp as il
 
-        if ALLOW_MODULE_RUNTIME_RELOAD or force:
-            if len(args):
-                for module in args:
-                    il.reload(module)
+        if len(args):
+            for module in args:
+                il.reload(module)

@@ -57,10 +57,13 @@ class RenamerUI(QtWidgets.QWidget):
         # /.Set UI init Position
         p = wm.getMainWindowCenter()
         self.setGeometry(p.x(), p.y(), 500, 260)
+        self.setObjectName("pHoudini_tools_devtools_RenamerUI_widget")
+
         # /.Set Window Title
         self.setWindowTitle('Renamer - PeachPy v{0}'.format(pGlob.PEACH_PY_VERSION))
         icon = QtGui.QIcon(img.getPixmap("peach_dev"))
         self.setWindowIcon(icon)
+
         # /. Build UI Functions
         self.create_widgets()
         self.create_layouts()
