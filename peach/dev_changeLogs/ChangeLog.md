@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.18__<br>
-> __Time stamp: 20:23:10__<br>
+> __Date stamp: 2022.01.19__<br>
+> __Time stamp: 01:13:08__<br>
 > __Author: Junru Tao__
 ---
 
@@ -119,6 +119,9 @@
 - :bookmark_tabs: _012_. [Change_Log - Date: 2022/01/18](./2022_01/2022_01_18_cl.md) : :bread::bread:
    > - [ 20:19:08 ] <sup><b> Removing Some redundant functions in `pHoudini.hNode`</b></sup>
    > - [ 20:21:45 ] <sup><b> Adding Type Name, Category Name functions</b></sup>
+
+- :bookmark_tabs: _013_. [Change_Log - Date: 2022/01/19](./2022_01/2022_01_19_cl.md) : :bread:
+   > - [ 01:11:59 ] <sup><b> Change Formatting in Python `%` to `{}`</b></sup>
 
 <br><br>
 

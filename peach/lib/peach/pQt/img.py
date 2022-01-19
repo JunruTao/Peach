@@ -40,7 +40,7 @@ def getPixmap(name="", size="x25"):
     path = _ico_tank.get(name).getPath(size)
     if not path:
         # _____PRINT_WARNINGS_____
-        pLog.warning("icon \"%s_%s\" not found" % (name, size),
+        pLog.warning("icon \"{0}_{1}\" not found".format(name, size),
                      fn=getPixmap,
                      cls=pDir.fileNameBare(__file__))
         return None
@@ -76,7 +76,7 @@ class IconManager(object):
                     self.pixmap_dict[key] = getPixmap(icon_name, self._size)
             else:
                 # _____PRINT_DEBUG_____
-                pLog.debug("qt_pixmap-icon \"%s\" has already been created." % key,
+                pLog.debug("qt_pixmap-icon \"{0}\" has already been created.".format(key),
                            fn=self.stash,
                            cls=self)
 
@@ -96,7 +96,7 @@ class IconManager(object):
         key = self._create_key(name, size_)
         if key not in self.pixmap_dict:
             # _____PRINT_WARNINGS_____
-            pLog.warning("icon \"%s_%s\" not found" % (name, key),
+            pLog.warning("icon \"{0}_{1}\" not found".format(name, key),
                          fn=self.get,
                          cls=self)
             return None

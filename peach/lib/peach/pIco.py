@@ -63,18 +63,18 @@ class Icon(object):
                         ext = "svg"
                         folder = t
                     else:
-                        folder = "%sw" % t[1:]
-                        suffix = "_%s" % t
+                        folder = "{0}w".format(t[1:])
+                        suffix = "_{0}".format(t)
                         ext = "png"
                     p = pDir.join(
                         _PEACH_ICON_DIR,
                         folder,
-                        "icon_%s%s.%s" % (self._name, suffix, ext))
+                        "icon_{0}{1}.{2}".format(self._name, suffix, ext))
                     if pDir.exists(p):
                         self._data[str(t)] = p
                     else:
                         # _____PRINT_WARNINGS_____
-                        pLog.warning("File Missing: %s" % p, cls=self, fn="Constructor")
+                        pLog.warning("File Missing: {0}".format(p), cls=self, fn="Constructor")
 
     def getPath(self, size="SVG"):
         """
@@ -140,7 +140,7 @@ class IconTank(object):
                 self._data[name] = Icon(name, self._icon_types)
         else:
             # _____PRINT_WARNINGS_____
-            pLog.warning("No Icon-sub-folders found under: %s" % _PEACH_ICON_DIR,
+            pLog.warning("No Icon-sub-folders found under: {0}".format(_PEACH_ICON_DIR),
                          cls=self,
                          fn="Constructor")
 
