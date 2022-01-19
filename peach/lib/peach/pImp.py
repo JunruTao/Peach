@@ -37,7 +37,8 @@ def reload(*args, force=False):
         python_version = sys.version_info[0]
 
         # [ LOADING RELOADING MODULES ]
-        if sys.version_info[0] >= 3.4:
+        if sys.version_info.major >= 3 and sys.version_info.minor >= 4:
+            # if version greater than 3.4
             import importlib as il
         else:
             import imp as il
