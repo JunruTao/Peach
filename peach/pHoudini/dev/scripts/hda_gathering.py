@@ -5,7 +5,6 @@ base_path = os.path.dirname(os.path.dirname(__file__))
 package_dir = os.path.join(base_path, "packages")  # executed in sh script
 packages = [f.path for f in os.scandir(package_dir) if f.is_dir()]
 empty_dir = True
-divider = "----------------------------------"
 
 class HDA(object):
     def __init__(self, hda_filename="", path="") -> None:
@@ -19,14 +18,8 @@ class HDA(object):
         self.version = int(self.v_major) * 1000 + int(self.v_minor)
         
     def printInfo(self):
-        print("---[HDA::path]: ", self.path)
-        # print("---> name: {0}\n---> major_version: {1}\n---> minor_version: {2}".format(
-        #         self.name,
-        #         self.v_major,
-        #         self.v_minor
-        #     ))
-        print("---> VERSION_INT: %d" % self.version)
-        print(divider)
+        print(". . . [_hda::name]: ", self.name)
+        print(". . . [_hda::VERSION_INT]: %d" % self.version)
 
 
 def get_latest_hdas(hda_dir):
@@ -46,27 +39,25 @@ def get_latest_hdas(hda_dir):
     return hdas
             
 
-print(divider)
-print("scanning...")
+print("[gather_HDA]: scanning...")
 for path in packages:
     hda_wip_dir = os.path.join(path, "wip\\hda")
     if os.path.exists(hda_wip_dir):
-        print(divider)
-        print("[HDA Wip path]: %s" % hda_wip_dir)
+        print(". [HDA Wip path]: %s" % hda_wip_dir)
         
         # [1] Emty Otls, update with new empty dir
         otl_dir = os.path.join(path, "pdev_otls")
         if empty_dir:
-            print("---[OS::Dir] Empty Filepath, create New `otls` dir")
+            print(". . [OS::Dir] Empty Filepath, create New `otls` dir")
             if os.path.exists(otl_dir):
                 shutil.rmtree(otl_dir)    
             os.makedirs(otl_dir)
         # [2] Getting latest hdas
         hdas = get_latest_hdas(hda_wip_dir)
-        print("[All Latest HDAs]: ")
+        print("[gather_HDA::All Latests]: ")
         
         for _, a in hdas.items():
-            print(">>>> to copy: ", a.name, a.version)
+            print(". >>> [to-copy]: ", a.name, a.version)
             
             # copy HDA to this packages otls folder
             shutil.copy(a.path, os.path.join(otl_dir, a.long_name))

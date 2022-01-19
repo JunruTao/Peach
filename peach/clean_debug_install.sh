@@ -8,6 +8,7 @@ echo "execute python script..."
 python './pHoudini/dev/scripts/hda_gathering.py'
 
 python ./dev_osTools/cmake_configlive/cmake_config_build_all.py
+python ./dev_changeLogs/scripts/changelog_version_up.py
 # Build:
 cd ./.build
 # cmake debug
