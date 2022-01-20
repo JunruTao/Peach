@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.19__<br>
-> __Time stamp: 17:37:49__<br>
+> __Date stamp: 2022.01.20__<br>
+> __Time stamp: 01:08:50__<br>
 > __Author: Junru Tao__
 ---
 
@@ -130,6 +130,10 @@
    > - [ 16:44:29 ] <sup><b> PeachPy Lib-Build: v0.1.21</b></sup>
    > - [ 16:57:42 ] <sup><b> PeachPy Lib-Build: v0.1.22</b></sup>
    > - [ 17:35:58 ] <sup><b> Update Doc Tool: __Muti-Functions__, __Class And Members__</b></sup>
+
+- :bookmark_tabs: _014_. [Change_Log - Date: 2022/01/20](./2022_01/2022_01_20_cl.md) : :bread:
+   > - [ 01:07:22 ] <sup><b> PeachPy Lib-Build: v0.1.23</b></sup>
+   > - [ 01:07:30 ] <sup><b> peach.pQt.sty.Sheet class working</b></sup>
 
 <br><br>
 
