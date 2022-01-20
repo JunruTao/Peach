@@ -99,10 +99,14 @@ with open("./file_in.py", "r") as f:
                 if "__init__" in function_name:
                     tags = "`constructor`"
                     function_name = "__init__"
-                elif return_type:
+                elif "get" in function_name:
                     tags = "`getter`"
+                elif "set" in function_name:
+                    tags = "`setter`"
                 else:
-                    tags = "`member`"
+                    tags = "`pub` `member`"
+                    if return_type:
+                        tags += " `return`"
             if len(parm_list):
                 tags += " `args`"
             if return_type and not is_class:
