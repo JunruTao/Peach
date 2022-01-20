@@ -56,10 +56,12 @@ def fRGB(*args):
     values = _col_num_to_normalize(*args)
     if len(values) == 1:
         return values[0], values[0], values[0]
-    if len(values) == 2:
+    elif len(values) == 2:
         return values[0], values[1], 0.0
-    if len(values) > 2:
+    elif len(values) > 2:
         return values[0], values[1], values[2]
+    else:
+        return 0.0, 0.0, 0.0
 
 
 def fRGBA(*args):
@@ -71,12 +73,14 @@ def fRGBA(*args):
     values = _col_num_to_normalize(*args)
     if len(values) == 1:
         return values[0], values[0], values[0], 1.0
-    if len(values) == 2:
+    elif len(values) == 2:
         return values[0], values[1], 0.0, 1.0
-    if len(values) == 3:
+    elif len(values) == 3:
         return values[0], values[1], values[2], 1.0
-    if len(values) > 3:
+    elif len(values) > 3:
         return values[0], values[1], values[2], values[3]
+    else:
+        return 0.0, 0.0, 0.0, 1.0
 
 
 def sRGB(*args):
@@ -88,24 +92,28 @@ def sRGB(*args):
     values = _col_float_to_8bits(*args)
     if len(values) == 1:
         return values[0], values[0], values[0]
-    if len(values) == 2:
+    elif len(values) == 2:
         return values[0], values[1], 0
-    if len(values) > 2:
+    elif len(values) > 2:
         return values[0], values[1], values[2]
+    else:
+        return 0, 0, 0
 
 
 def sRGBA(*args):
     """
-    From given arguments cast to RGB tuple
+    From given arguments cast to RGBA tuple
     @param args: (float) color values Any
-    @return: (tuple of 3 ints) 0-255 int8
+    @return: (tuple of 4 ints) 0-255 int8
     """
     values = _col_float_to_8bits(*args)
     if len(values) == 1:
         return values[0], values[0], values[0], 1
-    if len(values) == 2:
+    elif len(values) == 2:
         return values[0], values[1], 0.0, 1
-    if len(values) == 3:
+    elif len(values) == 3:
         return values[0], values[1], values[2], 1
-    if len(values) > 3:
+    elif len(values) > 3:
         return values[0], values[1], values[2], values[3]
+    else:
+        return 0, 0, 0, 255
