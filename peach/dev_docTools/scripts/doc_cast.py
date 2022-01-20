@@ -99,9 +99,9 @@ with open("./file_in.py", "r") as f:
                 if "__init__" in function_name:
                     tags = "`constructor`"
                     function_name = "__init__"
-                elif "get" in function_name:
+                elif function_name.startswith("get"):
                     tags = "`getter`"
-                elif "set" in function_name:
+                elif function_name.startswith("set"):
                     tags = "`setter`"
                 else:
                     tags = "`pub` `member`"
