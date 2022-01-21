@@ -20,10 +20,10 @@
 # ---------------------------------------------------------------------
 import hou
 from peach.pQt.qHotel import QtWidgets, QtCore, QtGui
-from peach import pImp, pGlob, pLog
+from peach import pImp, pGlob, pLog, pDir, pIco
 from peach.pQt import img, style
 from peach.pHoudini import hNode, wm
-pImp.reload(hNode, wm, pGlob, img, style, pLog)
+pImp.reload(hNode, wm, pGlob, img, style, pLog, pDir, pIco)
 
 
 _types = {
@@ -72,6 +72,9 @@ class RenamerUI(QtWidgets.QWidget):
 
     def create_widgets(self):
         """[ RenamerUI ] UI Define Widgets """
+        self.lbl_icon = QtWidgets.QLabel()
+        logo = img.getPixmap(pIco.DP.white256())
+        self.lbl_icon.setPixmap(logo.scaledToHeight(70, QtCore.Qt.SmoothTransformation))
         self.lbl_node_name = QtWidgets.QLabel("No Node Selected")
         for tp, dt in _types.items():
             self.uis_bnt[tp] = QtWidgets.QPushButton(dt[2])
@@ -81,6 +84,7 @@ class RenamerUI(QtWidgets.QWidget):
     def create_layouts(self):
         """[ RenamerUI ] UI Construct Layout """
         layout_main = QtWidgets.QVBoxLayout()
+        layout_main.addWidget(self.lbl_icon)
         layout_main.addWidget(self.lbl_node_name)
         layout_main.addWidget(self.txt_in)
         wgt_layout_buttons = QtWidgets.QWidget()

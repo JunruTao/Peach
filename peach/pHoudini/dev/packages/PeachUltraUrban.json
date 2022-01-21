@@ -1,6 +1,6 @@
 {
     "author" : "Junru Tao",
-    "version": "0.1.9",
+    "version": "0.1.11",
     "load_package_once": true,
     "enable" : "houdini_version >= '19.0' and houdini_version < '19.1'",
     "env": [

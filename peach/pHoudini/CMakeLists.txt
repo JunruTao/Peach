@@ -7,7 +7,7 @@
 # The main/env peach Houdini package will be generated
 # from this file
 # [ SETTINGS ] - pHoudini Packages
-set(PACKAGE_VERSION "0.1.9")  # >>>> CONTROL [AUTO]
+set(PACKAGE_VERSION "0.1.11")  # >>>> CONTROL [AUTO]
 set(ULTRA_URBAN_VERSION "0.2.1")
 
 

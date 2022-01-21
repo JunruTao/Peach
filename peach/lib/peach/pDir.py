@@ -160,3 +160,38 @@ def getPeachBlnDir():
 def getPeachIconsDir():
     """[ Peach ] Get `$PEACH/icons` folder realpath """
     return join(getPeachDir(), "icons")
+
+
+def getPeachIconSvgDir():
+    """[ Peach ] Get `$PEACH/icons/SVG` folder realpath """
+    return join(getPeachDir(), "icons/SVG")
+
+
+def getPeachIcon25():
+    """[ Peach ] Get `$PEACH/icons/SVG/25w` folder realpath """
+    return join(getPeachDir(), "icons/SVG/25w")
+
+
+def getPeachImagesDir():
+    """[ Peach ] Get `$PEACH/images` folder realpath """
+    return join(getPeachDir(), "images")
+
+
+def getPeachImgSvgDir():
+    """[ Peach ] Get `$PEACH/images/SVG` folder realpath """
+    return join(getPeachDir(), "images/SVG")
+
+
+def getPeachImg256():
+    """[ Peach ] Get `$PEACH/images/256w` folder realpath """
+    return join(getPeachDir(), "images/256w")
+
+
+def getPeachImg512():
+    """[ Peach ] Get `$PEACH/images/512w` folder realpath """
+    return join(getPeachDir(), "images/512w")
+
+
+def getPeachImg1024():
+    """[ Peach ] Get `$PEACH/images/1024w` folder realpath """
+    return join(getPeachDir(), "images/1024w")

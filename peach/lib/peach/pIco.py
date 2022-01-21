@@ -188,3 +188,88 @@ class IconTank(object):
         """[ IconTank ] Debug Function"""
         # _____PRINT_DEBUG_MESSAGE_____
         pLog.debug(*self.getNames(), fn="Names", cls=self)
+
+
+class _DP0IcXTemplate(object):
+    _base_name = ""
+    _img_svg_dir = pDir.getPeachImgSvgDir()
+    _img_256_dir = pDir.getPeachImg256()
+    _img_512_dir = pDir.getPeachImg512()
+
+    @classmethod
+    def _pd(cls, p="", e=""):
+        d = str(pDir.join(p, cls._base_name + e))
+        if pDir.exists(d):
+            return d
+        else:
+            pLog.warning("Image File Doesn't exist - {}".format(d))
+            return ""
+
+    @classmethod
+    def blackSVG(cls):
+        return cls._pd(cls._img_svg_dir, "_b.svg")
+
+    @classmethod
+    def black256(cls):
+        return cls._pd(cls._img_256_dir, "_b.svg")
+
+    @classmethod
+    def black512(cls):
+        return cls._pd(cls._img_512_dir, "_b.svg")
+
+    @classmethod
+    def whiteSVG(cls):
+        return cls._pd(cls._img_svg_dir, "_w.svg")
+
+    @classmethod
+    def white256(cls):
+        return cls._pd(cls._img_256_dir, "_w.png")
+
+    @classmethod
+    def white512(cls):
+        return cls._pd(cls._img_512_dir, "_w.png")
+
+    @classmethod
+    def blackTextAndStrokeColorIcoSVG(cls):
+        return cls._pd(cls._img_svg_dir, "_bt_bci.svg")
+
+    @classmethod
+    def blackTextAndStrokeColorIco256(cls):
+        return cls._pd(cls._img_256_dir, "_bt_bci.png")
+
+    @classmethod
+    def blackTextAndStrokeColorIco512(cls):
+        return cls._pd(cls._img_512_dir, "_bt_bci.png")
+
+    @classmethod
+    def blackTextColorIcoSVG(cls):
+        return cls._pd(cls._img_svg_dir, "_bt_ci.svg")
+
+    @classmethod
+    def blackTextColorIco256(cls):
+        return cls._pd(cls._img_256_dir, "_bt_ci.png")
+
+    @classmethod
+    def blackTextColorIco512(cls):
+        return cls._pd(cls._img_512_dir, "_bt_ci.png")
+
+    @classmethod
+    def whiteTextColorIcoSVG(cls):
+        return cls._pd(cls._img_svg_dir, "_wt_ci.svg")
+
+    @classmethod
+    def whiteTextColorIco256(cls):
+        return cls._pd(cls._img_256_dir, "_wt_ci.png")
+
+    @classmethod
+    def whiteTextColorIco512(cls):
+        return cls._pd(cls._img_512_dir, "_wt_ci.png")
+
+
+class DP(_DP0IcXTemplate):
+    _base_name = "digital_peach"
+
+
+class DPS(_DP0IcXTemplate):
+    _base_name = "digital_peach_studio"
+

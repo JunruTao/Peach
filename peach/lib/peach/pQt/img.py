@@ -33,11 +33,17 @@ _ico_tank = pIco.IconTank()
 def getPixmap(name="", size="x25"):
     """
     [ Public Getter Function ]from name get QPixmap UI object
-    @param name: (str) Icon name
+    @param name: (str) Icon name/path
     @param size: (str) Icon size/type
     @return: (QtGui.QPixmap or None)
     """
-    path = _ico_tank.get(name).getPath(size)
+    if pDir.exists(name):
+        # /. It's path, go ahead.
+        path = name
+    else:
+        # /. It's name, look up in icon library
+        path = _ico_tank.get(name).getPath(size)
+
     if not path:
         # _____PRINT_WARNINGS_____
         pLog.warning("icon \"{0}_{1}\" not found".format(name, size),
