@@ -139,6 +139,9 @@ if(INSTALL_ICON)
             ${PEACH_DIR}/icons/SVG # install vector icons
             ${PEACH_DIR}/icons/25w # install small icons
             DESTINATION ${PEACH_INSTALL_DIR}/icons)
+    install(DIRECTORY
+            ${PEACH_DIR}/images
+            DESTINATION ${PEACH_INSTALL_DIR})
 endif()
 
 

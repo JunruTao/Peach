@@ -6,7 +6,9 @@ _igr_*
 **/util_x
 **/nocopy
 **/500w
+**/512w
 **/1000w
+**/1024w
 **/backup
 **/wip
 **/venv

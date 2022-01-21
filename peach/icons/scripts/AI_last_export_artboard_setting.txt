@@ -1,0 +1,81 @@
+# Backup file
+
+/collection6 {
+	/attributes {
+		/scale 500.0
+		/suffix [ 5
+			5f78353030
+		]
+		/fileformat 0
+		/scaleType 1
+	}
+	/canEdit 1
+	/canDelete 1
+}
+/collection5 {
+	/attributes {
+		/scale 250.0
+		/suffix [ 5
+			5f78323530
+		]
+		/fileformat 0
+		/scaleType 1
+	}
+	/canEdit 1
+	/canDelete 1
+}
+/collection4 {
+	/attributes {
+		/scale 100.0
+		/suffix [ 5
+			5f78313030
+		]
+		/fileformat 0
+		/scaleType 1
+	}
+	/canEdit 1
+	/canDelete 1
+}
+/collection3 {
+	/attributes {
+		/scale 50.0
+		/suffix [ 4
+			5f783530
+		]
+		/fileformat 0
+		/scaleType 1
+	}
+	/canEdit 1
+	/canDelete 1
+}
+/collection2 {
+	/attributes {
+		/scale 25.0
+		/suffix [ 4
+			5f783235
+		]
+		/fileformat 0
+		/scaleType 1
+	}
+	/canEdit 1
+	/canDelete 1
+}
+/collection1 {
+	/attributes {
+		/scale 1.0
+		/suffix [ 0
+
+		]
+		/fileformat 6
+		/scaleType 0
+	}
+	/canEdit 1
+	/canDelete 1
+}
+/Sketch {
+	/Version 0
+	/Description (Last Used Artboard Export Settings)
+	/Owner ()
+}
+/NumberOfCollections 7
+/CatalogName (Last Used Artboard Export Settings)
