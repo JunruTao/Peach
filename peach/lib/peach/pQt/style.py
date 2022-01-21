@@ -82,24 +82,29 @@ class Sheet(object):
         @param cat: (str/None) None Auto detect. str: i.g. "QWidget" or use sty.C.wgt
         """
         self._object = obj
+        self._object_id = ""
+        self._cat = cat
         self._header = ""
-        if cat is None:
-            if isinstance(obj, QtCore.QObject):
-                cat = obj.__class__.__name__
-            else:
-                # _____THROWING_ERROR_____
-                pLog.error("If Category of object is not specified, you must pass a QObject.",
-                           cls=self, fn="Constructor")
-        if self._object:
-            self._header = _header.format(category=cat, object=self._object)
-        else:
-            self._header = _headSn.format(category=cat) # unique_object_str(obj)
-
         self._current_state = ""
         self._states = dict()
 
+        # /.create the header
+        self._config_header()
+
     def _config_header(self):
         """[ Internal ]"""
+        if self._cat is None:
+            if isinstance(self._object, QtCore.QObject):
+                cat = self._object.__class__.__name__
+            else:
+                # _____THROWING_ERROR_____
+                pLog.error("If Category of object is not specified, you must pass a QObject.",
+                           cls=self, fn="Constructor", e=RuntimeError)
+        if self._object:
+            self._object_id = unique_object_str(self._object)
+            self._header = _header.format(category=self._cat, object=self._object_id)
+        else:
+            self._header = _headSn.format(category=self._cat)
 
     def _config_unique_state_name(self, state="default"):
         """[ Internal ]"""
@@ -176,6 +181,22 @@ class Sheet(object):
         @return: (list of str) states
         """
         return list(self._states.keys())
+
+    def getObjectName(self):
+        """
+        [ Sheet ] getter
+        @return: (str) object name
+        """
+        return self._object_id
+
+    def setObject(self, obj=None, cat=None):
+        """[ Sheet ] setter: update sheet object
+        @param obj: (str/QCore.QObject) any
+        @param cat: (str/None) None Auto detect. str: i.g. "QWidget" or use sty.C.wgt
+        """
+        self._object = obj
+        self._cat = cat
+        self._config_header()
 
     def setTextColor(self, *args):
         """[ Sheet ] setter. config text color

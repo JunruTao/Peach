@@ -7,7 +7,7 @@
 # Build:
 
 
-python ./dev_osTools/cmake_configlive/cmake_config_devlib_only.py
+python ./dev_osTools/cmake_configlive/cmake_config_devlib_only_nv.py
 
 cd ./.build
 cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug ..
