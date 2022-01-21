@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.20__<br>
-> __Time stamp: 01:08:50__<br>
+> __Date stamp: 2022.01.21__<br>
+> __Time stamp: 18:12:46__<br>
 > __Author: Junru Tao__
 ---
 
@@ -131,9 +131,18 @@
    > - [ 16:57:42 ] <sup><b> PeachPy Lib-Build: v0.1.22</b></sup>
    > - [ 17:35:58 ] <sup><b> Update Doc Tool: __Muti-Functions__, __Class And Members__</b></sup>
 
-- :bookmark_tabs: _014_. [Change_Log - Date: 2022/01/20](./2022_01/2022_01_20_cl.md) : :bread:
+- :bookmark_tabs: _014_. [Change_Log - Date: 2022/01/20](./2022_01/2022_01_20_cl.md) : :bread::bread::bread:
    > - [ 01:07:22 ] <sup><b> PeachPy Lib-Build: v0.1.23</b></sup>
    > - [ 01:07:30 ] <sup><b> peach.pQt.sty.Sheet class working</b></sup>
+   > - [ 22:10:30 ] <sup><b> Change Name pQt.`sty` &rarr; `style`</b></sup>
+   > - [ 22:22:29 ] <sup><b> `DocBot:` Adding more specific feature for classes</b></sup>
+   > - [ 22:26:31 ] <sup><b> Build script: make normal build without version up</b></sup>
+   > - [ 22:32:57 ] <sup><b> PeachPy Lib-Build: v0.1.25</b></sup>
+   > - [ 22:36:21 ] <sup><b> Fix `Error` on build script: not turning lib only in cmake</b></sup>
+
+- :bookmark_tabs: _015_. [Change_Log - Date: 2022/01/21](./2022_01/2022_01_21_cl.md) : :bread:
+   > - [ 01:41:19 ] <sup><b> PeachPy Lib-Build: v0.1.28</b></sup>
+   > - [ 18:12:13 ] <sup><b> Rename Build script</b></sup>
 
 <br><br>
 
