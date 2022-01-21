@@ -15,15 +15,15 @@
 #                            *   *   *   *
 #
 #   [Peach-pQt-Dependent]This script contains Qt-UI Class of 
-#   < RenamerUI > for Dev Tool UI Creation
+#   < RenamerUI > for Dev Tool UI Creation toDO: fix the styling issue. maybe not using the dict
 #
 # ---------------------------------------------------------------------
 import hou
 from peach.pQt.qHotel import QtWidgets, QtCore, QtGui
-from peach import pImp, pGlob
+from peach import pImp, pGlob, pLog
 from peach.pQt import img, style
 from peach.pHoudini import hNode, wm
-pImp.reload(hNode, wm, pGlob, img, style)
+pImp.reload(hNode, wm, pGlob, img, style, pLog)
 
 
 _types = {
@@ -62,8 +62,8 @@ class RenamerUI(QtWidgets.QWidget):
 
         # /. Build UI Functions
         self.create_widgets()
-        self.create_layouts()
         self.create_style()
+        self.create_layouts()
         self.create_connections()
         self.populate_menu()
 
@@ -86,7 +86,7 @@ class RenamerUI(QtWidgets.QWidget):
         wgt_layout_buttons = QtWidgets.QWidget()
         layout_buttons = QtWidgets.QGridLayout()
 
-        for tp, bnt in self.uis_bnt:
+        for tp, bnt in self.uis_bnt.items():
             layout_buttons.addWidget(bnt, *_types[tp][1])
 
         wgt_layout_buttons.setLayout(layout_buttons)
@@ -97,24 +97,31 @@ class RenamerUI(QtWidgets.QWidget):
     def create_style(self):
         """[ RenamerUI ] UI Configure Styles """
         for tp, dt in _types.items():
-            s_sheet = style.Sheet(self.uis_bnt[tp])
+            s_sheet = style.Sheet(cat=style.C.bnt)
             s_sheet.newState()
-            s_sheet.setTextColor(0.9)
+            s_sheet.setTextColor(0.9, 0, 0)
+            s_sheet.setBorderStyle()
+            s_sheet.setBorderWidth(3)
             s_sheet.setBackgroundColor(*dt[0])
             self.uis_bnt_style[tp] = s_sheet
             self.uis_bnt[tp].setStyleSheet(s_sheet.get())
 
         # todo: set self style sheet
-        self.setStyleSheet("QWidget{background-color: rgb(5, 5, 5);}")
+        s_sheet = style.Sheet(self)
+        s_sheet.newState()
+        s_sheet.setBackgroundColor(5, 5, 100)
+        self.setStyleSheet(s_sheet.get())
 
     def create_connections(self):
         # self.button.clicked.connect(self._rename_sel)
         """[ RenamerUI ] UI Connections """
         for key, bnt in self.uis_bnt.items():
-            bnt.clicked.connect(lambda: self._rename(prefix=key))
+            bnt.clicked.connect(lambda: self._rename())
 
     def populate_menu(self):
         """[ RenamerUI ] UI Populate Menus """
+        print("----")
+        pLog.debug(self.uis_bnt["OUT"].styleSheet())
         pass
 
     def selectionCallback(self, selection):
@@ -129,8 +136,13 @@ class RenamerUI(QtWidgets.QWidget):
     def closeEvent(self, event):
         hou.ui.removeAllSelectionCallbacks()
 
-    def _rename(self, prefix=""):
+    def _rename(self):
         if self.selected:
+            prefix = ""
+            for tp, bnt in self.uis_bnt.items():
+                if bnt.clicked():
+                    prefix = tp
+                    break
             self.selected[0].setName(prefix + "_" + self.txt_in.text() + "_" + hNode.getTypeStr(self.selected[0]))
             self.selected[0].setColor(hou.Color(*_types[prefix][0]))
             if prefix in ("IN", "OUT", "REF"):

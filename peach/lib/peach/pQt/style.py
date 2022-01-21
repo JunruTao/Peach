@@ -28,6 +28,7 @@ _line = "    {param}: {value};\n"
 _header = "{category}#{object} {{\n"
 _headSn = "{category} {{\n"
 _close = "}\n\n"
+_counter = 0
 
 
 def unique_object_str(obj=None):
@@ -48,7 +49,11 @@ def unique_object_str(obj=None):
         # is a Qt Object Instance
         if obj.objectName() == "":
             name_str = obj.__class__.__name__
-            name_str += datetime.now().strftime('Id%YP%mO%dP%HO%MP%SI')
+            name_str += datetime.now().strftime('I%mO%dP%HO%MP%SI')
+            # /. add in counter
+            global _counter
+            name_str += str(_counter)
+            _counter += 1
             # ! [ setting object name here]
             obj.setObjectName(name_str)
             return name_str
@@ -95,7 +100,7 @@ class Sheet(object):
         """[ Internal ]"""
         if self._cat is None:
             if isinstance(self._object, QtCore.QObject):
-                cat = self._object.__class__.__name__
+                self._cat = self._object.__class__.__name__
             else:
                 # _____THROWING_ERROR_____
                 pLog.error("If Category of object is not specified, you must pass a QObject.",
