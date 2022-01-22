@@ -10,3 +10,7 @@
 
 ### Vex
 - [Vex Include external scripts](./hou_vex_include.md)
+
+
+### Houdini HDA
+- [Node parameter interface](./hou_param_interface.md)

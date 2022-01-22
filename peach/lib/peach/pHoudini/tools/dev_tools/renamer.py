@@ -66,7 +66,7 @@ class RenamerUI(QtWidgets.QWidget):
     def create_widgets(self):
         """[ RenamerUI ] UI Define Widgets """
         # /.title
-        ttl = "pHoudini-DevTool: Sop Renamer\nPeachPy v{}".format(pGlob.PEACH_PY_VERSION)
+        ttl = "pHoudini-DevTool: Sop Renamer".format(pGlob.PEACH_PY_VERSION)
         self.lbl_icon = wgt.getHeaderTemplateWidget(type="dev_tool",
                                                     title=ttl,
                                                     height=70,
