@@ -180,12 +180,14 @@ class IconTank(object):
         return self._data[name] if name in self._data else None
 
     def printTypes(self):
-        """[ IconTank ] Debug Function"""
+        """[ IconTank ] Debug Function
+        """
         # _____PRINT_DEBUG_MESSAGE_____
         pLog.debug(*self.getTypes(), fn="Types", cls=self)
 
     def printNames(self):
-        """[ IconTank ] Debug Function"""
+        """[ IconTank ] Debug Function
+        """
         # _____PRINT_DEBUG_MESSAGE_____
         pLog.debug(*self.getNames(), fn="Names", cls=self)
 

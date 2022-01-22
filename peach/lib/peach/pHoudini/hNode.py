@@ -57,7 +57,7 @@ def listSelected(item=False, connection=False, bundle=False):
         return hou.selectedConnections()
     elif bundle:
         return hou.selectedNodeBundles()
-    return hou.selectedNodes()
+    return list(hou.selectedNodes())
 
 
 def getTypeStr(node=None):

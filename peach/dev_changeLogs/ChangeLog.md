@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.21__<br>
-> __Time stamp: 18:12:46__<br>
+> __Date stamp: 2022.01.22__<br>
+> __Time stamp: 04:01:37__<br>
 > __Author: Junru Tao__
 ---
 
@@ -143,6 +143,14 @@
 - :bookmark_tabs: _015_. [Change_Log - Date: 2022/01/21](./2022_01/2022_01_21_cl.md) : :bread:
    > - [ 01:41:19 ] <sup><b> PeachPy Lib-Build: v0.1.28</b></sup>
    > - [ 18:12:13 ] <sup><b> Rename Build script</b></sup>
+   > - [ 19:35:31 ] <sup><b> Build Version Up: `v0.1.6`</b></sup>
+   > - [ 20:58:54 ] <sup><b> Build Version Up: `v0.1.7`</b></sup>
+
+- :bookmark_tabs: _016_. [Change_Log - Date: 2022/01/22](./2022_01/2022_01_22_cl.md) : :bread::bread:
+   > - [ 02:45:30 ] <sup><b> Build Version Up: `v0.1.8`</b></sup>
+   > - [ 02:54:13 ] <sup><b> Build Version Up: `v0.1.11`</b></sup>
+   > - [ 03:59:53 ] <sup><b> Wrapped up basic functions of `style.Sheet` class. new module `pQt.wgt`</b></sup>
+   > - [ 04:01:15 ] <sup><b> Finished Doc string for `style`</b></sup>
 
 <br><br>
 

@@ -19,20 +19,21 @@
 #
 # ---------------------------------------------------------------------
 import hou
+import re
 from peach.pQt.qHotel import QtWidgets, QtCore, QtGui
 from peach import pImp, pGlob, pLog, pDir, pIco
-from peach.pQt import img, style
+from peach.pQt import img, style, wgt
 from peach.pHoudini import hNode, wm
-pImp.reload(hNode, wm, pGlob, img, style, pLog, pDir, pIco)
+pImp.reload(hNode, wm, pGlob, img, style, pLog, pDir, pIco, wgt)
 
 
 _types = {
-    "IN": [(1.000, 1.000, 1.0000), (0, 0), "input"],
-    "OUT": [(1.000, 0.572, 0.019), (1, 0), "output"],
-    "REF": [(0.560, 0.780, 0.745), (2, 0), "reference"],
-    "CTR": [(0.945, 0.164, 0.152), (0, 1), "control"],
-    "DRV": [(0.031, 0.478, 0.749), (1, 1), "driven"],
-    "PRC": [(0.478, 0.478, 0.478), (2, 1), "procedural"]
+    "input": ["IN", (1.000, 1.000, 1.0000)],
+    "output": ["OUT", (1.000, 0.572, 0.019)],
+    "reference": ["REF", (0.560, 0.780, 0.745)],
+    "control": ["CTR", (0.945, 0.164, 0.152)],
+    "driven": ["DRV", (0.031, 0.478, 0.749)],
+    "procedural": ["PRC", (0.478, 0.478, 0.478)]
 }
 
 
@@ -52,107 +53,146 @@ class RenamerUI(QtWidgets.QWidget):
         self.setWindowTitle('Renamer - PeachPy v{0}'.format(pGlob.PEACH_PY_VERSION))
         self.setWindowIcon(QtGui.QIcon(img.getPixmap("peach_dev")))
 
-        # /.Data Containers
-        self.uis_lbl = dict()
-        self.uis_lbl_style = dict()
-        self.uis_bnt = dict()
-        self.uis_bnt_style = dict()
-        self.uis_txt = dict()
-        self.uis_txt_style = dict()
-
         # /. Build UI Functions
         self.create_widgets()
         self.create_style()
         self.create_layouts()
         self.create_connections()
-        self.populate_menu()
 
         # /. Register Callback
+        self.selectionCallback(hNode.listSelected())
         hou.ui.addSelectionCallback(self.selectionCallback)
 
     def create_widgets(self):
         """[ RenamerUI ] UI Define Widgets """
-        self.lbl_icon = QtWidgets.QLabel()
-        logo = img.getPixmap(pIco.DP.white256())
-        self.lbl_icon.setPixmap(logo.scaledToHeight(70, QtCore.Qt.SmoothTransformation))
-        self.lbl_node_name = QtWidgets.QLabel("No Node Selected")
-        for tp, dt in _types.items():
-            self.uis_bnt[tp] = QtWidgets.QPushButton(dt[2])
+        # /.title
+        ttl = "pHoudini-DevTool: Sop Renamer\nPeachPy v{}".format(pGlob.PEACH_PY_VERSION)
+        self.lbl_icon = wgt.getHeaderTemplateWidget(type="dev_tool",
+                                                    title=ttl,
+                                                    height=70,
+                                                    font_size=23)
 
+        # /.node name
+        self.txt_node_name = QtWidgets.QLineEdit("No Node Selected")
+
+        # /.subject name
         self.txt_in = QtWidgets.QLineEdit("subject")
+
+        # /.renamer buttons
+        self.bnt_in = QtWidgets.QPushButton("input")
+        self.bnt_out = QtWidgets.QPushButton("output")
+        self.bnt_ref = QtWidgets.QPushButton("reference")
+        self.bnt_ctr = QtWidgets.QPushButton("control")
+        self.bnt_drv = QtWidgets.QPushButton("driven")
+        self.bnt_prc = QtWidgets.QPushButton("procedural")
+
+        self.buttons = [self.bnt_in,
+                        self.bnt_out,
+                        self.bnt_ref,
+                        self.bnt_ctr,
+                        self.bnt_drv,
+                        self.bnt_prc]
 
     def create_layouts(self):
         """[ RenamerUI ] UI Construct Layout """
         layout_main = QtWidgets.QVBoxLayout()
+        # /. header icon.
         layout_main.addWidget(self.lbl_icon)
-        layout_main.addWidget(self.lbl_node_name)
+        # /. node name section
+        layout_main.addWidget(self.txt_node_name)
         layout_main.addWidget(self.txt_in)
+        # /.Buttons Section
         wgt_layout_buttons = QtWidgets.QWidget()
         layout_buttons = QtWidgets.QGridLayout()
-
-        for tp, bnt in self.uis_bnt.items():
-            layout_buttons.addWidget(bnt, *_types[tp][1])
-
+        # /.. adding buttons to a grid
+        layout_buttons.addWidget(self.bnt_in, 0, 0)
+        layout_buttons.addWidget(self.bnt_out, 1, 0)
+        layout_buttons.addWidget(self.bnt_ref, 2, 0)
+        layout_buttons.addWidget(self.bnt_ctr, 0, 1)
+        layout_buttons.addWidget(self.bnt_prc, 1, 1)
+        layout_buttons.addWidget(self.bnt_drv, 2, 1)
         wgt_layout_buttons.setLayout(layout_buttons)
         layout_main.addWidget(wgt_layout_buttons)
+        # /.wrap up main layout
         layout_main.addStretch()
         self.setLayout(layout_main)
 
     def create_style(self):
         """[ RenamerUI ] UI Configure Styles """
-        for tp, dt in _types.items():
-            s_sheet = style.Sheet(cat=style.C.bnt)
-            s_sheet.newState()
-            s_sheet.setTextColor(0.9, 0, 0)
-            s_sheet.setBorderStyle()
-            s_sheet.setBorderWidth(3)
-            s_sheet.setBackgroundColor(*dt[0])
-            self.uis_bnt_style[tp] = s_sheet
-            self.uis_bnt[tp].setStyleSheet(s_sheet.get())
 
-        # todo: set self style sheet
-        s_sheet = style.Sheet(self)
+        # /. create basic button styles:
+        s_sheet = style.Sheet(cat=style.BUTTON)
+        s_sheet.setTextColor(0.9)
+        s_sheet.setBorderStyle()
+        s_sheet.setBorderWidth(0)
+        s_sheet.setBorderRadius(5)
+        s_sheet.setBackgroundColor(0.3)
+        s_sheet.setFont(style.fnt_Arial, 16, i=True, b=True)
+        # /. set style sheet
+        sheet = s_sheet.get()
+        for b in self.buttons:
+            b.setStyleSheet(sheet)
+            b.setFixedHeight(20)
+
+        # /.main background
         s_sheet.newState()
-        s_sheet.setBackgroundColor(5, 5, 100)
-        self.setStyleSheet(s_sheet.get())
+        s_sheet.setObject(self)
+        s_sheet.setBackgroundColor(62, 9, 35)
+        s_sheet.assign(self)
 
     def create_connections(self):
-        # self.button.clicked.connect(self._rename_sel)
         """[ RenamerUI ] UI Connections """
-        for key, bnt in self.uis_bnt.items():
-            bnt.clicked.connect(lambda: self._rename())
-
-    def populate_menu(self):
-        """[ RenamerUI ] UI Populate Menus """
-        print("----")
-        pLog.debug(self.uis_bnt["OUT"].styleSheet())
-        pass
+        self.bnt_in.clicked.connect(lambda: self._rename(self.bnt_in.text()))
+        self.bnt_out.clicked.connect(lambda: self._rename(self.bnt_out.text()))
+        self.bnt_ref.clicked.connect(lambda: self._rename(self.bnt_ref.text()))
+        self.bnt_ctr.clicked.connect(lambda: self._rename(self.bnt_ctr.text()))
+        self.bnt_drv.clicked.connect(lambda: self._rename(self.bnt_drv.text()))
+        self.bnt_prc.clicked.connect(lambda: self._rename(self.bnt_prc.text()))
 
     def selectionCallback(self, selection):
+        """[ RenamerUI ] Callback"""
         if selection:
-            if isinstance(selection[0], hou.Node):
-                self.selected = selection
-                self.lbl_node_name.setText(self.selected[0].name() + " -> " + hNode.getTypeStr(self.selected[0]))
+            self.selected = selection
+            if len(selection) == 1:
+                sl = selection[0]
+                if isinstance(sl, hou.Node):
+                    self.txt_node_name.setText(hNode.getTypeStr(sl))
+                    self.txt_node_name.setEnabled(True)
+            else:
+                self.selected = []
+                for sl in selection:
+                    if isinstance(selection[0], hou.Node):
+                        self.selected.append(sl)
+                self.txt_node_name.setText(" ... ")
+                self.txt_node_name.setDisabled(True)
         else:
-            self.lbl_node_name.setText("No Node Selected")
+            self.txt_node_name.setText("No Node Selected")
+            self.txt_node_name.setDisabled(True)
             self.selected = None
 
     def closeEvent(self, event):
         hou.ui.removeAllSelectionCallbacks()
 
-    def _rename(self):
+    def _rename(self, name=""):
         if self.selected:
-            prefix = ""
-            for tp, bnt in self.uis_bnt.items():
-                if bnt.clicked():
-                    prefix = tp
-                    break
-            self.selected[0].setName(prefix + "_" + self.txt_in.text() + "_" + hNode.getTypeStr(self.selected[0]))
-            self.selected[0].setColor(hou.Color(*_types[prefix][0]))
-            if prefix in ("IN", "OUT", "REF"):
-                self.selected[0].setUserData('nodeshape', "null")
-            else:
-                self.selected[0].clearUserDataDict()
+            prefix = _types[name][0]
+            color = _types[name][1]
+            suffix = self.txt_node_name.text()
+            subject = self.txt_in.text()
+            subject = subject.replace(" ", "")
+            subject = re.sub(r"\W", '_', subject)
+            # /. foreach node
+            for sl in self.selected:
+                # /. change suffix to each nodeType if multiple
+                if len(self.selected) != 1:
+                    suffix = hNode.getTypeStr(sl)
+                # /..change name and color
+                sl.setName(prefix + "_" + subject + "_" + suffix, unique_name=True)
+                sl.setColor(hou.Color(*color))
+                # /..setting node shape
+                sl.clearUserDataDict()
+                if name in ("input", "output", "reference"):
+                    sl.setUserData('nodeshape', "null")
 
 
 # [ GLOBAL HWND ]

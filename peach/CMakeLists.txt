@@ -29,7 +29,7 @@ set(INSTAGRAM "@digital.peach.studio")
 # [ GLOBAL ] Versions
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "1")
-set(PEACH_VERSION_PATCH "7")  # [AUTO]
+set(PEACH_VERSION_PATCH "11")  # [AUTO]
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
 
 # [ DCC SETTINGS ]
@@ -141,6 +141,10 @@ if(INSTALL_ICON)
             DESTINATION ${PEACH_INSTALL_DIR}/icons)
     install(DIRECTORY
             ${PEACH_DIR}/images
+            DESTINATION ${PEACH_INSTALL_DIR}
+            PATTERN "desktop.ini" EXCLUDE)
+    install(DIRECTORY
+            ${PEACH_DIR}/fonts
             DESTINATION ${PEACH_INSTALL_DIR}
             PATTERN "desktop.ini" EXCLUDE)
 endif()

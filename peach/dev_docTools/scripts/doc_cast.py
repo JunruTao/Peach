@@ -6,7 +6,7 @@ from unicodedata import name
 
 def get_value(line=""):
     return line.split(":==:")[1]
-
+tag_in = ""
 tags = ""
 parent = ""
 subject = ""
@@ -62,11 +62,7 @@ template = """
 - <sub>{tags}</sub> <!-- `TAGS` -->
     <table>
     <tr><td> <!-- [ FUNCTIONS ] -->
-    <sup>{parent}.</sup> {module}.<code> {function} </code>{ag}<br><br>
-    <blockquote>
-    {main_comment}
-    </blockquote>
-    </td></tr>
+    <sup>{parent}.</sup> {module}.<code> {function} </code>{ag}<br><br>{main_comment}
     <!-- ( /END OF FUNCTIONS ) -->{parm}{rtr}
     </table>
     <!-- . . . . . . . . . . . . . . . . . . . . . . . .  -->
@@ -136,6 +132,9 @@ with open("./file_in.py", "r") as f:
                     args = "<sup>({})</sup>".format(args)    
                 else:
                     function_name += "()"
+                    
+                if comment_area:
+                    comment_area = "\n    <blockquote>{}</blockquote>".format(comment_area)
                 out_str = template.format(tags=tags,
                                         parent=parent,
                                         module=subject,
@@ -154,6 +153,7 @@ with open("./file_in.py", "r") as f:
             return_type = ""
             return_comment = ""
             class_def = False
+            tags = tag_in
             
         if func_started:
             while line.startswith(' '):
@@ -162,8 +162,8 @@ with open("./file_in.py", "r") as f:
                 comment_started = not comment_started
                 if not comment_started:
                     func_started = 0
-            elif comment_started:
-                
+                line = line[3:]
+            if comment_started:
                 line.rstrip()
                 if line.startswith("@param"):
                     #is parameter:
@@ -173,9 +173,12 @@ with open("./file_in.py", "r") as f:
                         line = line[1:]
                     type, comment = (line.replace("(","")).split(")")
                     parm_list.append(Parm(parm, type, comment))
-                elif line.startswith("@return:"):
-                    #is return:
-                    line = line.replace("@return:", "")
+                elif line.startswith("@return"):
+                    if line.startswith("@return:"):
+                        line = line.replace("@return:", "")
+                    else:
+                        #is return:
+                        line = line.replace("@return:", "")
                     if "(" in line:
                         return_type, return_comment = (line.replace("(","")).split(")")
                     else:
@@ -189,6 +192,7 @@ with open("./file_in.py", "r") as f:
             parent = get_value(line)
         if line.startswith("#tag"):
             tags = get_value(line)
+            tag_in = tags
         if line.startswith("#module_or_class"):
             subject = get_value(line)
         if line.startswith("#class"):

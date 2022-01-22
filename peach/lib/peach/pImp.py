@@ -33,9 +33,6 @@ def reload(*args, force=False):
     param args: modules to reload
     """
     if ALLOW_MODULE_RUNTIME_RELOAD or force:
-        # [ PYTHON VERSION ]
-        python_version = sys.version_info[0]
-
         # [ LOADING RELOADING MODULES ]
         if sys.version_info.major >= 3 and sys.version_info.minor >= 4:
             # if version greater than 3.4

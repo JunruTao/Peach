@@ -18,17 +18,46 @@
 # TODO: Doc String
 #
 # ---------------------------------------------------------------------
-from peach.pQt.qHotel import QtCore
-from peach import pImp, pUtil, pLog
+from peach.pQt.qHotel import QtCore, QtGui
+from peach import pImp, pUtil, pLog, pDir
 from datetime import datetime
 import re
-pImp.reload(pUtil)
+pImp.reload(pUtil, pUtil, pLog, pDir)
 
 _line = "    {param}: {value};\n"
 _header = "{category}#{object} {{\n"
 _headSn = "{category} {{\n"
 _close = "}\n\n"
 _counter = 0
+
+# [ Qt Style Category ]
+WIDGET = "QWidget"
+DIALOG = "QDialog"
+LABEL = "QLabel"
+BUTTON = "QPushButton"
+CHECKBOX = "QCheckBox"
+LINE_EDIT = "QLineEdit"
+MSGBOX = "QMessageBox"
+MENU = "QMenu"
+TOOLTIP = "QToolTip"
+TAB_BAR = "QTabBar"
+
+# [ Fonts ]
+fnt_Arial = "Arial"
+fnt_Helvetica = "Helvetica"
+fnt_TimesNewRoman = "Times New Roman"
+fnt_STHupo = "STHupo"
+
+
+# [ Log-in Fonts ]
+def load_all_custom_fonts():
+    """[ Style-Font ] load all the fonts under peach/font folder
+    """
+    _fonts_path = pDir.listfiles(pDir.getPeachFontsDir())
+    for _f in _fonts_path:
+        if str(_f).endswith("TTF") or str(_f).endswith("ttf"):
+            pLog.debug("Loading from ./fonts: {}".format(pDir.fileNameBare(_f)), cls="LoadFont")
+            QtGui.QFontDatabase.addApplicationFont(_f)
 
 
 def unique_object_str(obj=None):
@@ -64,27 +93,12 @@ def unique_object_str(obj=None):
         return ""
 
 
-class C(object):
-    """[ Qt Style Category ]"""
-    wgt = "QWidget"
-    dlg = "QDialog"
-    lbl = "QLabel"
-    bnt = "QPushButton"
-    cbx = "QCheckBox"
-    ldt = "QLineEdit"
-    msb = "QMessageBox"
-    mnu = "QMenu"
-    ttp = "QToolTip"
-    tbb = "QTabBar"
-    # Append the list if needed
-
-
 class Sheet(object):
-    def __init__(self, obj=None, cat=None):
+    def __init__(self, obj=None, cat=None, state="default"):
         """
         [ Sheet ] constructor
         @param obj: (str/QCore.QObject) any
-        @param cat: (str/None) None Auto detect. str: i.g. "QWidget" or use sty.C.wgt
+        @param cat: (str/None) None Auto detect. str; i.g. "QWidget" or use sty.C.wgt
         """
         self._object = obj
         self._object_id = ""
@@ -95,6 +109,7 @@ class Sheet(object):
 
         # /.create the header
         self._config_header()
+        self.newState(state)
 
     def _config_header(self):
         """[ Internal ]"""
@@ -197,7 +212,7 @@ class Sheet(object):
     def setObject(self, obj=None, cat=None):
         """[ Sheet ] setter: update sheet object
         @param obj: (str/QCore.QObject) any
-        @param cat: (str/None) None Auto detect. str: i.g. "QWidget" or use sty.C.wgt
+        @param cat: (str/None) None Auto detect. str; i.g. "QWidget" or use sty.C.wgt
         """
         self._object = obj
         self._cat = cat
@@ -240,3 +255,39 @@ class Sheet(object):
         @param unit: (str) unit, i.g. "px", "pt", "em"...
         """
         self._the_state_dict()["border-radius"] = "{0}{1}".format(radius, unit)
+
+    def setFont(self, font="", size=-1, unit="px", i=False, b=False, large=False):
+        """[ Sheet ] setter. set font /style and size
+        @param font: (str) font name, "" using application default
+        @param size: (int) font size,`-1` doesn't change
+        @param unit: (str)  i.g. "px", "pt", "em"...
+        @param i: (bool) italic
+        @param b: (bool) bold
+        @param large: (bool) large
+        """
+        self._the_state_dict()["font"] = ""
+        if i:
+            self._the_state_dict()["font"] += " italic"
+        if b:
+            self._the_state_dict()["font"] += " bold"
+        if large:
+            self._the_state_dict()["font"] += " large"
+        if size > 0:
+            self._the_state_dict()["font"] += " {0}{1}".format(size, unit)
+        if font:
+            self._the_state_dict()["font"] += " \"{0}\"".format(font)
+
+    def setFontSize(self, size=-1):
+        """[ Sheet ] setter. only set font size
+        @param size: (int) size
+        """
+        self.setFont(size=size)
+
+    def assign(self, *args):
+        """[ Sheet ] modifier. Assign this style to one/multiple objects
+        @param args: (QObjects) object to assign style sheet
+        """
+        for item in args:
+            if self._object:
+                self.setObject(obj=item)
+            item.setStyleSheet(self.get())

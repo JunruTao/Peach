@@ -5,7 +5,7 @@
 # ------------------------------------------------------------------------------- #
 # This should build the libs copy all the files..
 # [ HOU SETTINGS ] - lib
-set(PACKAGE_VERSION "0.1.30")  # >>>> CONTROL [AUTO]
+set(PACKAGE_VERSION "0.1.35")  # >>>> CONTROL [AUTO]
 
 # [ HOUDINI LIBS ]--------------------------------------------------------------- #
 
@@ -70,6 +70,11 @@ if(BUILD_INSTALL_HOU)
     configure_file(
         ${HOU_PY_SOURCE_JSON}
         ${INSTALL_PACKAGES_DIR}/PeachPy.json)
+
+    # /.configure pGlob.py file
+    configure_file(
+        ${LIB_DIR}/pGlob.py
+        ${INSTALL_PEACHPY_DIR}/peach/pGlob.py)
     # /.install: copy
     install(
         DIRECTORY  ${HOU_PY_LIBRARIES}
