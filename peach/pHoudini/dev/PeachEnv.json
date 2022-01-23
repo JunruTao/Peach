@@ -9,7 +9,8 @@
         {"PEACH_CREATOR" : "Junru Tao"},
         {"PEACH_BUILD" : "Debug"},
         {"PEACH_PACKAGES_PATH" : "$PEACH_HOU/packages"},
-        {"PEACH_ICONS" : "$PEACH/icons/SVG"}
+        {"PEACH_ICONS" : "$PEACH/icons/SVG"},
+        {"PEACH_HICON" : "$PEACH/icons/HICON"}
     ],
     "path" : "$PEACH_HOU/PeachEnv"
 }

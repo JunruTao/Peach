@@ -116,7 +116,7 @@ class IconTank(object):
         configure_icon_path()
         folders = pDir.listdir(_PEACH_ICON_DIR, n=True)
         # /.remove exceptions
-        exclusions = ["scripts", "ICO"]
+        exclusions = ["scripts", "ICO", "HICON"]
         for e in exclusions:
             if e in folders:
                 folders.remove(e)
@@ -190,6 +190,19 @@ class IconTank(object):
         """
         # _____PRINT_DEBUG_MESSAGE_____
         pLog.debug(*self.getNames(), fn="Names", cls=self)
+
+
+def getHouIcon(name=""):
+    """
+    [ Get Houdini Icon ] Icon Name (usually match with HDA Name)
+    @param name: (str) icon name
+    @return: (str) filepath
+    """
+    configure_icon_path()
+    path_ = pDir.join(_PEACH_ICON_DIR, "HICON", "{}.svg".format(name))
+    if pDir.exists(path_):
+        return path_
+    return ""
 
 
 class _DP0IcXTemplate(object):

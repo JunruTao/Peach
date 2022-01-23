@@ -6,9 +6,9 @@
 # ------------------------------------------------------------------------------- #
 # [ QUICK BUILD OPTIONS ]
 # /. build the dev version only
-set(BUILD_DEV_NOT_INSTALL TRUE)  # >>>> CONTROL [AUTO]
+set(BUILD_DEV_NOT_INSTALL false)  # >>>> CONTROL [AUTO]
 # /. build lib only
-set(BUILD_DEVLIB_ONLY TRUE)      # >>>> CONTROL [AUTO]
+set(BUILD_DEVLIB_ONLY false)      # >>>> CONTROL [AUTO]
 
 # [ CMAKE CONFIGURATION ]
 CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
@@ -139,6 +139,7 @@ if(INSTALL_ICON)
     install(DIRECTORY 
             ${PEACH_DIR}/icons/SVG # install vector icons
             ${PEACH_DIR}/icons/25w # install small icons
+            ${PEACH_DIR}/icons/HICON # houdini icons
             DESTINATION ${PEACH_INSTALL_DIR}/icons)
     install(DIRECTORY
             ${PEACH_DIR}/images
