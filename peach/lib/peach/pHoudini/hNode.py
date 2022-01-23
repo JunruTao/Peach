@@ -19,7 +19,8 @@
 # ---------------------------------------------------------------------
 import hou
 from peach import pImp, pLog, pUtil
-pImp.reload(pLog, pUtil)
+from peach.pHoudini import wm
+pImp.reload(pLog, pUtil, wm)
 
 
 def select(node=None):
@@ -86,13 +87,58 @@ def getCatStr(node=None):
         return ""
 
 
-def createNetworkImageLinked(node=None, filepath="", location=()):
+def createNetworkImageLinked(node=None, filepath="", *args):
     """
     [ Node ] Create a hou.NetworkImage object and link to the Node.
-    <br> - when node deleted, this image will be removed.
+    <br> - when node deleted, this image will be removed. TODO:fix
     <br> - when by-pass the node, image should change transparency
     @param node: (hou.Node) node object
     @param filepath: (str) image file path
-    @param location: (tuple) location(x, y)
+    @param args: (tuple) bounding rect x1, x2, y1, y2
     @return:
     """
+    if not isinstance(node, hou.Node):
+        # /.not houdini node object
+        return
+
+    editor = wm.getCurrentEditor()
+    image = hou.NetworkImage()
+    image.setPath(filepath)
+
+    def removeBackgroundImage(**kwargs):
+        node_ = kwargs['node']
+        editor_ = wm.getCurrentEditor()
+        bgmIs = editor_.backgroundImages()
+        culled_bgmIs = []
+        for x in bgmIs:
+            if x.relativeToPath() != node_.path():
+                culled_bgmIs.append(x)
+        editor_.setBackgroundImages(*culled_bgmIs)
+
+    def changeBackgroundImageBrightness(**kwargs):
+        node_ = kwargs['node']
+        editor_ = wm.getCurrentEditor()
+        bgmIs = editor_.backgroundImages()
+        img = None
+        for x in bgmIs:
+            if x.relativeToPath() != node_.path():
+                img = x
+                break
+        brightness = 1.0
+        if node_.isBypassed():
+            brightness = 0.0
+        elif node_.isTemplateFlagSet():
+            brightness = 0.5
+        img.setBrightness(brightness)
+        editor_.setBackgroundImages(*bgmIs)
+
+    node.addEventCallback((hou.nodeEventType.BeingDeleted,), removeBackgroundImage)
+    node.addEventCallback((hou.nodeEventType.FlagChanged,), changeBackgroundImageBrightness)
+
+    image.setRelativeToPath(node.path())
+    image.setRect(hou.BoundingRect(*args))
+
+    backgroundImagesDic = editor.backgroundImages()
+    backgroundImagesDic = backgroundImagesDic + (image,)
+    editor.setBackgroundImages(backgroundImagesDic)
+

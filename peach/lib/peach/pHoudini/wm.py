@@ -41,3 +41,10 @@ def getMainWindowCenter():
     @return: QtCore.QPoint
     """
     return getMainWindowRect().center()
+
+
+def getCurrentEditor():
+    """[ Houdini ] get Current working Network
+    @return: (hou.Pane)
+    """
+    return hou.ui.paneTabOfType(hou.paneTabType.NetworkEditor)
