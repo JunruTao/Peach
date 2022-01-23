@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.22__<br>
-> __Time stamp: 04:01:37__<br>
+> __Date stamp: 2022.01.23__<br>
+> __Time stamp: 05:12:26__<br>
 > __Author: Junru Tao__
 ---
 
@@ -151,6 +151,11 @@
    > - [ 02:54:13 ] <sup><b> Build Version Up: `v0.1.11`</b></sup>
    > - [ 03:59:53 ] <sup><b> Wrapped up basic functions of `style.Sheet` class. new module `pQt.wgt`</b></sup>
    > - [ 04:01:15 ] <sup><b> Finished Doc string for `style`</b></sup>
+
+- :bookmark_tabs: _017_. [Change_Log - Date: 2022/01/23](./2022_01/2022_01_23_cl.md) : :bread::bread:
+   > - [ 01:06:07 ] <sup><b> Build Version Up: `v0.1.12`</b></sup>
+   > - [ 02:19:34 ] <sup><b> Build Version Up: `v0.1.13`</b></sup>
+   > - [ 05:10:32 ] <sup><b> Adding New Icons for HDA</b></sup>
 
 <br><br>
 
