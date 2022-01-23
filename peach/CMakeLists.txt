@@ -6,9 +6,9 @@
 # ------------------------------------------------------------------------------- #
 # [ QUICK BUILD OPTIONS ]
 # /. build the dev version only
-set(BUILD_DEV_NOT_INSTALL FALSE)  # >>>> CONTROL [AUTO]
+set(BUILD_DEV_NOT_INSTALL TRUE)  # >>>> CONTROL [AUTO]
 # /. build lib only
-set(BUILD_DEVLIB_ONLY FALSE)      # >>>> CONTROL [AUTO]
+set(BUILD_DEVLIB_ONLY TRUE)      # >>>> CONTROL [AUTO]
 
 # [ CMAKE CONFIGURATION ]
 CMAKE_MINIMUM_REQUIRED(VERSION 3.22)

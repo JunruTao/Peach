@@ -76,6 +76,7 @@ class RenamerUI(QtWidgets.QWidget):
         self.txt_node_name = QtWidgets.QLineEdit("No Node Selected")
 
         # /.subject name
+        self.txt_in_cached = ""
         self.txt_in = QtWidgets.QLineEdit("subject")
 
         # /.renamer buttons
@@ -132,7 +133,7 @@ class RenamerUI(QtWidgets.QWidget):
         sheet = s_sheet.get()
         for b in self.buttons:
             b.setStyleSheet(sheet)
-            b.setFixedHeight(20)
+            b.setFixedHeight(28)
 
         # /.main background
         s_sheet.newState()
@@ -155,7 +156,19 @@ class RenamerUI(QtWidgets.QWidget):
             self.selected = selection
             if len(selection) == 1:
                 sl = selection[0]
-                if isinstance(sl, hou.Node):
+                if isinstance(sl, hou.Node) and not isinstance(sl, hou.NetworkDot):
+                    # /.if user already renamed this node to something, this should be changed.
+                    if hNode.getTypeStr(sl) not in sl.name():
+                        _name = str(sl.name())
+                        for tp, key in _types.items():
+                            if key[0] in _name:
+                                _name = _name.replace("{}_".format(key[0]), "")
+                        self.txt_in_cached = self.txt_in.text()
+                        self.txt_in.setText(_name)
+                    elif self.txt_in_cached:
+                        self.txt_in.setText(self.txt_in_cached)
+                    else:
+                        self.txt_in_cached = self.txt_in.text()
                     self.txt_node_name.setText(hNode.getTypeStr(sl))
                     self.txt_node_name.setEnabled(True)
             else:
@@ -179,20 +192,35 @@ class RenamerUI(QtWidgets.QWidget):
             color = _types[name][1]
             suffix = self.txt_node_name.text()
             subject = self.txt_in.text()
-            subject = subject.replace(" ", "")
-            subject = re.sub(r"\W", '_', subject)
+            # subject_formatting
+            if " " in subject:
+                subjects = subject.split(" ")
+                subject = ""
+                for i in range(len(subjects)):
+                    if i > 0:
+                        subjects[i] = subjects[i].capitalize()
+                        subject = "{}.{}".format(subject, subjects[i])
+                    else:
+                        subject = subjects[i]
+            subject = re.sub(r"\W\.-", '_', subject)
             # /. foreach node
             for sl in self.selected:
-                # /. change suffix to each nodeType if multiple
+                # /..change suffix to each nodeType if multiple
                 if len(self.selected) != 1:
                     suffix = hNode.getTypeStr(sl)
-                # /..change name and color
-                sl.setName(prefix + "_" + subject + "_" + suffix, unique_name=True)
-                sl.setColor(hou.Color(*color))
-                # /..setting node shape
-                sl.clearUserDataDict()
-                if name in ("input", "output", "reference"):
-                    sl.setUserData('nodeshape', "null")
+                # /..avoid super long names
+                if "_" in subject:
+                    suffix = ""
+                else:
+                    suffix = "_" + suffix
+                with hou.undos.group("Renamer-Rename Nodes"):
+                    # /..change name and color
+                    sl.setName(prefix + "_" + subject + suffix, unique_name=True)
+                    sl.setColor(hou.Color(*color))
+                    # /..setting node shape
+                    sl.clearUserDataDict()
+                    if name in ("input", "output", "reference"):
+                        sl.setUserData('nodeshape', "null")
 
 
 # [ GLOBAL HWND ]
