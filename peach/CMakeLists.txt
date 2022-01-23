@@ -29,7 +29,7 @@ set(INSTAGRAM "@digital.peach.studio")
 # [ GLOBAL ] Versions
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "1")
-set(PEACH_VERSION_PATCH "11")  # [AUTO]
+set(PEACH_VERSION_PATCH "13")  # [AUTO]
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
 
 # [ DCC SETTINGS ]
@@ -130,7 +130,8 @@ add_subdirectory(pHoudini)
 if(INSTALL_CONFIG)
     install(DIRECTORY 
             ${PEACH_DIR}/config
-            DESTINATION ${PEACH_INSTALL_DIR})
+            DESTINATION ${PEACH_INSTALL_DIR}
+            PATTERN "desktop.ini" EXCLUDE)
 endif()
 
 # /.icons
