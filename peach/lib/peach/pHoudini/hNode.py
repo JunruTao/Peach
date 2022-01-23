@@ -84,3 +84,15 @@ def getCatStr(node=None):
         return node.type().category().name()
     else:
         return ""
+
+
+def createNetworkImageLinked(node=None, filepath="", location=()):
+    """
+    [ Node ] Create a hou.NetworkImage object and link to the Node.
+    <br> - when node deleted, this image will be removed.
+    <br> - when by-pass the node, image should change transparency
+    @param node: (hou.Node) node object
+    @param filepath: (str) image file path
+    @param location: (tuple) location(x, y)
+    @return:
+    """
