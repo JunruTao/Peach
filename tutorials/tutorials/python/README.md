@@ -6,3 +6,4 @@
     > - Remove File, Directory and rm -rf in Python
     > - File copy
 - [Pycharm Tools](./pycharm_tools.md)
+- [Reading Arguments from cmds](./reading_arguments.md)
