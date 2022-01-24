@@ -51,7 +51,7 @@ class RenamerUI(QtWidgets.QWidget):
 
         # /.Set Window Title, Icon
         self.setWindowTitle('Renamer - PeachPy v{0}'.format(pGlob.PEACH_PY_VERSION))
-        self.setWindowIcon(QtGui.QIcon(img.getPixmap("peach_dev")))
+        self.setWindowIcon(QtGui.QIcon(img.getPixmap("devtool_renamer")))
 
         # /. Build UI Functions
         self.create_widgets()
@@ -66,7 +66,7 @@ class RenamerUI(QtWidgets.QWidget):
     def create_widgets(self):
         """[ RenamerUI ] UI Define Widgets """
         # /.title
-        ttl = "pHoudini-DevTool: Sop Renamer".format(pGlob.PEACH_PY_VERSION)
+        ttl = "DevTool: Sop Renamer"
         self.lbl_icon = wgt.getHeaderTemplateWidget(type="dev_tool",
                                                     title=ttl,
                                                     height=70,

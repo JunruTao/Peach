@@ -18,6 +18,7 @@
 #
 # ---------------------------------------------------------------------
 import hou
+import nodegraphutils
 from peach import pImp, pLog, pUtil
 from peach.pHoudini import wm
 pImp.reload(pLog, pUtil, wm)
@@ -25,7 +26,7 @@ pImp.reload(pLog, pUtil, wm)
 
 class Colors(object):
     Pk1 = (0.98, 0.784, 1)
-    Bl1 = (0.87, 0.784, 1)
+    Bl1 = (0.616, 0.871, 0.769)
 
 
 def select(node=None):
@@ -116,6 +117,7 @@ def linkNetworkImage(node=None, filepath="", x=0.0, y=0.0, w=0.7, h=0.7):
     images = list(editor.backgroundImages())
     images.append(image)
     editor.setBackgroundImages(images)
+    nodegraphutils.saveBackgroundImages(node.parent(), images)
 
 
 def unlinkNetworkImage(node=None):
@@ -131,3 +133,4 @@ def unlinkNetworkImage(node=None):
             img_culled.append(i)
 
     editor.setBackgroundImages(img_culled)
+    nodegraphutils.saveBackgroundImages(node.parent(), images)
