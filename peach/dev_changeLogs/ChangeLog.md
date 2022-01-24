@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.24__<br>
-> __Time stamp: 05:07:35__<br>
+> __Time stamp: 05:12:47__<br>
 > __Author: Junru Tao__
 ---
 
@@ -157,12 +157,13 @@
    > - [ 02:19:34 ] <sup><b> Build Version Up: `v0.1.13`</b></sup>
    > - [ 05:10:32 ] <sup><b> Adding New Icons for HDA</b></sup>
 
-- :bookmark_tabs: _018_. [Change_Log - Date: 2022/01/24](./2022_01/2022_01_24_cl.md) : :bread::bread:
+- :bookmark_tabs: _018_. [Change_Log - Date: 2022/01/24](./2022_01/2022_01_24_cl.md) : :bread::bread::bread:
    > - [ 01:49:34 ] <sup><b> Fix template problem, tests on the Image Linking working</b></sup>
    > - [ 02:30:19 ] <sup><b> `Commit` : Adding Auto Git-Commit and Auto Change Log</b></sup>
    > - [ 02:30:56 ] <sup><b> `Commit` : Adding Auto Git-Commit and Auto Change Log</b></sup>
    > - [ 05:02:36 ] <sup><b> Build Version Up: `v0.1.14`</b></sup>
    > - [ 05:07:33 ] <sup><b> `Commit` :</b></sup>
+   > - [ 05:12:46 ] <sup><b> `Commit` : Removed Mid-res icons save file space as mid res are not used</b></sup>
 
 <br><br>
 
