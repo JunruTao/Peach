@@ -6,9 +6,9 @@
 # ------------------------------------------------------------------------------- #
 # [ QUICK BUILD OPTIONS ]
 # /. build the dev version only
-set(BUILD_DEV_NOT_INSTALL TRUE)  # >>>> CONTROL [AUTO]
+set(BUILD_DEV_NOT_INSTALL FALSE)  # >>>> CONTROL [AUTO]
 # /. build lib only
-set(BUILD_DEVLIB_ONLY TRUE)      # >>>> CONTROL [AUTO]
+set(BUILD_DEVLIB_ONLY FALSE)      # >>>> CONTROL [AUTO]
 
 # [ CMAKE CONFIGURATION ]
 CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
@@ -29,7 +29,7 @@ set(INSTAGRAM "@digital.peach.studio")
 # [ GLOBAL ] Versions
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "1")
-set(PEACH_VERSION_PATCH "13")  # [AUTO]
+set(PEACH_VERSION_PATCH "14")  # [AUTO]
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
 
 # [ DCC SETTINGS ]

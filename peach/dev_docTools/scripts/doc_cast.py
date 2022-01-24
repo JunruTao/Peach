@@ -87,6 +87,72 @@ with open("./file_in.py", "r") as f:
     comment_started = False
     function_count = 0
     for line in f:
+        if func_started:
+            while line.startswith(' '):
+                line = line[1:]
+            if line.startswith("\"\"\""):
+                comment_started = not comment_started
+                if not comment_started:
+                    func_started = 0
+                line = line[3:]
+            if comment_started:
+                line.rstrip()
+                if line.startswith("@param"):
+                    #is parameter:
+                    line = line.replace("@param ", "")
+                    parm, line= line.split(":")
+                    while line.startswith(' '):
+                        line = line[1:]
+                    type, comment = (line.replace("(","")).split(")")
+                    parm_list.append(Parm(parm, type, comment))
+                elif line.startswith("@return"):
+                    if line.startswith("@return:"):
+                        line = line.replace("@return:", "")
+                    else:
+                        #is return:
+                        line = line.replace("@return:", "")
+                    if "(" in line:
+                        return_type, return_comment = (line.replace("(","")).split(")")
+                    else:
+                        return_type = line
+                else:
+                    line = line.rstrip()
+                    comment_area += line
+
+        line = line.rstrip()
+        if line.startswith("#parent"):
+            parent = get_value(line)
+        if line.startswith("#tag"):
+            tags = get_value(line)
+            tag_in = tags
+        if line.startswith("#module_or_class"):
+            subject = get_value(line)
+        if line.startswith("#class"):
+            is_class = int(get_value(line))
+        if line.startswith("#add_quote"):
+            add_quote = int(get_value(line))
+        
+        while line.startswith(' '):
+            line = line[1:]
+        if line.startswith("def"):
+            func_started=True
+            function_count = 1
+            line = line.replace("def ", "")
+            function_name, args= line.split("(")
+            args = args.replace("):", "")
+            
+        if line.startswith("class"):
+            func_started=True
+            class_def = True
+            function_count = 1
+            line = line.replace("class ", "")
+            function_name, args= line.split("(")
+            args = args.replace("):", "")
+            func_started=False
+            function_count = 1
+            is_class = 1
+            
+        # /. start parsing
         if not func_started and function_count:
             function_count = 0
             print("[Construct] {}".format(function_name))
@@ -154,71 +220,6 @@ with open("./file_in.py", "r") as f:
             return_comment = ""
             class_def = False
             tags = tag_in
-            
-        if func_started:
-            while line.startswith(' '):
-                line = line[1:]
-            if line.startswith("\"\"\""):
-                comment_started = not comment_started
-                if not comment_started:
-                    func_started = 0
-                line = line[3:]
-            if comment_started:
-                line.rstrip()
-                if line.startswith("@param"):
-                    #is parameter:
-                    line = line.replace("@param ", "")
-                    parm, line= line.split(":")
-                    while line.startswith(' '):
-                        line = line[1:]
-                    type, comment = (line.replace("(","")).split(")")
-                    parm_list.append(Parm(parm, type, comment))
-                elif line.startswith("@return"):
-                    if line.startswith("@return:"):
-                        line = line.replace("@return:", "")
-                    else:
-                        #is return:
-                        line = line.replace("@return:", "")
-                    if "(" in line:
-                        return_type, return_comment = (line.replace("(","")).split(")")
-                    else:
-                        return_type = line
-                else:
-                    line = line.rstrip()
-                    comment_area += line
-
-        line = line.rstrip()
-        if line.startswith("#parent"):
-            parent = get_value(line)
-        if line.startswith("#tag"):
-            tags = get_value(line)
-            tag_in = tags
-        if line.startswith("#module_or_class"):
-            subject = get_value(line)
-        if line.startswith("#class"):
-            is_class = int(get_value(line))
-        if line.startswith("#add_quote"):
-            add_quote = int(get_value(line))
-        
-        while line.startswith(' '):
-            line = line[1:]
-        if line.startswith("def"):
-            func_started=True
-            function_count = 1
-            line = line.replace("def ", "")
-            function_name, args= line.split("(")
-            args = args.replace("):", "")
-            
-        if line.startswith("class"):
-            func_started=True
-            class_def = True
-            function_count = 1
-            line = line.replace("class ", "")
-            function_name, args= line.split("(")
-            args = args.replace("):", "")
-            func_started=False
-            function_count = 1
-            is_class = 1
                 
     f.close()
     

@@ -79,3 +79,27 @@
 }
 /NumberOfCollections 7
 /CatalogName (Last Used Artboard Export Settings)
+
+
+# - > Houdini Icon
+
+
+/collection1 {
+	/attributes {
+		/scale 1.0
+		/suffix [ 0
+
+		]
+		/fileformat 6
+		/scaleType 0
+	}
+	/canEdit 1
+	/canDelete 1
+}
+/Sketch {
+	/Version 0
+	/Description (Last Used Artboard Export Settings)
+	/Owner ()
+}
+/NumberOfCollections 1
+/CatalogName (Last Used Artboard Export Settings)

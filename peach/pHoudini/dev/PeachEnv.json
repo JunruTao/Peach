@@ -1,15 +1,18 @@
 {
     "author" : "Junru Tao",
-    "version": "0.1.17",
+    "version": "0.1.18",
     "load_package_once": true,
     "enable" : "houdini_version >= '19.0' and houdini_version < '19.1'",
     "env" : [
-        {"PEACH_VERSION" : "0.1.13"},
-        {"PEACH_VERSION_PKG": "0.1.17"},
+        {"PEACH_VERSION" : "0.1.14"},
+        {"PEACH_VERSION_PKG": "0.1.18"},
         {"PEACH_CREATOR" : "Junru Tao"},
         {"PEACH_BUILD" : "Debug"},
         {"PEACH_PACKAGES_PATH" : "$PEACH_HOU/packages"},
-        {"PEACH_ICONS" : "$PEACH/icons/SVG"}
+        {"PEACH_ICONS" : "$PEACH/icons/SVG"},
+        {"PEACH_HICON" : "$PEACH/icons/HICON"},
+        {"PEACH_IMAGE" : "$PEACH/images"},
+        {"PEACH_HIMGS" : "$PEACH/images/HIMG"}
     ],
     "path" : "$PEACH_HOU/PeachEnv"
 }
