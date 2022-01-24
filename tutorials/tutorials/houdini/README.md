@@ -15,7 +15,11 @@
 ### Houdini HDA
 - [Loading HDA](./hou_03_hda_loading.md)
 - [Node parameter interface](./hou_param_interface.md)
+- []()
+- [* Attach a PyPanel to a HDA](./hou_hda_attach_pypanel_to_Node.md)
 
 
 ### Network Customisation
 - [Add Network Image](./hou_NetworkImage.md)
+
+

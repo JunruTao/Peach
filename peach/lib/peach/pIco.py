@@ -23,6 +23,7 @@ pImp.reload(pDir, pLog)
 
 # [ global-variables ] Private
 _PEACH_ICON_DIR = ""
+_PEACH_IMGS_DIR = ""
 
 
 # [ global-functions ] Public
@@ -31,8 +32,11 @@ def configure_icon_path():
     Configure path only once, the value will be stored.
     """
     global _PEACH_ICON_DIR
+    global _PEACH_IMGS_DIR
     if _PEACH_ICON_DIR == "":
         _PEACH_ICON_DIR = pDir.getPeachIconsDir()
+    if _PEACH_IMGS_DIR == "":
+        _PEACH_IMGS_DIR = pDir.getPeachImagesDir()
 
 
 class Icon(object):
@@ -200,6 +204,20 @@ def getHouIcon(name=""):
     """
     configure_icon_path()
     path_ = pDir.join(_PEACH_ICON_DIR, "HICON", "{}.svg".format(name))
+    if pDir.exists(path_):
+        return path_
+    return ""
+
+
+def getHouImg(name="", ext="png"):
+    """
+    [ Get Houdini Icon ] Get custom images from HIMG@dir
+    @param name: (str) name of image under $PEACH_HIMGS dir
+    @param ext: (str) extension, "png" by default
+    @return: (str) filepath
+    """
+    configure_icon_path()
+    path_ = pDir.join(_PEACH_IMGS_DIR, "HIMG", "{}.{}".format(name, ext))
     if pDir.exists(path_):
         return path_
     return ""

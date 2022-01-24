@@ -23,6 +23,11 @@ from peach.pHoudini import wm
 pImp.reload(pLog, pUtil, wm)
 
 
+class Colors(object):
+    Pk1 = (0.98, 0.784, 1)
+    Bl1 = (0.87, 0.784, 1)
+
+
 def select(node=None):
     """
     [ Node ] Select Node
@@ -87,15 +92,17 @@ def getCatStr(node=None):
         return ""
 
 
-def createNetworkImageLinked(node=None, filepath="", *args):
+def linkNetworkImage(node=None, filepath="", x=0.0, y=0.0, w=0.7, h=0.7):
     """
     [ Node ] Create a hou.NetworkImage object and link to the Node.
-    <br> - when node deleted, this image will be removed. TODO:fix
+    <br> - when node deleted, this image will be removed.
     <br> - when by-pass the node, image should change transparency
     @param node: (hou.Node) node object
     @param filepath: (str) image file path
-    @param args: (tuple) bounding rect x1, x2, y1, y2
-    @return:
+    @param x: (float) x position
+    @param y: (float) y position
+    @param w: (float) width
+    @param h: (float) height
     """
     if not isinstance(node, hou.Node):
         # /.not houdini node object
@@ -104,41 +111,23 @@ def createNetworkImageLinked(node=None, filepath="", *args):
     editor = wm.getCurrentEditor()
     image = hou.NetworkImage()
     image.setPath(filepath)
-
-    def removeBackgroundImage(**kwargs):
-        node_ = kwargs['node']
-        editor_ = wm.getCurrentEditor()
-        bgmIs = editor_.backgroundImages()
-        culled_bgmIs = []
-        for x in bgmIs:
-            if x.relativeToPath() != node_.path():
-                culled_bgmIs.append(x)
-        editor_.setBackgroundImages(*culled_bgmIs)
-
-    def changeBackgroundImageBrightness(**kwargs):
-        node_ = kwargs['node']
-        editor_ = wm.getCurrentEditor()
-        bgmIs = editor_.backgroundImages()
-        img = None
-        for x in bgmIs:
-            if x.relativeToPath() != node_.path():
-                img = x
-                break
-        brightness = 1.0
-        if node_.isBypassed():
-            brightness = 0.0
-        elif node_.isTemplateFlagSet():
-            brightness = 0.5
-        img.setBrightness(brightness)
-        editor_.setBackgroundImages(*bgmIs)
-
-    node.addEventCallback((hou.nodeEventType.BeingDeleted,), removeBackgroundImage)
-    node.addEventCallback((hou.nodeEventType.FlagChanged,), changeBackgroundImageBrightness)
-
+    image.setRect(hou.BoundingRect(x, y, x + w, y + h))
     image.setRelativeToPath(node.path())
-    image.setRect(hou.BoundingRect(*args))
+    images = list(editor.backgroundImages())
+    images.append(image)
+    editor.setBackgroundImages(images)
 
-    backgroundImagesDic = editor.backgroundImages()
-    backgroundImagesDic = backgroundImagesDic + (image,)
-    editor.setBackgroundImages(backgroundImagesDic)
 
+def unlinkNetworkImage(node=None):
+    """
+    [ Node ] Unlink all Network Images attached to this node.
+    @param node: (hou.Node) node object
+    """
+    editor = wm.getCurrentEditor()
+    images = list(editor.backgroundImages())
+    img_culled = []
+    for i in images:
+        if node.path() != i.relativeToPath():
+            img_culled.append(i)
+
+    editor.setBackgroundImages(img_culled)

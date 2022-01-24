@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.24__<br>
-> __Time stamp: 05:12:47__<br>
+> __Time stamp: 08:13:39__<br>
 > __Author: Junru Tao__
 ---
 
@@ -164,6 +164,8 @@
    > - [ 05:02:36 ] <sup><b> Build Version Up: `v0.1.14`</b></sup>
    > - [ 05:07:33 ] <sup><b> `Commit` :</b></sup>
    > - [ 05:12:46 ] <sup><b> `Commit` : Removed Mid-res icons save file space as mid res are not used</b></sup>
+   > - [ 08:12:46 ] <sup><b> Build Version Up: `v0.1.15`</b></sup>
+   > - [ 08:13:39 ] <sup><b> `Commit` :</b></sup>
 
 <br><br>
 
