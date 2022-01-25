@@ -33,3 +33,57 @@ PEACH_PY_VERSION = "${PACKAGE_VERSION}"
 PEACH_VERSION_MAJOR = "${PEACH_VERSION_MAJOR}"
 PEACH_VERSION_MINOR = "${PEACH_VERSION_MINOR}"
 PEACH_VERSION_PATCH = "${PEACH_VERSION_PATCH}"
+
+DEFAULT_MATERIALS = (
+    "paint",
+    "rust",
+    "rubber",
+    "leather",
+    "fur",
+    "feather",
+    "glass",
+    "tinted_glass",
+    "water",
+    "stone",
+    "metal",
+    "gold",
+    "copper",
+    "steel",
+    "silver",
+    "skin",
+    "plaster",
+    "cloth",
+    "timber",
+    "wood",
+    "leaves",
+    "grass",
+    "generic",
+    "organic",
+    "gloss",
+    "matt",
+)
+
+DEFAULT_COLOURS = (
+    "white",
+    "black",
+    "grey",
+    "light_grey",
+    "dark_grey",
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "cyan"
+    "blue",
+    "purple",
+    "pink",
+    "brown",
+    "coffee",
+    "dark_blue",
+    "dark_red",
+    "dark_green",
+    "light_blue",
+    "light_green",
+    "gold",
+    "silver",
+)

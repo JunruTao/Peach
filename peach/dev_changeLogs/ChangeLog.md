@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.24__<br>
-> __Time stamp: 22:54:07__<br>
+> __Date stamp: 2022.01.25__<br>
+> __Time stamp: 00:05:59__<br>
 > __Author: Junru Tao__
 ---
 
@@ -169,6 +169,9 @@
    > - [ 18:55:48 ] <sup><b> Build Version Up: `v0.1.16`</b></sup>
    > - [ 22:15:33 ] <sup><b> Build Version Up: `v0.1.17`</b></sup>
    > - [ 22:54:06 ] <sup><b> `Commit` : HDA Manager/Creator Done! new tools and icons</b></sup>
+
+- :bookmark_tabs: _019_. [Change_Log - Date: 2022/01/25](./2022_01/2022_01_25_cl.md) : :bread:
+   > - [ 00:05:59 ] <sup><b> `Commit` : update global values: color and mat as Enums</b></sup>
 
 <br><br>
 
