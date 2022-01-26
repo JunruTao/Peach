@@ -134,3 +134,21 @@ def unlinkNetworkImage(node=None):
 
     editor.setBackgroundImages(img_culled)
     nodegraphutils.saveBackgroundImages(node.parent(), images)
+
+
+def updateNetworkImage(new_node=None, old_path=""):
+    """
+    [ Node ] Update Network Images - Transfer image from old to new node
+    @param new_node: (hou.Node) node object to.
+    @param old_path: (str) old node path
+    """
+    editor = wm.getCurrentEditor()
+    images = list(editor.backgroundImages())
+    img_culled = []
+    for i in images:
+        if old_path == i.relativeToPath():
+            i.setRelativeToPath(new_node.path())
+        img_culled.append(i)
+
+    editor.setBackgroundImages(img_culled)
+    nodegraphutils.saveBackgroundImages(new_node.parent(), images)

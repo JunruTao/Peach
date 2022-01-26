@@ -27,9 +27,9 @@ from peach.pHoudini import wm, hNode
 pImp.reload(img, pGlob, wm, hNode)
 
 
-_look_up_sheet = {"PeachModel": ["peachM", "peach[Model]"],
-                  "PeachAsset": ["peachA", "peach[Asset]"],
-                  "PeachUltraUrban": ["pUU", "peach[UU]"]}
+_look_up_sheet = {"PeachModel": ["peachM", "Peach[Model]", "hNode.Colors.Pk1", "peach_mdl"],
+                  "PeachAsset": ["peachA", "Peach[Asset]", "hNode.Colors.Bl1", "peach_ast"],
+                  "PeachUltraUrban": ["pUU", "Peach[UU]", "hNode.Colors.Pk1", "peach_uu"]}
 
 _look_up_cats = {"PeachModel": ["Architecture",
                                 "Utility",
@@ -65,6 +65,29 @@ _hda_shelf_def_str = """<?xml version="1.0" encoding="UTF-8"?>
 soptoolutils.genericTool(kwargs, '$HDA_NAME')]]></script>
   </tool>
 </shelfDocument>
+"""
+
+_hda_OnCreated_str = """from peach.pHoudini import hNode
+from peach import pIco
+
+node_ = kwargs['node']
+node_.setColor(hou.Color(*{col}))
+img_path = pIco.getHouImg("{img}")
+hNode.linkNetworkImage(node_, img_path, -0.8, -0.7, 0.9, 0.9)
+"""
+
+_hda_OnDeleted_str = """from peach.pHoudini import hNode
+
+node_ = kwargs['node']
+hNode.unlinkNetworkImage(node_)
+"""
+
+_hda_OnNameChanged_str = """from peach.pHoudini import hNode
+
+node_ = kwargs['node']
+old_name = kwargs['old_name']
+old_path = "/".join([node_.parent().path(), old_name])
+hNode.updateNetworkImage(node_, old_path)
 """
 
 
@@ -159,6 +182,7 @@ class HdaManagerUI(QtWidgets.QWidget):
         lyt_hda_names.addWidget(QtWidgets.QLabel("Type Name: "))
         lyt_hda_names.addWidget(self.txt_hda_type_name)
 
+        # /..Final Layout
         layout_main.addLayout(lyt_hda_names)
         layout_main.addWidget(self.bnt_new_hda)
         layout_main.addStretch()
@@ -189,48 +213,76 @@ class HdaManagerUI(QtWidgets.QWidget):
         self.cmb_hda_v_minor.addItems([str(i) for i in range(1, 10)])
 
     def update_path(self):
-        txt = pDir.join(self._pkg_path, self.cmb_packages.currentText(), "wip/hda")
-
-        prefix = _look_up_sheet[self.cmb_packages.currentText()][0]
+        # /.Hda Tab-Submenu Entry
         self._hda_menu_entry = _look_up_sheet[self.cmb_packages.currentText()][1] + "/"
         self.lbl_menu_entry_1.setText(self._hda_menu_entry)
 
+        # /.Configure name
+        op_cat = "sop"
+        if self.selected:
+            # /..Get Node Context: sop, lop, dop...
+            op_cat = str(hNode.getCatStr(self.selected)).lower()
         name_ = re.sub(r"\W", '_', str(self.txt_hda_name.text()).lower())
-        self._hda_file_name = "{op}_{prf}_{n}.{vmj}.{vmn}.hdalc".format(op="sop",
+        # /.Configure Prefix
+        prefix = _look_up_sheet[self.cmb_packages.currentText()][0]
+        # /.HDA filename
+        self._hda_file_name = "{op}_{prf}_{n}.{vmj}.{vmn}.hdalc".format(op=op_cat,
                                                                         prf=prefix,
                                                                         n=name_,
                                                                         vmj=self.cmb_hda_v_major.currentText(),
                                                                         vmn=self.cmb_hda_v_minor.currentText())
-        txt = pDir.join(txt, self._hda_file_name)
-        self.txt_full_path.setText(txt)
+        # /.HDA File Full path Compile
+        _full_path = pDir.join(self._pkg_path, self.cmb_packages.currentText(), "wip/hda")
+        _full_path = pDir.join(_full_path, self._hda_file_name)
+        self.txt_full_path.setText(_full_path)
         self._hda_op_name = "{prf}_{n}::{vmj}.{vmn}".format(prf=prefix,
                                                             n=name_,
                                                             vmj=self.cmb_hda_v_major.currentText(),
                                                             vmn=self.cmb_hda_v_minor.currentText())
+        # /.Type Name UI
         self.txt_hda_type_name.setText(self._hda_op_name)
-
+        # /.HDA Label Name configure
         self._hda_label_name = prefix + " " + re.sub(r"\W", ' ', str(self.txt_hda_name.text()))
         self.txt_hda_final_name.setText(self._hda_label_name)
-
+        # /.Repopulate menu
         self.cmb_menu_entries.clear()
         self.cmb_menu_entries.addItems(_look_up_cats[self.cmb_packages.currentText()])
 
     def create_hda_and_dump(self):
         if isinstance(self.selected, hou.Node):
+            # /.Create HDA
             hda_node = self.selected.createDigitalAsset(name=self._hda_op_name,
                                                         hda_file_name=self.txt_full_path.text(),
                                                         description=self.txt_hda_final_name.text(),
                                                         min_num_inputs=0,
                                                         max_num_inputs=0,
                                                         )
-            hda_node.allowEditingOfContents()
-            # Get HDA definition
+            _sheet = _look_up_sheet[self.cmb_packages.currentText()]
 
+            # /.Unlock Node
+            hda_node.allowEditingOfContents()
+            # /.Get HDA definition
             hda_def = hda_node.type().definition()
+            # /.Write Extra Information
             hda_def.addSection("Tools.shelf", _hda_shelf_def_str.format(self._hda_menu_entry,
                                                                         self.cmb_menu_entries.currentText()))
-
+            hda_def.addSection("OnCreated", _hda_OnCreated_str.format(col=_sheet[2],
+                                                                      img=_sheet[3]))
+            hda_def.addSection("OnDeleted", _hda_OnDeleted_str)
+            hda_def.addSection("OnNameChanged", _hda_OnNameChanged_str)
+            for sec in ("OnCreated", "OnDeleted", "OnNameChanged"):
+                hda_def.setExtraFileOption("{}/IsPython".format(sec), True)
+                hda_def.setExtraFileOption("{}/IsScript".format(sec), True)
+            # /.Save definition
             hda_def.save(hda_def.libraryFilePath(), hda_node)
+
+            # /.try create a new node:
+            last_pos = hda_node.position()
+            parent = hda_node.parent()
+            hda_node.destroy()
+            new_node = parent.createNode(self._hda_op_name)
+            new_node.setPosition(last_pos)
+            new_node.allowEditingOfContents()
 
     def selectionCallback(self, selection):
         """[ RenamerUI ] Callback"""
