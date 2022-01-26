@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.26__<br>
-> __Time stamp: 03:01:55__<br>
+> __Time stamp: 13:22:47__<br>
 > __Author: Junru Tao__
 ---
 
@@ -174,10 +174,11 @@
    > - [ 00:05:59 ] <sup><b> `Commit` : update global values: color and mat as Enums</b></sup>
    > - [ 23:25:37 ] <sup><b> PeachPy Lib-Build: v0.1.42</b></sup>
 
-- :bookmark_tabs: _020_. [Change_Log - Date: 2022/01/26](./2022_01/2022_01_26_cl.md) : :bread:
+- :bookmark_tabs: _020_. [Change_Log - Date: 2022/01/26](./2022_01/2022_01_26_cl.md) : :bread::bread:
    > - [ 01:25:17 ] <sup><b> Automate HDA internal script creation: OnCreated, OnDeleted, OnNameChanged</b></sup>
    > - [ 03:01:08 ] <sup><b> Build Version Up: `v0.1.18`</b></sup>
    > - [ 03:01:55 ] <sup><b> `Commit` : update hda manager. add new hda</b></sup>
+   > - [ 13:22:47 ] <sup><b> `Commit` : fixed undeleted imaged behavior in hNode</b></sup>
 
 <br><br>
 

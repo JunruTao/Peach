@@ -98,7 +98,7 @@ class HdaManagerUI(QtWidgets.QWidget):
 
         # /.Set UI init Position
         p = wm.getMainWindowCenter()
-        self.setGeometry(p.x(), p.y(), 700, 260)
+        self.setGeometry(p.x()-350, p.y()-130, 700, 260)
         self.setObjectName("pHoudini_tools_devtools_HdaManagerUI_widget")
 
         # /.Set Window Title, Icon
