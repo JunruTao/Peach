@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.26__<br>
-> __Time stamp: 23:06:44__<br>
+> __Date stamp: 2022.01.27__<br>
+> __Time stamp: 22:34:35__<br>
 > __Author: Junru Tao__
 ---
 
@@ -181,6 +181,12 @@
    > - [ 13:22:47 ] <sup><b> `Commit` : fixed undeleted imaged behavior in hNode</b></sup>
    > - [ 23:05:04 ] <sup><b> Build Version Up: `v0.1.19`</b></sup>
    > - [ 23:06:44 ] <sup><b> `Commit` : finished basic functions for stair HDA</b></sup>
+
+- :bookmark_tabs: _021_. [Change_Log - Date: 2022/01/27](./2022_01/2022_01_27_cl.md) : :bread::bread:
+   > - [ 13:51:08 ] <sup><b> Build Version Up: `v0.1.20`</b></sup>
+   > - [ 14:35:55 ] <sup><b> Build Version Up: `v0.1.21`</b></sup>
+   > - [ 22:31:30 ] <sup><b> Fixed problem on window close, image handle releasing</b></sup>
+   > - [ 22:34:35 ] <sup><b> `Commit` : updated:</b></sup>
 
 <br><br>
 

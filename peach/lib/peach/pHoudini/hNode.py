@@ -133,7 +133,10 @@ def unlinkNetworkImage(node=None):
             img_culled.append(i)
 
     editor.setBackgroundImages(img_culled)
-    nodegraphutils.saveBackgroundImages(node.parent(), img_culled)
+    try:
+        nodegraphutils.saveBackgroundImages(node.parent(), img_culled)
+    finally:
+        pass
 
 
 def updateNetworkImage(new_node=None, old_path=""):

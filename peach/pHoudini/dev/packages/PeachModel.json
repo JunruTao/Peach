@@ -1,6 +1,6 @@
 {
     "author" : "Junru Tao",
-    "version": "0.1.23",
+    "version": "0.1.25",
     "load_package_once": true,
     "enable" : "houdini_version >= '19.0' and houdini_version < '19.1'",
     "path" : "$PEACH_HOU/packages/PeachModel"

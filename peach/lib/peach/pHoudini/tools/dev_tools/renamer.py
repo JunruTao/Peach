@@ -59,9 +59,15 @@ class RenamerUI(QtWidgets.QWidget):
         self.create_layouts()
         self.create_connections()
 
+        self.prefix_checks = []
+        for key, lst in _types.items():
+            self.prefix_checks.append(lst[0])
+            self.prefix_checks += ["OPT"]  # append any extra prefixes
+
         # /. Register Callback
         self.selectionCallback(hNode.listSelected())
         hou.ui.addSelectionCallback(self.selectionCallback)
+
 
     def create_widgets(self):
         """[ RenamerUI ] UI Define Widgets """
@@ -160,9 +166,9 @@ class RenamerUI(QtWidgets.QWidget):
                     # /.if user already renamed this node to something, this should be changed.
                     if hNode.getTypeStr(sl) not in sl.name():
                         _name = str(sl.name())
-                        for tp, key in _types.items():
-                            if key[0] in _name:
-                                _name = _name.replace("{}_".format(key[0]), "")
+                        for k in self.prefix_checks:
+                            if k in _name:
+                                _name = _name.replace(k + "_", "")
                         self.txt_in_cached = self.txt_in.text()
                         self.txt_in.setText(_name)
                     elif self.txt_in_cached:
@@ -205,6 +211,10 @@ class RenamerUI(QtWidgets.QWidget):
             subject = re.sub(r"\W\.-", '_', subject)
             # /. foreach node
             for sl in self.selected:
+                # /..specific namings:
+                if "switch" in hNode.getTypeStr(sl):
+                    prefix = "OPT"
+                    color = hNode.Colors.Bl1
                 # /..change suffix to each nodeType if multiple
                 if len(self.selected) != 1:
                     suffix = hNode.getTypeStr(sl)
