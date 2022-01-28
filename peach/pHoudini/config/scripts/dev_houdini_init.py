@@ -15,6 +15,7 @@
 # ---------------------------------------------------------------------
 
 import os, shutil
+from tkinter import END
 import nocopy.houdini_util as hu
 import hou
 
@@ -39,6 +40,16 @@ package_dir = hou.getenv("PEACH_PACKAGES_PATH")
 packages = [f.path for f in os.scandir(package_dir) if f.is_dir()]
 divider = "----------------------------------"
 
+class bcolors:
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKCYAN = "\033[96m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
 
 class HDA(object):
     def __init__(self, hda_filename="", path="") -> None:
@@ -52,8 +63,7 @@ class HDA(object):
         self.version = int(self.v_major) * 1000 + int(self.v_minor)
         
     def printInfo(self):
-        hu.printMsg(". . [Found]: %s" % self.name)
-        hu.printMsg(". . [VERSION_INT]: %d" % self.version)
+        hu.printMsg(". . [Found]: %s - v: %d" % (self.name, self.version))
 
 
 def get_latest_hdas(hda_dir):
@@ -84,6 +94,6 @@ for path in packages:
         hu.printMsg("[All Latest HDAs]: ")
         
         for _, a in hdas.items():
-            hu.printMsg(">>>> Load HDA: %s, %d" % (a.name, a.version))
+            hu.printMsg(">>>> Load HDA:" + bcolors.OKGREEN + " %s, %d" % (a.name, a.version) + bcolors.ENDC)
             # [3] load:
             hou.hda.installFile(hu.format_dir(a.path))

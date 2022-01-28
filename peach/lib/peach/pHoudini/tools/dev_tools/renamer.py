@@ -68,7 +68,6 @@ class RenamerUI(QtWidgets.QWidget):
         self.selectionCallback(hNode.listSelected())
         hou.ui.addSelectionCallback(self.selectionCallback)
 
-
     def create_widgets(self):
         """[ RenamerUI ] UI Define Widgets """
         # /.title
