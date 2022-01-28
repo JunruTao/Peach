@@ -1,3 +1,4 @@
+from importlib.metadata import files
 import os, datetime, glob
 
 
@@ -19,6 +20,7 @@ def get_file_profile(fname):
 
 def get_topics(fname):
     str_ = ""
+    str_units = []
     with open(fname, "r") as f:
         hit = False
         logged = ""
@@ -27,9 +29,14 @@ def get_topics(fname):
                 hit = True
                 logged = (line.replace(sub_topic_id, "")).rstrip()
             if line.startswith(sub_time_id):
+                str_t = ""
                 line = "[%s ] " % (line.replace(sub_time_id, "")).split('|')[0].rstrip()
-                str_ += list_indent + line 
-                str_ += "<sup><b>%s</b></sup>\n" % logged
+                str_t += list_indent + line 
+                str_t += "<sup><b>%s</b></sup>\n" % logged
+                str_units.append(str_t)
+        str_units.reverse()
+        for s in str_units:
+            str_ += s
     f.close()
     return str_
 
@@ -61,6 +68,7 @@ subfolders = [f.path for f in os.scandir(logs_dir) if f.is_dir()]
 month_list = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
+subfolders.reverse()
 
 for d in subfolders:
     dirname = os.path.split(d)[-1]
@@ -68,26 +76,29 @@ for d in subfolders:
         continue
     
     log_files = []
-    for infile in glob.glob(os.path.join(d, "*.md")):
+    files_list = glob.glob(os.path.join(d, "*.md"))
+    files_list.reverse()
+    for infile in files_list:
         if os.path.split(infile)[-1].startswith('2'):
             log_files.append(infile)
             
-    counter = 0
+    counter_ = len(log_files) + 1
     
     str_data += "## {0} Change Logs: _{1}, {2}_\n\n".format(month_start_symbol,
                                                                 month_list[int(dirname.split("_")[1])-1], 
                                                                 dirname.split("_")[0])
 
+    # log_files.reverse()
     for f in log_files:
-        counter += 1
-        len = get_file_profile(f)
+        counter_ = counter_ - 1
+        length = get_file_profile(f)
         title =  os.path.basename(os.path.splitext(f)[0])
         title = str(title).replace("_", "/")
         title = "Change_Log - Date: %s" % title[:-3]
         file = "./%s/%s" % (dirname, os.path.basename(f))
-        str_data += "\n- :bookmark_tabs: _{2:03d}_. [{0}]({1}) : ".format(title, file, counter)
+        str_data += "\n- :bookmark_tabs: _{2:03d}_. [{0}]({1}) : ".format(title, file, counter_)
         
-        for i in range(len):
+        for i in range(length):
             str_data += length_rep_symbol
             
         str_data += "\n"
