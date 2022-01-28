@@ -34,7 +34,7 @@ eval "git commit -m \"$msg\""
 while true; do
     read -p "Do you want to Push? [Y/N]" yn
     case $yn in
-        [Yy]* ) git push; break;;
+        [Yy]* ) git push; git gc; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
