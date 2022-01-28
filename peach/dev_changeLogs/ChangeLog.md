@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.27__<br>
-> __Time stamp: 22:34:35__<br>
+> __Date stamp: 2022.01.28__<br>
+> __Time stamp: 01:28:04__<br>
 > __Author: Junru Tao__
 ---
 
@@ -187,6 +187,9 @@
    > - [ 14:35:55 ] <sup><b> Build Version Up: `v0.1.21`</b></sup>
    > - [ 22:31:30 ] <sup><b> Fixed problem on window close, image handle releasing</b></sup>
    > - [ 22:34:35 ] <sup><b> `Commit` : updated:</b></sup>
+
+- :bookmark_tabs: _022_. [Change_Log - Date: 2022/01/28](./2022_01/2022_01_28_cl.md) : :bread:
+   > - [ 01:28:04 ] <sup><b> `Commit` : adding new icons</b></sup>
 
 <br><br>
 

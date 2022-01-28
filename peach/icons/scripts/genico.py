@@ -30,7 +30,7 @@ for infile in glob.glob(os.path.join(_dir_png, "*.png")):
     filename = filename.replace("_x500", "")
     
     if not force_rewrite:
-        if filename in existing:
+        if filename in existing or "devtool" in filename:
             print("--- [Skip File] %s" % filename)
             continue
         
