@@ -29,7 +29,7 @@ eval "git status"
 echo "git-commit message: $msg"
 
 
-eval `git commit -m "$msg"`
+eval "git commit -m \"$msg\""
 
 while true; do
     read -p "Do you want to Push? [Y/N]" yn

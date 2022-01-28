@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.28__<br>
-> __Time stamp: 01:52:05__<br>
+> __Time stamp: 01:56:13__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,7 @@
 
 
 - :bookmark_tabs: _022_. [Change_Log - Date: 2022/01/28](./2022_01/2022_01_28_cl.md) : :bread:
+   > - [ 01:56:13 ] <sup><b> `Commit` : try fix gitshell sytax error</b></sup>
    > - [ 01:52:05 ] <sup><b> `Commit` : make change log generator reverves. keep __latest__ on top of the page</b></sup>
    > - [ 01:28:04 ] <sup><b> `Commit` : adding new icons</b></sup>
 
