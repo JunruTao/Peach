@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.29__<br>
-> __Time stamp: 14:25:40__<br>
+> __Time stamp: 21:35:16__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,7 @@
 
 
 - :bookmark_tabs: _023_. [Change_Log - Date: 2022/01/29](./2022_01/2022_01_29_cl.md) : :bread:
+   > - [ 21:35:16 ] <sup><b> `Commit` : update blender test.</b></sup>
    > - [ 14:25:39 ] <sup><b> `Commit` : update on details</b></sup>
 
 - :bookmark_tabs: _022_. [Change_Log - Date: 2022/01/28](./2022_01/2022_01_28_cl.md) : :bread::bread::bread:

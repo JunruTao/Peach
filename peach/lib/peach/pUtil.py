@@ -20,6 +20,9 @@
 #
 # ---------------------------------------------------------------------
 
+PI = 3.141592654
+
+
 # [ Functions ]: Color Casting
 def _col_num_to_normalize(*args):
     """[ Internal ] AnyNum -> (0.0 ~ 1.0)Value"""
@@ -117,6 +120,26 @@ def sRGBA(*args):
         return values[0], values[1], values[2], values[3]
     else:
         return 0, 0, 0, 255
+
+
+def y_to_z_up(*args):
+    if len(args) == 3:
+        return -args[0], args[2], args[1]
+
+
+def y_to_z_up_s(*args):
+    if len(args) == 3:
+        return args[0], args[2], args[1]
+
+
+def y_to_z_up_euler(*args):
+    if len(args) == 3:
+        return args[0] + PI/2, args[2], args[1] + PI
+
+
+def y_to_z_up_euler_d(*args):
+    if len(args) == 3:
+        return args[0]-90, args[2], args[1] + 180
 
 
 def launch_background_blender(python_file=""):
