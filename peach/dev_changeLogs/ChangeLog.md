@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.28__<br>
-> __Time stamp: 02:52:01__<br>
+> __Date stamp: 2022.01.29__<br>
+> __Time stamp: 14:25:40__<br>
 > __Author: Junru Tao__
 ---
 
@@ -14,7 +14,13 @@
 ## :hammer: Change Logs: _Jan, 2022_
 
 
-- :bookmark_tabs: _022_. [Change_Log - Date: 2022/01/28](./2022_01/2022_01_28_cl.md) : :bread::bread:
+- :bookmark_tabs: _023_. [Change_Log - Date: 2022/01/29](./2022_01/2022_01_29_cl.md) : :bread:
+   > - [ 14:25:39 ] <sup><b> `Commit` : update on details</b></sup>
+
+- :bookmark_tabs: _022_. [Change_Log - Date: 2022/01/28](./2022_01/2022_01_28_cl.md) : :bread::bread::bread:
+   > - [ 22:44:56 ] <sup><b> Build Version Up: `v0.1.24`</b></sup>
+   > - [ 22:44:42 ] <sup><b> Build Version Up: `v0.1.23`</b></sup>
+   > - [ 22:15:54 ] <sup><b> Build Version Up: `v0.1.22`</b></sup>
    > - [ 02:52:01 ] <sup><b> `Commit` : update color text test-ignored</b></sup>
    > - [ 01:57:18 ] <sup><b> `Commit` : add compress git database after the push</b></sup>
    > - [ 01:56:13 ] <sup><b> `Commit` : try fix gitshell sytax error</b></sup>

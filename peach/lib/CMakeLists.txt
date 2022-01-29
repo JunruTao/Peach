@@ -5,7 +5,7 @@
 # ------------------------------------------------------------------------------- #
 # This should build the libs copy all the files..
 # [ HOU SETTINGS ] - lib
-set(PACKAGE_VERSION "0.1.46")  # >>>> CONTROL [AUTO]
+set(PACKAGE_VERSION "0.1.49")  # >>>> CONTROL [AUTO]
 
 # [ HOUDINI LIBS ]--------------------------------------------------------------- #
 
@@ -20,6 +20,8 @@ set(HOUDEV_PACKAGES_DIR ${PEACH_DIR}/pHoudini/dev/packages)
 set(HOUDEV_PEACHPY_DIR ${PEACH_DIR}/pHoudini/dev/packages/PeachPy/python3.7libs)
 set(INSTALL_PACKAGES_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages)
 set(INSTALL_PEACHPY_DIR ${PEACH_INSTALL_DIR}/pHoudini/packages/PeachPy/python3.7libs)
+set(INSTALL_PEACH_LIB_DIR ${PEACH_INSTALL_DIR}/lib/python)
+
 
 set(README_STR "# PyPeach ${PACKAGE_VERSION}")
 
@@ -31,6 +33,11 @@ set(HOU_PY_LIBRARIES
     ${LIB_DIR}/pHoudini
     ${LIB_DIR}/pQt
 )
+
+set(BLD_PY_LIBRARIES 
+    ${LIB_DIR}/pBlender
+)
+
 # /.source Python files in lib$peach
 file(GLOB PEACH_DIR_FILES CONFIGURE_DEPENDS ${LIB_DIR}/*.py)
 # /. remove this file and configure if later.
@@ -66,6 +73,7 @@ endif()
 
 # [ HOU: CREATE INSTALL PACKAGE FILES ]
 if(BUILD_INSTALL_HOU)
+    message(STATUS "[Install - lib]: Installing pHoudini...")
     # /.install: configure package file
     configure_file(
         ${HOU_PY_SOURCE_JSON}
@@ -78,7 +86,9 @@ if(BUILD_INSTALL_HOU)
     # /.install: copy
     install(
         DIRECTORY  ${HOU_PY_LIBRARIES}
-        DESTINATION ${INSTALL_PEACHPY_DIR}/peach)
+        DESTINATION ${INSTALL_PEACHPY_DIR}/peach
+        PATTERN
+        "__pycache__" EXCLUDE)
     # /.install.copy peach/*.py
     install(
         FILES ${PEACH_DIR_FILES}
@@ -89,4 +99,25 @@ endif()
 
 add_subdirectory(peach/houdini_panels)
 add_subdirectory(peach/houdini_toolbars)
+
+
 # [ BLENDER LIBS ]--------------------------------------------------------------- #
+if(BUILD_INSTALL_BLD)
+    message(STATUS "[Install - lib]: Installing pBlender...")
+    # /.configure pGlob.py file
+    configure_file(
+        ${LIB_DIR}/pGlob.py
+        ${INSTALL_PEACH_LIB_DIR}/peach/pGlob.py)
+    # /.install: copy
+    install(
+        DIRECTORY  ${BLD_PY_LIBRARIES}
+        DESTINATION ${INSTALL_PEACH_LIB_DIR}/peach
+        PATTERN
+        "__pycache__" EXCLUDE)
+    # /.install.copy peach/*.py
+    install(
+        FILES ${PEACH_DIR_FILES}
+        DESTINATION ${INSTALL_PEACH_LIB_DIR}/peach
+    )
+    file(WRITE ${INSTALL_PEACH_LIB_DIR}/README.md ${README_STR})
+endif()

@@ -116,8 +116,11 @@ def linkNetworkImage(node=None, filepath="", x=0.0, y=0.0, w=0.7, h=0.7):
     image.setRelativeToPath(node.path())
     images = list(editor.backgroundImages())
     images.append(image)
-    editor.setBackgroundImages(images)
-    nodegraphutils.saveBackgroundImages(node.parent(), images)
+    try:
+        editor.setBackgroundImages(images)
+        nodegraphutils.saveBackgroundImages(node.parent(), images)
+    finally:
+        pass
 
 
 def unlinkNetworkImage(node=None):
@@ -132,8 +135,8 @@ def unlinkNetworkImage(node=None):
         if node.path() != i.relativeToPath():
             img_culled.append(i)
 
-    editor.setBackgroundImages(img_culled)
     try:
+        editor.setBackgroundImages(img_culled)
         nodegraphutils.saveBackgroundImages(node.parent(), img_culled)
     finally:
         pass
@@ -152,6 +155,8 @@ def updateNetworkImage(new_node=None, old_path=""):
         if old_path == i.relativeToPath():
             i.setRelativeToPath(new_node.path())
         img_culled.append(i)
-
-    editor.setBackgroundImages(img_culled)
-    nodegraphutils.saveBackgroundImages(new_node.parent(), images)
+    try:
+        editor.setBackgroundImages(img_culled)
+        nodegraphutils.saveBackgroundImages(new_node.parent(), images)
+    finally:
+        pass

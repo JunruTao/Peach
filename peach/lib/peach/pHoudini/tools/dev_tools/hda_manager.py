@@ -36,6 +36,7 @@ _look_up_cats = {"PeachModel": ["Architecture",
                                 "Generators",
                                 "Mechanical",
                                 "Nature",
+                                "Panel"
                                 ],
                  "PeachAsset": ["Utility",
                                 "Material",
@@ -254,7 +255,7 @@ class HdaManagerUI(QtWidgets.QWidget):
             hda_node = self.selected.createDigitalAsset(name=self._hda_op_name,
                                                         hda_file_name=self.txt_full_path.text(),
                                                         description=self.txt_hda_final_name.text(),
-                                                        min_num_inputs=0,
+                                                        min_num_inputs=len(self.selected.inputs()),
                                                         max_num_inputs=0,
                                                         )
             _sheet = _look_up_sheet[self.cmb_packages.currentText()]

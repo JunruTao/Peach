@@ -14,6 +14,12 @@ with open("./CMakeLists.txt", "r") as f:
             _, ver, _ = line.split("\"")
             line = "set(PEACH_VERSION_PATCH \"{0}\")  # [AUTO]\n".format(int(ver) + 1)
             print("[settings-cmake version up]: ", line.rstrip())
+        if str(line).startswith("set(INSTALL_ICON"):
+            line = "set(INSTALL_ICON ON)      # >>>> CONTROL [AUTO]\n"
+            print("[settings-cmake]: ", line.rstrip()) 
+        if str(line).startswith("set(BUILD_BOOTSTRAP"):
+            line = "set(BUILD_BOOTSTRAP ON)      # >>>> CONTROL [AUTO]\n"
+            print("[settings-cmake]: ", line.rstrip())
         main_cmake_str += line
     f.close()
 

@@ -117,3 +117,10 @@ def sRGBA(*args):
         return values[0], values[1], values[2], values[3]
     else:
         return 0, 0, 0, 255
+
+
+def launch_background_blender(python_file=""):
+    from peach import pDir
+    import subprocess
+    blender_exe = pDir.getBlenderExeDir()
+    subprocess.run([blender_exe, "--background", "--python", python_file])

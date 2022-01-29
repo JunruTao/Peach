@@ -16,5 +16,16 @@
 #
 # ---------------------------------------------------------------------
 
+import sys
+sys.path.append('./lib/python')
 
-print("hello world")
+try:
+    import peach
+except ImportError as e:
+    raise e
+finally:
+    from peach import pLog
+    pLog.message("import <peach> Module SUCCESS..", fn="Import", cls="pBlender")
+
+from peach.pBlender import pbu
+pbu.purge_scene() 

@@ -222,6 +222,11 @@ class RenamerUI(QtWidgets.QWidget):
                     suffix = ""
                 else:
                     suffix = "_" + suffix
+
+                # /..input/output has no need.
+                if prefix in ["IN", "OUT"]:
+                    suffix = ""
+
                 with hou.undos.group("Renamer-Rename Nodes"):
                     # /..change name and color
                     sl.setName(prefix + "_" + subject + suffix, unique_name=True)

@@ -25,6 +25,7 @@ from peach import pLog
 
 pImp.reload(pLog)
 _PEACH_DIR = None
+_PEACH_CONFIG_DATA = None
 
 
 # [ PATH FORMAT ]
@@ -224,3 +225,50 @@ def getPeachFontsDir():
     @return: (str) filepath
     """
     return join(getPeachDir(), "fonts")
+
+
+def getConfigData():
+    """
+    [ Peach ] Get `$PEACH/config/startup.pconfig` data
+    @return: (dict) config data:
+    """
+    stp_filepath = join(getPeachDir(), "config/startup.pconfig")
+    data = dict()
+    if exists(stp_filepath):
+        with open(stp_filepath, "r") as f:
+            for line in f:
+                line = line.rstrip()
+                if not line.startswith("#") and line:
+                    if line.startswith("houdini_executable"):
+                        data["houdini_path"] = pathSlashConvert(line.split("\"")[1])
+                    elif line.startswith("blender_executable"):
+                        data["blender_path"] = pathSlashConvert(line.split("\"")[1])
+        global _PEACH_CONFIG_DATA
+        _PEACH_CONFIG_DATA = data
+    else:
+        pLog.warning("Cannot locate config/startup.pconfig file", fn=getConfigData)
+    return data
+
+
+def getHoudiniExeDir():
+    """
+    [ Peach ] Get houdini executable location
+    @return: (str) path
+    """
+    if isinstance(_PEACH_CONFIG_DATA, dict):
+        return _PEACH_CONFIG_DATA.get("houdini_path")
+    else:
+        data = getConfigData()
+        return data.get("houdini_path")
+
+
+def getBlenderExeDir():
+    """
+    [ Peach ] Get houdini executable location
+    @return: (str) path
+    """
+    if isinstance(_PEACH_CONFIG_DATA, dict):
+        return _PEACH_CONFIG_DATA.get("blender_path")
+    else:
+        data = getConfigData()
+        return data.get("blender_path")
