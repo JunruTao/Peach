@@ -167,7 +167,6 @@ def read_keys(filepath="", divider=":"):
         return datasheet
     with open(filepath, "r") as f:
         for line in f:
-            print(line)
             data = (line.rstrip()).split(divider)
             if len(data) == 2:
                 datasheet[data[0].strip()] = data[1].strip()

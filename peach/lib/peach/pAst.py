@@ -64,7 +64,7 @@ def get_lib_type():
     <br> in lib_path/__lib__ file should contain i.g. <code>type:project</code> data
     @return: (str) library type
     """
-    data_ = pUtil.read_keys(get_lib_path(), ":")
+    data_ = pUtil.read_keys(pDir.join(get_lib_path(), "__lib__"), ":")
     type_ = data_.get("type")
     if type_:
         return type_
@@ -83,6 +83,23 @@ def get_categories():
     for c in cats:
         _dict[pDir.fileName(c)] = c
     return _dict
+
+
+def get_cat_prefix(cat=""):
+    """
+    [ Asset ] Get Library Categories
+    @param cat: (str) cat_name
+    @return: (str) prefix of category
+    """
+    cat_d = get_categories().get(cat)
+    if cat_d:
+        cat_d = pDir.join(cat_d, "__cat__")
+        data_ = pUtil.read_keys(cat_d, ":")
+        prf_ = data_.get("prefix")
+        if prf_:
+            return prf_
+    pLog.warning("Can not find any information in __cat__ file", cls="CatPrefix", fn=cat)
+    return ""
 
 
 def get_types(cat=""):
@@ -116,9 +133,17 @@ def get_assets(cat="", tp=""):
     return _dict
 
 
-def get_cat_prefix(cat=""):
+def resolve(wd=""):
     """
-    [ Asset ] Get Category's nickname/prefix
-    @param cat:
-    @return:
+    [ Asset ] resolve all the information from current working directory
+    @param wd: (str) working directory
+    @return: (dict) data
     """
+    if wd:
+        set_workdir(wd)
+    lib_dir = get_lib_path()
+    data = dict()
+    if lib_dir in WORKING_DIR:
+        # /.it's currently working on an asset.
+        # todo: should store in +class or global variable.
+        pass

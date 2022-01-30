@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.30__<br>
-> __Time stamp: 05:42:20__<br>
+> __Time stamp: 06:04:24__<br>
 > __Author: Junru Tao__
 ---
 
@@ -14,7 +14,8 @@
 ## :hammer: Change Logs: _Jan, 2022_
 
 
-- :bookmark_tabs: _024_. [Change_Log - Date: 2022/01/30](./2022_01/2022_01_30_cl.md) : :bread::bread::bread:
+- :bookmark_tabs: _024_. [Change_Log - Date: 2022/01/30](./2022_01/2022_01_30_cl.md) : :bread::bread::bread::bread:
+   > - [ 06:04:24 ] <sup><b> `Commit` : adding todo:  function to complete, should call this function in any context and get all the information</b></sup>
    > - [ 05:42:19 ] <sup><b> `Commit` : moved parsing function to pUtil. added more specific asset template: see  module file comment</b></sup>
    > - [ 05:41:26 ] <sup><b> PeachPy Lib-Build: v0.1.52</b></sup>
    > - [ 04:48:32 ] <sup><b> PeachPy Lib-Build: v0.1.51</b></sup>
