@@ -26,6 +26,7 @@ from peach import pLog
 pImp.reload(pLog)
 _PEACH_DIR = None
 _PEACH_CONFIG_DATA = None
+_USER_ASSET_LIB_DIR = None
 
 
 # [ PATH FORMAT ]
@@ -272,3 +273,41 @@ def getBlenderExeDir():
     else:
         data = getConfigData()
         return data.get("blender_path")
+
+
+def getUserLibDir(working_dir=""):
+    global _USER_ASSET_LIB_DIR
+    if _USER_ASSET_LIB_DIR and exists(_USER_ASSET_LIB_DIR):
+        return _USER_ASSET_LIB_DIR
+    # finding lib:
+    library_dir = ""
+    library_id_file = ""
+    _id_file_name = "__lib__"
+    if not working_dir:
+        working_dir = os.getcwd()
+    elif os.path.isfile(working_dir):
+        working_dir = os.path.dirname(working_dir)
+    out_dir = working_dir
+    while not exists(library_dir) or not exists(library_id_file):
+        this_local_files = listfiles(out_dir, n=True)
+        if _id_file_name in this_local_files:
+            # /.lib dir is this path
+            _USER_ASSET_LIB_DIR = out_dir
+            return out_dir
+        this_local_folders = listdir(out_dir)
+        for folder in this_local_folders:
+            # /.lib dir is in parallel path
+            library_dir = folder
+            library_id_file = join(folder, _id_file_name)
+            if exists(library_id_file):
+                _USER_ASSET_LIB_DIR = library_dir
+                return library_dir
+        library_dir = out_dir = os.path.dirname(out_dir)
+        library_id_file = join(library_dir, _id_file_name)
+        if exists(library_id_file):
+            # /.lib dir is upper path
+            _USER_ASSET_LIB_DIR = library_dir
+            return library_dir
+        if library_dir == os.path.dirname(out_dir):
+            # /.out of scope
+            pLog.error("Cannot Find library directory", fn=getUserLibDir, cls="pDir")

@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.30__<br>
-> __Time stamp: 01:20:34__<br>
+> __Time stamp: 03:06:04__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,7 @@
 
 
 - :bookmark_tabs: _024_. [Change_Log - Date: 2022/01/30](./2022_01/2022_01_30_cl.md) : :bread:
+   > - [ 03:06:04 ] <sup><b> `Commit` : added  function</b></sup>
    > - [ 01:20:33 ] <sup><b> `Commit` : moved old hdas.</b></sup>
    > - [ 01:20:03 ] <sup><b> Build Version Up: `v0.1.25`</b></sup>
 
