@@ -150,6 +150,7 @@ class HdaManagerUI(QtWidgets.QWidget):
 
         self.bnt_new_hda = QtWidgets.QPushButton("Dump!!!!")
         self.bnt_new_hda.setFixedHeight(50)
+        self.bnt_temp = QtWidgets.QPushButton("temp")
 
     def create_layouts(self):
         """[ HdaManagerUI ] UI Construct Layout """
@@ -186,6 +187,7 @@ class HdaManagerUI(QtWidgets.QWidget):
         # /..Final Layout
         layout_main.addLayout(lyt_hda_names)
         layout_main.addWidget(self.bnt_new_hda)
+        layout_main.addWidget(self.bnt_temp)
         layout_main.addStretch()
         self.setLayout(layout_main)
 
@@ -201,6 +203,7 @@ class HdaManagerUI(QtWidgets.QWidget):
         self.cmb_hda_v_minor.currentTextChanged.connect(self.update_path)
         self.txt_hda_name.textChanged.connect(self.update_path)
         self.bnt_new_hda.clicked.connect(self.create_hda_and_dump)
+        self.bnt_temp.clicked.connect(self.add_definitions_temp)
 
     def populate_menu(self):
         """[ HdaManagerUI ] UI Populate Menus """
@@ -284,6 +287,21 @@ class HdaManagerUI(QtWidgets.QWidget):
             new_node = parent.createNode(self._hda_op_name)
             new_node.setPosition(last_pos)
             new_node.allowEditingOfContents()
+
+    def add_definitions_temp(self):
+        node_ = hNode.listSelected()[0]
+        hda_def = node_.type().definition()
+        _sheet = _look_up_sheet["PeachModel"]
+        # /.Write Extra Information
+        hda_def.addSection("OnCreated", _hda_OnCreated_str.format(col=_sheet[2],
+                                                                  img=_sheet[3]))
+        hda_def.addSection("OnDeleted", _hda_OnDeleted_str)
+        hda_def.addSection("OnNameChanged", _hda_OnNameChanged_str)
+        for sec in ("OnCreated", "OnDeleted", "OnNameChanged"):
+            hda_def.setExtraFileOption("{}/IsPython".format(sec), True)
+            hda_def.setExtraFileOption("{}/IsScript".format(sec), True)
+        # /.Save definition
+        hda_def.save(hda_def.libraryFilePath(), node_)
 
     def selectionCallback(self, selection):
         """[ RenamerUI ] Callback"""

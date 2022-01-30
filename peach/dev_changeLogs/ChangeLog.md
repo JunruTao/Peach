@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.29__<br>
-> __Time stamp: 21:35:16__<br>
+> __Date stamp: 2022.01.30__<br>
+> __Time stamp: 01:20:34__<br>
 > __Author: Junru Tao__
 ---
 
@@ -13,6 +13,10 @@
 
 ## :hammer: Change Logs: _Jan, 2022_
 
+
+- :bookmark_tabs: _024_. [Change_Log - Date: 2022/01/30](./2022_01/2022_01_30_cl.md) : :bread:
+   > - [ 01:20:33 ] <sup><b> `Commit` : moved old hdas.</b></sup>
+   > - [ 01:20:03 ] <sup><b> Build Version Up: `v0.1.25`</b></sup>
 
 - :bookmark_tabs: _023_. [Change_Log - Date: 2022/01/29](./2022_01/2022_01_29_cl.md) : :bread:
    > - [ 21:35:16 ] <sup><b> `Commit` : update blender test.</b></sup>
