@@ -172,3 +172,22 @@ def read_keys(filepath="", divider=":"):
                 datasheet[data[0].strip()] = data[1].strip()
         f.close()
     return datasheet
+
+
+def get_dcc():
+    # /. see if this is running in houdini
+    try:
+        import hou
+        dcc = "houdini"
+    except ImportError:
+        dcc = "none"
+        pass
+    # /. see if this is running in blender
+    try:
+        import bpy
+        if bpy.data:
+            dcc = "blender"
+    except ImportError:
+        dcc = "none"
+        pass
+    return dcc

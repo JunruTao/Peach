@@ -20,10 +20,13 @@
 #
 # ---------------------------------------------------------------------
 import os
+
+import pUtil
 from peach import pImp
 from peach import pLog
+from peach import pGlob
+pImp.reload(pLog, pGlob)
 
-pImp.reload(pLog)
 _PEACH_DIR = None
 _PEACH_CONFIG_DATA = None
 _USER_ASSET_LIB_DIR = None
@@ -304,7 +307,7 @@ def getUserLibDir(working_dir=""):
     # finding lib:
     library_dir = ""
     library_id_file = ""
-    _id_file_name = "__lib__"
+    _id_file_name = pGlob.PEACH_GLOBAL_ASSET_LIB_ID
     if not working_dir:
         working_dir = os.getcwd()
     elif os.path.isfile(working_dir):
@@ -332,5 +335,11 @@ def getUserLibDir(working_dir=""):
             return _USER_ASSET_LIB_DIR
         if library_dir == os.path.dirname(out_dir):
             # /.out of scope
+            dcc_msg = "Please set the correct working directory"
+            dcc = pUtil.get_dcc()
+            if dcc == "houdini":
+                dcc_msg = "please set the correct HIP file or save under the correct libray workdir"
+            elif dcc == "blender":
+                dcc_msg = "please save blender file under the correct libray workdir"
             pLog.error("Cannot Find library directory", fn=getUserLibDir, cls="pDir")
-            raise RuntimeError("Cannot Find library directory")
+            raise RuntimeError("Cannot Find library directory: {dcc_msg}".format(dcc_msg=dcc_msg))
