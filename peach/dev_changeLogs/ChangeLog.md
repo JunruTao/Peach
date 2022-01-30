@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.30__<br>
-> __Time stamp: 04:02:09__<br>
+> __Time stamp: 05:42:20__<br>
 > __Author: Junru Tao__
 ---
 
@@ -14,7 +14,10 @@
 ## :hammer: Change Logs: _Jan, 2022_
 
 
-- :bookmark_tabs: _024_. [Change_Log - Date: 2022/01/30](./2022_01/2022_01_30_cl.md) : :bread:
+- :bookmark_tabs: _024_. [Change_Log - Date: 2022/01/30](./2022_01/2022_01_30_cl.md) : :bread::bread::bread:
+   > - [ 05:42:19 ] <sup><b> `Commit` : moved parsing function to pUtil. added more specific asset template: see  module file comment</b></sup>
+   > - [ 05:41:26 ] <sup><b> PeachPy Lib-Build: v0.1.52</b></sup>
+   > - [ 04:48:32 ] <sup><b> PeachPy Lib-Build: v0.1.51</b></sup>
    > - [ 04:02:09 ] <sup><b> `Commit` : adding basic asset getter functions. resolving the path and find assets</b></sup>
    > - [ 03:06:04 ] <sup><b> `Commit` : added  function</b></sup>
    > - [ 01:20:33 ] <sup><b> `Commit` : moved old hdas.</b></sup>

@@ -19,6 +19,8 @@
 #   parsing, etc. Should be included in this module
 #
 # ---------------------------------------------------------------------
+from peach import pImp, pLog, pDir
+pImp.reload(pLog, pDir)
 
 PI = 3.141592654
 
@@ -147,3 +149,27 @@ def launch_background_blender(python_file=""):
     import subprocess
     blender_exe = pDir.getBlenderExeDir()
     subprocess.run([blender_exe, "--background", "--python", python_file])
+
+
+def read_keys(filepath="", divider=":"):
+    """
+    [ Util ] Parse a file which contains linear keys
+    @param filepath: (str) filepath
+    @param divider: (str) divider to split token and values
+    @return: (dict) data sheet
+    """
+    datasheet = dict()
+    if not pDir.exists(filepath):
+        pLog.warning("filepath: {} does not exist".format(filepath), fn=read_keys, cls="pUtil")
+        return datasheet
+    elif not pDir.isFile(filepath):
+        pLog.warning("filepath: {} is not a file".format(filepath), fn=read_keys, cls="pUtil")
+        return datasheet
+    with open(filepath, "r") as f:
+        for line in f:
+            print(line)
+            data = (line.rstrip()).split(divider)
+            if len(data) == 2:
+                datasheet[data[0].strip()] = data[1].strip()
+        f.close()
+    return datasheet

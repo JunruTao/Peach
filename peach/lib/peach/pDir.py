@@ -67,6 +67,24 @@ def exists(path):
     return os.path.exists(path)
 
 
+def isFile(path):
+    """
+    Check if this path is file
+    @param path: (str) path
+    @return: (bool) if is a file
+    """
+    return os.path.isfile(path)
+
+
+def isDir(path):
+    """
+    Check if this path is directory
+    @param path: (str) path
+    @return: (bool) if is a directory
+    """
+    return os.path.isdir(path)
+
+
 # [ PATH FUNCTIONS ] - os.path impl
 def join(*args):
     """
