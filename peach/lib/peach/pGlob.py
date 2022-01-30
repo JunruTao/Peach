@@ -52,6 +52,7 @@ DEFAULT_MATERIALS = (
     "silver",
     "skin",
     "plaster",
+    "plastic",
     "cloth",
     "timber",
     "wood",

@@ -54,6 +54,10 @@ def fileNameBare(filepath=''):
     return remove_ext(fileName(filepath))
 
 
+def parent(filepath=''):
+    return pathSlashConvert(os.path.dirname(filepath))
+
+
 def exists(path):
     """
     Check if the path exists
@@ -83,7 +87,7 @@ def ls(path="", n=False):
         return None
     if n:
         return [f.name for f in os.scandir(path)]
-    return [f.path for f in os.scandir(path)]
+    return [pathSlashConvert(f.path) for f in os.scandir(path)]
 
 
 def listdir(path="", n=False):
@@ -96,7 +100,7 @@ def listdir(path="", n=False):
         return None
     if n:
         return [f.name for f in os.scandir(path) if f.is_dir()]
-    return [f.path for f in os.scandir(path) if f.is_dir()]
+    return [pathSlashConvert(f.path) for f in os.scandir(path) if f.is_dir()]
 
 
 def listfiles(path="", n=False):
@@ -109,7 +113,7 @@ def listfiles(path="", n=False):
         return None
     if n:
         return [f.name for f in os.scandir(path) if f.is_file()]
-    return [f.path for f in os.scandir(path) if f.is_file()]
+    return [pathSlashConvert(f.path) for f in os.scandir(path) if f.is_file()]
 
 
 # [ PEACH DIR FUNCTION ]
@@ -292,22 +296,23 @@ def getUserLibDir(working_dir=""):
         this_local_files = listfiles(out_dir, n=True)
         if _id_file_name in this_local_files:
             # /.lib dir is this path
-            _USER_ASSET_LIB_DIR = out_dir
-            return out_dir
+            _USER_ASSET_LIB_DIR = pathSlashConvert(out_dir)
+            return _USER_ASSET_LIB_DIR
         this_local_folders = listdir(out_dir)
         for folder in this_local_folders:
             # /.lib dir is in parallel path
             library_dir = folder
             library_id_file = join(folder, _id_file_name)
             if exists(library_id_file):
-                _USER_ASSET_LIB_DIR = library_dir
-                return library_dir
+                _USER_ASSET_LIB_DIR = pathSlashConvert(library_dir)
+                return _USER_ASSET_LIB_DIR
         library_dir = out_dir = os.path.dirname(out_dir)
         library_id_file = join(library_dir, _id_file_name)
         if exists(library_id_file):
             # /.lib dir is upper path
-            _USER_ASSET_LIB_DIR = library_dir
-            return library_dir
+            _USER_ASSET_LIB_DIR = pathSlashConvert(library_dir)
+            return _USER_ASSET_LIB_DIR
         if library_dir == os.path.dirname(out_dir):
             # /.out of scope
             pLog.error("Cannot Find library directory", fn=getUserLibDir, cls="pDir")
+            raise RuntimeError("Cannot Find library directory")
