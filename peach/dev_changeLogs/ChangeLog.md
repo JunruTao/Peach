@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.01.30__<br>
-> __Time stamp: 06:04:24__<br>
+> __Time stamp: 06:10:04__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,7 @@
 
 
 - :bookmark_tabs: _024_. [Change_Log - Date: 2022/01/30](./2022_01/2022_01_30_cl.md) : :bread::bread::bread::bread:
+   > - [ 06:10:04 ] <sup><b> `Commit` : make hNode's network image functions safer</b></sup>
    > - [ 06:04:24 ] <sup><b> `Commit` : adding todo:  function to complete, should call this function in any context and get all the information</b></sup>
    > - [ 05:42:19 ] <sup><b> `Commit` : moved parsing function to pUtil. added more specific asset template: see  module file comment</b></sup>
    > - [ 05:41:26 ] <sup><b> PeachPy Lib-Build: v0.1.52</b></sup>
