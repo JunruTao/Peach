@@ -24,12 +24,30 @@
 #       +-- categories/__cat__ (prefix:nickname i.g.BPS for building_parts)
 #       +---- type/__type__ ---> ./addon, ./wall, ./windows (short as possible)
 #       +------ asset/__ast__ ---> asset name as `wallAcUnit_A` <- A is variant
-#       +-------- step_lvl/__stp__ ---> files:
+#       +-------- variant/__vrt__  A, B, C...
+#       +------------ step/MDL_A, ANM_AxA ... ---> files: Todo:
+#
+#       ../wallAcUnit_A
+#        __ast__
+#             ./ A
+#             __vrt__
 #             *====[ wallAcUnit_A_MDL_A.v001 ] * .blend, .fbx(mid), .bgeo (static)
 #             *====[ wallAcUnit_A_MDL_A.v002 ] .blend
+#             *====[ wallAcUnit_A_ANM_AxA.v001 ] .blend (different in motion)
+#             ./ B
+#             __vrt__
 #             *====[ wallAcUnit_A_MDL_B.v001 ] .blend (only different in shading)
-#             *====[ wallAcUnit_A_ANM_A.v001 ] .blend (different in motion)
-#             *====[ wallAcUnit_A_ANM_B.v001 ] .blend (different in motion, ...)
+#             *====[ wallAcUnit_A_ANM_BxA.v001 ] .blend (different in motion, ...)
+#             *====[ wallAcUnit_A_ANM_BxB.v001 ] .blend (different in motion, ...)
+#      ../wallAcUnit_B
+#        __ast__
+#             ./ A
+#             __vrt__
+#             *====[ wallAcUnit_B_MDL_A.v001 ] *
+#             *====[ wallAcUnit_B_MDL_A.v002 ] *
+#             ./ B
+#             __vrt__
+#             *====[ wallAcUnit_B_MDL_B.v001 ] *
 #
 #
 # ---------------------------------------------------------------------
@@ -51,6 +69,7 @@ __LIB__ = pGlob.PEACH_GLOBAL_ASSET_LIB_ID
 __CAT__ = "__cat__"
 __TYP__ = "__type__"
 __AST__ = "__ast__"
+__VRT__ = "__vrt__"
 
 
 class Struct(object):
@@ -129,6 +148,12 @@ class Ast(Struct):
         self._base_name, self._variant = tuple(name.split("_"))
 
 
+class Vrt(Struct):
+    def __init__(self, name="", path="", parent=None):
+        super(Vrt, self).__init__(name, path, parent)
+        # TODO:
+
+
 def init_lib(wd=""):
     """
     [ Asset ] Initialize Current Lib object
@@ -137,8 +162,12 @@ def init_lib(wd=""):
     global _LIBS_CONTAINER, _cw_lib
     set_wd(wd)
     _cw_lib = Lib()
-    _cw_lib.set_name("{}_library".format(_cw_lib.libType()))
-    _LIBS_CONTAINER["current"] = _cw_lib
+    if _cw_lib.path():
+        _cw_lib.set_name("{}_{}_library".format(pDir.parent(_cw_lib.path(), n=True),
+                                                _cw_lib.libType()))
+        _LIBS_CONTAINER["current"] = _cw_lib
+    else:
+        _cw_lib = None
 
 
 def get_libs():
@@ -249,13 +278,20 @@ def _get_assets(cat="", tp=""):
     return _dict
 
 
+def _get_variants(ast_dir=""):
+    _dict = dict()
+    vrt_list = [d for d in pDir.listdir(ast_dir) if pDir.exists(pDir.join(d, __VRT__))]
+    for v in vrt_list:
+        _dict[pDir.fileName(v)] = v
+
+
 def resolve(wd="", ):
     """
     [ Asset ] resolve all the information from current working directory
     @param wd: (str) working directory
     @return: (dict) data
     """
-    if _LIBS_CONTAINER or _cw_lib:
+    if len(_LIBS_CONTAINER.keys()) and _cw_lib:
         # /. already resolved.
         return -1
     if _WORKING_DIR:
@@ -295,7 +331,7 @@ def reset():
     _cw_typ = None
     _cw_ast = None
     _WORKING_DIR = ""
-    _LIBS_CONTAINER = dict()
+    _LIBS_CONTAINER.clear()
 
 
 def assets():

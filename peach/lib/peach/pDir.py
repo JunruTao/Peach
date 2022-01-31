@@ -21,11 +21,11 @@
 # ---------------------------------------------------------------------
 import os
 
-import pUtil
+from peach import pUtil
 from peach import pImp
 from peach import pLog
 from peach import pGlob
-pImp.reload(pLog, pGlob)
+pImp.reload(pLog, pGlob, pUtil)
 
 _PEACH_DIR = None
 _PEACH_CONFIG_DATA = None
@@ -57,7 +57,15 @@ def fileNameBare(filepath=''):
     return remove_ext(fileName(filepath))
 
 
-def parent(filepath=''):
+def parent(filepath='', n=False):
+    """
+
+    @param filepath: (str) directory
+    @param n: (bool) if return name
+    @return: (str) filepath or name:
+    """
+    if n:
+        return os.path.basename(os.path.dirname(filepath))
     return pathSlashConvert(os.path.dirname(filepath))
 
 

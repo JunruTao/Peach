@@ -6,9 +6,9 @@
 # ------------------------------------------------------------------------------- #
 # [ QUICK BUILD OPTIONS ]
 # /. build the dev version only
-set(BUILD_DEV_NOT_INSTALL TRUE)  # >>>> CONTROL [AUTO]
+set(BUILD_DEV_NOT_INSTALL FALSE)  # >>>> CONTROL [AUTO]
 # /. build lib only
-set(BUILD_DEVLIB_ONLY TRUE)      # >>>> CONTROL [AUTO]
+set(BUILD_DEVLIB_ONLY FALSE)      # >>>> CONTROL [AUTO]
 
 # [ CMAKE CONFIGURATION ]
 CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
@@ -51,9 +51,9 @@ set(PEACH_ICONS_ICO_DIR "${PEACH_DIR}/icons/ICO")
 
 # [ INSTALLATION OPTIONS ]
 # /. Install Settings
-set(INSTALL_ICON ON)      # >>>> CONTROL [AUTO]
+set(INSTALL_ICON OFF)      # >>>> CONTROL [AUTO]
 set(INSTALL_CONFIG ON)
-set(BUILD_BOOTSTRAP ON)      # >>>> CONTROL [AUTO]
+set(BUILD_BOOTSTRAP OFF)      # >>>> CONTROL [AUTO]
 # /. Houdini Dev Builds
 set(BUILD_DEV_HOU ON)
 set(BUILD_INSTALL_HOU ON)

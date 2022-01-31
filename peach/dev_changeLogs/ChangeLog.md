@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.01.30__<br>
-> __Time stamp: 23:08:00__<br>
+> __Date stamp: 2022.01.31__<br>
+> __Time stamp: 03:45:03__<br>
 > __Author: Junru Tao__
 ---
 
@@ -13,6 +13,10 @@
 
 ## :hammer: Change Logs: _Jan, 2022_
 
+
+- :bookmark_tabs: _025_. [Change_Log - Date: 2022/01/31](./2022_01/2022_01_31_cl.md) : :bread:
+   > - [ 03:45:03 ] <sup><b> `Commit` : asset basic resolving working. houdini asset publisher HDA</b></sup>
+   > - [ 03:44:39 ] <sup><b> PeachPy Lib-Build: v0.1.53</b></sup>
 
 - :bookmark_tabs: _024_. [Change_Log - Date: 2022/01/30](./2022_01/2022_01_30_cl.md) : :bread::bread::bread::bread::bread:
    > - [ 23:08:00 ] <sup><b> `Commit` : update working pAst. tested</b></sup>
