@@ -71,7 +71,14 @@ __TYP__ = "__type__"
 __AST__ = "__ast__"
 __VRT__ = "__vrt__"
 
+# [ Asset ] Templates:
+_MDL_t = "{ast}_MDL_{var}"
+_ANM_t = "{ast}_ANM_{var}"
+_VER_t = ".v{0:03d}"
+_VAR_t = pGlob.ALPHA
 
+
+# [ Asset ]: OBJECTS ------------------------------------------
 class Struct(object):
     def __init__(self, name="", path="", parent=None):
         self._name = name
@@ -145,16 +152,29 @@ class Typ(Struct):
 class Ast(Struct):
     def __init__(self, name="", path="", parent=None):
         super(Ast, self).__init__(name, path, parent)
-        self._base_name, self._variant = tuple(name.split("_"))
+        self._base_name, self._suf = tuple(name.split("_"))
+        for key, path in _get_variants(self.path()).items():
+            self.addItem(key, Vrt(key, path, self))
+
+    def base_name(self):
+        return self._base_name
+
+    def suffix_name(self):
+        return self._suf
+
+    def get_step_variant_names(self):
+        return list(self.children_dict().keys())
 
 
 class Vrt(Struct):
     def __init__(self, name="", path="", parent=None):
         super(Vrt, self).__init__(name, path, parent)
-        # TODO:
+        self._mdl_tpl = _MDL_t.format(ast=self.parent().name(), var=self.name())
+        self._anm_tpl = _ANM_t.format(ast=self.parent().name(), var=self.name())
 
 
-def init_lib(wd=""):
+# [ Asset ]: PROTECTED ------------------------------------------
+def _init_lib(wd=""):
     """
     [ Asset ] Initialize Current Lib object
     @param wd: (str) working dir
@@ -168,31 +188,6 @@ def init_lib(wd=""):
         _LIBS_CONTAINER["current"] = _cw_lib
     else:
         _cw_lib = None
-
-
-def get_libs():
-    """
-    [ Asset ] Get Libs
-    @return: (dict) dict of registered  peach.pAst.Lib object instances
-    """
-    return _LIBS_CONTAINER
-
-
-def set_wd(wd=""):
-    """
-    [ Asset ] Set current working directory
-    @param wd: (str) working directory
-    """
-    global _WORKING_DIR
-    _WORKING_DIR = pDir.pathSlashConvert(str(wd))
-
-
-def cwd():
-    """
-    [ Asset ] Get Current working directory
-    @return: (str) wd
-    """
-    return _WORKING_DIR
 
 
 def _get_lib_path():
@@ -279,10 +274,16 @@ def _get_assets(cat="", tp=""):
 
 
 def _get_variants(ast_dir=""):
+    """
+    [ Asset ] Get Asset Variants
+    @param ast_dir: (str) asset filepath
+    @return: (dict) variant: variant_folder_path
+    """
     _dict = dict()
     vrt_list = [d for d in pDir.listdir(ast_dir) if pDir.exists(pDir.join(d, __VRT__))]
     for v in vrt_list:
         _dict[pDir.fileName(v)] = v
+    return _dict
 
 
 def resolve(wd="", ):
@@ -296,7 +297,7 @@ def resolve(wd="", ):
         return -1
     if _WORKING_DIR:
         wd = _WORKING_DIR
-    init_lib(wd)
+    _init_lib(wd)
 
     # /. resolving
     global _cw_lvl, _cw_cat, _cw_typ, _cw_ast
@@ -320,6 +321,32 @@ def resolve(wd="", ):
         return 0
 
 
+# [ Asset ]: API ------------------------------------------
+def get_libs():
+    """
+    [ Asset ] Get Libs
+    @return: (dict) dict of registered  peach.pAst.Lib object instances
+    """
+    return _LIBS_CONTAINER
+
+
+def set_wd(wd=""):
+    """
+    [ Asset ] Set current working directory
+    @param wd: (str) working directory
+    """
+    global _WORKING_DIR
+    _WORKING_DIR = pDir.pathSlashConvert(str(wd))
+
+
+def cwd():
+    """
+    [ Asset ] Get Current working directory
+    @return: (str) wd
+    """
+    return _WORKING_DIR
+
+
 def reset():
     """
     [ Asset ] Clear Local Data (rest)
@@ -334,7 +361,7 @@ def reset():
     _LIBS_CONTAINER.clear()
 
 
-def assets():
+def all_assets():
     """
     [ Asset ] Get Registered asset objects
     @return:
@@ -356,12 +383,48 @@ def cwl():
     return _cw_lvl
 
 
+# [ Asset ]: LIBRARY ------------------------------------------
+def is_lib():
+    """
+    [ Asset ] has working Lib
+    @return: (bool)
+    """
+    return isinstance(_cw_lib, Lib)
+
+
 def current_lib():
     """
     [ Asset ] get Current working Lib
     @return: (peach.pAst.Lib) object instance
     """
-    return _cw_lib
+    return _cw_lib if isinstance(_cw_lib, Lib) else None
+
+
+def current_lib_name():
+    """
+    [ Asset ] get Current working Lib name
+    @return: (str) name
+    """
+    out = current_lib()
+    return out.name() if out else ""
+
+
+def current_lib_path():
+    """
+     [ Asset ] get Current working Library path
+    @return:
+    """
+    out = current_lib()
+    return out.path() if out else ""
+
+
+# [ Asset ]: CATEGORY ------------------------------------------
+def is_cat():
+    """
+    [ Asset ] has working Category
+    @return: (bool)
+    """
+    return isinstance(_cw_cat, Cat)
 
 
 def current_cat():
@@ -369,7 +432,34 @@ def current_cat():
     [ Asset ] get Current working Category
     @return: (peach.pAst.Cat) object instance
     """
-    return _cw_cat
+    return _cw_cat if isinstance(_cw_cat, Cat) else None
+
+
+def current_cat_name():
+    """
+    [ Asset ] get Current working Category name
+    @return: (str) name
+    """
+    out = current_cat()
+    return out.name() if out else ""
+
+
+def current_cat_path():
+    """
+     [ Asset ] get Current working Category path
+    @return:
+    """
+    out = current_cat()
+    return out.path() if out else ""
+
+
+# [ Asset ]: TYPE --------------------------------------------
+def is_type():
+    """
+    [ Asset ] has working Type
+    @return: (bool)
+    """
+    return isinstance(_cw_typ, Typ)
 
 
 def current_type():
@@ -377,7 +467,34 @@ def current_type():
     [ Asset ] get Current working Type
     @return: (peach.pAst.Typ) object instance
     """
-    return _cw_typ
+    return _cw_typ if isinstance(_cw_typ, Typ) else None
+
+
+def current_type_name():
+    """
+    [ Asset ] get Current working Type name
+    @return: (str) name
+    """
+    out = current_type()
+    return out.name() if out else ""
+
+
+def current_type_path():
+    """
+     [ Asset ] get Current working Type path
+    @return:
+    """
+    out = current_type()
+    return out.path() if out else ""
+
+
+# [ Asset ]: ASSET --------------------------------------------
+def is_asset():
+    """
+    [ Asset ] has working Asset
+    @return: (bool)
+    """
+    return isinstance(_cw_ast, Ast)
 
 
 def current_asset():
@@ -385,4 +502,145 @@ def current_asset():
     [ Asset ] get Current working Asset
     @return: (peach.pAst.Ast) object instance
     """
-    return _cw_ast
+    return _cw_ast if isinstance(_cw_ast, Ast) else None
+
+
+def current_asset_name():
+    """
+    [ Asset ] get Current working Asset name
+    @return: (str) name
+    """
+    out = current_asset()
+    return out.name() if out else ""
+
+
+def current_asset_path():
+    """
+     [ Asset ] get Current working Asset path
+    @return:
+    """
+    out = current_asset()
+    return out.path() if out else ""
+
+
+_init_script_src = """#!/usr/bin/env python
+import subprocess
+subprocess.run(["{blender_exe}", 
+                "-con", 
+                "--debug-python", 
+                "--python", 
+                "{cmd_script}"])
+"""
+
+_init_script_bg_src = """#!/usr/bin/env python
+import subprocess
+subprocess.run(["{blender_exe}", 
+                "--background", 
+                "--python", 
+                "{cmd_script}"])
+"""
+
+
+_init_cmd_src = """#!/usr/bin/env python
+import bpy
+import sys
+sys.path.append("{python_lib_dir}")
+try:
+    import peach
+except ImportError as e:
+    raise e
+finally:
+    from peach import pLog
+    pLog.message("import <peach> Module SUCCESS..", fn="Import", cls="pBlender")
+from peach.pBlender import pbu
+pbu.purge_scene()
+bpy.ops.import_scene.fbx(filepath="{fbx_file}")
+bpy.ops.wm.save_as_mainfile(filepath="{blend_file}")
+"""
+
+
+def hou_script_pub_cache_dir():
+    """
+    [ Asset (Beta) ] get script cache dir
+    @return: (str) script_cache dir
+    """
+    return pDir.join(cwd(), "script_cache")
+
+
+def hou_publish_init_script_dir():
+    """
+    [ Asset (Beta) ] get init script dir
+    @return: (str) scripts' dirs
+    """
+    script_cache_dir = hou_script_pub_cache_dir()
+    init_script_path = pDir.join(script_cache_dir, "htb_init.py")
+    init_cmd_script_path = pDir.join(script_cache_dir, "bln_import_cmds.py")
+    return init_script_path, init_cmd_script_path
+
+
+def hou_run_publish_script(asset_path="", bg=False):
+    """
+    [ Asset (Beta) ] Output file and run scripts:
+    @param asset_path: (str) asset path to be published
+    @param bg: (bool) running in background
+    """
+    if asset_path:
+        script_cache_dir = hou_script_pub_cache_dir()
+        if not pDir.exists(script_cache_dir):
+            pDir.mkdir(script_cache_dir)
+
+        init_script_path, init_cmd_script_path = hou_publish_init_script_dir()
+
+        out_str = _init_script_src
+        if bg:
+            out_str = _init_script_bg_src
+        out_str = out_str.format(blender_exe=pDir.getBlenderExeDir(),
+                                 cmd_script=init_cmd_script_path)
+
+        with open(init_script_path, "w+") as f:
+            f.write(out_str)
+
+        out_str = _init_cmd_src.format(python_lib_dir=pDir.getPeachBlendLibDir(),
+                                       fbx_file=asset_path.replace("$<EXT>", "fbx"),
+                                       blend_file=asset_path.replace("$<EXT>", "blend")
+                                       )
+        with open(init_cmd_script_path, "w+") as f:
+            f.write(out_str)
+
+
+def get_latest_model_version(asset_path=""):
+    latest_v = 0
+    if not asset_path:
+        raise pLog.error("Error",
+                         fn=get_latest_model_version,
+                         cls="pAst",
+                         e=RuntimeError("Please Specify an asset path"))
+    ast_name = pDir.fileName(asset_path)
+    asset_path = pDir.join(asset_path, "A")
+    fs = pDir.listfiles(asset_path, n=True)
+    if fs:
+        files = [f for f in fs if _MDL_t.format(ast=ast_name, var='A') in f]
+        if len(files):
+            versions = []
+            for f in files:
+                versions.append(int(f.split(".v")[-1].split(".")[0]))
+            latest_v = max(versions)
+    return latest_v
+
+
+def get_latest_model_fbx_filepath(asset_path=""):
+    if not asset_path:
+        raise pLog.error("Error",
+                         fn=get_latest_model_fbx_filepath(),
+                         cls="pAst",
+                         e=RuntimeError("Please Specify an asset path"))
+    ast_name = pDir.fileName(asset_path)
+    asset_path = pDir.join(asset_path, "A")
+    fs = pDir.listfiles(asset_path)
+    if fs:
+        files = [f for f in fs
+                 if _MDL_t.format(ast=ast_name, var='A') in f and f.endswith("fbx")]
+        if files:
+            files.sort()
+            return files[-1]
+    return ""

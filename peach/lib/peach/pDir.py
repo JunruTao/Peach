@@ -69,6 +69,14 @@ def parent(filepath='', n=False):
     return pathSlashConvert(os.path.dirname(filepath))
 
 
+def mkdir(path=""):
+    """
+    Make Directory
+    @param path: (str) dir to make
+    """
+    os.mkdir(path)
+
+
 def exists(path):
     """
     Check if the path exists
@@ -181,6 +189,17 @@ def getPeachConfigsDir():
     @return: (str) filepath
     """
     return join(getPeachDir(), "config")
+
+
+def getPeachBlendLibDir():
+    """[ Peach ] Get `$LIB` folder realpath
+    @return: (str) filepath
+    """
+    dir_ = join(getPeachDir(), "lib")
+    if exists(join(dir_, "peach")):
+        return dir_
+    elif exists(join(dir_, "python", "peach")):
+        return join(dir_, "python")
 
 
 def getPeachHouDir():
