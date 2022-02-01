@@ -15,7 +15,11 @@ from the $icon path, and create `Icon` objects.
 
 ### pHoudini.node
 Todo:
-- [ ] --- node creation
-- [ ] --- node delete
-- [ ] --- node color stuff
-- [ ] --- node placement
+- [x] --- node creation
+- [x] --- node delete
+- [x] --- node color stuff
+- [x] --- node placement
+
+### CMake
+__Todo:__ 
+- [ ] --- :warning: build the `PeachEnv/python_panels/default.pypanel`

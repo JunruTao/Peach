@@ -29,6 +29,6 @@
     <interfaceItem name="layout_asset_gallery"/>
     <separatorItem/>
     <interfaceItem name="peach_main"/>
-    <interfaceItem name="asset_browser"/>
+    <interfaceItem name="asset_manager"/>
   </interfacesMenu>
 </pythonPanelDocument>

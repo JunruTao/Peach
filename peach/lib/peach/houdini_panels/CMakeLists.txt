@@ -18,7 +18,7 @@ string(CONFIGURE ${COMMENT_TEMPLATE} COMMENT_HEADER)
 # [ SUBDIRS OF PANELS ]
 list(APPEND PANEL_NAMES 
         "peach_main"
-        "asset_browser"
+        "asset_manager"
 )
 
 set(COUNTER 500)

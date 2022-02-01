@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--Build: [ 2022.02.01 ] Peach
- [pHoudini - 0.1.26]
+ [pHoudini - 0.1.28]
  This file contains definitions of houdini python panels.
  [ Houdini Notes ]:
  It should not be hand-edited when it is being used by the application.
@@ -9,8 +9,8 @@
 -->
 <pythonPanelDocument>
     <interface 
-        name="asset_browser" 
-        label="Peach Asset Browser" 
+        name="asset_manager" 
+        label="Peach Asset Manager" 
         icon="$PEACH_ICONS/icon_peach_dev.svg" 
         showNetworkNavigationBar="true" 
         help_url="">
@@ -22,7 +22,7 @@
 # This code is licensed under MIT license (see LICENSE.txt for details)
 #                             *   *   *   *
 # - Digital Peach Studio
-# - Peach Build: -Debug -v0.1.26
+# - Peach Build: -Debug -v0.1.28
 # - Authors: Junru Tao
 # - Contact: <junrutao.uk@gmail.com | junrutao@qq.com>
 # - Website: digital-peach.company.site
@@ -34,14 +34,12 @@
 #   while Houdini is running.
 # ---------------------------------------------------------------------
 from peach import pImp
-from peach.pQt import img
-from peach.pHoudini.panels import peach_main
-from peach.pHoudini.tools.dev_tools import renamer
-pImp.reload(img, peach_main)
+from peach.pHoudini.panels import peach_asset_manager
+pImp.reload(peach_asset_manager)
 
 
 def onCreateInterface():
-    widget = renamer.RenamerUI()
+    widget = peach_asset_manager.AssetManagerUI()
     return widget
 ]]>
         </script>
