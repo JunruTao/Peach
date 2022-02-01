@@ -151,6 +151,32 @@ def launch_background_blender(python_file=""):
     subprocess.run([blender_exe, "--background", "--python", python_file])
 
 
+def file_write(filepath="", data=""):
+    """
+    [ Util ] Write File
+    @param filepath: (str) path
+    @param data: (str) string data
+    """
+    with open(filepath, "w+") as f:
+        f.write(data)
+    f.close()
+
+
+def file_read(filepath=""):
+    """
+    [ Util ] Read File
+    @param filepath: (str) file to read
+    @return: (str) data
+    """
+    data = ""
+    if pDir.isFile(filepath):
+        with open(filepath, "r") as f:
+            for line in f:
+                data += line
+        f.close()
+    return data
+
+
 def read_keys(filepath="", divider=":"):
     """
     [ Util ] Parse a file which contains linear keys

@@ -73,8 +73,10 @@ def mkdir(path=""):
     """
     Make Directory
     @param path: (str) dir to make
+    @return: (str) path that made.
     """
     os.mkdir(path)
+    return path
 
 
 def exists(path):

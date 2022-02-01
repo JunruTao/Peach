@@ -75,7 +75,7 @@ __VRT__ = "__vrt__"
 _MDL_t = "{ast}_MDL_{var}"
 _ANM_t = "{ast}_ANM_{var}"
 _VER_t = ".v{0:03d}"
-_VAR_t = pGlob.ALPHA
+ABCDs = pGlob.ALPHA
 
 
 # [ Asset ]: OBJECTS ------------------------------------------
@@ -85,6 +85,8 @@ class Struct(object):
         self._path = path
         self._parent = parent
         self._items = dict()
+        self._id_key = ""
+        self._id_key_child = ""
 
     def replaceItemData(self, data=None):
         if isinstance(data, dict):
@@ -110,14 +112,42 @@ class Struct(object):
     def children_dict(self):
         return self._items
 
+    def get(self, key=""):
+        return self._items.get(key)
+
     def children(self):
         return list(self._items.values())
+
+    def id_key(self):
+        return self._id_key
+
+    def id_key_child(self):
+        return self._id_key_child
+
+    def _new_child(self, name="", extra_data=""):
+        if not self._id_key_child:
+            pLog.warning("Can not create new child: this object has no id_key_child",
+                         fn=self._new_child, cls=self)
+            return ""
+        if not name:
+            pLog.warning("Can not create new child: Please specify a name",
+                         fn=self._new_child, cls=self)
+            return ""
+        if self._items.get(name):
+            pLog.warning("Can not create new child: it already has a child with the same name",
+                         fn=self._new_child, cls=self)
+            return ""
+        child_path = pDir.mkdir(pDir.join(self._path, name))
+        pUtil.file_write(pDir.join(child_path, self._id_key_child), extra_data)
+        return child_path
 
 
 class Lib(Struct):
     def __init__(self, name="library"):
         super(Lib, self).__init__(name, _get_lib_path(), None)
         self._lib_type = _get_lib_type()
+        self._id_key = __LIB__
+        self._id_key_child = __CAT__
         # /.construct library
         for key, path in _get_categories().items():
             self.addItem(key, Cat(key, path, self))
@@ -128,11 +158,22 @@ class Lib(Struct):
     def set_name(self, n=""):
         self._name = n
 
+    def new_cat(self, ch_name="", cat_codename=""):
+        cat_codename = cat_codename if cat_codename else ch_name
+        ch_dir = self._new_child(ch_name, _cat_data_prefix(cat_codename))
+        if ch_dir:
+            _out = Cat(ch_name, ch_dir, self)
+            self.addItem(ch_name, _out)
+            return _out
+        return None
+
 
 class Cat(Struct):
     def __init__(self, name="", path="", parent=None):
         super(Cat, self).__init__(name, path, parent)
         self._prefix = _get_cat_prefix(self._name)
+        self._id_key = __CAT__
+        self._id_key_child = __TYP__
         # /.construct types:
         for key, path in _get_types(self._name).items():
             self.addItem(key, Typ(key, path, self))
@@ -140,18 +181,38 @@ class Cat(Struct):
     def prefix(self):
         return self._prefix
 
+    def new_type(self, ch_name=""):
+        ch_dir = self._new_child(ch_name)
+        if ch_dir:
+            _out = Typ(ch_name, ch_dir, self)
+            self.addItem(ch_name, _out)
+            return _out
+        return None
+
 
 class Typ(Struct):
     def __init__(self, name="", path="", parent=None):
         super(Typ, self).__init__(name, path, parent)
+        self._id_key = __TYP__
+        self._id_key_child = __AST__
         # /.construct types:
         for key, path in _get_assets(self.parent().name(), self._name).items():
             self.addItem(key, Ast(key, path, self))
+
+    def new_asset(self, ch_name=""):
+        ch_dir = self._new_child(ch_name)
+        if ch_dir:
+            _out = Ast(ch_name, ch_dir, self)
+            self.addItem(ch_name, _out)
+            return _out
+        return None
 
 
 class Ast(Struct):
     def __init__(self, name="", path="", parent=None):
         super(Ast, self).__init__(name, path, parent)
+        self._id_key = __AST__
+        self._id_key_child = __VRT__
         self._base_name, self._suf = tuple(name.split("_"))
         for key, path in _get_variants(self.path()).items():
             self.addItem(key, Vrt(key, path, self))
@@ -165,12 +226,49 @@ class Ast(Struct):
     def get_step_variant_names(self):
         return list(self.children_dict().keys())
 
+    def new_step_variant(self):
+        names = self.get_step_variant_names()
+        counter = 0
+        ch_name = ABCDs[counter]
+
+        while ch_name in names:
+            ch_name = ABCDs[counter]
+            counter += 1
+
+        ch_dir = self._new_child(ch_name)
+        if ch_dir:
+            _out = Vrt(ch_name, ch_dir, self)
+            self.addItem(ch_name, _out)
+            return _out
+        return None
+
 
 class Vrt(Struct):
     def __init__(self, name="", path="", parent=None):
         super(Vrt, self).__init__(name, path, parent)
+        self._id_key = __VRT__
         self._mdl_tpl = _MDL_t.format(ast=self.parent().name(), var=self.name())
         self._anm_tpl = _ANM_t.format(ast=self.parent().name(), var=self.name())
+
+    def mdl_versions(self):
+        files = pDir.listfiles(self._path, n=True)
+        vers = []
+        for f in files:
+            if self._mdl_tpl in f:
+                vers.append(int(pDir.remove_ext(f).split(".v")[-1]))
+        return list(set(vers))
+
+    def mdl_latest_version(self):
+        return max(self.mdl_versions())
+
+    def anm_variants(self):
+        files = pDir.listfiles(self._path, n=True)
+        vats = []
+        for f in files:
+            if self._anm_tpl in f:
+                f = f.replace(self._anm_tpl, "")
+                vats.append(pDir.remove_ext(f).split(".v")[0][-1])
+        return list(set(vats))
 
 
 # [ Asset ]: PROTECTED ------------------------------------------
@@ -240,6 +338,15 @@ def _get_cat_prefix(cat=""):
             return prf_
     pLog.warning("Can not find any information in __cat__ file", cls="CatPrefix", fn=cat)
     return ""
+
+
+def _cat_data_prefix(name=""):
+    """
+    [ Asset ] Create Cat prefix
+    @param name: (str) prefix
+    @return: (str) prefix formatted data
+    """
+    return "prefix : {}".format(name.upper())
 
 
 def _get_types(cat=""):
@@ -594,18 +701,18 @@ def hou_run_publish_script(asset_path="", bg=False):
         out_str = _init_script_src
         if bg:
             out_str = _init_script_bg_src
+
+        # /.Init script
         out_str = out_str.format(blender_exe=pDir.getBlenderExeDir(),
                                  cmd_script=init_cmd_script_path)
+        pUtil.file_write(init_script_path, out_str)
 
-        with open(init_script_path, "w+") as f:
-            f.write(out_str)
-
+        # /.Cmd script
         out_str = _init_cmd_src.format(python_lib_dir=pDir.getPeachBlendLibDir(),
                                        fbx_file=asset_path.replace("$<EXT>", "fbx"),
                                        blend_file=asset_path.replace("$<EXT>", "blend")
                                        )
-        with open(init_cmd_script_path, "w+") as f:
-            f.write(out_str)
+        pUtil.file_write(init_cmd_script_path, out_str)
 
 
 def get_latest_model_version(asset_path=""):

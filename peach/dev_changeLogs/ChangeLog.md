@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.01__<br>
-> __Time stamp: 02:37:20__<br>
+> __Time stamp: 15:26:29__<br>
 > __Author: Junru Tao__
 ---
 
@@ -14,7 +14,9 @@
 ## :hammer: Change Logs: _Feb, 2022_
 
 
-- :bookmark_tabs: _001_. [Change_Log - Date: 2022/02/01](./2022_02/2022_02_01_cl.md) : :bread:
+- :bookmark_tabs: _001_. [Change_Log - Date: 2022/02/01](./2022_02/2022_02_01_cl.md) : :bread::bread:
+   > - [ 15:26:29 ] <sup><b> `Commit` : update more handy functions in to Ast classes, in order to  asset entries</b></sup>
+   > - [ 15:25:42 ] <sup><b> PeachPy Lib-Build: v0.1.56</b></sup>
    > - [ 02:37:20 ] <sup><b> `Commit` : asset manager to 2.0. asset publish houdini &rarr;blender.</b></sup>
    > - [ 02:36:11 ] <sup><b> PeachPy Lib-Build: v0.1.55</b></sup>
 
