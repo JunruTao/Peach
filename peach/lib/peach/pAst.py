@@ -200,9 +200,31 @@ class Typ(Struct):
             self.addItem(key, Ast(key, path, self))
 
     def new_asset(self, ch_name=""):
+        import re
+        words = re.split(r"\W+", ch_name)
+        if len(words) > 1:
+            ch_name = ch_name.lower()
+            words = re.split(r"\W+", ch_name)
+            ch_name = ""
+            counter = 0
+            for w in words:
+                if counter > 0:
+                    w = w.capitalize()
+                ch_name += w
+                counter += 1
+
+        counter = 0
+        base_name = ch_name
+        ch_name = "{}_{}".format(base_name, ABCDs[counter])
+        while self.get(ch_name):
+            ch_name = "{}_{}".format(base_name, ABCDs[counter])
+            counter += 1
+
+        print(ch_name)
         ch_dir = self._new_child(ch_name)
         if ch_dir:
             _out = Ast(ch_name, ch_dir, self)
+            _out.new_step_variant()
             self.addItem(ch_name, _out)
             return _out
         return None
@@ -222,6 +244,9 @@ class Ast(Struct):
 
     def suffix_name(self):
         return self._suf
+
+    def new_asset_variant(self):
+        return self._parent.new_asset(self._base_name)
 
     def get_step_variant_names(self):
         return list(self.children_dict().keys())
