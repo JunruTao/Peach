@@ -62,3 +62,16 @@ def save_file(filepath, file_name):
     if file_name:
         file = pDir.join(filepath, file_name + ".hip")
     hou.hipFile.save(file)
+
+
+def open_file(filepath, file_name):
+    """
+    [ Houdini ] Open Hip File
+    @param filepath: (str) path to folder/or filepath
+    @param file_name: (str) filename (no extension)
+    """
+    file = filepath
+    if file_name:
+        file = pDir.join(filepath, file_name + ".hip")
+    if pDir.isFile(file):
+        hou.hipFile.load(file)

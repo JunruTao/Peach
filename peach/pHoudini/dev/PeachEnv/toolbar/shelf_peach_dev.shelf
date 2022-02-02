@@ -9,6 +9,7 @@
  a single file. -->
   <toolshelf name="shelf_peach_dev" label="Peach Dev">    <memberTool name="renamer"/>
     <memberTool name="hda_manager"/>
+    <memberTool name="reload_dev_hdas"/>
 
   </toolshelf>
 
@@ -77,6 +78,39 @@ hda_manager.show()
     </script>
     <keywordList>
       <keyword>Peach HDA</keyword>
+    </keywordList>
+  </tool>
+
+  <tool name="reload_dev_hdas" 
+        label="RlHha"
+        icon="$PEACH_ICONS/icon_peach_dev.svg">
+    <script scriptType="python">
+    <![CDATA[#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# ---------------------------------------------------------------------
+# Copyright (c) 2022 Digital Peach Studio - Junru Tao
+# This code is licensed under MIT license (see LICENSE.txt for details)
+#                             *   *   *   *
+# - Digital Peach Studio
+# - Peach Build: -Debug -v0.1.30
+# - Authors: Junru Tao
+# - Contact: <junrutao.uk@gmail.com | junrutao@qq.com>
+# - Website: digital-peach.company.site
+# - Instagram: @digital.peach.studio
+# ---------------------------------------------------------------------
+# [ File Description] - 2022.02.02 (Y.M.D)
+#                             *   *   *   *
+#   This is Toolbar Script for Peach. Please do not edit externally
+#   while Houdini is running.
+# ---------------------------------------------------------------------
+from peach.pHoudini.tools.dev_tools import dev_hda_reload
+
+
+dev_hda_reload.load()
+]]>
+    </script>
+    <keywordList>
+      <keyword>Peach Dev</keyword>
     </keywordList>
   </tool>
 

@@ -5,6 +5,7 @@ set(TARGET_PKG "PeachEnv")
 list(APPEND TOOLS 
             "renamer"
             "hda_manager"
+            "reload_dev_hdas"
 )
 
 set(SHELF_CMAKE_LIST_DIR ${CMAKE_CURRENT_LIST_DIR})

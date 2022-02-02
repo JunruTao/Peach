@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.02__<br>
-> __Time stamp: 17:35:10__<br>
+> __Time stamp: 19:32:20__<br>
 > __Author: Junru Tao__
 ---
 
@@ -14,7 +14,11 @@
 ## :hammer: Change Logs: _Feb, 2022_
 
 
-- :bookmark_tabs: _002_. [Change_Log - Date: 2022/02/02](./2022_02/2022_02_02_cl.md) : :bread::bread:
+- :bookmark_tabs: _002_. [Change_Log - Date: 2022/02/02](./2022_02/2022_02_02_cl.md) : :bread::bread::bread::bread:
+   > - [ 19:32:20 ] <sup><b> `Commit` : added a reloading tools to help reload hda in hda dev stage</b></sup>
+   > - [ 19:27:07 ] <sup><b> PeachPy Lib-Build: v0.1.68</b></sup>
+   > - [ 18:30:25 ] <sup><b> PeachPy Lib-Build: v0.1.67</b></sup>
+   > - [ 18:29:02 ] <sup><b> PeachPy Lib-Build: v0.1.66</b></sup>
    > - [ 17:35:09 ] <sup><b> `Commit` : adding wd override in pconfig.</b></sup>
    > - [ 17:32:10 ] <sup><b> Build Version Up: `v0.1.30`</b></sup>
    > - [ 17:08:33 ] <sup><b> Build Version Up: `v0.1.29`</b></sup>

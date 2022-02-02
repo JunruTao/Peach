@@ -209,6 +209,10 @@ class AssetManagerUI(QtWidgets.QWidget):
                 _action_h.triggered.connect(self._MA_save_dev_file)
                 menu.addAction(_action_h)
 
+                _action_o = QtWidgets.QAction("Open Dev File")
+                _action_o.triggered.connect(self._MA_open_dev_file)
+                menu.addAction(_action_o)
+
                 _action_d = QtWidgets.QAction("Delete")
                 _action_d.triggered.connect(self._MA_delete)
                 menu.addAction(_action_d)
@@ -304,11 +308,50 @@ class AssetManagerUI(QtWidgets.QWidget):
             if not pDir.exists(path_):
                 pDir.mkdir(path_)
             existing_files = [f for f in pDir.listfiles(path_, n=True) if name_ in f]
-            versions_ = [1]
+            versions_ = [0]
+
             if existing_files:
                 for f in existing_files:
                     versions_.append(int(pDir.remove_ext(f).split(".v")[-1]))
-            wm.save_file(path_, "{0}.v{1:03d}".format(name_, max(versions_)))
+
+            f_name = "{0}.v{1:03d}".format(name_, (max(versions_) + 1))
+            # confirmation:
+            mb = QtWidgets.QMessageBox()
+            mb.setIcon(QtWidgets.QMessageBox.Icon.Question)
+            mb.setWindowTitle("Save New Dev File")
+            mb.setWindowIcon(img.getPixmap("peach"))
+            mb.move(QtGui.QCursor.pos() - QtCore.QPoint(180, 100))
+            msg = "Save to {0}/<b>{1}.hip</b>?".format(
+                path_, f_name)
+            mb.setInformativeText(msg)
+            mb.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.Cancel)
+            if mb.exec_() == QtWidgets.QMessageBox.Yes:
+                wm.save_file(path_, f_name)
+
+    def _MA_open_dev_file(self):
+        if isinstance(self._selected, pAst.Struct):
+            path_ = pDir.join(self._selected.path(), "dev")
+            name_ = self._selected.name()
+            if not pDir.exists(path_):
+                pDir.mkdir(path_)
+            existing_files = [f for f in pDir.listfiles(path_, n=True) if name_ in f]
+            versions_ = []
+            if existing_files:
+                for f in existing_files:
+                    versions_.append(int(pDir.remove_ext(f).split(".v")[-1]))
+                wm.open_file(path_, "{0}.v{1:03d}".format(name_, max(versions_)))
+            else:
+                mb = QtWidgets.QMessageBox()
+                mb.setIcon(QtWidgets.QMessageBox.Icon.Question)
+                mb.setWindowTitle("Not Existing Files")
+                mb.setWindowIcon(img.getPixmap("peach_dev"))
+                mb.move(QtGui.QCursor.pos() - QtCore.QPoint(180, 100))
+                msg = "This Entity <b>{}</b> doesn't have any dev hip.files, do you want to create one?".format(
+                    self._selected.name())
+                mb.setInformativeText(msg)
+                mb.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.Cancel)
+                if mb.exec_() == QtWidgets.QMessageBox.Yes:
+                    self._MA_save_dev_file()
 
 
 class DiaUI(QtWidgets.QDialog):
