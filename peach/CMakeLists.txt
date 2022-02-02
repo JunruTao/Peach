@@ -51,9 +51,9 @@ set(PEACH_ICONS_ICO_DIR "${PEACH_DIR}/icons/ICO")
 
 # [ INSTALLATION OPTIONS ]
 # /. Install Settings
-set(INSTALL_ICON ON)      # >>>> CONTROL [AUTO]
+set(INSTALL_ICON OFF)      # >>>> CONTROL [AUTO]
 set(INSTALL_CONFIG ON)
-set(BUILD_BOOTSTRAP ON)      # >>>> CONTROL [AUTO]
+set(BUILD_BOOTSTRAP OFF)      # >>>> CONTROL [AUTO]
 # /. Houdini Dev Builds
 set(BUILD_DEV_HOU ON)
 set(BUILD_INSTALL_HOU ON)

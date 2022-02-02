@@ -53,6 +53,7 @@
 # ---------------------------------------------------------------------
 from peach import pImp, pDir, pGlob, pLog, pUtil
 pImp.reload(pDir, pGlob, pLog, pUtil)
+import re
 
 # [ Asset ] Global Data Containers
 _WORKING_DIR = ""
@@ -140,6 +141,29 @@ class Struct(object):
         child_path = pDir.mkdir(pDir.join(self._path, name))
         pUtil.file_write(pDir.join(child_path, self._id_key_child), extra_data)
         return child_path
+    
+    def _pop_child(self, key=""):
+        self._items.pop(key)
+
+    @staticmethod
+    def _standard_name(name=""):
+        return re.sub(r"\W+", "_", name.lower())
+
+    def deletable(self):
+        dir_items = pDir.ls(self._path)
+        if len(dir_items) == 1:
+            if dir_items[0].endswith(self._id_key):
+                return True
+        return False
+
+    def delete(self):
+        if self.deletable():
+            result = pDir.rm_rf(self._path)
+            if result:
+                if isinstance(self._parent, Struct):
+                    self._parent._pop_child(self._name)
+            return result
+        return False
 
 
 class Lib(Struct):
@@ -156,9 +180,10 @@ class Lib(Struct):
         return self._lib_type
 
     def set_name(self, n=""):
-        self._name = n
+        self._name = self._standard_name(n)
 
     def new_cat(self, ch_name="", cat_codename=""):
+        ch_name = self._standard_name(ch_name)
         cat_codename = cat_codename if cat_codename else ch_name
         ch_dir = self._new_child(ch_name, _cat_data_prefix(cat_codename))
         if ch_dir:
@@ -182,6 +207,7 @@ class Cat(Struct):
         return self._prefix
 
     def new_type(self, ch_name=""):
+        ch_name = self._standard_name(ch_name)
         ch_dir = self._new_child(ch_name)
         if ch_dir:
             _out = Typ(ch_name, ch_dir, self)
@@ -200,7 +226,6 @@ class Typ(Struct):
             self.addItem(key, Ast(key, path, self))
 
     def new_asset(self, ch_name=""):
-        import re
         words = re.split(r"\W+", ch_name)
         if len(words) > 1:
             ch_name = ch_name.lower()

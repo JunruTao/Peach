@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.02.01__<br>
-> __Time stamp: 16:44:33__<br>
+> __Date stamp: 2022.02.02__<br>
+> __Time stamp: 16:25:32__<br>
 > __Author: Junru Tao__
 ---
 
@@ -13,6 +13,11 @@
 
 ## :hammer: Change Logs: _Feb, 2022_
 
+
+- :bookmark_tabs: _002_. [Change_Log - Date: 2022/02/02](./2022_02/2022_02_02_cl.md) : :bread:
+   > - [ 16:25:31 ] <sup><b> `Commit` : finished  working in houdini</b></sup>
+   > - [ 16:24:45 ] <sup><b> PeachPy Lib-Build: v0.1.63</b></sup>
+   > - [ 10:22:21 ] <sup><b> PeachPy Lib-Build: v0.1.62</b></sup>
 
 - :bookmark_tabs: _001_. [Change_Log - Date: 2022/02/01](./2022_02/2022_02_01_cl.md) : :bread::bread::bread::bread::bread:
    > - [ 16:44:32 ] <sup><b> `Commit` : added new asset browser panel, updated clean script to clean dev pypanels as well</b></sup>

@@ -79,6 +79,21 @@ def mkdir(path=""):
     return path
 
 
+def rm_rf(file_path=""):
+    import shutil
+    try:
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+            os.unlink(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+    except Exception as e:
+        pLog.error('Failed to delete %s.' % file_path,
+                   fn=rm_rf, cls="pDir", e=e)
+        return False
+    finally:
+        return not exists(file_path)
+
+
 def exists(path):
     """
     Check if the path exists
