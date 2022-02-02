@@ -42,13 +42,22 @@ class AssetManagerUI(QtWidgets.QWidget):
         self._lib = None
         self._selected = None
         self._ui_expand_dict = dict()
-        # /.init library
         self._refresh_lib()
-        self.create_widgets()
-        self.populate_menu()
-        self.create_style()
-        self.create_layouts()
-        self.create_connections()
+        if self._lib:
+            # /.init library
+            self.create_widgets()
+            self.populate_menu()
+            self.create_style()
+            self.create_layouts()
+            self.create_connections()
+        else:
+            self.create_unresolved_msg()
+
+    def create_unresolved_msg(self):
+        _layout = QtWidgets.QVBoxLayout()
+        _layout.addWidget(QtWidgets.QLabel("<b>Unable To Resolve Asset Library</b><br>" +
+                                           "Please Make Sure set the correct working dir(\"$HIP\")"))
+        self.setLayout(_layout)
 
     def create_widgets(self):
         """[ AssetManagerUI ] UI Define Widgets """
@@ -145,8 +154,9 @@ class AssetManagerUI(QtWidgets.QWidget):
 
     def _refresh_lib(self):
         pAst.reset()
-        pAst.resolve(hou.getenv('HIP'))
-        self._lib = pAst.current_lib()
+        value = pAst.resolve(hou.getenv('HIP'))
+        if value != -2:
+            self._lib = pAst.current_lib()
 
     def _A_refresh(self):
         self._selected = None
@@ -195,6 +205,10 @@ class AssetManagerUI(QtWidgets.QWidget):
                 menu.addAction(_action_1)
 
             if level != 0:
+                _action_h = QtWidgets.QAction("Save Dev File")
+                _action_h.triggered.connect(self._MA_save_dev_file)
+                menu.addAction(_action_h)
+
                 _action_d = QtWidgets.QAction("Delete")
                 _action_d.triggered.connect(self._MA_delete)
                 menu.addAction(_action_d)
@@ -282,6 +296,19 @@ class AssetManagerUI(QtWidgets.QWidget):
             msg_box.setIcon(QtWidgets.QMessageBox.Warning)
             msg_box.setStandardButtons(QtWidgets.QMessageBox.Discard)
             return msg_box.exec_()
+
+    def _MA_save_dev_file(self):
+        if isinstance(self._selected, pAst.Typ) or isinstance(self._selected, pAst.Ast):
+            path_ = pDir.join(self._selected.path(), "dev")
+            name_ = self._selected.name()
+            if not pDir.exists(path_):
+                pDir.mkdir(path_)
+            existing_files = [f for f in pDir.listfiles(path_, n=True) if name_ in f]
+            versions_ = [1]
+            if existing_files:
+                for f in existing_files:
+                    versions_.append(int(pDir.remove_ext(f).split(".v")[-1]))
+            wm.save_file(path_, "{0}.v{1:03d}".format(name_, max(versions_)))
 
 
 class DiaUI(QtWidgets.QDialog):

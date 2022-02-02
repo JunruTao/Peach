@@ -18,6 +18,8 @@
 #
 # ---------------------------------------------------------------------
 import hou
+from peach import pImp, pDir
+pImp.reload(pDir)
 
 
 def getMainWindow():
@@ -48,3 +50,15 @@ def getCurrentEditor():
     @return: (hou.Pane)
     """
     return hou.ui.paneTabOfType(hou.paneTabType.NetworkEditor)
+
+
+def save_file(filepath, file_name):
+    """
+    [ Houdini ] Save Houdini file
+    @param filepath: (str) path to folder/or filepath
+    @param file_name: (str) filename (no extension)
+    """
+    file = filepath
+    if file_name:
+        file = pDir.join(filepath, file_name + ".hip")
+    hou.hipFile.save(file)

@@ -313,6 +313,8 @@ def getConfigData():
                         data["houdini_path"] = pathSlashConvert(line.split("\"")[1])
                     elif line.startswith("blender_executable"):
                         data["blender_path"] = pathSlashConvert(line.split("\"")[1])
+                    elif line.startswith("working_dir"):
+                        data["working_dir"] = pathSlashConvert(line.split("\"")[1])
         global _PEACH_CONFIG_DATA
         _PEACH_CONFIG_DATA = data
     else:

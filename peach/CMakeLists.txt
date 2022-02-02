@@ -29,7 +29,7 @@ set(INSTAGRAM "@digital.peach.studio")
 # [ GLOBAL ] Versions
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "1")
-set(PEACH_VERSION_PATCH "28")  # [AUTO]
+set(PEACH_VERSION_PATCH "30")  # [AUTO]
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
 
 # [ DCC SETTINGS ]
@@ -51,9 +51,10 @@ set(PEACH_ICONS_ICO_DIR "${PEACH_DIR}/icons/ICO")
 
 # [ INSTALLATION OPTIONS ]
 # /. Install Settings
-set(INSTALL_ICON OFF)      # >>>> CONTROL [AUTO]
+set(INSTALL_ICON ON)      # >>>> CONTROL [AUTO]
 set(INSTALL_CONFIG ON)
-set(BUILD_BOOTSTRAP OFF)      # >>>> CONTROL [AUTO]
+set(INSTALL_CONFIG_OVRD OFF)
+set(BUILD_BOOTSTRAP ON)      # >>>> CONTROL [AUTO]
 # /. Houdini Dev Builds
 set(BUILD_DEV_HOU ON)
 set(BUILD_INSTALL_HOU ON)
@@ -131,7 +132,13 @@ if(INSTALL_CONFIG)
     install(DIRECTORY 
             ${PEACH_DIR}/config
             DESTINATION ${PEACH_INSTALL_DIR}
-            PATTERN "desktop.ini" EXCLUDE)
+            PATTERN "desktop.ini" EXCLUDE
+            PATTERN "startup.pconfig" EXCLUDE)
+    if(INSTALL_CONFIG_OVRD)
+        install(FILES 
+                ${PEACH_DIR}/config/startup.pconfig
+                DESTINATION ${PEACH_INSTALL_DIR}/config)
+    endif()
 endif()
 
 # /.icons

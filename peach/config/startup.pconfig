@@ -26,3 +26,4 @@ debug=FALSE
 # --- "sh" .......... (forced using shell) 
 # --- "ps" .......... (forced using powershell)
 startup_script_mode="auto"
+working_dir=""

@@ -454,8 +454,10 @@ def resolve(wd="", ):
         return -1
     if _WORKING_DIR:
         wd = _WORKING_DIR
-    _init_lib(wd)
 
+    _init_lib(wd)
+    if not _cw_lib:
+        return -2
     # /. resolving
     global _cw_lvl, _cw_cat, _cw_typ, _cw_ast
     if isinstance(_cw_lib, Lib):

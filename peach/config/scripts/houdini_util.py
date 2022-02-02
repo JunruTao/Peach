@@ -17,6 +17,7 @@
 # ---------------------------------------------------------------------
 
 import os
+from turtle import pd
 
 # GLOBAL VARIABLES
 mode = "normal"
@@ -35,7 +36,6 @@ peach_packages = []
 henv_PEACH = "PEACH"
 henv_PEACH_HOU = "PEACH_HOU"
 henv_GLOBS = ["HIP", "JOB", "HSITE"]
-
 
 # Convert dir to Houdini Format
 def format_dir(dir):
@@ -67,32 +67,6 @@ def tryImportHou():
 # Loading Hou Module
 if(tryImportHou()):
     import hou
-
-
-def setDirAndPrint():
-    global peach_dir
-    global phoudini_dir
-    global working_dir
-    
-    peach_dir = format_dir(peach_dir)
-    phoudini_dir = format_dir(phoudini_dir)
-    working_dir = format_dir(working_dir)
-
-    # [ Setting $PEACH in Houdini ]
-    hou.putenv(henv_PEACH, peach_dir)
-    printMsg("Peach Dir: %s" % peach_dir)
-    printMsg("---set as '$%s'" % henv_PEACH)
-    
-    # [ Setting $PEACH in Houdini ]
-    hou.putenv(henv_PEACH_HOU, phoudini_dir)
-    printMsg("pHoudini Dir: %s" % phoudini_dir)
-    printMsg("---set as '$%s'" % henv_PEACH_HOU)
-    
-    # [ Getting Workfing Directroy ]
-    printMsg("Current Working Directory: %s" % working_dir)
-    for env in henv_GLOBS:
-        hou.putenv(env, working_dir)
-        printMsg("---set '$%s' to this Working Directory" % env)
 
 
 def loadPeachEnvPackage():
@@ -151,3 +125,39 @@ def loadPeachPackages():
         finally:
             printMsg("---+ ---package <%s> Found" % pkg)
             printMsg("---+ ---path: %s" % pkg_dir)
+            
+
+def setDirAndPrint():
+    global peach_dir
+    global phoudini_dir
+    global working_dir
+    
+    peach_dir = format_dir(peach_dir)
+    phoudini_dir = format_dir(phoudini_dir)
+    working_dir = format_dir(working_dir)
+    
+    with open(os.path.join(peach_dir, "config", "startup.pconfig")) as f:
+        cf_wd = ""
+        for line in f:
+            if line.startswith("working_dir"):
+                cf_wd = line.split("\"")[1]
+                break
+        if os.path.isdir(cf_wd):
+            printMsg("Found WD Override! in startup.pconfig")
+            working_dir = format_dir(cf_wd)
+
+    # [ Setting $PEACH in Houdini ]
+    hou.putenv(henv_PEACH, peach_dir)
+    printMsg("Peach Dir: %s" % peach_dir)
+    printMsg("---set as '$%s'" % henv_PEACH)
+    
+    # [ Setting $PEACH in Houdini ]
+    hou.putenv(henv_PEACH_HOU, phoudini_dir)
+    printMsg("pHoudini Dir: %s" % phoudini_dir)
+    printMsg("---set as '$%s'" % henv_PEACH_HOU)
+    
+    # [ Getting Workfing Directroy ]
+    printMsg("Current Working Directory: %s" % working_dir)
+    for env in henv_GLOBS:
+        hou.putenv(env, working_dir)
+        printMsg("---set '$%s' to this Working Directory" % env)

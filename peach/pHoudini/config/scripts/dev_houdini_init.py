@@ -28,7 +28,7 @@ hu.peach_packages = []
 # [ Getting the Peach Install Dir ]
 hu.peach_dir = os.path.realpath("..")
 hu.phoudini_dir = os.path.join(hu.peach_dir, "pHoudini/dev")
-hu.working_dir = str(os.path.realpath("./dev/packages"))
+hu.working_dir = "E:/dev/peach_dev_projects/ACPS"  # str(os.path.realpath("./dev/packages"))
 
 # [ Run Functions ]
 hu.setDirAndPrint()
