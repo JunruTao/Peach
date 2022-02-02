@@ -83,7 +83,7 @@ hda_manager.show()
 
   <tool name="reload_dev_hdas" 
         label="RlHha"
-        icon="$PEACH_ICONS/icon_peach_dev.svg">
+        icon="$PEACH_ICONS/icon_devtool_hda_manager.svg">
     <script scriptType="python">
     <![CDATA[#!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -104,8 +104,6 @@ hda_manager.show()
 #   while Houdini is running.
 # ---------------------------------------------------------------------
 from peach.pHoudini.tools.dev_tools import dev_hda_reload
-
-
 dev_hda_reload.load()
 ]]>
     </script>

@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.02__<br>
-> __Time stamp: 19:32:20__<br>
+> __Time stamp: 21:33:26__<br>
 > __Author: Junru Tao__
 ---
 
@@ -14,7 +14,9 @@
 ## :hammer: Change Logs: _Feb, 2022_
 
 
-- :bookmark_tabs: _002_. [Change_Log - Date: 2022/02/02](./2022_02/2022_02_02_cl.md) : :bread::bread::bread::bread:
+- :bookmark_tabs: _002_. [Change_Log - Date: 2022/02/02](./2022_02/2022_02_02_cl.md) : :bread::bread::bread::bread::bread:
+   > - [ 21:33:26 ] <sup><b> `Commit` : moved more hda from AOSFM project. added geo path to asset publish</b></sup>
+   > - [ 21:32:42 ] <sup><b> PeachPy Lib-Build: v0.1.69</b></sup>
    > - [ 19:32:20 ] <sup><b> `Commit` : added a reloading tools to help reload hda in hda dev stage</b></sup>
    > - [ 19:27:07 ] <sup><b> PeachPy Lib-Build: v0.1.68</b></sup>
    > - [ 18:30:25 ] <sup><b> PeachPy Lib-Build: v0.1.67</b></sup>
