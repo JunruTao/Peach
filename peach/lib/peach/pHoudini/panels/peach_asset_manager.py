@@ -305,6 +305,19 @@ class AssetManagerUI(QtWidgets.QWidget):
         if isinstance(self._selected, pAst.Typ) or isinstance(self._selected, pAst.Ast):
             path_ = pDir.join(self._selected.path(), "dev")
             name_ = self._selected.name()
+            if path_ not in wm.hip():
+                # /.not good.
+                mb = QtWidgets.QMessageBox()
+                mb.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                mb.setWindowTitle("Working Dir Unmatched")
+                mb.setWindowIcon(img.getPixmap("peach"))
+                mb.move(QtGui.QCursor.pos() - QtCore.QPoint(180, 100))
+                msg = "Working Dir Unmatched<br> Are You Sure Saving to <b>{0}</b>?".format(name_)
+                mb.setInformativeText(msg)
+                mb.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.Cancel)
+                if mb.exec_() != QtWidgets.QMessageBox.Yes:
+                    return
+
             if not pDir.exists(path_):
                 pDir.mkdir(path_)
             existing_files = [f for f in pDir.listfiles(path_, n=True) if name_ in f]
@@ -327,6 +340,8 @@ class AssetManagerUI(QtWidgets.QWidget):
             mb.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.Cancel)
             if mb.exec_() == QtWidgets.QMessageBox.Yes:
                 wm.save_file(path_, f_name)
+            else:
+                return
 
     def _MA_open_dev_file(self):
         if isinstance(self._selected, pAst.Struct):

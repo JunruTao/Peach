@@ -157,7 +157,7 @@ def file_write(filepath="", data=""):
     @param filepath: (str) path
     @param data: (str) string data
     """
-    with open(filepath, "w+") as f:
+    with open(filepath, "w") as f:
         f.write(data)
     f.close()
 

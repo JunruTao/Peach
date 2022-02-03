@@ -207,7 +207,17 @@ class Cat(Struct):
         return self._prefix
 
     def new_type(self, ch_name=""):
-        ch_name = self._standard_name(ch_name)
+        # /.TypesShouldUseCamelCase
+        words = re.split(r"\W+", ch_name)
+        if len(words) > 1:
+            ch_name = ch_name.lower()
+            words = re.split(r"\W+", ch_name)
+            ch_name = ""
+            for w in words:
+                w = w.capitalize()
+                ch_name += w
+        else:
+            ch_name = ch_name.capitalize()
         ch_dir = self._new_child(ch_name)
         if ch_dir:
             _out = Typ(ch_name, ch_dir, self)
@@ -749,6 +759,11 @@ def hou_run_publish_script(asset_path="", bg=False):
             pDir.mkdir(script_cache_dir)
 
         init_script_path, init_cmd_script_path = hou_publish_init_script_dir()
+        # /. remove cached file
+        if pDir.isFile(init_script_path):
+            pDir.rm_rf(init_script_path)
+        if pDir.isFile(init_cmd_script_path):
+            pDir.rm_rf(init_cmd_script_path)
 
         out_str = _init_script_src
         if bg:

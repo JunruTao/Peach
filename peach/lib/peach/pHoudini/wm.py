@@ -18,8 +18,8 @@
 #
 # ---------------------------------------------------------------------
 import hou
-from peach import pImp, pDir
-pImp.reload(pDir)
+from peach import pImp, pDir, pLog
+pImp.reload(pDir, pLog)
 
 
 def getMainWindow():
@@ -60,7 +60,7 @@ def save_file(filepath, file_name):
     """
     file = filepath
     if file_name:
-        file = pDir.join(filepath, file_name + ".hip")
+        file = pDir.join(filepath, file_name + ".hiplc")
     hou.hipFile.save(file)
 
 
@@ -73,5 +73,13 @@ def open_file(filepath, file_name):
     file = filepath
     if file_name:
         file = pDir.join(filepath, file_name + ".hip")
+        if not pDir.exists(file):
+            file = pDir.join(filepath, file_name + ".hiplc")
+        if not pDir.exists(file):
+            pLog.warning("cannot find file {}".format(file), fn=open_file, cls="pHoudini.wm")
     if pDir.isFile(file):
         hou.hipFile.load(file)
+
+
+def hip():
+    return hou.getenv("HIP")

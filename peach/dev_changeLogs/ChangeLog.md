@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.02.02__<br>
-> __Time stamp: 21:33:26__<br>
+> __Date stamp: 2022.02.03__<br>
+> __Time stamp: 00:06:11__<br>
 > __Author: Junru Tao__
 ---
 
@@ -13,6 +13,10 @@
 
 ## :hammer: Change Logs: _Feb, 2022_
 
+
+- :bookmark_tabs: _003_. [Change_Log - Date: 2022/02/03](./2022_02/2022_02_03_cl.md) : :bread:
+   > - [ 00:06:11 ] <sup><b> `Commit` : update asset manager, safer mechanism tring to save to different hip dir</b></sup>
+   > - [ 00:05:05 ] <sup><b> PeachPy Lib-Build: v0.1.70</b></sup>
 
 - :bookmark_tabs: _002_. [Change_Log - Date: 2022/02/02](./2022_02/2022_02_02_cl.md) : :bread::bread::bread::bread::bread:
    > - [ 21:33:26 ] <sup><b> `Commit` : moved more hda from AOSFM project. added geo path to asset publish</b></sup>
