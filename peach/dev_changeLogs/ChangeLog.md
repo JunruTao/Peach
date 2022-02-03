@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.03__<br>
-> __Time stamp: 14:29:07__<br>
+> __Time stamp: 19:37:08__<br>
 > __Author: Junru Tao__
 ---
 
@@ -14,7 +14,8 @@
 ## :hammer: Change Logs: _Feb, 2022_
 
 
-- :bookmark_tabs: _003_. [Change_Log - Date: 2022/02/03](./2022_02/2022_02_03_cl.md) : :bread:
+- :bookmark_tabs: _003_. [Change_Log - Date: 2022/02/03](./2022_02/2022_02_03_cl.md) : :bread::bread:
+   > - [ 19:37:08 ] <sup><b> `Commit` : blender addon working. able to resolve name set collection name</b></sup>
    > - [ 14:29:06 ] <sup><b> `Commit` : added auto load addons to  and star</b></sup>
    > - [ 00:06:11 ] <sup><b> `Commit` : update asset manager, safer mechanism tring to save to different hip dir</b></sup>
    > - [ 00:05:05 ] <sup><b> PeachPy Lib-Build: v0.1.70</b></sup>

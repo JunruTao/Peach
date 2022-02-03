@@ -17,11 +17,18 @@
 #   This script contains
 #
 # ---------------------------------------------------------------------
+from peach import pImp
 from peach.pBlender import pbu
-from .ui import PbUiAssetPrep
+from . import (asset_ops_prep_ui,
+               asset_ops_prep_name,
+               )
+pImp.reload(asset_ops_prep_ui,
+            asset_ops_prep_name,
+            )
 
 classes = (
-    PbUiAssetPrep,
+    asset_ops_prep_ui.PbUiAssetPrep,
+    asset_ops_prep_name.PbOpAssetPrepName
 )
 
 
@@ -39,4 +46,4 @@ def register():
 
 
 def unregister():
-    pbu.r_cls(*classes)
+    pbu.u_cls(*classes)

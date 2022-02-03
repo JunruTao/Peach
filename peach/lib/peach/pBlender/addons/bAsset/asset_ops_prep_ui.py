@@ -10,7 +10,7 @@
 # - Website: digital-peach.company.site
 # - Instagram: @digital.peach.studio
 # ---------------------------------------------------------------------
-# [ File Name ] ui.py@python
+# [ File Name ] asset_ops_prep_ui.py@python
 # [ File Description ] - 2022.02.03 (Y.M.D) - 13:34
 #                            *   *   *   *
 #
@@ -18,11 +18,13 @@
 #
 # ---------------------------------------------------------------------
 import bpy
+from peach import pGlob
+from .asset_ops_prep_name import PbOpAssetPrepName
 
 
 class PbUiAssetPrep(bpy.types.Panel):
     """Creates a Panel in the Object properties window"""
-    bl_label = "Hello Peach"
+    bl_label = "Peach Asset Collection"
     bl_idname = "OBJECT_PT_PEACH_AST_COLL"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
@@ -30,16 +32,12 @@ class PbUiAssetPrep(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-
         coll = context.collection
-
         row = layout.row()
-        row.label(text="Hello world!", icon='WORLD_DATA')
-
+        row.label(text="Peach Version {}".format(pGlob.PEACH_VERSION), icon='WORLD_DATA')
         row = layout.row()
         row.label(text="Active Collection is: " + coll.name)
         row = layout.row()
-        row.prop(coll, "name")
-
+        row.prop(data=coll, property="name")
         row = layout.row()
-        row.operator("mesh.primitive_cube_add")
+        row.operator(PbOpAssetPrepName.bl_idname)

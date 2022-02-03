@@ -319,7 +319,7 @@ class Vrt(Struct):
         return list(set(vers))
 
     def mdl_latest_version(self):
-        return max(self.mdl_versions())
+        return max(self.mdl_versions() + [0, ])
 
     def anm_variants(self):
         files = pDir.listfiles(self._path, n=True)
@@ -329,6 +329,19 @@ class Vrt(Struct):
                 f = f.replace(self._anm_tpl, "")
                 vats.append(pDir.remove_ext(f).split(".v")[0][-1])
         return list(set(vats))
+
+    def form_new_filename_mdl_mE(self):
+        return self._mdl_tpl + _VER_t.format(self.mdl_latest_version() + 1)
+
+    def form_new_object_name_mdl(self):
+        typ_ = self.parent().parent()
+        cat_ = typ_.parent()
+        assert isinstance(typ_, Typ)
+        assert isinstance(cat_, Cat)
+        typ_mf = typ_.name()
+        cat_pf = cat_.prefix()
+        prefix_ = "{}_{}_".format(cat_pf, typ_mf)
+        return prefix_ + self._mdl_tpl
 
 
 # [ Asset ]: PROTECTED ------------------------------------------

@@ -17,7 +17,6 @@
 #   This script contains util functions for blender
 #
 # ---------------------------------------------------------------------
-import addon_utils
 import bpy
 from peach import pImp, pLog
 pImp.reload(pLog)
@@ -71,21 +70,24 @@ def unregister_addons():
     unregistered_count = 0
     for m in _pb_addons():
         try:
-            m.register()
+            m.unregister()
         except Exception as e:
-            pLog.error("[ {} ] Module Install Failed".format(m.__name__),
+            pLog.error("[ {} ] Module Uninstall Failed".format(m.__name__),
                        fn=unregister_addons, cls="pbu")
             raise e
         finally:
-            pLog.message("[ {} ] Module Successfully Installed".format(m.__name__),
+            pLog.message("[ {} ] Module Successfully Uninstalled".format(m.__name__),
                          fn=unregister_addons, cls="pbu")
             unregistered_count += 1
     return unregistered_count
 
 
-def reload_addons():
-    unregister_addons()
+def reload_addons_modules():
     pImp.reload(*_pb_addons())
+
+
+def reload_addons():
+    reload_addons_modules()
     register_addons()
 
 
