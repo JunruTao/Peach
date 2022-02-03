@@ -17,7 +17,21 @@
 #   This script contains util functions for blender
 #
 # ---------------------------------------------------------------------
+import addon_utils
 import bpy
+from peach import pImp, pLog
+pImp.reload(pLog)
+
+
+def _pb_addons():
+    """
+    [ pBlender::Util -> pbu ] Internal
+    Import all the addons in this function.
+    vvv
+    @return: (tuple of modules)
+    """
+    from peach.pBlender.addons import (bAsset,)
+    return (bAsset, )
 
 
 def purge_scene():
@@ -35,3 +49,53 @@ def purge_scene():
         bpy.data.meshes.remove(ms)
     for cm in bpy.data.cameras:
         bpy.data.cameras.remove(cm)
+
+
+def register_addons():
+    registered_count = 0
+    for m in _pb_addons():
+        try:
+            m.register()
+        except Exception as e:
+            pLog.error("[ {} ] Module Install Failed".format(m.__name__),
+                       fn=register_addons, cls="pbu")
+            raise e
+        finally:
+            pLog.message("[ {} ] Module Successfully Installed".format(m.__name__),
+                         fn=register_addons, cls="pbu")
+            registered_count += 1
+    return registered_count
+
+
+def unregister_addons():
+    unregistered_count = 0
+    for m in _pb_addons():
+        try:
+            m.register()
+        except Exception as e:
+            pLog.error("[ {} ] Module Install Failed".format(m.__name__),
+                       fn=unregister_addons, cls="pbu")
+            raise e
+        finally:
+            pLog.message("[ {} ] Module Successfully Installed".format(m.__name__),
+                         fn=unregister_addons, cls="pbu")
+            unregistered_count += 1
+    return unregistered_count
+
+
+def reload_addons():
+    unregister_addons()
+    pImp.reload(*_pb_addons())
+    register_addons()
+
+
+def r_cls(*classes):
+    for cls in classes:
+        if isinstance(cls, type):
+            bpy.utils.register_class(cls)
+
+
+def u_cls(*classes):
+    for cls in classes:
+        if isinstance(cls, type):
+            bpy.utils.unregister_class(cls)

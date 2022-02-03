@@ -28,4 +28,7 @@ finally:
     pLog.message("import <peach> Module SUCCESS..", fn="Import", cls="pBlender")
 
 from peach.pBlender import pbu
-pbu.purge_scene() 
+# /.remove everything in the scene
+pbu.purge_scene()
+# /.load peach addons
+pbu.register_addons()
