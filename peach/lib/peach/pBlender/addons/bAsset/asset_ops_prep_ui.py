@@ -18,8 +18,10 @@
 #
 # ---------------------------------------------------------------------
 import bpy
-from peach import pGlob
-from .asset_ops_prep_name import PbOpAssetPrepName
+from peach import pGlob, pImp
+from . import asset_ops_prep_name as ap
+from peach.pBlender.addons import bImg
+pImp.reload(ap, bImg)
 
 
 class PbUiAssetPrep(bpy.types.Panel):
@@ -32,12 +34,14 @@ class PbUiAssetPrep(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        coll = context.collection
+        collection_ = context.collection
         row = layout.row()
-        row.label(text="Peach Version {}".format(pGlob.PEACH_VERSION), icon='WORLD_DATA')
+        row.label(text="Peach Version {}".format(pGlob.PEACH_VERSION), icon_value=bImg.get_id("peach"))
         row = layout.row()
-        row.label(text="Active Collection is: " + coll.name)
+        row.label(text="Collection Name: " + collection_.name)
         row = layout.row()
-        row.prop(data=coll, property="name")
+        row.prop(data=collection_, property="name")
         row = layout.row()
-        row.operator(PbOpAssetPrepName.bl_idname)
+        row.operator(ap.PbOpAssetPrepName.bl_idname)
+        row = layout.row()
+        row.operator(ap.PbOpPublishNewVersion.bl_idname)

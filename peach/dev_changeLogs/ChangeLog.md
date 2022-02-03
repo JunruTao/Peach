@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.03__<br>
-> __Time stamp: 19:37:08__<br>
+> __Time stamp: 23:48:45__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,7 @@
 
 
 - :bookmark_tabs: _003_. [Change_Log - Date: 2022/02/03](./2022_02/2022_02_03_cl.md) : :bread::bread:
+   > - [ 23:48:44 ] <sup><b> `Commit` : blender addon working/blender icon working/fixed pHoudini image link bug/more functions in pAst::Vrt class</b></sup>
    > - [ 19:37:08 ] <sup><b> `Commit` : blender addon working. able to resolve name set collection name</b></sup>
    > - [ 14:29:06 ] <sup><b> `Commit` : added auto load addons to  and star</b></sup>
    > - [ 00:06:11 ] <sup><b> `Commit` : update asset manager, safer mechanism tring to save to different hip dir</b></sup>

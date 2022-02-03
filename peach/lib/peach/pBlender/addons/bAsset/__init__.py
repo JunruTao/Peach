@@ -28,7 +28,8 @@ pImp.reload(asset_ops_prep_ui,
 
 classes = (
     asset_ops_prep_ui.PbUiAssetPrep,
-    asset_ops_prep_name.PbOpAssetPrepName
+    asset_ops_prep_name.PbOpAssetPrepName,
+    asset_ops_prep_name.PbOpPublishNewVersion
 )
 
 

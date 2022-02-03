@@ -119,6 +119,9 @@ class Struct(object):
     def children(self):
         return list(self._items.values())
 
+    def has_children(self):
+        return len(self._items) > 0
+
     def id_key(self):
         return self._id_key
 
@@ -320,6 +323,14 @@ class Vrt(Struct):
 
     def mdl_latest_version(self):
         return max(self.mdl_versions() + [0, ])
+
+    def mdl_latest_fbx(self):
+        if self.mdl_versions():
+            name = self._mdl_tpl + _VER_t.format(self.mdl_latest_version())
+            path_ =  pDir.join(self.path(), name + ".fbx")
+            if pDir.exists(path_):
+                return path_
+        return ""
 
     def anm_variants(self):
         files = pDir.listfiles(self._path, n=True)

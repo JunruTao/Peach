@@ -18,8 +18,8 @@
 #
 # ---------------------------------------------------------------------
 import bpy
-from peach import pImp, pLog
-pImp.reload(pLog)
+from peach import pImp, pLog, pDir
+pImp.reload(pLog, pDir)
 
 
 def _pb_addons():
@@ -29,8 +29,12 @@ def _pb_addons():
     vvv
     @return: (tuple of modules)
     """
-    from peach.pBlender.addons import (bAsset,)
-    return (bAsset, )
+    from peach.pBlender.addons import (bImg,
+                                       bAsset,
+                                       )
+    return (bImg,
+            bAsset,
+            )
 
 
 def purge_scene():
@@ -101,3 +105,28 @@ def u_cls(*classes):
     for cls in classes:
         if isinstance(cls, type):
             bpy.utils.unregister_class(cls)
+
+
+def save_blend_as(filepath=""):
+    if pDir.exists(pDir.parent(filepath)):
+        bpy.ops.wm.save_as_mainfile(filepath=filepath)
+
+
+def save_blend():
+    cf = bpy.data.filepath
+    if cf:
+        bpy.ops.wm.save_mainfile(filepath=cf)
+
+
+def export_as_blend(filepath=""):
+    if pDir.exists(pDir.parent(filepath)):
+        cf = bpy.data.filepath
+        if cf:
+            save_blend()
+            bpy.ops.wm.save_as_mainfile(filepath=filepath)
+            bpy.ops.wm.open_mainfile(filepath=cf)
+
+
+def export_fbx(filepath="", sl=True):
+    if pDir.exists(pDir.parent(filepath)):
+        bpy.ops.export_scene.fbx(filepath=filepath, use_selection=sl)

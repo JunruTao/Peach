@@ -131,13 +131,9 @@ def unlinkNetworkImage(node=None):
     editor = wm.getCurrentEditor()
     images = list(editor.backgroundImages())
     img_culled = []
-    found = False
     for i in images:
         if node.path() != i.relativeToPath():
             img_culled.append(i)
-            found = True
-    if not found:
-        return
     try:
         editor.setBackgroundImages(img_culled)
         nodegraphutils.saveBackgroundImages(node.parent(), img_culled)

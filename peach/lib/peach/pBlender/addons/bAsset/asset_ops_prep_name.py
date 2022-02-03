@@ -18,24 +18,26 @@
 #
 # ---------------------------------------------------------------------
 import bpy
-from peach import pImp, pAst, pDir
+from peach import pImp, pAst, pDir, pLog
 from peach.pBlender import pbu
-pImp.reload(pAst, pDir)
+pImp.reload(pAst, pDir, pLog)
+
+
+_SELECTED_VARIANT = 'A'
 
 
 def resolve():
     if bpy.data.filepath:
         wd = pDir.parent(bpy.data.filepath)
-    else:
-        import os
-        wd = os.getcwd()
-    pAst.reset()
-    try:
-        pAst.resolve(wd)
-    finally:
-        pass
-    if pAst.current_lib():
-        return True
+        pAst.reset()
+        try:
+            pAst.resolve(wd)
+        finally:
+            pass
+        if pAst.current_lib():
+            return True
+    pLog.error("File is not saved, Please make sure save the file under asset/dev",
+               fn=resolve, cls=pDir.fileNameBare(__file__))
     return False
 
 
@@ -43,11 +45,35 @@ def get_resolved_name():
     if resolve():
         if pAst.cwl() == pAst.__AST__:
             ast_ = pAst.current_asset()
-            vrt_s = ast_.children()
-            if len(vrt_s):
-                vrt_ = vrt_s[0]
+            vrt_s = ast_.children_dict()
+            vrt_ = vrt_s.get(_SELECTED_VARIANT)
+            if vrt_:
                 return vrt_.form_new_object_name_mdl()
-    return "__NOT_RESOLVED__"
+    return "__NOT_IN_ASSET_DEV__"
+
+
+def publish_new_version():
+    if resolve():
+        if pAst.cwl() == pAst.__AST__:
+            ast_ = pAst.current_asset()
+            vrt_s = ast_.children_dict()
+            vrt_ = vrt_s.get(_SELECTED_VARIANT)
+            if vrt_:
+                assert isinstance(vrt_, pAst.Vrt)
+                f_name_bare = vrt_.form_new_filename_mdl_mE()
+                base_path = pDir.join(vrt_.path(), f_name_bare)
+                fp_blend = base_path + ".blend"
+                fp_fbx = base_path + ".fbx"
+                name = vrt_.form_new_object_name_mdl()
+                col = bpy.data.collections.get(name)
+                if col:
+                    for obj_ in col.objects:
+                        obj_.select_set(True)
+                    pbu.export_fbx(fp_fbx, sl=True)
+                    pbu.export_as_blend(fp_blend)
+                else:
+                    pLog.warning("There's no PeachAsset format collections",
+                                 fn=publish_new_version, cls=pDir.fileNameBare(__file__))
 
 
 class PbOpAssetPrepName(bpy.types.Operator):
@@ -73,6 +99,5 @@ class PbOpPublishNewVersion(bpy.types.Operator):
     bl_context = "collection"
 
     def execute(self, context):
-        current_coll = context.collection
-        current_coll.name = get_resolved_name()
+        publish_new_version()
         return {"FINISHED"}
