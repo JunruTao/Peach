@@ -313,12 +313,22 @@ class Vrt(Struct):
         self._mdl_tpl = _MDL_t.format(ast=self.parent().name(), var=self.name())
         self._anm_tpl = _ANM_t.format(ast=self.parent().name(), var=self.name())
 
+    def valid(self):
+        return len(self.mdl_versions()) > 0
+
     def mdl_versions(self):
         files = pDir.listfiles(self._path, n=True)
         vers = []
+        if not files:
+            return vers
         for f in files:
+            base_n = pDir.remove_ext(f)
+            # /.is MDL step
             if self._mdl_tpl in f:
-                vers.append(int(pDir.remove_ext(f).split(".v")[-1]))
+                # /..Has both FBX and Blend Files (valid version)
+                check_path = pDir.join(self._path, base_n)
+                if pDir.isFile(check_path + ".fbx") and pDir.isFile(check_path + ".blend"):
+                    vers.append(int(base_n.split(".v")[-1]))
         return list(set(vers))
 
     def mdl_latest_version(self):
@@ -327,7 +337,7 @@ class Vrt(Struct):
     def mdl_latest_fbx(self):
         if self.mdl_versions():
             name = self._mdl_tpl + _VER_t.format(self.mdl_latest_version())
-            path_ =  pDir.join(self.path(), name + ".fbx")
+            path_ = pDir.join(self.path(), name + ".fbx")
             if pDir.exists(path_):
                 return path_
         return ""
@@ -336,7 +346,7 @@ class Vrt(Struct):
         files = pDir.listfiles(self._path, n=True)
         vats = []
         for f in files:
-            if self._anm_tpl in f:
+            if self._anm_tpl in f and f.endswith(".blend"):
                 f = f.replace(self._anm_tpl, "")
                 vats.append(pDir.remove_ext(f).split(".v")[0][-1])
         return list(set(vats))
@@ -344,7 +354,7 @@ class Vrt(Struct):
     def form_new_filename_mdl_mE(self):
         return self._mdl_tpl + _VER_t.format(self.mdl_latest_version() + 1)
 
-    def form_new_object_name_mdl(self):
+    def get_object_name_mdl(self):
         typ_ = self.parent().parent()
         cat_ = typ_.parent()
         assert isinstance(typ_, Typ)

@@ -48,7 +48,7 @@ def get_resolved_name():
             vrt_s = ast_.children_dict()
             vrt_ = vrt_s.get(_SELECTED_VARIANT)
             if vrt_:
-                return vrt_.form_new_object_name_mdl()
+                return vrt_.get_object_name_mdl()
     return "__NOT_IN_ASSET_DEV__"
 
 
@@ -64,7 +64,7 @@ def publish_new_version():
                 base_path = pDir.join(vrt_.path(), f_name_bare)
                 fp_blend = base_path + ".blend"
                 fp_fbx = base_path + ".fbx"
-                name = vrt_.form_new_object_name_mdl()
+                name = vrt_.get_object_name_mdl()
                 col = bpy.data.collections.get(name)
                 if col:
                     for obj_ in col.objects:

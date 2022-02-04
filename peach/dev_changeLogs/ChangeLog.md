@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.04__<br>
-> __Time stamp: 00:42:04__<br>
+> __Time stamp: 12:35:50__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,8 @@
 
 
 - :bookmark_tabs: _004_. [Change_Log - Date: 2022/02/04](./2022_02/2022_02_04_cl.md) : :bread:
+   > - [ 12:35:49 ] <sup><b> `Commit` : update pAset variant functions</b></sup>
+   > - [ 12:35:02 ] <sup><b> PeachPy Lib-Build: v0.1.72</b></sup>
    > - [ 00:42:03 ] <sup><b> `Commit` : build lib version up</b></sup>
    > - [ 00:41:28 ] <sup><b> Build Version Up: `v0.1.31`</b></sup>
 
