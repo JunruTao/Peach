@@ -342,6 +342,14 @@ class Vrt(Struct):
                 return path_
         return ""
 
+    def mdl_latest_blend(self):
+        if self.mdl_versions():
+            name = self._mdl_tpl + _VER_t.format(self.mdl_latest_version())
+            path_ = pDir.join(self.path(), name + ".blend")
+            if pDir.exists(path_):
+                return path_
+        return ""
+
     def anm_variants(self):
         files = pDir.listfiles(self._path, n=True)
         vats = []
@@ -349,20 +357,56 @@ class Vrt(Struct):
             if self._anm_tpl in f and f.endswith(".blend"):
                 f = f.replace(self._anm_tpl, "")
                 vats.append(pDir.remove_ext(f).split(".v")[0][-1])
-        return list(set(vats))
+        if vats:
+            vats = list(set(vats))
+            vats.sort()
+        return vats
+
+    def anm_variants_l(self):
+        vats = []
+        avs = self.anm_variants()
+        if avs:
+            for av in avs:
+                vats.append("{}x{}".format(self.name(), av))
+        return vats
+
+    def anm_get_latest_blends(self):
+        avs = self.anm_variants()
+        avf = []
+        files = pDir.listfiles(self._path)
+        files.sort()
+        for av in avs:
+            av_filepath = pDir.join(self._path, "{}x{}".format(self._anm_tpl, av))
+            vs_fs = [f for f in files if av_filepath in f]
+            if len(vs_fs):
+                avf.append(vs_fs[-1])
+        return avf
 
     def form_new_filename_mdl_mE(self):
         return self._mdl_tpl + _VER_t.format(self.mdl_latest_version() + 1)
 
-    def get_object_name_mdl(self):
+    def _object_name_pref(self):
         typ_ = self.parent().parent()
         cat_ = typ_.parent()
-        assert isinstance(typ_, Typ)
-        assert isinstance(cat_, Cat)
         typ_mf = typ_.name()
         cat_pf = cat_.prefix()
-        prefix_ = "{}_{}_".format(cat_pf, typ_mf)
+        return "{}_{}_".format(cat_pf, typ_mf)
+
+    def get_object_name_mdl(self):
+        prefix_ = self._object_name_pref()
         return prefix_ + self._mdl_tpl
+
+    def get_object_name_anm(self, anim_var="A"):
+        prefix_ = self._object_name_pref()
+        return prefix_ + self._anm_tpl + "x" + anim_var
+
+    def get_object_names_list_anm(self):
+        name_list_ = []
+        vrs = self.anm_variants()
+        if vrs:
+            for av in vrs:
+                name_list_.append(self.get_object_name_anm(anim_var=av))
+        return name_list_
 
 
 # [ Asset ]: PROTECTED ------------------------------------------
@@ -756,9 +800,21 @@ finally:
     from peach import pLog
     pLog.message("import <peach> Module SUCCESS..", fn="Import", cls="pBlender")
 from peach.pBlender import pbu
+# /.load peach addons.
+pbu.register_addons()
+# /.remove everything in the scene.
 pbu.purge_scene()
-bpy.ops.import_scene.fbx(filepath="{fbx_file}")
 bpy.ops.wm.save_as_mainfile(filepath="{blend_file}")
+bpy.ops.import_scene.fbx(filepath="{fbx_file}")
+loaded = bpy.context.scene.objects.items()[0][1]
+grp = bpy.data.collections.new("MDL")
+bpy.context.scene.collection.children.link(grp)
+grp.objects.link(loaded)
+layer_collection = bpy.context.view_layer.layer_collection.children["MDL"]
+bpy.context.view_layer.active_layer_collection = layer_collection
+bpy.ops.peach.asset_prep_name()
+bpy.data.scenes['Scene'].collection.objects.unlink(bpy.context.scene.objects.items()[0][1])
+bpy.ops.wm.save_mainfile(filepath="{blend_file}")
 """
 
 
@@ -811,7 +867,7 @@ def hou_run_publish_script(asset_path="", bg=False):
         # /.Cmd script
         out_str = _init_cmd_src.format(python_lib_dir=pDir.getPeachBlendLibDir(),
                                        fbx_file=asset_path.replace("$<EXT>", "fbx"),
-                                       blend_file=asset_path.replace("$<EXT>", "blend")
+                                       blend_file=asset_path.replace("$<EXT>", "blend"),
                                        )
         pUtil.file_write(init_cmd_script_path, out_str)
 

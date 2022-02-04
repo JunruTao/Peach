@@ -100,5 +100,14 @@
       <scope name="Open Files" level="INFORMATION" enabled="true" />
       <scope name="Project Files" level="WEAK WARNING" enabled="true" />
     </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="list.inverted" />
+          <option value="hou.attribType.Global" />
+          <option value="hou.attribData.*" />
+        </list>
+      </option>
+    </inspection_tool>
   </profile>
 </component>

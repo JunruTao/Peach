@@ -41,6 +41,8 @@ _look_up_cats = {"PeachModel": ["Architecture",
                  "PeachAsset": ["Utility",
                                 "Material",
                                 "IO",
+                                "Instance",
+                                "Scatter"
                                 ],
                  "PeachUltraUrban": ["Building",
                                      "Road",
@@ -288,7 +290,8 @@ class HdaManagerUI(QtWidgets.QWidget):
             new_node.setPosition(last_pos)
             new_node.allowEditingOfContents()
 
-    def add_definitions_temp(self):
+    @staticmethod
+    def add_definitions_temp():
         node_ = hNode.listSelected()[0]
         hda_def = node_.type().definition()
         _sheet = _look_up_sheet["PeachModel"]

@@ -163,3 +163,40 @@ def updateNetworkImage(new_node=None, old_path=""):
         nodegraphutils.saveBackgroundImages(new_node.parent(), images)
     finally:
         pass
+
+
+def createDetailAttr(name="", value=None):
+    """
+    [ Node ] Python: Create Detail/Global Attribute
+    @param name: (str) attribute name
+    @param value: (Any) Value
+    """
+    if name and value:
+        node_ = hou.pwd()
+        geo_ = node_.geometry()
+        geo_.addAttrib(hou.attribType.Global, name, value)
+        geo_.setGlobalAttribValue(name, value)
+
+
+def createDetailAttributes(attr_dict=None):
+    """
+    [ Node ] Python: Create Detail/Global Attributes
+    @param attr_dict: (dict) {attribute: value}
+    """
+    if isinstance(attr_dict, dict) and len(attr_dict):
+        for name, value in attr_dict.items():
+            createDetailAttr(name, value)
+
+
+def createArrayAttrStr(name="", values=""):
+    """
+    [ Node ] Python: Create Detail/Global Array Attribute
+    @param name: (str) attribute name
+    @param values: (list) Values
+    """
+    if name and isinstance(values, list):
+        node_ = hou.pwd()
+        geo_ = node_.geometry()
+        dt = geo_.addArrayAttrib(hou.attribType.Global, name, hou.attribData.String, 1)
+        geo_.setGlobalAttribValue(name, values)
+        return dt
