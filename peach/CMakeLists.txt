@@ -6,9 +6,9 @@
 # ------------------------------------------------------------------------------- #
 # [ QUICK BUILD OPTIONS ]
 # /. build the dev version only
-set(BUILD_DEV_NOT_INSTALL TRUE)  # >>>> CONTROL [AUTO]
+set(BUILD_DEV_NOT_INSTALL FALSE)  # >>>> CONTROL [AUTO]
 # /. build lib only
-set(BUILD_DEVLIB_ONLY TRUE)      # >>>> CONTROL [AUTO]
+set(BUILD_DEVLIB_ONLY FALSE)      # >>>> CONTROL [AUTO]
 
 # [ CMAKE CONFIGURATION ]
 CMAKE_MINIMUM_REQUIRED(VERSION 3.22)
@@ -29,7 +29,7 @@ set(INSTAGRAM "@digital.peach.studio")
 # [ GLOBAL ] Versions
 set(PEACH_VERSION_MAJOR "0")
 set(PEACH_VERSION_MINOR "1")
-set(PEACH_VERSION_PATCH "30")  # [AUTO]
+set(PEACH_VERSION_PATCH "31")  # [AUTO]
 set(PEACH_VERSION "${PEACH_VERSION_MAJOR}.${PEACH_VERSION_MINOR}.${PEACH_VERSION_PATCH}")
 
 # [ DCC SETTINGS ]
@@ -51,10 +51,10 @@ set(PEACH_ICONS_ICO_DIR "${PEACH_DIR}/icons/ICO")
 
 # [ INSTALLATION OPTIONS ]
 # /. Install Settings
-set(INSTALL_ICON OFF)      # >>>> CONTROL [AUTO]
+set(INSTALL_ICON ON)      # >>>> CONTROL [AUTO]
 set(INSTALL_CONFIG ON)
 set(INSTALL_CONFIG_OVRD OFF)
-set(BUILD_BOOTSTRAP OFF)      # >>>> CONTROL [AUTO]
+set(BUILD_BOOTSTRAP ON)      # >>>> CONTROL [AUTO]
 # /. Houdini Dev Builds
 set(BUILD_DEV_HOU ON)
 set(BUILD_INSTALL_HOU ON)

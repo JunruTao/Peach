@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.02.03__<br>
-> __Time stamp: 23:48:45__<br>
+> __Date stamp: 2022.02.04__<br>
+> __Time stamp: 00:42:04__<br>
 > __Author: Junru Tao__
 ---
 
@@ -13,6 +13,10 @@
 
 ## :hammer: Change Logs: _Feb, 2022_
 
+
+- :bookmark_tabs: _004_. [Change_Log - Date: 2022/02/04](./2022_02/2022_02_04_cl.md) : :bread:
+   > - [ 00:42:03 ] <sup><b> `Commit` : build lib version up</b></sup>
+   > - [ 00:41:28 ] <sup><b> Build Version Up: `v0.1.31`</b></sup>
 
 - :bookmark_tabs: _003_. [Change_Log - Date: 2022/02/03](./2022_02/2022_02_03_cl.md) : :bread::bread:
    > - [ 23:48:44 ] <sup><b> `Commit` : blender addon working/blender icon working/fixed pHoudini image link bug/more functions in pAst::Vrt class</b></sup>

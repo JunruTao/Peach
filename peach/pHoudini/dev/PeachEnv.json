@@ -1,11 +1,11 @@
 {
     "author" : "Junru Tao",
-    "version": "0.1.34",
+    "version": "0.1.35",
     "load_package_once": true,
     "enable" : "houdini_version >= '19.0' and houdini_version < '19.1'",
     "env" : [
-        {"PEACH_VERSION" : "0.1.30"},
-        {"PEACH_VERSION_PKG": "0.1.34"},
+        {"PEACH_VERSION" : "0.1.31"},
+        {"PEACH_VERSION_PKG": "0.1.35"},
         {"PEACH_CREATOR" : "Junru Tao"},
         {"PEACH_BUILD" : "Debug"},
         {"PEACH_PACKAGES_PATH" : "$PEACH_HOU/packages"},
