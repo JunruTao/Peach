@@ -105,7 +105,7 @@ class HdaManagerUI(QtWidgets.QWidget):
         self.setObjectName("pHoudini_tools_devtools_HdaManagerUI_widget")
 
         # /.Set Window Title, Icon
-        self.setWindowTitle('Hda Manager - PeachPy v{0}'.format(pGlob.PEACH_PY_VERSION))
+        self.setWindowTitle('HDA Manager - PeachPy v{0}'.format(pGlob.PEACH_PY_VERSION))
         self.setWindowIcon(QtGui.QIcon(img.getPixmap("devtool_hda_manager")))
 
         # /.Data Containers
@@ -274,9 +274,13 @@ class HdaManagerUI(QtWidgets.QWidget):
                                                                         self.cmb_menu_entries.currentText()))
             hda_def.addSection("OnCreated", _hda_OnCreated_str.format(col=_sheet[2],
                                                                       img=_sheet[3]))
+            hda_def.addSection("OnLoaded", _hda_OnCreated_str.format(col=_sheet[2],
+                                                                     img=_sheet[3]))
+            hda_def.addSection("OnUpdated", _hda_OnCreated_str.format(col=_sheet[2],
+                                                                      img=_sheet[3]))
             hda_def.addSection("OnDeleted", _hda_OnDeleted_str)
             hda_def.addSection("OnNameChanged", _hda_OnNameChanged_str)
-            for sec in ("OnCreated", "OnDeleted", "OnNameChanged"):
+            for sec in ("OnCreated", "OnDeleted", "OnNameChanged", "OnUpdated", "OnLoaded"):
                 hda_def.setExtraFileOption("{}/IsPython".format(sec), True)
                 hda_def.setExtraFileOption("{}/IsScript".format(sec), True)
             # /.Save definition
