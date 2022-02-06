@@ -111,6 +111,7 @@
           <option value="hou.attribType.Global" />
           <option value="hou.attribData.*" />
           <option value="pBlender.addons.bAsset.asset_ops_import_layout.PbOpImportLayout.*" />
+          <option value="os._ScandirIterator.*" />
         </list>
       </option>
     </inspection_tool>

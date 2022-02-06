@@ -75,7 +75,10 @@ def mkdir(path=""):
     @param path: (str) dir to make
     @return: (str) path that made.
     """
-    os.mkdir(path)
+    if not exists(parent(path)):
+        os.makedirs(path)
+    else:
+        os.mkdir(path)
     return path
 
 
