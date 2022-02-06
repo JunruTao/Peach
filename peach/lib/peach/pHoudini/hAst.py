@@ -18,6 +18,7 @@
 #
 # ---------------------------------------------------------------------
 from peach import pImp, pAst, pDir, pUtil
+import hou
 pImp.reload(pAst, pDir, pUtil)
 
 
@@ -111,13 +112,41 @@ bpy.data.scenes['Scene'].collection.objects.unlink(bpy.context.scene.objects.ite
 bpy.ops.wm.save_mainfile(filepath="{blend_file}")
 """
 
+_init_cmd_ext_src = """#!/usr/bin/env python
+import bpy
+import sys
+sys.path.append("{python_lib_dir}")
+try:
+    import peach
+except ImportError as e:
+    raise e
+finally:
+    from peach import pLog
+    pLog.message("import <peach> Module SUCCESS..", fn="Import", cls="pBlender")
+from peach.pBlender import pbu
+from peach import pDir
+# /.load peach addons.
+pbu.register_addons()
+# /.remove everything in the scene.
+pbu.purge_scene()
+bpy.ops.wm.save_as_mainfile(filepath="{blend_file}")
+bpy.ops.import_scene.fbx(filepath="{fbx_file}")
+loaded = bpy.context.scene.objects.items()[0][1]
+name_ = pDir.fileNameBare("{fbx_file}").split(".v")[0]
+grp = bpy.data.collections.new("EXT_" + name_ + "_GRP")
+bpy.context.scene.collection.children.link(grp)
+grp.objects.link(loaded)
+bpy.data.scenes['Scene'].collection.objects.unlink(bpy.context.scene.objects.items()[0][1])
+bpy.ops.wm.save_mainfile(filepath="{blend_file}")
+"""
+
 
 def hou_script_pub_cache_dir():
     """
     [ Asset (Beta) ] get script cache dir
     @return: (str) script_cache dir
     """
-    return pDir.join(pAst.cwd(), "script_cache")
+    return pDir.join(hou.getenv("HIP"), "script_cache")
 
 
 def hou_publish_init_script_dir():
@@ -131,7 +160,7 @@ def hou_publish_init_script_dir():
     return init_script_path, init_cmd_script_path
 
 
-def hou_run_publish_script(asset_path="", bg=False):
+def hou_run_publish_script(asset_path="", bg=False, cmd="asset"):
     """
     [ Asset (Beta) ] Output file and run scripts:
     @param asset_path: (str) asset path to be published
@@ -158,9 +187,16 @@ def hou_run_publish_script(asset_path="", bg=False):
                                  cmd_script=init_cmd_script_path)
         pUtil.file_write(init_script_path, out_str)
 
+        if cmd == "asset":
+            cmd_src = _init_cmd_src
+        elif cmd == "extension":
+            cmd_src = _init_cmd_ext_src
+        else:
+            # no command specified.
+            return
         # /.Cmd script
-        out_str = _init_cmd_src.format(python_lib_dir=pDir.getPeachBlendLibDir(),
-                                       fbx_file=asset_path.replace("$<EXT>", "fbx"),
-                                       blend_file=asset_path.replace("$<EXT>", "blend"),
-                                       )
+        out_str = cmd_src.format(python_lib_dir=pDir.getPeachBlendLibDir(),
+                                 fbx_file=asset_path.replace("$<EXT>", "fbx"),
+                                 blend_file=asset_path.replace("$<EXT>", "blend"),
+                                 )
         pUtil.file_write(init_cmd_script_path, out_str)

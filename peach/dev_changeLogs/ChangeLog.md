@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.06__<br>
-> __Time stamp: 03:07:38__<br>
+> __Time stamp: 05:45:29__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,8 @@
 
 
 - :bookmark_tabs: _006_. [Change_Log - Date: 2022/02/06](./2022_02/2022_02_06_cl.md) : :bread::bread::bread:
+   > - [ 05:45:29 ] <sup><b> `Commit` : new features: ; working with shot extention; layout format</b></sup>
+   > - [ 05:44:05 ] <sup><b> Build Version Up: `v0.1.32`</b></sup>
    > - [ 03:07:38 ] <sup><b> `Commit` : moved some arbirary functions from  to  which only used in houdini</b></sup>
    > - [ 02:13:01 ] <sup><b> `Commit` : fix pdir makedir function: now works with multiple levels</b></sup>
    > - [ 01:42:55 ] <sup><b> `Commit` : new format  as layout data. fixed bugs on pbu selection</b></sup>

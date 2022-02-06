@@ -280,6 +280,7 @@ class HdaManagerUI(QtWidgets.QWidget):
                                                                       img=_sheet[3]))
             hda_def.addSection("OnDeleted", _hda_OnDeleted_str)
             hda_def.addSection("OnNameChanged", _hda_OnNameChanged_str)
+
             for sec in ("OnCreated", "OnDeleted", "OnNameChanged", "OnUpdated", "OnLoaded"):
                 hda_def.setExtraFileOption("{}/IsPython".format(sec), True)
                 hda_def.setExtraFileOption("{}/IsScript".format(sec), True)
@@ -301,10 +302,14 @@ class HdaManagerUI(QtWidgets.QWidget):
         _sheet = _look_up_sheet["PeachModel"]
         # /.Write Extra Information
         hda_def.addSection("OnCreated", _hda_OnCreated_str.format(col=_sheet[2],
+                                                                      img=_sheet[3]))
+        hda_def.addSection("OnLoaded", _hda_OnCreated_str.format(col=_sheet[2],
+                                                                 img=_sheet[3]))
+        hda_def.addSection("OnUpdated", _hda_OnCreated_str.format(col=_sheet[2],
                                                                   img=_sheet[3]))
         hda_def.addSection("OnDeleted", _hda_OnDeleted_str)
         hda_def.addSection("OnNameChanged", _hda_OnNameChanged_str)
-        for sec in ("OnCreated", "OnDeleted", "OnNameChanged"):
+        for sec in ("OnCreated", "OnDeleted", "OnNameChanged", "OnUpdated", "OnLoaded"):
             hda_def.setExtraFileOption("{}/IsPython".format(sec), True)
             hda_def.setExtraFileOption("{}/IsScript".format(sec), True)
         # /.Save definition
