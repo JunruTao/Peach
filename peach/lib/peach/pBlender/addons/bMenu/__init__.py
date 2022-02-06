@@ -11,28 +11,23 @@
 # - Instagram: @digital.peach.studio
 # ---------------------------------------------------------------------
 # [ File Name ] __init__.py@python
-# [ File Description ] - 2022.02.03 (Y.M.D) - 13:33
+# [ File Description ] - 2022.02.05 (Y.M.D) - 21:32
 #                            *   *   *   *
 #
 #   This script contains
 #
 # ---------------------------------------------------------------------
+import bpy
 from peach import pImp
 from peach.pBlender import pbu
-from . import (asset_ops_prep_ui,
-               asset_ops_prep_name,
-               asset_ops_import_layout
+from . import (peach_top_bar_ui,
                )
-pImp.reload(asset_ops_prep_ui,
-            asset_ops_prep_name,
-            asset_ops_import_layout
+
+pImp.reload(peach_top_bar_ui,
             )
 
 classes = (
-    asset_ops_prep_ui.PbUiAssetPrep,
-    asset_ops_prep_name.PbOpAssetPrepName,
-    asset_ops_prep_name.PbOpPublishNewVersion,
-    asset_ops_import_layout.PbOpImportLayout,
+    peach_top_bar_ui.TOPBAR_MT_peach_menu,
 )
 
 
@@ -41,13 +36,15 @@ bl_info = {
     "blender": (3, 0, 0),
     "author": "Digital Peach Studio",
     "version": (1, 0),
-    "category": "Object",
+    "category": "User Interface",
 }
 
 
 def register():
     pbu.r_cls(*classes)
+    bpy.types.TOPBAR_MT_editor_menus.append(peach_top_bar_ui.TOPBAR_MT_peach_menu.menu_draw)
 
 
 def unregister():
+    bpy.types.TOPBAR_MT_editor_menus.remove(peach_top_bar_ui.TOPBAR_MT_peach_menu.menu_draw)
     pbu.u_cls(*classes)

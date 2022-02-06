@@ -17,32 +17,13 @@
 #   This script contains tests(backup scrips)
 #
 # ---------------------------------------------------------------------
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# ---------------------------------------------------------------------
-# Copyright (c) 2022 Digital Peach Studio - Junru Tao
-# This code is licensed under MIT license (see LICENSE.txt for details)
-#                            *   *   *   *
-# [ Info ] - Digital Peach Studio
-# - Authors: Junru Tao
-# - Contact: <junrtao.uk@gmail.com | junrutao@qq.com>
-# - Website: digital-peach.company.site
-# - Instagram: @digital.peach.studio
-# ---------------------------------------------------------------------
-# [ File Name ] blender_load_asset_test.py@python
-# [ File Description ] - 2022.01.29 (Y.M.D) - 14:26
-#                            *   *   *   *
-#
-#   This script contains tests(backup scrips)
-#
-# ---------------------------------------------------------------------
 import json
 import bpy
 import mathutils
 import math
 
 from peach import pDir, pUtil, pImp, pLog
-pImp.reload(pUtil)
+pImp.reload(pUtil, pDir, pLog)
 
 
 # loading json
@@ -71,12 +52,12 @@ layer_collection = bpy.context.view_layer.layer_collection
 bpy.context.view_layer.active_layer_collection = layer_collection
 
 # /.Adding A master transform.
-mst_name = "MASTER_TRANSFROM_{}_EPT".format(json_file_name)
+mst_name = "MASTER_TRANSFORM_{}_EPT".format(json_file_name)
 mst = bpy.data.objects.new( "empty", None )
 mst.name = mst_name
 layout.objects.link(mst)
 
-# /.Create the main group for file instancs
+# /.Create the main group for file instances
 grp_name = "instance_geo_GRP"
 grp = None
 
@@ -159,5 +140,5 @@ for key, data in layout_data.items():
             o.matrix_parent_inverse = mst.matrix_world.inverted()
 
 # /.Rotate the master transform to get the right axis.
-mst.rotation_euler = mathutils.Euler((math.pi/2, 0,0), 'XYZ')
+mst.rotation_euler = mathutils.Euler((math.pi/2, 0, 0), 'XYZ')
 

@@ -31,9 +31,11 @@ def _pb_addons():
     """
     from peach.pBlender.addons import (bImg,
                                        bAsset,
+                                       bMenu
                                        )
     return (bImg,
             bAsset,
+            bMenu
             )
 
 
@@ -130,3 +132,29 @@ def export_as_blend(filepath=""):
 def export_fbx(filepath="", sl=True):
     if pDir.exists(pDir.parent(filepath)):
         bpy.ops.export_scene.fbx(filepath=filepath, use_selection=sl)
+
+
+def deselect_all():
+    for ob in bpy.context.selected_objects:
+        ob.select = False
+
+
+def select(obj_):
+    obj_.select_set(True)
+
+
+def apt_R():
+    bpy.ops.object.transform_apply(location=False, rotation=True, scale=False)
+
+
+def apt_T():
+    bpy.ops.object.transform_apply(location=True, rotation=False, scale=False)
+
+
+def apt_S():
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+
+
+def apt_A():
+    bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+

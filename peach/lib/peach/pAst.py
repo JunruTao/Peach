@@ -253,16 +253,23 @@ class Typ(Struct):
 
         counter = 0
         base_name = ch_name
-        ch_name = "{}_{}".format(base_name, ABCDs[counter])
-        while self.get(ch_name):
-            ch_name = "{}_{}".format(base_name, ABCDs[counter])
-            counter += 1
 
-        print(ch_name)
+        # /.Lib data is an exception, i.g.textures, materials
+        is_lib_data = False
+        if self.parent().name().startswith("lib_"):
+            is_lib_data = True
+
+        if not is_lib_data:
+            ch_name = "{}_{}".format(base_name, ABCDs[counter])
+            while self.get(ch_name):
+                ch_name = "{}_{}".format(base_name, ABCDs[counter])
+                counter += 1
+
         ch_dir = self._new_child(ch_name)
         if ch_dir:
             _out = Ast(ch_name, ch_dir, self)
-            _out.new_step_variant()
+            if not is_lib_data:
+                _out.new_step_variant()
             self.addItem(ch_name, _out)
             return _out
         return None
@@ -273,7 +280,9 @@ class Ast(Struct):
         super(Ast, self).__init__(name, path, parent)
         self._id_key = __AST__
         self._id_key_child = __VRT__
-        self._base_name, self._suf = tuple(name.split("_"))
+        self._base_name, self._suf = "", ""
+        if not self.parent().parent().name().startswith("lib_"):
+            self._base_name, self._suf = tuple(name.split("_"))
         for key, path in _get_variants(self.path()).items():
             self.addItem(key, Vrt(key, path, self))
 

@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.02.05__<br>
-> __Time stamp: 20:58:23__<br>
+> __Date stamp: 2022.02.06__<br>
+> __Time stamp: 00:15:55__<br>
 > __Author: Junru Tao__
 ---
 
@@ -14,7 +14,12 @@
 ## :hammer: Change Logs: _Feb, 2022_
 
 
-- :bookmark_tabs: _005_. [Change_Log - Date: 2022/02/05](./2022_02/2022_02_05_cl.md) : :bread:
+- :bookmark_tabs: _006_. [Change_Log - Date: 2022/02/06](./2022_02/2022_02_06_cl.md) : :bread:
+   > - [ 00:15:55 ] <sup><b> `Commit` : added import layout menu into blender. fixed small bugs. tested link texture</b></sup>
+
+- :bookmark_tabs: _005_. [Change_Log - Date: 2022/02/05](./2022_02/2022_02_05_cl.md) : :bread::bread:
+   > - [ 22:47:47 ] <sup><b> PeachPy Lib-Build: v0.1.78</b></sup>
+   > - [ 21:48:30 ] <sup><b> PeachPy Lib-Build: v0.1.77</b></sup>
    > - [ 20:58:22 ] <sup><b> `Commit` : layout export/load Houdini - Blender working</b></sup>
    > - [ 18:07:18 ] <sup><b> PeachPy Lib-Build: v0.1.76</b></sup>
    > - [ 17:27:47 ] <sup><b> PeachPy Lib-Build: v0.1.75</b></sup>
