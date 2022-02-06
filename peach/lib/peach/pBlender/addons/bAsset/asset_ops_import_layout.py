@@ -161,9 +161,9 @@ class PbOpImportLayout(Operator, ImportHelper):
 
     # ImportHelper mixin class uses this
     filename_ext = ".{}".format(pAst.LAY_EXT)
-
+    ext_default = "*.{}".format(pAst.LAY_EXT)
     filter_glob: StringProperty(
-        default="*.playout",
+        default=ext_default,
         options={'HIDDEN'},
         maxlen=255,  # Max internal buffer length, longer would be clamped.
     )
