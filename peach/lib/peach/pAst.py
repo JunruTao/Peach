@@ -78,6 +78,8 @@ _ANM_t = "{ast}_ANM_{var}"
 _VER_t = ".v{0:03d}"
 ABCDs = pGlob.ALPHA
 
+LAY_EXT = "playout"
+
 
 # [ Asset ]: OBJECTS ------------------------------------------
 class Struct(object):

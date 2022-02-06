@@ -17,11 +17,13 @@
 #   This script contains houdini Ast functions
 #
 # ---------------------------------------------------------------------
-import hou
+from peach import pAst
 
 
 def export_layout(node_out=None, json_path=""):
     if node_out and json_path:
+        if json_path.endswith(".json"):
+            json_path = json_path.replace(".json", ".{}".format(pAst.LAY_EXT))
         geo = node_out.geometry()
 
         def chunks(lst, n):
@@ -29,11 +31,11 @@ def export_layout(node_out=None, json_path=""):
             for j in range(0, len(lst), n):
                 yield lst[j:j + n]
 
-        names = geo.attribValue("ast_longnames")
+        ast_instance_data = geo.attribValue("ast_instance_data")
         data_out = dict()
-        for ln in names:
+        for ln, path_ in ast_instance_data.items():
             data_out[ln] = dict()
-            data_out[ln]["path"] = ""
+            data_out[ln]["path"] = path_
             data_out[ln]["instances"] = []
 
         # getting all the transforms:
@@ -41,7 +43,6 @@ def export_layout(node_out=None, json_path=""):
         r = geo.primFloatAttribValues("r")
         s = geo.primFloatAttribValues("s")
         asset_name = geo.primStringAttribValues("ast_longname")
-        asset_path = geo.primStringAttribValues("ast_filepath")
 
         # get them into 3 sized vector arrays
         t = list(chunks(t, 3))
@@ -50,8 +51,6 @@ def export_layout(node_out=None, json_path=""):
 
         for i in range(0, len(geo.prims())):
             if data_out.get(asset_name[i]):
-                if not data_out[asset_name[i]]["path"]:
-                    data_out[asset_name[i]]["path"] = asset_path[i]
                 data = {"order": "trs",
                         "t": (t[i][0], t[i][1], t[i][2]),
                         "r": (r[i][0], r[i][1], r[i][2]),

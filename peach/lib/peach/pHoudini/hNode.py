@@ -137,7 +137,7 @@ def unlinkNetworkImage(node=None):
     try:
         editor.setBackgroundImages(img_culled)
         nodegraphutils.saveBackgroundImages(node.parent(), img_culled)
-    finally:
+    except:
         pass
 
 

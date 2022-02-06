@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.06__<br>
-> __Time stamp: 00:15:55__<br>
+> __Time stamp: 01:41:30__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,7 @@
 
 
 - :bookmark_tabs: _006_. [Change_Log - Date: 2022/02/06](./2022_02/2022_02_06_cl.md) : :bread:
+   > - [ 01:41:30 ] <sup><b> `Commit` : new format  as layout data. fixed bugs on pbu selection</b></sup>
    > - [ 00:15:55 ] <sup><b> `Commit` : added import layout menu into blender. fixed small bugs. tested link texture</b></sup>
 
 - :bookmark_tabs: _005_. [Change_Log - Date: 2022/02/05](./2022_02/2022_02_05_cl.md) : :bread::bread:

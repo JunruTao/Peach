@@ -135,8 +135,8 @@ def export_fbx(filepath="", sl=True):
 
 
 def deselect_all():
-    for ob in bpy.context.selected_objects:
-        ob.select = False
+    for obj in bpy.context.selected_objects:
+        obj.select_set(False)
 
 
 def select(obj_):

@@ -24,7 +24,7 @@ import math
 from bpy_extras.io_utils import ImportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
-from peach import pDir, pUtil, pImp, pLog
+from peach import pDir, pUtil, pImp, pLog, pAst
 from peach.pBlender import pbu
 pImp.reload(pUtil, pDir, pLog, pbu)
 
@@ -160,10 +160,10 @@ class PbOpImportLayout(Operator, ImportHelper):
     bl_label = "Load Layout Data"
 
     # ImportHelper mixin class uses this
-    filename_ext = ".json"
+    filename_ext = ".{}".format(pAst.LAY_EXT)
 
     filter_glob: StringProperty(
-        default="*.json",
+        default="*.playout",
         options={'HIDDEN'},
         maxlen=255,  # Max internal buffer length, longer would be clamped.
     )
