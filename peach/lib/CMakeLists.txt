@@ -5,7 +5,7 @@
 # ------------------------------------------------------------------------------- #
 # This should build the libs copy all the files..
 # [ HOU SETTINGS ] - lib
-set(PACKAGE_VERSION "0.1.79")  # >>>> CONTROL [AUTO]
+set(PACKAGE_VERSION "0.1.80")  # >>>> CONTROL [AUTO]
 
 # [ HOUDINI LIBS ]--------------------------------------------------------------- #
 

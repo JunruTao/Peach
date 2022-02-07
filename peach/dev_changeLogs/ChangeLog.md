@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.02.06__<br>
-> __Time stamp: 05:45:29__<br>
+> __Date stamp: 2022.02.07__<br>
+> __Time stamp: 06:32:59__<br>
 > __Author: Junru Tao__
 ---
 
@@ -13,6 +13,10 @@
 
 ## :hammer: Change Logs: _Feb, 2022_
 
+
+- :bookmark_tabs: _007_. [Change_Log - Date: 2022/02/07](./2022_02/2022_02_07_cl.md) : :bread:
+   > - [ 06:32:59 ] <sup><b> `Commit` : more util  hda, started UU.</b></sup>
+   > - [ 06:31:57 ] <sup><b> Build Version Up: `v0.1.33`</b></sup>
 
 - :bookmark_tabs: _006_. [Change_Log - Date: 2022/02/06](./2022_02/2022_02_06_cl.md) : :bread::bread::bread:
    > - [ 05:45:29 ] <sup><b> `Commit` : new features: ; working with shot extention; layout format</b></sup>

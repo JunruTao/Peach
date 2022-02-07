@@ -10,6 +10,7 @@
 
 ### VEX
 - [Vex Include external scripts](./hou_vex_include.md)
+- [Vex Tricks](./hou_vex_tricks.md)
 
 
 ### Houdini HDA
