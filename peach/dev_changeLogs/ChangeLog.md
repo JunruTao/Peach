@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.07__<br>
-> __Time stamp: 06:32:59__<br>
+> __Time stamp: 06:37:27__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,7 @@
 
 
 - :bookmark_tabs: _007_. [Change_Log - Date: 2022/02/07](./2022_02/2022_02_07_cl.md) : :bread:
+   > - [ 06:37:26 ] <sup><b> `Commit` : added UU important VEX script.  generator script.</b></sup>
    > - [ 06:32:59 ] <sup><b> `Commit` : more util  hda, started UU.</b></sup>
    > - [ 06:31:57 ] <sup><b> Build Version Up: `v0.1.33`</b></sup>
 

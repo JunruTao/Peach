@@ -1,0 +1,206 @@
+/*///////////////////////////////////////////////////////////////////////////////////
+//[ VEX::Code - Run Over: <Detail> ]
+// version: Houdini 19.0 and upper
+// inputs: rail(has tangent as N), packed geo x2: 
+// has attributes: uu_type, e_e_width;
+//-----------------------------------------------------------------------------------
+[ For input D/W ]--ipt.1, ipt.2 packed geo
+should run through:
+    // [ Run Over Primitive]
+    float bnd[] = primintrinsic(0,"packedbounds",@primnum);
+    f@e_x_width = bnd[1] - bnd[0]; 
+    f@e_y_height = bnd[3] - bnd[2];
+then <split /sop> expr="@uu_type=door"
+///////////////////////////////////////////////////////////////////////////////////*/
+
+// [ Wrangle Inputs ]
+int Ipt_rail = 0; /* [input] rail polyline polygons */
+int Ipt_door = 1; /* [input] *one packed geometry {  Door  } */
+int Ipt_wind = 2; /* [input] *one packed geometry { Window } */
+
+// [ Outputs ]
+int Opt_geo = geoself();
+
+// [ Door-Window Code input ]
+string  _s_in_dw_code     = chs("dw_code");
+float   _f_in_buffer      = chf("buffer");
+float   _f_in_gaplen      = max(chf("gap_length"), 0.01); //min is 10mm
+float   _f_in_walldivlen  = max(chf("wall_resample_len"), 0.01); //min is 10mm
+float   _f_in_wallcolpst  = chf("polyline_collapse_threshold"); //by default should be 0.999
+int     _i_op_fixed_gap   = chi("fixed_gap");
+int     _i_op_continuous  = chi("continuous_code");
+int     _i_op_looped_dw   = chi("looped_code");
+int     _i_in_loopoffset  = chi("looped_offset");
+
+// [ Dictionaries ]
+dict type_name; 
+dict type_len;
+
+// [ Get Widths ]
+float door_w = prim(Ipt_door, "e_x_width", 0);
+float wind_w = prim(Ipt_wind, "e_x_width", 0);
+
+// [ Construct Dictionary ]
+type_name['d'] = "door";
+type_name['w'] = "window";
+type_name[' '] = "gap";
+type_len['d'] = door_w;
+type_len['w'] = wind_w;
+type_len[' '] = _f_in_gaplen;
+
+// [ Cache field ]
+vector p, p1, p2, n; vector2 us_t, uv;
+int ptnum, div, np, count_max, if_add_pt;
+string type, STR_dw_fit, temp_;
+float test_len, gap_len, aclen, uv_dif, rest_len, total_length, 
+unit, prim_len, min_length, all_prim_len;
+
+// [opt] if looped.
+if(_i_op_looped_dw)
+{
+    //generate a long enough dw string to fit.
+    test_len = 0;
+    all_prim_len = 0.0f;
+    count_max = 0;
+    // get the entire length of the all the rails
+    for(int primnum = 0; primnum < nprimitives(Ipt_rail); ++primnum)
+        all_prim_len += primuvconvert(Ipt_rail, 1, primnum, PRIMUV_UNIT_TO_LEN);
+    min_length = min(door_w, wind_w, _f_in_gaplen, 0.1);
+    while(test_len < all_prim_len)
+    {
+        test_len += min_length;
+        ++count_max;
+    }
+    // make loop
+    temp_ = "";
+    for(int i = _i_in_loopoffset; i < count_max; ++i)
+        temp_ += _s_in_dw_code[i % strlen(_s_in_dw_code)];
+    _s_in_dw_code = temp_;
+}
+
+for(int primnum = 0; primnum < nprimitives(Ipt_rail); ++primnum)
+{
+    // [ Cache field ] per prim
+    total_length = 0;
+    rest_len = 0;
+    STR_dw_fit = "";
+    unit = 0;
+    uv = {0, 0};
+    vector2 wall_uvs[];
+    // [ Total Length of the rail ]
+    prim_len = primuvconvert(Ipt_rail, 1, primnum, PRIMUV_UNIT_TO_LEN);
+
+    // [ fLoop#01 ] Find how many to fit in the prim
+    for(int i = 0; i < strlen(_s_in_dw_code); ++i)
+    {
+        // configure unit length, if it's not in the dw list, will treat it as gap
+        if(!isvalidindex(type_len, _s_in_dw_code[i])) unit = _i_op_fixed_gap;
+        else unit = type_len[_s_in_dw_code[i]];
+
+        // [opt] Use Fixed Gap.
+        if(_i_op_fixed_gap) test_len = total_length + unit + _f_in_gaplen;
+        else test_len = total_length + unit;
+
+        if(test_len < prim_len - _f_in_buffer)
+        {
+            total_length = test_len;
+            STR_dw_fit += _s_in_dw_code[i];
+        }
+    } //End of fLoop#01
+
+    // [ Set the Gap length ]
+    if(_i_op_fixed_gap) gap_len = _f_in_gaplen; // If using fixed length, BUffer is at both ends
+    else gap_len = max(_f_in_gaplen, (prim_len - total_length - _f_in_buffer)/(strlen(STR_dw_fit) + 1));
+
+    // [ fLoop#02 ] Generate New points
+    for(int i = 0; i < strlen(STR_dw_fit); ++i)
+    {
+        if(rest_len + gap_len + unit <= prim_len - _f_in_buffer/2)
+        {
+            if(i == 0) append(wall_uvs, set(0, 0));
+            // [ Compute UV ] based on length
+            unit = type_len[STR_dw_fit[i]];
+            if(!isvalidindex(type_len, STR_dw_fit[i])) unit = type_len[' '];
+            if (i == 0) rest_len = _f_in_buffer/2;
+            rest_len += gap_len;
+            if(isvalidindex(type_name, STR_dw_fit[i]) && STR_dw_fit[i] != ' ') 
+            {
+                // wall_end_pt 
+                append(wall_uvs, set((rest_len)/prim_len, 0));
+                uv[0] = (rest_len + (unit/2))/prim_len;
+                rest_len += unit;
+                append(wall_uvs, set((rest_len)/prim_len, 0));
+                // [ Get Data ]
+                p1 = primuv(Ipt_rail, "P", primnum, wall_uvs[-1]);
+                p2 = primuv(Ipt_rail, "P", primnum, wall_uvs[-2]);
+                p = (p1 + p2)/2;
+                n = normalize(p2 - p1);
+                //. geo always perp to the ground.
+                n[1] = 0;
+                // [ Output::Point ] Adding points
+                ptnum = addpoint(Opt_geo, p);
+                // [ Output::Type ] Set what type the output point is.
+                type = type_name[STR_dw_fit[i]];
+                // [ Output::Attributes ] Setting Attributes
+                setpointattrib(Opt_geo, "uu_type", ptnum, type, "set");
+                setpointattrib(Opt_geo, "N", ptnum, n, "set");
+                setpointattrib(Opt_geo, "up", ptnum, set(0, 1, 0), "set");
+            }
+        }
+        else
+        {
+            break;
+        }
+
+    } //End of fLoop#02
+    append(wall_uvs, set(1, 0));
+    
+    // [ Option ] Continuous Code, the next primitive will start from the last
+    if(_i_op_continuous) _s_in_dw_code = _s_in_dw_code[strlen(STR_dw_fit):];
+    // [ Make Wall Prims ]
+    for(int i = 0; i < len(wall_uvs)-1; i+=2)
+    {
+        int pts_wall[];
+        aclen = primarclen(Ipt_rail, wall_uvs[i],  wall_uvs[i+1], primnum, 10, PRIMUV_UNIT_TO_LEN);
+        uv_dif = wall_uvs[i+1][0] - wall_uvs[i][0];
+        
+        div = max(1, int(aclen/_f_in_walldivlen));
+        for(int j = 0; j < div; ++j)
+        {
+            if_add_pt = 1;
+            test_len = uv_dif/(float)div;
+            unit = float(j);
+            us_t = set(wall_uvs[i][0] + (unit * test_len), 0);
+            p1 = primuv(Ipt_rail, "P", primnum, us_t);
+            if(j > 0)
+            {
+                // polyline collapse
+                
+                us_t = set(wall_uvs[i][0] + ((unit - 1.0f) * test_len), 0);
+                p = primuv(Ipt_rail, "P", primnum, us_t);
+                us_t = set(wall_uvs[i][0] + ((unit + 1.0f) * test_len), 0);
+                p2 = primuv(Ipt_rail, "P", primnum, us_t);
+                if(dot(normalize(p1-p), normalize(p2-p1)) > _f_in_wallcolpst) if_add_pt = 0;
+            }
+
+            if(if_add_pt)
+            {
+                np = addpoint(Opt_geo, p1);
+                test_len = primuvconvert(Ipt_rail, us_t[0], primnum, PRIMUV_UNIT_TO_LEN);
+                setpointattrib(Opt_geo, "w_val_u", np, test_len, "set");
+                setpointattrib(Opt_geo, "w_val_normalu", np, us_t[0], "set");
+                append(pts_wall, np);
+            }
+        }
+        p2 = primuv(Ipt_rail, "P", primnum, wall_uvs[i+1]);
+        np = addpoint(Opt_geo, p2);
+        test_len = primuvconvert(Ipt_rail, wall_uvs[i+1][0], primnum, PRIMUV_UNIT_TO_LEN);
+        setpointattrib(Opt_geo, "w_val_u", np, test_len, "set");
+        setpointattrib(Opt_geo, "w_val_normalu", np, wall_uvs[i+1][0], "set");
+        append(pts_wall, np);
+        np = addprim(0, "polyline", pts_wall);
+        setprimgroup(Opt_geo, "wall", np, 1, "set");
+    }
+    // [ Clean ] remove the rail from input
+    if(Ipt_rail == Opt_geo) removeprim(Ipt_rail, primnum, 1);
+}
