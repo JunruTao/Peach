@@ -133,7 +133,8 @@ def unlinkNetworkImage(node=None):
     img_culled = []
     for i in images:
         if node.path() != i.relativeToPath():
-            img_culled.append(i)
+            if hou.node(i.relativeToPath()):
+                img_culled.append(i)
     try:
         editor.setBackgroundImages(img_culled)
         nodegraphutils.saveBackgroundImages(node.parent(), img_culled)
