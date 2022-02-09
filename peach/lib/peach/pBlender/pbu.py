@@ -160,4 +160,28 @@ def apt_A():
 
 
 def create_material(name=""):
-    bpy.data.materials.new("MAT_")
+    mat = bpy.data.materials.new("MAT_{}".format(pUtil.format_camelCase(name)))
+    mat.use_nodes = True
+    return mat
+
+
+'''
+import bpy
+from peach.pBlender import pbu
+from mathutils import Vector
+
+D = bpy.data
+C = bpy.context
+
+mat = pbu.create_material("my new material test")
+
+C.selected_objects[0].data.materials.append(mat)
+bsdf = mat.node_tree.nodes["Principled BSDF"] # /.node
+base_loc = bsdf.location
+texImage = mat.node_tree.nodes.new('ShaderNodeTexImage') # /.node
+# texImage.image = bpy.data.images.load("C:\\path\\to\\im.jpg")
+texImage.location = base_loc + Vector((-300, 0))
+mat.node_tree.links.new(bsdf.inputs['Base Color'], texImage.outputs['Color'])
+
+
+'''
