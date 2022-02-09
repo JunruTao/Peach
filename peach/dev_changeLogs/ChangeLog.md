@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.02.07__<br>
-> __Time stamp: 06:37:27__<br>
+> __Date stamp: 2022.02.09__<br>
+> __Time stamp: 15:13:37__<br>
 > __Author: Junru Tao__
 ---
 
@@ -13,6 +13,10 @@
 
 ## :hammer: Change Logs: _Feb, 2022_
 
+
+- :bookmark_tabs: _008_. [Change_Log - Date: 2022/02/09](./2022_02/2022_02_09_cl.md) : :bread:
+   > - [ 15:13:37 ] <sup><b> `Commit` : update hou nodes</b></sup>
+   > - [ 15:10:52 ] <sup><b> Build Version Up: `v0.1.34`</b></sup>
 
 - :bookmark_tabs: _007_. [Change_Log - Date: 2022/02/07](./2022_02/2022_02_07_cl.md) : :bread:
    > - [ 06:37:26 ] <sup><b> `Commit` : added UU important VEX script.  generator script.</b></sup>
