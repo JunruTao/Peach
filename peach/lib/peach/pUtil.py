@@ -21,6 +21,7 @@
 # ---------------------------------------------------------------------
 from peach import pImp, pLog, pDir
 pImp.reload(pLog, pDir)
+import re
 
 PI = 3.141592654
 
@@ -217,3 +218,53 @@ def get_dcc():
         dcc = "none"
         pass
     return dcc
+
+
+def format_split_with_underscore(string=""):
+    """
+    [ Util ] split_string_with_underscore_and_lower
+    @param string: (str) string
+    @return: (str) formatted
+    """
+    return re.sub(r"\W+", "_", string.lower())
+
+
+def format_CamelCase(string=""):
+    """
+    [ Util ] combineStringIntoCamelCase
+    @param string: (str) string
+    @return: (str) formatted
+    """
+    string = string.lower()
+    words = re.split(r"\W+", string)
+    if len(words) > 1:
+        string = string.lower()
+        words = re.split(r"\W+", string)
+        string = ""
+        for w in words:
+            w = w.capitalize()
+            string += w
+    else:
+        string = string.capitalize()
+    return string
+
+
+def format_camelCase(string=""):
+    """
+    [ Util ] combineStringIntoCamelCase
+    @param string: (str) string
+    @return: (str) formatted
+    """
+    string = string.lower()
+    words = re.split(r"\W+", string)
+    if len(words) > 1:
+        string = string.lower()
+        words = re.split(r"\W+", string)
+        string = ""
+        counter = 0
+        for w in words:
+            if counter > 0:
+                w = w.capitalize()
+            string += w
+            counter += 1
+    return string

@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
 > __Date stamp: 2022.02.09__<br>
-> __Time stamp: 15:13:37__<br>
+> __Time stamp: 15:28:36__<br>
 > __Author: Junru Tao__
 ---
 
@@ -15,6 +15,7 @@
 
 
 - :bookmark_tabs: _008_. [Change_Log - Date: 2022/02/09](./2022_02/2022_02_09_cl.md) : :bread:
+   > - [ 15:28:36 ] <sup><b> `Commit` : put format functions into re</b></sup>
    > - [ 15:13:37 ] <sup><b> `Commit` : update hou nodes</b></sup>
    > - [ 15:10:52 ] <sup><b> Build Version Up: `v0.1.34`</b></sup>
 

@@ -18,8 +18,8 @@
 #
 # ---------------------------------------------------------------------
 import bpy
-from peach import pImp, pLog, pDir
-pImp.reload(pLog, pDir)
+from peach import pImp, pLog, pDir, pUtil
+pImp.reload(pLog, pDir, pUtil)
 
 
 def _pb_addons():
@@ -158,3 +158,6 @@ def apt_S():
 def apt_A():
     bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
 
+
+def create_material(name=""):
+    bpy.data.materials.new("MAT_")

@@ -53,7 +53,6 @@
 # ---------------------------------------------------------------------
 from peach import pImp, pDir, pGlob, pLog, pUtil
 pImp.reload(pDir, pGlob, pLog, pUtil)
-import re
 
 # [ Asset ] Global Data Containers
 _WORKING_DIR = ""
@@ -152,7 +151,7 @@ class Struct(object):
 
     @staticmethod
     def _standard_name(name=""):
-        return re.sub(r"\W+", "_", name.lower())
+        return pUtil.format_split_with_underscore(name)
 
     def deletable(self):
         dir_items = pDir.ls(self._path)
@@ -213,16 +212,7 @@ class Cat(Struct):
 
     def new_type(self, ch_name=""):
         # /.TypesShouldUseCamelCase
-        words = re.split(r"\W+", ch_name)
-        if len(words) > 1:
-            ch_name = ch_name.lower()
-            words = re.split(r"\W+", ch_name)
-            ch_name = ""
-            for w in words:
-                w = w.capitalize()
-                ch_name += w
-        else:
-            ch_name = ch_name.capitalize()
+        ch_name = pUtil.format_CamelCase(ch_name)
         ch_dir = self._new_child(ch_name)
         if ch_dir:
             _out = Typ(ch_name, ch_dir, self)
@@ -241,20 +231,8 @@ class Typ(Struct):
             self.addItem(key, Ast(key, path, self))
 
     def new_asset(self, ch_name=""):
-        words = re.split(r"\W+", ch_name)
-        if len(words) > 1:
-            ch_name = ch_name.lower()
-            words = re.split(r"\W+", ch_name)
-            ch_name = ""
-            counter = 0
-            for w in words:
-                if counter > 0:
-                    w = w.capitalize()
-                ch_name += w
-                counter += 1
-
         counter = 0
-        base_name = ch_name
+        base_name = pUtil.format_camelCase(ch_name)
 
         # /.Lib data is an exception, i.g.textures, materials
         is_lib_data = False
