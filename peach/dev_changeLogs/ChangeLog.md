@@ -1,7 +1,7 @@
 # :hammer: ChangeLogs
 > _Lastest Update on ChangeLogs:_<br>
-> __Date stamp: 2022.02.15__<br>
-> __Time stamp: 01:40:29__<br>
+> __Date stamp: 2022.02.24__<br>
+> __Time stamp: 21:43:32__<br>
 > __Author: Junru Tao__
 ---
 
@@ -13,6 +13,9 @@
 
 ## :hammer: Change Logs: _Feb, 2022_
 
+
+- :bookmark_tabs: _012_. [Change_Log - Date: 2022/02/24](./2022_02/2022_02_24_cl.md) : :bread:
+   > - [ 21:43:31 ] <sup><b> `Commit` : adding tutorial - blender</b></sup>
 
 - :bookmark_tabs: _011_. [Change_Log - Date: 2022/02/15](./2022_02/2022_02_15_cl.md) : :bread:
    > - [ 01:40:29 ] <sup><b> `Commit` : add hou tut</b></sup>
